@@ -108,6 +108,40 @@ Say exactly what's wrong, not just "try again":
 > fonts/copy, and don't touch client styling until template QA passes against
 > the screenshot and video.
 
+### Do not delegate Phase A
+
+Never hand Phase A — the verbatim clone (markup, CSS, DOM nesting) and its
+section-by-section screenshot QA — to a subagent. Checking a subagent's work
+afterward is the backup plan, not the plan: reviewing a redesign still burns
+the context the delegation was supposed to save, and then you rebuild it
+anyway once it fails the gate. **The parent agent ports the fetched source
+and diffs it, in this conversation.**
+
+Subagents may still do mechanical work that carries no fidelity judgment:
+downloading images, ffmpeg compression, scaffolding an empty Astro project,
+fetching live HTML/CSS into `reference/template/`. "Faithfully reproduce this
+layout" is not a valid subagent prompt — it is exactly the instruction a
+subagent will quietly "improve" into a redesign.
+
+Context pressure is not an exception. If the page is huge, clone it section
+by section in this thread. Do not offload the layout to another model to
+"save context" — that is how a redesign gets shipped as done.
+
+### "Verified" is evidence, not a claim
+
+You may not tell the user Phase A is done unless you — personally, in this
+conversation — compared:
+
+- Header/nav structure against `reference/template/` or the live URL, not
+  against another agent's description of it.
+- One screenshot crop per major section against the running clone.
+- The red-flag list above: invented class system, `clamp()` type, client
+  content mixed in, missing/simplified sections.
+
+A green `astro build` does not count. "No fake testimonials" does not count.
+Another agent's "I verified it" does not count. If you didn't open the source
+and look, you didn't verify.
+
 ---
 
 **Where you sit when you copy the dump matters for numbers, not for whether

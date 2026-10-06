@@ -39,6 +39,19 @@ Run this before any website goes live. It has two halves: **technical ship-readi
 16. **Third-party data collectors** — list every third party that can see the visitor: analytics, map embeds, font CDNs (Google Fonts, onlinewebfonts), embedded booking/checkout, tag managers, chat/social widgets. Each usually logs the visitor's IP.
 17. **No fake testimonials** — every review must be real and attributable (source it: Google, Yelp, the POS/booking API). Fabricated reviews plus `aggregateRating` schema = FTC violation + Google manual action. Confirm the source and get permission to republish named reviews.
 
+## Architecture-aware checks
+
+The lists above always run. Then read `architecture-plan.md` and check **only the systems it selected**. Do not fail a static site for lacking a database, and do not skip a check for a system the plan turned on.
+
+- **Cloudflare static** — production assets and the custom domain resolve, the custom 404 works, the intended pages are actually there, and no server runtime was added.
+- **Worker runtime** — API/server routes work in production, bindings/env are set, no dev-only URLs, errors do not leak secrets.
+- **R2** — the bucket/binding exists, upload and download work, private files are not public, and database metadata points at real objects.
+- **Auth** — login, logout, expired session, protected routes, and a logged-out visitor. Secrets stay server-side.
+- **Supabase** — production project and env vars, service-role key not in the client bundle, exposed data has an RLS/authorization story, production create/read/update paths work.
+- **Convex** — production deployment, queries/mutations work, protected functions enforce auth. If the plan’s reason was realtime, prove it: window A shows a slot, window B books it, window A updates. “The booking saved” is not that test.
+
+Legacy output paths (including `.vercel/output/static`) still count as a build directory when the architecture plan names that host. New projects are audited from the Cloudflare/Astro output (`dist/` unless the plan says otherwise).
+
 ## Privacy policy — minimum contents
 
 Draft it, and mark it a **template the client/lawyer must review before publishing**. Cover:

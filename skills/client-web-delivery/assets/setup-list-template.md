@@ -22,20 +22,23 @@ give us. Send these back and we go live. (Translate to the client's language if 
 4. **Integration credentials (only if the site connects to a system)** —
    {{e.g. Clover hosted-checkout token + Merchant ID / Stripe keys / CMS read token}}.
    ⚠️ Paste these into your own dashboard or a secure link we send — **never over text or DM.**
+5. **How the product actually behaves (only if it changes the build)** —
+   {{e.g. “When someone books 3:30, should that time disappear for everyone else right away, or do you confirm requests later?”}}
+   Ask the business question. Do not ask them to pick a vendor.
 
 ## Part B — Content to provide / confirm
 
-5. **Photos** — {{team/staff, product, or space}} images, and who is who.
-6. **Bios / descriptions** — {{any missing bios or copy}}.
-7. **Sign-off** — confirm {{prices / hours / medical or legal claims}} are accurate. We won't
+6. **Photos** — {{team/staff, product, or space}} images, and who is who.
+7. **Bios / descriptions** — {{any missing bios or copy}}.
+8. **Sign-off** — confirm {{prices / hours / medical or legal claims}} are accurate. We won't
    publish a claim that isn't right.
-8. **Media rights** — OK to use {{AI / stock}} imagery (labeled illustrative), or send real photos.
-9. **Reviews** — permission to display {{these real reviews}} with names.
+9. **Media rights** — OK to use {{AI / stock}} imagery (labeled illustrative), or send real photos.
+10. **Reviews** — permission to display {{these real reviews}} with names.
 
 ## Part C — Legal / licensing
 
-10. **Fonts / assets** — license the {{trial font / paid asset}}, or approve a free equivalent.
-11. **Privacy policy** — review the draft at `/privacy` before relying on it. It discloses
+11. **Fonts / assets** — license the {{trial font / paid asset}}, or approve a free equivalent.
+12. **Privacy policy** — review the draft at `/privacy` before relying on it. It discloses
     {{analytics, chat assistant, and third-party services}} and your privacy rights.
 
 ## Part D — Optional, for later (not blockers)

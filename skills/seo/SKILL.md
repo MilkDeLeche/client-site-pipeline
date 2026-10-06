@@ -17,6 +17,8 @@ Search visibility across three surfaces that now matter equally:
 
 **For a local business, the map pack outranks everything else in revenue terms.** A juice bar does not need a blog. It needs a claimed Google Business Profile, consistent NAP, review velocity, and `LocalBusiness` schema. Start at `references/local.md` and don't let a content calendar distract from it.
 
+**Content strategy is required. A blog is not.** Recommend recurring posts only when the business can actually publish useful material. Service pages, location pages, FAQs, case studies, or a portfolio can be the whole strategy. Do not add a blog to satisfy a checklist, and do not treat three generic articles as an asset.
+
 ---
 
 ## Before anything: the two rules

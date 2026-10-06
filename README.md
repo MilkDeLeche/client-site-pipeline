@@ -36,18 +36,19 @@ pass before the next one starts.
 
 | # | Skill | Runs | Done when |
 |---|-------|------|-----------|
-| **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | A **setup-list** exists; every client fact lives in **one** `src/data/` file; nothing invented |
+| **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | A **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; nothing invented |
 | **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
-| **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only **(Phase B)** |
+| **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)** |
 | **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, **no fabricated testimonials** |
 | **5** | [`seo`](skills/seo/SKILL.md) | After launch (snapshot old URLs *before* step 3 on a rebuild) | Crawlable HTML, GBP / NAP consistent if local, no stray `noindex`, redirects in place if replacing an old site |
 
 ```mermaid
 flowchart LR
-    A["1 · client-web-delivery<br/><i>setup-list + one data file</i>"] --> B["2 · clone-intake<br/><i>URL + DOM dumps + video</i>"]
-    B --> C["3 · clone-workflow<br/><i>Phase A clone → Phase B rebrand</i>"]
+    A["1 · client-web-delivery<br/><i>setup-list + architecture plan</i>"] --> B["2 · clone-intake<br/><i>URL + DOM dumps + video</i>"]
+    B --> C["3 · clone-workflow<br/><i>A clone → B rebrand → C functionality</i>"]
     C --> D["4 · launch-audit<br/><i>ship / don't-get-sued gate</i>"]
     D --> E["5 · seo<br/><i>rank + get cited by AI</i>"]
+    E -.->|handoff booklet| A
     E -.->|rebuild: snapshot URLs first| C
 ```
 
@@ -61,11 +62,12 @@ loud, and refuses to skip ahead.
 
 ### 1 · `client-web-delivery` — intake & handoff
 A repeatable five-stage workflow for shipping a client site. Its signature
-artifact is the **setup-list**: one page of everything you need *from* the
-client (domain, credentials, photos, sign-off on prices/claims, review
-permission), tailored to whatever the site connects to — payments/POS, booking,
-CMS, email, maps, analytics. Ships with
-[`assets/setup-list-template.md`](skills/client-web-delivery/assets/setup-list-template.md).
+artifacts are the **setup-list** (everything you need *from* the client) and
+the **architecture-plan** (the smallest stack that requirement actually needs:
+Astro, Cloudflare static or Worker, database none / Supabase / Convex, auth,
+R2 only for post-launch uploads). After SEO it runs once more to write
+`deliverables/client-handoff.md`. Ships with templates in
+[`assets/`](skills/client-web-delivery/assets/).
 
 ### 2 · `clone-intake` — the gate in front of cloning
 A checklist. A DOM dump is a photo of one frozen moment — it carries no fonts,
@@ -73,14 +75,16 @@ no motion, no hover states. The live URL carries the real source; the video
 carries the animation. This step refuses to start a clone until it has all
 three, or an explicit note of what will be guessed without them.
 
-### 3 · `clone-workflow` — clone, then rebrand — as two verified phases
+### 3 · `clone-workflow` — clone, then rebrand, then connect — as verified phases
 The core skill. **Phase A**: port the fetched source *close to verbatim* — same
 class names, same CSS values, the template's own colors, fonts, copy and
 images — at a clearly separate route, and verify it against the screenshot and
 video section by section. **Phase B**: only then, swap content — copy, images,
-links, logo, brand colors. It never touches layout inherited from Phase A. Also
-covers reading motion out of a video with `ffmpeg` contact sheets, and
-content-integrity rules for the rebrand.
+links, logo, brand colors. It never touches layout inherited from Phase A.
+**Phase C**: only then, connect what `architecture-plan.md` selected. Wiring a
+form is not permission to redesign the card. Also covers reading motion out of
+a video with `ffmpeg` contact sheets, and content-integrity rules for the
+rebrand.
 
 ### 4 · `launch-audit` — ship / don't-get-sued gate
 Runs on the **production build**, not the dev server. Two halves: technical
@@ -118,6 +122,9 @@ These run through every skill:
   faithful.
 - **Secrets never travel over chat.** The client pastes credentials into their
   own dashboard or a vault; code references env vars.
+- **Smallest architecture that works.** Astro stays. New sites default to
+  Cloudflare. No database, login, or R2 unless a real requirement needs it.
+  Every selected service has a written reason.
 - **Green build → push → verify the live URL.** Never "push and hope."
 - **Disclose AI use.** Label AI or stock imagery as illustrative, not real
   outcomes.
@@ -179,10 +186,13 @@ the agent will pick up `client-site-pipeline`, then work through
 ```
 skills/
   client-site-pipeline/   orchestrator — read first, enforces the order
-  client-web-delivery/    step 1 — intake, setup-list, handoff
+  client-web-delivery/    step 1 — intake, setup-list, architecture plan, handoff
     assets/setup-list-template.md
+    assets/architecture-plan-template.md
+    assets/client-handoff-template.md
+    assets/client-handoff-visual-prompt-template.md
   clone-intake/           step 2 — the gate in front of cloning
-  clone-workflow/         step 3 — clone (Phase A) then rebrand (Phase B)
+  clone-workflow/         step 3 — clone (A), rebrand (B), connect (C)
   launch-audit/           step 4 — ship / don't-get-sued gate
     scripts/audit.sh
   seo/                    step 5 — SEO / local / GEO-AEO

@@ -1,11 +1,11 @@
 ---
 name: clone-workflow
-description: Clone a real website into a client-ready Astro mockup at near-100% visual fidelity, then rebrand it for a different business. Use when handed a template to clone, a computed-style DOM dump, a reference screenshot, or a screen recording of a site's scroll/hover motion — or when asked to build website concepts or mockups for a business based on an existing site. Covers reading motion out of a video with ffmpeg contact sheets, motion implementation rules, folder conventions, and content-integrity rules for the rebrand pass.
+description: Clone a real website into a client-ready Astro mockup at near-100% visual fidelity, then rebrand it for a different business, then connect only the functionality named in architecture-plan.md. Use when handed a template to clone, a computed-style DOM dump, a reference screenshot, or a screen recording of a site's scroll/hover motion — or when asked to build website concepts or mockups for a business based on an existing site. Covers reading motion out of a video with ffmpeg contact sheets, motion implementation rules, folder conventions, and content-integrity rules for the rebrand pass.
 ---
 
 # Template Clone Workflow
 
-**Pipeline step 3 of 5** (`client-site-pipeline`). Previous: `clone-intake`. Next: `launch-audit`. If the live URL, repo `.txt` dump, or motion video is missing, go back to `clone-intake` first.
+**Pipeline step 3 of 5** (`client-site-pipeline`). Previous: `clone-intake`. Next: `launch-audit`. If the live URL, repo `.txt` dump, or motion video is missing, go back to `clone-intake` first. Do not start Phase C without `architecture-plan.md`.
 
 Turn a real website into a client-ready mockup for a different business, in Astro,
 at near-100% visual fidelity — then swap the content.
@@ -210,6 +210,14 @@ copy, images, links, logo, brand colors and fonts. **Never touch layout or DOM
 structure** unless explicitly asked. If the client says "only replace images,
 not the template," that means the `<style>` blocks stay byte-identical — prove
 it by only editing frontmatter and markup.
+
+### 6. Connect functionality — Phase C
+
+Starts only after Phase B. Read `architecture-plan.md` and implement **only** what it selected: database, auth, R2, booking, API routes, admin, CMS, forms, integrations. If the plan says `none`, do not add that system.
+
+Phase C does not redesign the visual system. A verified booking card may be wired to Convex or Supabase. It does not become a different layout because a modal would “look better.” Layout, spacing, and DOM inherited from Phase A stay unless the user explicitly asks for a structural change.
+
+A contact form that only sends email does not get a database. Runtime uploads go to R2; build-time images stay in static assets. Private files are authorized before they are served. Secrets stay in env vars / the host’s secret store, never in the browser bundle or chat.
 
 ---
 

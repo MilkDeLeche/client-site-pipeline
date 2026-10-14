@@ -11,15 +11,19 @@ Five skills. Run them **in this order**. Each one produces an artifact the next 
 |---|---|---|---|
 | 1 | `client-web-delivery` | Start of the job | Setup-list exists; client facts live in **one** `src/data/` file; `architecture-plan.md` exists with a reason for every service; no invented phone/reviews/prices or infrastructure |
 | 2 | `clone-intake` | Before any clone build | Live template URL + repo `.txt` dumps (scrolled to the section) + motion video |
-| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C) |
+| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
 | 4 | `launch-audit` | After build, **before** public launch | Production build audited; privacy / 404 / titles / no fake testimonials; remaining asks stay on the setup-list |
 | 5 | `seo` | After it is live (or on a rebuild, snapshot URLs **before** step 3) | Crawlable HTML, GBP/NAP if local, no `noindex` left on, redirects if replacing an old site |
 
 Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run build`. Do not run 5 as a substitute for 4. DESIGN.md / TypeUI files are tokens only; they are not a step.
 
+## Live showcase standard (every site, Phase C)
+
+Most of these sites go up as a working showcase before the client pays, so they must feel live. Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, and a privacy page that matches. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first.
+
 ## What each later skill actually is
 
-**`launch-audit`** — ship / don’t-get-sued gate. Privacy policy on `/privacy` (what you collect, AI use, font/analytics third parties), real testimonials only, view-source not empty, custom 404, unique titles, OG image, schema, canonical, robots that allow AI crawlers, sitemap, alt text, no secrets in the build.
+**`launch-audit`** — ship / don’t-get-sued gate. Privacy policy on `/privacy` (what you collect including newsletter fields, cookie/analytics choice, AI use, font/analytics third parties), a signup that saves a row, a banner that gates analytics, real testimonials only, view-source not empty, custom 404, unique titles, OG image, schema, canonical, robots that allow AI crawlers, sitemap, alt text, no secrets in the build.
 
 **`seo`** — growth after launch. Classic search, Google Business Profile / “near me,” and getting cited by AI assistants. Never invent keyword volumes. If this is a rebuild of a live site, snapshot old URLs and rankings **before** step 3.
 
@@ -42,7 +46,7 @@ Do not invent a fact to fill the data file, and do not invent a service to fill 
 
 ## Architecture gate
 
-Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. New projects default to Cloudflare Workers. A static marketing site stays static: no database, no login, no R2, no Worker runtime, just because those exist.
+Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. New projects default to Cloudflare Workers. A static marketing site stays static: no login, no R2, no server-rendered pages, just because those exist. The only standing exception is the email-capture API Worker + D1 subscribers table from the live showcase standard.
 
 ## After step 5
 

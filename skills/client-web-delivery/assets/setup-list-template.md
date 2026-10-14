@@ -26,6 +26,12 @@ give us. Send these back and we go live. (Translate to the client's language if 
    {{e.g. “When someone books 3:30, should that time disappear for everyone else right away, or do you confirm requests later?”}}
    Ask the business question. Do not ask them to pick a vendor.
 
+6. **Email list** — the site has a working "{{Sign up to our newsletter / Get new-home alerts / ...}}" signup.
+   It promises **{{what subscribers get — e.g. new drinks, seasonal specials, birthday treats / new homes as they list}}**.
+   Confirm you will actually send that, and {{what the birthday treat / alert is}}. Tell us which email tool
+   you want to send from (Brevo, Mailchimp, Klaviyo, or your POS's marketing tool). Until then,
+   signups are saved safely and we hand you the list.
+
 ## Part B — Content to provide / confirm
 
 6. **Photos** — {{team/staff, product, or space}} images, and who is who.
@@ -39,7 +45,7 @@ give us. Send these back and we go live. (Translate to the client's language if 
 
 11. **Fonts / assets** — license the {{trial font / paid asset}}, or approve a free equivalent.
 12. **Privacy policy** — review the draft at `/privacy` before relying on it. It discloses
-    {{analytics, chat assistant, and third-party services}} and your privacy rights.
+    {{the newsletter data, the cookie banner, analytics, AI-made images, chat assistant, and third-party services}} and your privacy rights.
 
 ## Part D — Optional, for later (not blockers)
 

@@ -23,12 +23,13 @@ Pin down, in writing:
 
 Infrastructure is selected because a requirement needs it, never because the technology is available. Astro stays the framework unless the user explicitly overrides it. **New projects default to Cloudflare Workers.** If the plan identifies an existing host (a legacy Vercel or Netlify site), name that provider explicitly and keep it — do not migrate it in silence.
 
-Two Cloudflare modes:
+Three Cloudflare modes:
 
 - **Static** (`rendering: static`, `server_runtime_required: false`) — marketing, portfolio, restaurant, contractor, brochure, developer-published blog. `astro build` → `dist/` → Workers static assets. Do not add a Worker runtime because Workers can run code.
+- **Static + API Worker** (`rendering: static`, `api_worker: true`) — the default for client showcase sites, because every site captures emails (see "Live showcase standard"). Pages stay static assets; `wrangler.jsonc` has `main: worker/index.ts` and `assets.run_worker_first: ["/api/*"]`, so the Worker only runs for `/api/subscribe`. No Astro adapter. Set Astro `build.format: "file"` so `/menu` is served without a trailing-slash redirect.
 - **Server** (`rendering: server`, `server_runtime_required: true`) — auth handlers, protected routes, API endpoints, signed file URLs, server-rendered app behavior. Use the Astro Cloudflare adapter only in this mode.
 
-Database is one of `none`, `supabase`, or `convex`. Never both “just in case.” Do not auto-select Cloudflare D1 or KV.
+Database is one of `none`, `supabase`, or `convex` for business data. Never both “just in case.” The one standing exception is email capture: a single D1 `subscribers` table (email, optional first name, optional birthday month/day, source, timestamps) behind the API Worker, until the client picks an email platform. Do not put anything else in D1 without its own reason, and do not auto-select KV.
 
 | Need | Choice |
 |---|---|
@@ -47,6 +48,28 @@ Every selected service needs a `reason`. Missing business facts stay on the setu
 
 Copy `assets/architecture-plan-template.md`, fill it, and keep it as the source of truth for Phase C and the launch audit.
 
+## Live showcase standard (every client site)
+
+These sites are often built **before** the client has paid, as a working showcase that wins the job. Build them to feel fully live. Every site gets all three of these, tuned to the business. They are not optional and do not need a separate request.
+
+1. **Email capture that actually saves.** A newsletter / alert popup (once per visitor, after the cookie choice and ~12s or ~45% scroll, snoozed 14 days when closed, never again after signup) **and** an always-visible inline signup section. Fields: email (required), first name and birthday month/day (optional) when the business can use them. Honeypot field, same-origin check, `ON CONFLICT(email)` upsert. Working endpoint `/api/subscribe` → D1. Test it with `wrangler dev` before deploy (`wrangler d1 migrations apply <name> --local`).
+2. **Cookie consent banner.** Accept / Decline, links to `/privacy#cookies`, remembers the choice in localStorage, and **actually gates** analytics: the analytics script loads only after Accept. Banner copy says what is really stored. Never claim cookies the site doesn't use.
+3. **Privacy policy that matches.** `/privacy` lists exactly what the signup keeps, where it is stored (Cloudflare), how to unsubscribe or delete, the cookie/analytics choice, and that AI imagery is illustrative.
+
+Pick the signup hook from what the business sells. Promise only what the client will send, and put the promise on the setup-list for confirmation:
+
+| Business | Signup hook (title / what they get) |
+| --- | --- |
+| Juice bar, café, restaurant, bakery | “Sign up to our newsletter” — new drinks/dishes first, seasonal specials, birthday treats; rewards/points only if a real program exists (e.g. Clover Rewards) |
+| Home builder, construction, real estate | “Get new-home alerts” — new homes and lots as they list, open houses, price changes; optional fields: area, budget range, beds |
+| Salon, barber, spa, clinic | “Get first dibs” — open appointment slots, seasonal services, birthday offers |
+| Gym, studio, coach | “Join the list” — new classes, challenges, schedule changes, member offers |
+| Retail / boutique | “Be first to know” — new arrivals, restocks, sales, birthday discounts |
+| Service trades (HVAC, plumbing, landscaping, cleaning) | “Seasonal tune-up reminders” — maintenance reminders, seasonal specials |
+| Events, venues | “Get the lineup” — upcoming events, presales |
+
+Blog: not part of this standard yet. A client-editable blog needs an admin login and storage; decide it per client.
+
 ## Stage 2 — Build
 
 Build the site. Keep every client-supplied fact in ONE data file so it's swappable. **Do not invent facts** (prices, reviews, credentials, results) — leave a clear placeholder and add the real item to the setup-list.
@@ -63,20 +86,22 @@ Copy `assets/setup-list-template.md` into the project, fill it in for THIS clien
 | **Stripe / Square** | Publishable + restricted/secret keys — or connect through their own dashboard / OAuth. |
 | **GlossGenius / external booking** | Usually **nothing** — booking and payment happen there; just confirm the booking URL(s). |
 | **A CMS (Sanity, Contentful, Keystatic…)** | Project ID / dataset / a read token, or an invite to the space. |
-| **Email / newsletter / contact forms** | The destination inbox; an API key if using a form service. |
+| **Email / newsletter / contact forms** | Which email tool sends the newsletter (Brevo, Mailchimp, Klaviyo, the POS's marketing tool) and confirmation of what subscribers are promised (birthday treat, alerts). Until then signups live in D1. The tool's API key goes in a Worker secret (`wrangler secret put`), never in chat. |
 | **Google Maps / Business Profile** | Confirm the exact NAP (name, address, phone); claim/verify the GBP. |
 | **Analytics** | Which tool; any consent/cookie requirements for their region. |
 | **A licensed font or stock asset** | Proof of license — or approval to swap for a free equivalent. |
 
-Always also request: **domain**, **public phone + email to publish**, **team/staff photos + bios**, **real reviews + permission to use names**, **factual/medical/legal sign-off** on any regulated copy, and **rights to any AI or stock imagery**.
+Always also request: **what the signup promises** (and which email tool sends it), **domain**, **public phone + email to publish**, **team/staff photos + bios**, **real reviews + permission to use names**, **factual/medical/legal sign-off** on any regulated copy, and **rights to any AI or stock imagery**.
 
 ## Stage 4 — Pre-launch gate
 
-Before shipping, **invoke the `launch-audit` skill** and clear its checklist: non-empty view-source, 404, unique titles, OG image, structured data, canonical, robots-allows-AI, sitemap, lang, alt text, no exposed source maps or secrets, and the legal items (a privacy policy disclosing data collection + AI usage + third-party processors, and real testimonials). Fix the ❌s you can; keep client-blocked items on the setup-list.
+Before shipping, **invoke the `launch-audit` skill** and clear its checklist: non-empty view-source, 404, unique titles, OG image, structured data, canonical, robots-allows-AI, sitemap, lang, alt text, no exposed source maps or secrets, and the legal items (a privacy policy disclosing data collection + AI usage + third-party processors, and real testimonials). Also confirm the live showcase standard works: the banner gates analytics, the popup and inline signup save a row (check with `wrangler d1 execute <name> --local`), and the privacy page matches. Fix the ❌s you can; keep client-blocked items on the setup-list.
 
 ## Stage 5 — Deploy + verify
 
 - Get a **green production build locally first**.
+- For the API Worker: leave `database_id` **out** of the D1 binding (only `binding` + `database_name`); the first `wrangler deploy` provisions the database. Wrangler does not run migrations on deploy, so the Worker runs the schema (`CREATE TABLE IF NOT EXISTS`, imported from the migration `.sql`) before its first insert. Pin Node with `.node-version` (`22`) and `engines`. Prove it the way Cloudflare will build it: clone the repo into a clean folder, `npm ci`, `npm run build`, `wrangler deploy --dry-run`, then `wrangler dev` against an empty local D1 and post a signup.
+- Git-connected deploy (no local login needed): Workers & Pages → Import a repository; build command `npm run build`, deploy command `npx wrangler deploy`, project name = `name` in `wrangler.jsonc`. Write these settings into the project README. Showcase sites go live on the `*.workers.dev` address first; the client's domain is attached after they say yes.
 - Ship to the host named in `architecture-plan.md`. New projects: Cloudflare Workers (static assets unless `server_runtime_required: true`). Legacy projects: the provider the plan already recorded (Vercel, Netlify, or otherwise).
 - **Verify the live URL, not just the build** — load the real pages and confirm the deploy went green in the host dashboard.
 - Set the real **domain** and the framework's **site/base URL** so canonical, OG, and sitemap point at production.

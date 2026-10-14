@@ -38,8 +38,8 @@ pass before the next one starts.
 |---|-------|------|-----------|
 | **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | A **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; nothing invented |
 | **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
-| **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)** |
-| **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, **no fabricated testimonials** |
+| **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page) |
+| **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, a signup that saves a row, a banner that gates analytics, **no fabricated testimonials** |
 | **5** | [`seo`](skills/seo/SKILL.md) | After launch (snapshot old URLs *before* step 3 on a rebuild) | Crawlable HTML, GBP / NAP consistent if local, no stray `noindex`, redirects in place if replacing an old site |
 
 ```mermaid

@@ -5,10 +5,11 @@ deployment:
   provider: cloudflare-workers
   rendering: static
   server_runtime_required: false
+  api_worker: true          # /api/subscribe for the email list; false only if the client's email tool hosts the form
   reason: >
 
 database:
-  provider: none
+  provider: cloudflare-d1   # subscribers table only, unless another requirement picks none/supabase/convex
   realtime_required: false
   reason: >
 
@@ -30,9 +31,13 @@ content:
 
 analytics:
   provider: cloudflare-web-analytics
+  consent_required: true    # loaded only after the cookie banner says Accept
   reason: >
 
 features:
+  newsletter_signup: true   # always on; see "Live showcase standard"
+  newsletter_hook: >        # what THIS business sends: new drinks + birthday treats / new-home alerts / ...
+  cookie_consent: true      # always on
   contact_form: false
   booking: false
   live_availability: false
@@ -56,7 +61,8 @@ features:
 - Database: {{none / why not Supabase / why not Convex}}
 - Auth: {{none unless a protected area exists}}
 - R2: {{none unless someone uploads after launch}}
-- D1 / KV: not auto-selected
+- D1: subscribers table only (email capture). Anything else in D1 needs its own reason.
+- KV: not auto-selected
 - Blog: {{only if they will actually publish}}
 
 ## Open business questions

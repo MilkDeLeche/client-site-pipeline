@@ -3,6 +3,15 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.2.0] — 2026-10-14
+
+Live showcase standard: client sites are often built before the client pays, so every site ships feeling live.
+
+- `client-site-pipeline` adds the live showcase standard to Phase C and to the launch-audit summary. The architecture gate keeps static sites static, with one standing exception: the email-capture API Worker + D1 subscribers table.
+- `client-web-delivery` adds a third Cloudflare mode, **static + API Worker** (`run_worker_first: ["/api/*"]`, no Astro adapter, `build.format: "file"`). It also defines the standard: a signup popup + inline signup saved to D1 via `/api/subscribe`, a cookie banner that actually gates analytics, and a privacy page that matches. It includes a signup-hook table by business type, D1 deploy steps (no `database_id`, schema run by the Worker, clean-clone dry run) and Git-connected Workers deploy settings.
+- `architecture-plan-template.md` records `api_worker`, the D1 subscribers table, consent-gated analytics, and the newsletter/cookie feature flags.
+- `setup-list-template.md` asks what the signup promises and which email tool will send it, and the privacy item now covers newsletter data, the cookie banner and AI-made images.
+
 ## [1.1.0] — 2026-10-06
 
 Architecture planning, without changing the five-step order or the clone gates.

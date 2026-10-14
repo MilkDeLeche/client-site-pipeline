@@ -5,7 +5,7 @@ description: A safe, repeatable workflow for delivering a client website end-to-
 
 # Client Web Delivery
 
-**Pipeline step 1 of 5** (`client-site-pipeline`). Next: `clone-intake`. Do not clone a template until this step has a setup-list, a single `src/data/` file for client facts, and an `architecture-plan.md`.
+**Pipeline step 1 of 5** (`client-site-pipeline`). Next: `clone-intake`. Do not clone a template until this step has a `PRD.md` (a `reference-only` one is enough for Phase A), a setup-list, a single `src/data/` file for client facts, and an `architecture-plan.md`.
 
 A repeatable, professional workflow for shipping a client website without surprises. Five stages. The signature artifact is the **setup-list**: one page of everything you need FROM the client, so you never chase them for it piecemeal.
 
@@ -13,11 +13,12 @@ A repeatable, professional workflow for shipping a client website without surpri
 
 Pin down, in writing:
 
-- Business identity, target market, and the ONE goal of the site (book / call / buy / lead).
+- **`PRD.md` first.** If the user supplied a PRD (file, doc, link), read it and keep its decisions; add a labeled supplement for gaps and never overwrite it. If it is only a seed (the client's website link in a text file), research that site and their public profiles, extract facts to `src/data/`, and draft the full PRD around it. Otherwise draft one from `assets/prd-template.md`. A PRD is **intent**, not contact details: what the business sells and to whom, where visitors come from, what they must believe, the one action that makes the business money, what completes it, and who answers it. Get it approved (client for production, builder for a near-final pitch). Publishable facts still go in the one `src/data/` file.
+- Business identity, target market, and the ONE goal of the site (book / call / buy / lead), taken from the PRD.
 - **Where the money and the data live:** which external systems will this site connect to or hand off to? (POS / payments, booking / scheduling, CMS, email / CRM, maps, analytics, chat.) This single question determines the whole setup-list.
 - Brand assets on hand vs. missing (logo, photos, fonts, copy, reviews).
 - Domain: owned or to buy.
-- Write `architecture-plan.md` from the requirements you already have (template: `assets/architecture-plan-template.md`). Infer the smallest stack. Do not stop to ask “Supabase or Convex?” when the brief is a brochure site.
+- Write `architecture-plan.md` from the requirements you already have (template: `assets/architecture-plan-template.md`), reconciled with the PRD's functional needs and primary conversion. Infer the smallest stack. Do not stop to ask “Supabase or Convex?” when the brief is a brochure site.
 
 ## Architecture plan
 
@@ -29,7 +30,7 @@ Three Cloudflare modes:
 - **Static + API Worker** (`rendering: static`, `api_worker: true`) — the default for client showcase sites, because every site captures emails (see "Live showcase standard"). Pages stay static assets; `wrangler.jsonc` has `main: worker/index.ts` and `assets.run_worker_first: ["/api/*"]`, so the Worker only runs for `/api/subscribe`. No Astro adapter. Set Astro `build.format: "file"` so `/menu` is served without a trailing-slash redirect.
 - **Server** (`rendering: server`, `server_runtime_required: true`) — auth handlers, protected routes, API endpoints, signed file URLs, server-rendered app behavior. Use the Astro Cloudflare adapter only in this mode.
 
-Database is one of `none`, `supabase`, or `convex` for business data. Never both “just in case.” The one standing exception is email capture: a single D1 `subscribers` table (email, optional first name, optional birthday month/day, source, timestamps) behind the API Worker, until the client picks an email platform. Do not put anything else in D1 without its own reason, and do not auto-select KV.
+Database is one of `none`, `supabase`, or `convex` for business data. Never both “just in case.” The one standing exception is capture: a D1 `subscribers` table (email, optional first name, optional birthday month/day, source, timestamps) behind the API Worker, until the client picks an email platform, plus an `inquiries` table when the PRD's primary action is a form (estimate, insight form), until the client's inbox or CRM is connected. Do not put anything else in D1 without its own reason, and do not auto-select KV.
 
 | Need | Choice |
 |---|---|
@@ -50,7 +51,7 @@ Copy `assets/architecture-plan-template.md`, fill it, and keep it as the source 
 
 ## Live showcase standard (every client site)
 
-These sites are often built **before** the client has paid, as a working showcase that wins the job. Build them to feel fully live. Every site gets all three of these, tuned to the business. They are not optional and do not need a separate request.
+These sites are often built **before** the client has paid, as a **near-final pitch** that wins the job: it must read as about 99% done. Nothing on the site says preview, prototype, demo or coming soon, and every form genuinely captures what is submitted (the primary inquiry form saves to the `inquiries` table until the client's inbox or CRM is connected). The remaining 1% is the client's own: email tool, real photos, domain. Build them to feel fully live. Every site gets all three of these, tuned to the business. They are not optional and do not need a separate request.
 
 1. **Email capture that actually saves.** A newsletter / alert popup (once per visitor, after the cookie choice and ~12s or ~45% scroll, snoozed 14 days when closed, never again after signup) **and** an always-visible inline signup section. Fields: email (required), first name and birthday month/day (optional) when the business can use them. Honeypot field, same-origin check, `ON CONFLICT(email)` upsert. Working endpoint `/api/subscribe` → D1. Test it with `wrangler dev` before deploy (`wrangler d1 migrations apply <name> --local`).
 2. **Cookie consent banner.** Accept / Decline, links to `/privacy#cookies`, remembers the choice in localStorage, and **actually gates** analytics: the analytics script loads only after Accept. Banner copy says what is really stored. Never claim cookies the site doesn't use.

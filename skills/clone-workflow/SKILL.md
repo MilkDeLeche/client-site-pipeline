@@ -1,6 +1,6 @@
 ---
 name: clone-workflow
-description: Clone a real website into a client-ready Astro mockup at near-100% visual fidelity, then rebrand it for a different business, then connect only the functionality named in architecture-plan.md. Use when handed a template to clone, a computed-style DOM dump, a reference screenshot, or a screen recording of a site's scroll/hover motion — or when asked to build website concepts or mockups for a business based on an existing site. Covers reading motion out of a video with ffmpeg contact sheets, motion implementation rules, folder conventions, and content-integrity rules for the rebrand pass.
+description: Clone a real website into a client-ready Astro mockup at near-100% visual fidelity, then rebrand it for a different business, guided by the PRD's intent section by section (references/intent-aware-rebrand.md), then connect only the functionality named in architecture-plan.md. Use when handed a template to clone, a computed-style DOM dump, a reference screenshot, or a screen recording of a site's scroll/hover motion — or when asked to build website concepts or mockups for a business based on an existing site. Covers reading motion out of a video with ffmpeg contact sheets, motion implementation rules, folder conventions, and content-integrity rules for the rebrand pass.
 ---
 
 # Template Clone Workflow
@@ -79,7 +79,12 @@ reference media, and ideally with the user's explicit sign-off that the
 template matches). Phase B changes **content only** — copy, images, links,
 logo, and yes, brand colors and fonts once the client's identity calls for it.
 It does **not** touch layout, spacing, or DOM structure inherited from Phase A
-unless the user explicitly asks for a structural change.
+unless the user explicitly asks for a structural change. When the PRD shows a
+need the inherited layout can't meet (a missing CTA, a section the funnel
+needs, a section with no truthful content), propose it in the rebrand plan and
+build it only from the template's own grammar: its button variants where it
+places buttons, its fonts, its spacing, an existing section pattern. See
+`references/intent-aware-rebrand.md`.
 
 ### Red flags that mean you skipped the gate
 
@@ -167,12 +172,14 @@ named as missing:
 
 ### 1. PRD first
 
-Research the target business (their site, Instagram, delivery listings, review
-sites, local directories) and write `PRD.md`: what they sell, their real
-differentiators, hours, address, phone, ordering links, tone.
+If a PRD was supplied, read it and keep it; never overwrite it. Otherwise research
+the target business (their site, Instagram, delivery listings, review sites,
+local directories) and write `PRD.md` from `client-web-delivery` →
+`assets/prd-template.md`: what they sell and to whom, what visitors must believe,
+the one action that makes money, real differentiators, tone.
 
-This is the content that gets plugged into every design later. Do it **first** so
-the rebrand pass is a lookup, not an invention.
+Do it **first** so the rebrand pass is a lookup, not an invention. The PRD never
+changes Phase A.
 
 Put every business fact in **one data file** (see `src/data/`), never inline in
 components. Phone, address, map link, ordering URLs — one source of truth.
@@ -210,6 +217,14 @@ copy, images, links, logo, brand colors and fonts. **Never touch layout or DOM
 structure** unless explicitly asked. If the client says "only replace images,
 not the template," that means the `<style>` blocks stay byte-identical — prove
 it by only editing frontmatter and markup.
+
+**Phase B strategy gate.** Before the first substitution, read `PRD.md`, the
+facts file and `architecture-plan.md`, and open
+`references/intent-aware-rebrand.md`. Inventory the template's design grammar
+and write `section-purpose-map.md`: each inherited section and CTA mapped to its
+business purpose, approved copy, real proof, fitting media and the action it
+drives. Present a short rebrand plan, and build structural changes only after
+approval. If the PRD is missing or unapproved, Phase B is blocked.
 
 ### 6. Connect functionality — Phase C
 
@@ -281,7 +296,8 @@ mid-animation. If you see that pattern, you've found a mask reveal.
 ## Folder conventions
 
 ```
-PRD.md                          business research, written first
+PRD.md                          business intent (who buys, the action that makes money); read, never overwritten
+section-purpose-map.md          Phase B: design-grammar inventory + why each section says what it says
 src/data/<client>.ts            every business fact, one place
 reference/template/             fetched real HTML/CSS/JS, when the template is a live site — primary source for Phase A
 src/pages/index.astro           concept picker (links every design) — or the Phase A template clone, before rebrand begins
@@ -346,3 +362,9 @@ project shipped a 179MB bundle that way; moving it out took it to 1.8MB.
   tend to disagree across sources — mark them and confirm with the owner.
 - Placeholder art should be dimension-exact so swapping in the real photo can't
   shift the layout.
+- AI images (e.g. Krea) may fill mood and gaps, styled like the template's
+  photography, but never stand in for the client's own projects, team, results
+  or reviews. Label them illustrative where they could be mistaken for real work,
+  and put "send your real photos" on the setup-list.
+- A near-final pitch never says preview, prototype, demo or coming soon, in copy,
+  alt text, titles or form messages.

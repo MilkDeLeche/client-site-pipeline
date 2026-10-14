@@ -9,7 +9,7 @@ deployment:
   reason: >
 
 database:
-  provider: cloudflare-d1   # subscribers table only, unless another requirement picks none/supabase/convex
+  provider: cloudflare-d1   # subscribers (+ inquiries when the primary action is a form), unless another requirement picks none/supabase/convex
   realtime_required: false
   reason: >
 
@@ -33,6 +33,11 @@ analytics:
   provider: cloudflare-web-analytics
   consent_required: true    # loaded only after the cookie banner says Accept
   reason: >
+
+conversion:                 # from PRD.md; the plan does not restate the PRD, only what the stack must deliver
+  primary_action: >         # call / estimate form / insight form / order / booking
+  completion_route: >       # where it lands: D1 inquiries until handoff, then inbox / CRM / POS / scheduler
+  destination_owner: >      # the person who answers it; UNKNOWN blocks calling conversions "live"
 
 features:
   newsletter_signup: true   # always on; see "Live showcase standard"
@@ -61,7 +66,7 @@ features:
 - Database: {{none / why not Supabase / why not Convex}}
 - Auth: {{none unless a protected area exists}}
 - R2: {{none unless someone uploads after launch}}
-- D1: subscribers table only (email capture). Anything else in D1 needs its own reason.
+- D1: subscribers table (email capture), plus inquiries when the primary action is a form. Anything else in D1 needs its own reason.
 - KV: not auto-selected
 - Blog: {{only if they will actually publish}}
 

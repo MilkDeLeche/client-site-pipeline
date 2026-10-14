@@ -50,6 +50,17 @@ The lists above always run. Then read `architecture-plan.md` and check **only th
 - **Supabase** — production project and env vars, service-role key not in the client bundle, exposed data has an RLS/authorization story, production create/read/update paths work.
 - **Convex** — production deployment, queries/mutations work, protected functions enforce auth. If the plan’s reason was realtime, prove it: window A shows a slot, window B books it, window A updates. “The booking saved” is not that test.
 
+## Conversion journey checks (conditional)
+
+Static checks can't prove a lead lands. For each conversion the PRD and architecture plan turned on (signup, inquiry/estimate/insight form, booking, order), run the real journey in a real browser (headless Chrome or Playwright): type, submit, then prove the outcome. Record it in `conversion-acceptance.md`. If the site has no conversion feature, write "not applicable" rather than inventing a test.
+
+- **Capture (near-final pitch):** the submission is stored. Check the row with `wrangler dev` + `wrangler d1 execute <db> --local`. The success message is honest. No "preview", "prototype" or "demo" wording appears anywhere in the build (grep the output).
+- **Live delivery:** the message actually arrives (the agreed inbox, the email tool's send log, the CRM record), not just a success message. A booking or order shows up in the real third-party or backend system.
+- **Failure path:** invalid input is blocked, a server error shows the error state, and the spam honeypot and challenge are in place.
+- **Ownership:** a named person receives each conversion. Without one, the site may capture, but don't call it live.
+- **Measurement:** count completed conversions server-side by default (D1 rows, send logs). Cloudflare Web Analytics is pageview-based; propose an events tool only if the PRD needs one, and get approval. Never send form contents to analytics.
+- **Consent + access:** the cookie banner gates analytics, forms work by keyboard, and errors are announced.
+
 Legacy output paths (including `.vercel/output/static`) still count as a build directory when the architecture plan names that host. New projects are audited from the Cloudflare/Astro output (`dist/` unless the plan says otherwise).
 
 ## Privacy policy — minimum contents
@@ -71,6 +82,7 @@ Draft it, and mark it a **template the client/lawyer must review before publishi
 Launch audit — <site>  (build: <dir>)
 Technical:  1 ✅ · 2 ✅ · … · 11 ✅ · 12 ⚠️ <note>
 Legal:      13 ❌ <fix> · 14 ❌ · 15 ⚠️ · 16 ❌ · 17 ✅
+Conversions: signup ✅ row stored · estimate form ✅ captured, delivery ⏳ client inbox · (or: not applicable)
 Client-blocked: <real domain, asset/font licensing, real reviews, real photos>
 ```
 

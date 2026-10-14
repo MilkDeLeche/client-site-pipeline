@@ -3,6 +3,16 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.3.0] — 2026-10-14
+
+Intent-aware rebranding. Phase A is unchanged; Phase B now knows what the business needs the site to do.
+
+- `client-site-pipeline` adds a **PRD gate** to step 1: read a supplied PRD and never overwrite it, or draft and approve one. A **seed PRD** (just the client's current website link in a text file) is researched and expanded into the full PRD, never mistaken for one. `reference-only` PRDs allow Phase A only. `PRD.md`, `section-purpose-map.md` and `conversion-acceptance.md` join the sources of truth. Unsold showcase sites are now **near-final pitches**: about 99% done, nothing labeled preview or prototype, every form really captures.
+- `client-web-delivery` starts Stage 1 from the PRD (intent: audience, proof, the action that makes money, who answers it) and reconciles the architecture plan with it. The standing D1 exception adds an `inquiries` table when the primary action is a form. New `assets/prd-template.md`.
+- `clone-workflow` adds a Phase B strategy gate and the on-demand `references/intent-aware-rebrand.md`: a design-grammar inventory (only the template's buttons, where it places them; its fonts, spacing and section patterns), a section-purpose map, editorial media rules (Krea images as labeled illustrative fill only), funnels by business type, and a **first-screen test** (on phone and desktop the first screen must say what is sold, where, why trust them, and what to do next), one label for the primary CTA everywhere, and the near-final pitch standard. The "PRD first" step now reads a supplied PRD instead of rewriting it. **No Phase A text changed.**
+- `launch-audit` adds conditional **conversion journey checks**: a real browser submission, proof the submission was stored or delivered, failure paths, a named owner, server-side conversion counts, and `conversion-acceptance.md`. The existing 17 checks are unchanged.
+- `architecture-plan-template.md` records `primary_action`, `completion_route` and `destination_owner` from the PRD.
+
 ## [1.2.0] — 2026-10-14
 
 Live showcase standard: client sites are often built before the client pays, so every site ships feeling live.

@@ -9,9 +9,9 @@ Five skills. Run them **in this order**. Each one produces an artifact the next 
 
 | Step | Skill | When | Done when |
 |---|---|---|---|
-| 1 | `client-web-delivery` | Start of the job | Setup-list exists; client facts live in **one** `src/data/` file; `architecture-plan.md` exists with a reason for every service; no invented phone/reviews/prices or infrastructure |
+| 1 | `client-web-delivery` | Start of the job | `PRD.md` read (if supplied) or drafted, and approved, with the site's intent: who buys, what they must believe, the one action that makes money; setup-list exists; client facts live in **one** `src/data/` file; `architecture-plan.md` exists with a reason for every service; no invented phone/reviews/prices or infrastructure |
 | 2 | `clone-intake` | Before any clone build | Live template URL + repo `.txt` dumps (scrolled to the section) + motion video |
-| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
+| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent section by section (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
 | 4 | `launch-audit` | After build, **before** public launch | Production build audited; privacy / 404 / titles / no fake testimonials; remaining asks stay on the setup-list |
 | 5 | `seo` | After it is live (or on a rebuild, snapshot URLs **before** step 3) | Crawlable HTML, GBP/NAP if local, no `noindex` left on, redirects if replacing an old site |
 
@@ -19,7 +19,7 @@ Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run bui
 
 ## Live showcase standard (every site, Phase C)
 
-Most of these sites go up as a working showcase before the client pays, so they must feel live. Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, and a privacy page that matches. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first.
+Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype or demo, and every form really captures what is submitted. Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, and a privacy page that matches. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first.
 
 ## What each later skill actually is
 
@@ -31,14 +31,28 @@ Most of these sites go up as a working showcase before the client pays, so they 
 
 On a new client clone, read this skill first, then open **only the current step’s** skill. Name the step out loud (“step 2, clone-intake”). When architecture is being chosen, say “Current step: Architecture / Setup”. When the user jumps ahead (“do SEO”), say which step they skipped and what is missing.
 
+## PRD gate
+
+Step 1 is not done without a `PRD.md` (template: `client-web-delivery` → `assets/prd-template.md`).
+
+- **PRD supplied** (file, doc, link): read it first, keep its decisions, add a labeled supplement for gaps. Never overwrite it.
+- **Seed PRD** (a text file holding only the client's current website link, or a few lines): it is the starting point, not the brief. Open the site and their public profiles, put publishable facts in `src/data/`, save their photos and logo to `reference/` with rights noted, snapshot the old URLs for redirects (`seo`), then draft the full `PRD.md` around it. Leave the seed file as it was.
+- **No PRD:** say it is required for a client rebrand, draft it from what is known, mark `UNKNOWN`s, and get approval (the builder approves a near-final pitch; the client approves production).
+- **`reference-only`:** a light PRD lets Phase A run; client-facing Phase B/C waits for the full brief.
+- The PRD holds intent; `src/data/` stays canonical for publishable facts. Conflicts between them are surfaced, not silently resolved.
+- The PRD never changes Phase A.
+
 ## Sources of truth
 
 | What | Where |
 |---|---|
+| Business intent and strategy | `PRD.md` |
 | Client facts | one `src/data/` file |
 | Architecture | `architecture-plan.md` |
 | Missing client facts | the setup-list |
 | Visual reference | clone-intake evidence |
+| Why each section says what it says | `section-purpose-map.md` (Phase B) |
+| Proof that conversions work | `conversion-acceptance.md` (launch-audit) |
 | What actually shipped | the source and the production build |
 | What the client is told | `deliverables/client-handoff.md` |
 

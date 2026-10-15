@@ -119,6 +119,7 @@ A `near-final-pitch` is built before the sale but must read as about 99% done:
 5. **Present a short rebrand plan:** hero message, section order, proof, image assignments, primary CTA, any `GRAMMAR_ADDITION` or removal with its reason, and any `CONFLICT`. Wait for approval of structural items.
 6. Implement content and brand tokens from the facts file, reusing the template's components.
 7. **First-screen test:** screenshot the top of every page on a phone and on desktop. That first screen alone must answer what they sell, where, why trust them, and what to do next. If it doesn't, fix the message or media before anything else.
+   Re-measure the fixed header after the logo swap: a taller client logo makes the header taller than the template's hardcoded first-section offset, and inner-page headings slide under it. Set the offset from the measured header height at each breakpoint.
    Then check desktop, tablet and phone: crops, real text wraps, contrast, hover and focus, motion and reduced motion, every CTA's destination. Compare page and section geometry with the Phase A baseline; differences must be the approved ones.
 8. Log what changed and why (`rebrand-change-log.md` or the project notes). Unresolved items go to the setup-list.
 

@@ -3,6 +3,14 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.3.1] — 2026-10-15
+
+Fixes found by running v1.3 on a real near-final pitch (Kasocri Construction).
+
+- `launch-audit/scripts/audit.sh` checks every built page whichever layout the build uses. With Astro `build.format: "file"` (`dist/about.html`, the static + API Worker default) it used to see only `index.html`/`404.html`, report false duplicate titles and miss `/privacy`. Check [13] now also counts the pages that link to `/privacy`.
+- `clone-workflow` Phase B (`references/intent-aware-rebrand.md`): re-measure the fixed header after the logo swap; a taller client logo hides inner-page headings under the template's hardcoded offset.
+- `client-web-delivery`: moving a project off the Astro Cloudflare adapter, delete the stale `.wrangler/deploy/config.json`.
+
 ## [1.3.0] — 2026-10-14
 
 Intent-aware rebranding. Phase A is unchanged; Phase B now knows what the business needs the site to do.

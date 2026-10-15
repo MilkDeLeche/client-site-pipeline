@@ -33,8 +33,12 @@ else fail "no $idx"; fi
 echo "[2] 404 page"
 { [ -f "$DIR/404.html" ] && pass "404.html present"; } || fail "no 404.html"
 
+# Every built page, whichever layout the build uses: dist/about/index.html (directory) or dist/about.html
+# (Astro build.format: "file"). Pages without a <title> (e.g. verification files) simply add no title.
+pages=$(find "$DIR" -name '*.html' -not -path '*/_astro/*')
+
 echo "[3] Unique titles"
-titles=$(find "$DIR" \( -name index.html -o -name 404.html \) -exec grep -ho '<title>[^<]*</title>' {} \;)
+titles=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -ho '<title>[^<]*</title>' "$f"; done)
 n=$(echo "$titles" | grep -c .); u=$(echo "$titles" | sort -u | grep -c .)
 if [ "$n" = "$u" ]; then pass "$n pages, $u unique titles"; else fail "$n pages but only $u unique titles (duplicates)"; fi
 
@@ -87,7 +91,9 @@ if [ -n "$hosts" ]; then echo "$hosts" | sed 's/^/      /'; echo "      ^ cross-
 
 echo
 echo "== Legal items (verify by hand in code) =="
-echo "  [13] /privacy page exists + linked in footer?  ->  $( [ -f "$DIR/privacy/index.html" ] && echo 'page present' || echo 'MISSING' )"
+if [ -f "$DIR/privacy/index.html" ] || [ -f "$DIR/privacy.html" ]; then priv='page present'; else priv='MISSING'; fi
+plinks=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -lE 'href="(/|\./|\.\./)*privacy(\.html|/)?(#[^"]*)?"' "$f"; done | grep -c .)
+echo "  [13] /privacy page exists + linked in footer?  ->  $priv; linked from $plinks of $(echo "$pages" | grep -c .) pages"
 echo "  [14] data-collection disclosed (analytics/forms)?"
 echo "  [15] AI usage disclosed (generated imagery = illustrative)?"
 echo "  [16] third-party processors listed (analytics, maps, fonts, booking)?"

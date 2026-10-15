@@ -1,6 +1,6 @@
 ---
 name: client-site-pipeline
-description: Ordered end-to-end workflow for a client site clone — client setup-list, architecture plan, clone intake, clone/build, launch audit, then SEO, then a client handoff. Use when starting a client website, cloning a template, choosing hosting/database/auth, or when the user mentions clone-intake, clone-workflow, client-web-delivery, launch-audit, or seo together. Required order; do not skip ahead.
+description: Ordered end-to-end workflow for a client site clone — client setup-list, architecture plan, clone intake, clone/build, launch audit, then SEO, then a client handoff. Use when starting a client website (including from a seed PRD that is just the client's current site link, or as a near-final pitch built before the sale), cloning a template, choosing hosting/database/auth, or when the user mentions clone-intake, clone-workflow, client-web-delivery, launch-audit, or seo together. Required order; do not skip ahead.
 ---
 
 # Client site pipeline
@@ -19,7 +19,7 @@ Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run bui
 
 ## Live showcase standard (every site, Phase C)
 
-Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype or demo, and every form really captures what is submitted. Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, and a privacy page that matches. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first.
+Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype, demo or coming soon, and every form really captures what is submitted (signups to `/api/subscribe`, the primary inquiry form to `/api/inquiries`). Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, and a privacy page that matches. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first, with `noindex`. Removing `noindex` belongs to step 5, after the client buys and the real domain is on.
 
 ## What each later skill actually is
 
@@ -36,7 +36,7 @@ On a new client clone, read this skill first, then open **only the current step�
 Step 1 is not done without a `PRD.md` (template: `client-web-delivery` → `assets/prd-template.md`).
 
 - **PRD supplied** (file, doc, link): read it first, keep its decisions, add a labeled supplement for gaps. Never overwrite it.
-- **Seed PRD** (a text file holding only the client's current website link, or a few lines): it is the starting point, not the brief. Open the site and their public profiles, put publishable facts in `src/data/`, save their photos and logo to `reference/` with rights noted, snapshot the old URLs for redirects (`seo`), then draft the full `PRD.md` around it. Leave the seed file as it was.
+- **Seed PRD** (a text file whose content is only the client's current website link, or that link plus a few notes): a seed even when the file is named `PRD.md`. It is not a brief and not approved. Keep its bytes (if it is named `PRD.md`, copy it unchanged to `PRD.seed.md` first). Open the site and their public profiles, put publishable facts in `src/data/`, save their photos and logo to `reference/` with rights noted, snapshot the old URLs for redirects (`seo`), then write the full `PRD.md` at status `draft`.
 - **No PRD:** say it is required for a client rebrand, draft it from what is known, mark `UNKNOWN`s, and get approval (the builder approves a near-final pitch; the client approves production).
 - **`reference-only`:** a light PRD lets Phase A run; client-facing Phase B/C waits for the full brief.
 - The PRD holds intent; `src/data/` stays canonical for publishable facts. Conflicts between them are surfaced, not silently resolved.
@@ -60,7 +60,7 @@ Do not invent a fact to fill the data file, and do not invent a service to fill 
 
 ## Architecture gate
 
-Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. New projects default to Cloudflare Workers. A static marketing site stays static: no login, no R2, no server-rendered pages, just because those exist. The only standing exception is the email-capture API Worker + D1 subscribers table from the live showcase standard.
+Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. New projects default to Cloudflare Workers. A static marketing site stays static: no login, no R2, no server-rendered pages, just because those exist. The only standing exception is the capture API Worker + D1 from the live showcase standard: a `subscribers` table, plus an `inquiries` table when the PRD's `primary_action` is a form.
 
 ## After step 5
 

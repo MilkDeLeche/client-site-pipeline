@@ -11,7 +11,10 @@ Intent-aware rebranding. Phase A is unchanged; Phase B now knows what the busine
 - `client-web-delivery` starts Stage 1 from the PRD (intent: audience, proof, the action that makes money, who answers it) and reconciles the architecture plan with it. The standing D1 exception adds an `inquiries` table when the primary action is a form. New `assets/prd-template.md`.
 - `clone-workflow` adds a Phase B strategy gate and the on-demand `references/intent-aware-rebrand.md`: a design-grammar inventory (only the template's buttons, where it places them; its fonts, spacing and section patterns), a section-purpose map, editorial media rules (Krea images as labeled illustrative fill only), funnels by business type, and a **first-screen test** (on phone and desktop the first screen must say what is sold, where, why trust them, and what to do next), one label for the primary CTA everywhere, and the near-final pitch standard. The "PRD first" step now reads a supplied PRD instead of rewriting it. **No Phase A text changed.**
 - `launch-audit` adds conditional **conversion journey checks**: a real browser submission, proof the submission was stored or delivered, failure paths, a named owner, server-side conversion counts, and `conversion-acceptance.md`. The existing 17 checks are unchanged.
-- `architecture-plan-template.md` records `primary_action`, `completion_route` and `destination_owner` from the PRD.
+- `architecture-plan-template.md` records `primary_action`, `completion_route` and `destination_owner` from the PRD (the PRD template uses the same names).
+- Inquiry capture is fully specified: `POST /api/inquiries` (columns, honeypot, same-origin, honest success message) joins `/api/subscribe` behind the API Worker, which now serves `/api/*`. The setup-list asks who receives new inquiries, and its numbering is fixed.
+- Near-final pitches deploy to `*.workers.dev` with `noindex`; it is removed in step 5 after the sale. A missing fact is hidden, never shown as a placeholder. Fonts stay the template's unless the user directs a brand font.
+- Conversion checks read the database the form actually wrote to (local for `wrangler dev`, remote for `workers.dev`), prove `tel:` and external order/booking links by following them, accept pending delivery on a pitch, and check a challenge only when the plan names one.
 
 ## [1.2.0] — 2026-10-14
 

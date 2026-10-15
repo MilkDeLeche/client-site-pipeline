@@ -30,7 +30,7 @@ Copy to `PRD.md` at the project root. This is a **starter, not an approved PRD**
 ## 2. The outcome this site exists for
 
 - **Primary business goal:** {{e.g. qualified estimate requests / booked consultations / online orders / qualified project inquiries}}
-- **Primary visitor action:** {{the thing a visitor actually completes: call, estimate form, order, booking, insight form}}
+- **Primary visitor action (`primary_action`):** {{the thing a visitor actually completes: call, estimate form, order, booking, insight form}}
 - **Completion means:** {{form accepted AND delivered / booking confirmed / payment authorized}}
 - **What makes a lead or order valuable:** {{real qualifying criteria, e.g. budget range, timeline, owns a lot, company size}}
 - **Secondary action (optional):** {{call, directions, view projects, sign up for alerts}}
@@ -40,8 +40,8 @@ Copy to `PRD.md` at the project root. This is a **starter, not an approved PRD**
 
 | | |
 |---|---|
-| Where the action lands | {{inbox / scheduler / POS / CRM; in a near-final pitch: captured to D1 until handoff}} |
-| Who answers it | {{named person or team; `UNKNOWN` blocks any "live leads" claim}} |
+| Where the action lands (`completion_route`) | {{inbox / scheduler / POS / CRM; in a near-final pitch: captured to D1 until handoff}} |
+| Who answers it (`destination_owner`) | {{named person or team; `UNKNOWN` blocks any "live leads" claim}} |
 | What happens next | {{reply within a day, quote, confirmation email, etc.}} |
 | Open dependency | {{client inbox, Brevo account, booking login, domain}} |
 

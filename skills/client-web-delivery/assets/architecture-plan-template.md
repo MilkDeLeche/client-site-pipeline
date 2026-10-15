@@ -5,7 +5,7 @@ deployment:
   provider: cloudflare-workers
   rendering: static
   server_runtime_required: false
-  api_worker: true          # /api/subscribe for the email list; false only if the client's email tool hosts the form
+  api_worker: true          # /api/subscribe, plus /api/inquiries when primary_action is a form; false only if the client's tools host every form
   reason: >
 
 database:
@@ -43,7 +43,7 @@ features:
   newsletter_signup: true   # always on; see "Live showcase standard"
   newsletter_hook: >        # what THIS business sends: new drinks + birthday treats / new-home alerts / ...
   cookie_consent: true      # always on
-  contact_form: false
+  contact_form: false       # true when primary_action is a form (estimate / insight) -> /api/inquiries
   booking: false
   live_availability: false
   accounts: false

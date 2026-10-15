@@ -77,7 +77,8 @@ original.
 **Phase B — Rebrand. Starts only after Phase A is verified** (against the
 reference media, and ideally with the user's explicit sign-off that the
 template matches). Phase B changes **content only** — copy, images, links,
-logo, and yes, brand colors and fonts once the client's identity calls for it.
+logo, and yes, brand colors once the client's identity calls for it. Fonts stay
+the families and weights the template loads unless the user directs a brand font.
 It does **not** touch layout, spacing, or DOM structure inherited from Phase A
 unless the user explicitly asks for a structural change. When the PRD shows a
 need the inherited layout can't meet (a missing CTA, a section the funnel
@@ -172,7 +173,10 @@ named as missing:
 
 ### 1. PRD first
 
-If a PRD was supplied, read it and keep it; never overwrite it. Otherwise research
+If the supplied file is only a URL (or a URL plus a few notes), it is a seed, even
+when named `PRD.md`: keep its bytes (copy it to `PRD.seed.md`), research, and write
+`PRD.md` at status `draft`. If a full PRD was supplied, read it and keep it; never
+overwrite it. Otherwise research
 the target business (their site, Instagram, delivery listings, review sites,
 local directories) and write `PRD.md` from `client-web-delivery` →
 `assets/prd-template.md`: what they sell and to whom, what visitors must believe,
@@ -361,7 +365,8 @@ project shipped a 179MB bundle that way; moving it out took it to 1.8MB.
 - Flag unverified facts rather than shipping them silently. Hours in particular
   tend to disagree across sources — mark them and confirm with the owner.
 - Placeholder art should be dimension-exact so swapping in the real photo can't
-  shift the layout.
+  shift the layout. In a near-final pitch, use a labeled illustrative image or hide
+  the slot; never ship visible placeholder art.
 - AI images (e.g. Krea) may fill mood and gaps, styled like the template's
   photography, but never stand in for the client's own projects, team, results
   or reviews. Label them illustrative where they could be mistaken for real work,

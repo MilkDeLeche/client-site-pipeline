@@ -34,7 +34,8 @@ Write this down once, at the top of `section-purpose-map.md`. Every Phase B chan
 |---|---|
 | **Buttons** | Every variant (class names, e.g. `primary-button`, `secondary-button`, `link-button`) and **where the template places each**: hero, nav, end of a section heading, card footer. |
 | **Typography** | Font families and weights actually loaded, and the heading/label/paragraph classes. |
-| **Spacing** | Container widths, section padding, grid gaps: the template's own CSS variables or values. |
+| **Spacing** | Container widths, section padding, section margins, grid gaps: the template's own CSS variables or values. |
+| **Form controls** | Input, label, select, error, success and submit styles, if the template has a form. A new form reuses exactly these. |
 | **Section patterns** | The repeating structures: heading block + summary + grid, alternating backgrounds, card types. |
 | **Image slots** | Each slot's pixel size and aspect ratio, and whether layout depends on the image's own size. |
 | **Motion** | Reveal and hover behavior and how it is bound (classes, data attributes, per-page IDs). |
@@ -42,9 +43,10 @@ Write this down once, at the top of `section-purpose-map.md`. Every Phase B chan
 
 **Rules for anything added, moved or removed in Phase B:**
 
-- **Buttons:** only existing variants, and only in places where the template puts that kind of button. Never a button floating mid-grid because "it needs a CTA there". Hover and focus states come from the variant.
-- **Fonts:** only families and weights the template already loads. No new font.
-- **Spacing:** only the template's spacing values. A new block gets the same padding, container and gap as its neighbors.
+- **Buttons:** only existing variants, and only in slot types where the inventory recorded the template using that kind of button (if some section headings carry a button, another section heading may; a slot type that never has one gets none). Never a button floating mid-grid because "it needs a CTA there". Hover and focus states come from the variant.
+- **Fonts:** only families and weights the template already loads. No new font, unless the user directs a brand font (`USER_DIRECTED`).
+- **Spacing:** only the template's spacing values. A new block gets the same padding, margin, container and gap as its neighbors.
+- **Order:** changing section order is a structural change; it goes in the rebrand plan and waits for approval.
 - **New section:** duplicate an existing section pattern (its markup, classes and reveal binding) and change the content. Don't write a new layout. Keep background alternation intact.
 - **Removed section:** only when there is no truthful content for it (no reviews → no testimonials block). Check the page rhythm still works and nothing now points to it.
 - **Images:** crop to the slot's exact size and aspect. Where layout depends on the image's own size, keep the template's pixel size (serve a 2x copy with `srcset` "1x, 2x").
@@ -70,7 +72,7 @@ Create `section-purpose-map.md`: one row per inherited section and CTA, **before
 | Edit type | `CONTENT_ONLY` / `BRAND_TOKEN` / `GRAMMAR_ADDITION` / `USER_DIRECTED` / `CONFLICT` |
 | Status | `READY` / `NEEDS_ASSET` / `NEEDS_FACT` / `NEEDS_APPROVAL` / `NOT_APPLICABLE` |
 
-Example (home builder on a roofing template): the hero gets an offer-first headline plus a real finished home at dusk. The "brands we work with" logo row is removed (no real partners). The ratings row is reused with three real home photos and a true portfolio count instead of fake stars. The process section's steps are rewritten into the client's real build process. The testimonials section is hidden until there are permissioned reviews.
+Example (home builder on a roofing template, and only because these assets existed): the hero gets an offer-first headline plus a real finished home at dusk. The "brands we work with" logo row is removed (no real partners). The ratings row is reused with three real home photos and a true portfolio count instead of fake stars. The process section's steps are rewritten into the client's real build process. The testimonials section is hidden until there are permissioned reviews.
 
 ## 4. Pick media like an editor
 
@@ -89,7 +91,7 @@ For each image, check in order:
 
 ## 5. Shape the funnel to the business
 
-There is no universal funnel. Choose from the PRD:
+There is no universal funnel. Choose from the PRD, and pick the one action the business already uses: a call → `tel:`; order, reserve or book → their existing ordering or booking URL; an estimate or insight form → one form, one label, `POST /api/inquiries`. A phone call may be the secondary action. Do not add a second form, a cart or a scheduler the architecture plan did not select, and do not add a form where the action is an order, a reservation or directions.
 
 - **Agency / B2B service:** ad → focused landing page → proof (relevant work, capabilities) → **insight form** with qualifying fields (company, website, goal, budget range, timeline) → a named person follows up.
 - **Contractor / home builder:** local search or ad → service area, real projects, process → estimate request or call → office response.
@@ -97,14 +99,14 @@ There is no universal funnel. Choose from the PRD:
 - **Retail:** ad or search → product → variants, price, stock, policies → checkout.
 - **Appointment service:** services, availability, expertise, policies → booking.
 
-The primary CTA appears where the template already places primary buttons (hero, section heading blocks, final CTA section), consistently, with the same label throughout.
+One label, taken from the PRD, on every primary button the inventory recorded. Do not add a primary button in a slot type the template leaves without one.
 
 ## 6. Near-final pitch standard
 
 A `near-final-pitch` is built before the sale but must read as about 99% done:
 
 - No "preview", "prototype", "demo", "coming soon", lorem ipsum or template leftovers anywhere: copy, alt text, titles, form messages.
-- Every CTA goes somewhere real. Every form genuinely captures what's submitted: signups to D1 (live showcase standard), and the primary inquiry form to D1 as well, until the client's inbox, CRM or Brevo is connected. Success messages say only what is true ("Thanks, your message was received").
+- Every CTA goes somewhere real. Every form genuinely captures what's submitted: signups to `/api/subscribe` and the primary inquiry form to `/api/inquiries` (both D1), until the client's inbox, CRM or Brevo is connected. A missing fact is omitted or its section hidden, never shown as a visible placeholder. Success messages say only what is true ("Thanks, your message was received").
 - The remaining 1% is the client's own: their email tool, real photos, domain, approvals. It is listed on the setup-list in their language.
 - The pitch link stays private: `*.workers.dev`, `noindex` until they buy. None of this shows on the page.
 
@@ -143,7 +145,7 @@ Give the impact of each on layout, motion and mobile. Sometimes the honest answe
 **Phase B is blocked when:**
 - Phase A isn't verified.
 - The PRD is missing or unapproved for client work.
-- A required claim or image is missing.
+- A required claim is missing, or a required image is missing and neither a client photo nor a labeled illustrative image can honestly fill it.
 - A business-critical change needs unapproved structure.
 
 ## Anti-patterns
@@ -164,7 +166,7 @@ Give the impact of each on layout, motion and mobile. Sometimes the honest answe
 | No PRD | Stop Phase B; return to step 1 or continue as `reference-only` clone. |
 | 3-card design, 7 services | Group them or propose a grammar-consistent option; never squeeze 7 into 3 cards. |
 | Only one real project | Show it well, ask for more, never invent a second. |
-| Lead form wanted, backend not ready | Build the form in the template's form styles, capture to D1, mark delivery as a Phase C item. |
+| Lead form wanted, backend not ready | Build the form from the template's form controls, capture through `POST /api/inquiries`, mark delivery to the client's inbox as pending. |
 | New brand colors | Apply as tokens, chase literal copies, verify contrast and cohesion. |
 | Section needed that the template lacks | Duplicate an existing section pattern, propose it in the rebrand plan, build after approval. |
 | Near-final pitch | No preview or prototype wording anywhere; forms capture for real; remaining items on the setup-list. |

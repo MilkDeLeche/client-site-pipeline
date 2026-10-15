@@ -31,20 +31,22 @@ give us. Send these back and we go live. (Translate to the client's language if 
    Confirm you will actually send that, and {{what the birthday treat / alert is}}. Tell us which email tool
    you want to send from (Brevo, Mailchimp, Klaviyo, or your POS's marketing tool). Until then,
    signups are saved safely and we hand you the list.
+7. **Who gets a new inquiry** — the name and inbox for {{estimate / project inquiry}} requests (only if the site has an
+   inquiry form). Until then, every request is saved and handed to you; the site never promises a reply.
 
 ## Part B — Content to provide / confirm
 
-6. **Photos** — {{team/staff, product, or space}} images, and who is who.
-7. **Bios / descriptions** — {{any missing bios or copy}}.
-8. **Sign-off** — confirm {{prices / hours / medical or legal claims}} are accurate. We won't
+8. **Photos** — {{team/staff, product, or space}} images, and who is who.
+9. **Bios / descriptions** — {{any missing bios or copy}}.
+10. **Sign-off** — confirm {{prices / hours / medical or legal claims}} are accurate. We won't
    publish a claim that isn't right.
-9. **Media rights** — OK to use {{AI / stock}} imagery (labeled illustrative), or send real photos.
-10. **Reviews** — permission to display {{these real reviews}} with names.
+11. **Media rights** — OK to use {{AI / stock}} imagery (labeled illustrative), or send real photos.
+12. **Reviews** — permission to display {{these real reviews}} with names.
 
 ## Part C — Legal / licensing
 
-11. **Fonts / assets** — license the {{trial font / paid asset}}, or approve a free equivalent.
-12. **Privacy policy** — review the draft at `/privacy` before relying on it. It discloses
+13. **Fonts / assets** — license the {{trial font / paid asset}}, or approve a free equivalent.
+14. **Privacy policy** — review the draft at `/privacy` before relying on it. It discloses
     {{the newsletter data, the cookie banner, analytics, AI-made images, chat assistant, and third-party services}} and your privacy rights.
 
 ## Part D — Optional, for later (not blockers)

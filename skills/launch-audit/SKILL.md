@@ -54,9 +54,10 @@ The lists above always run. Then read `architecture-plan.md` and check **only th
 
 Static checks can't prove a lead lands. For each conversion the PRD and architecture plan turned on (signup, inquiry/estimate/insight form, booking, order), run the real journey in a real browser (headless Chrome or Playwright): type, submit, then prove the outcome. Record it in `conversion-acceptance.md`. If the site has no conversion feature, write "not applicable" rather than inventing a test.
 
-- **Capture (near-final pitch):** the submission is stored. Check the row with `wrangler dev` + `wrangler d1 execute <db> --local`. The success message is honest. No "preview", "prototype" or "demo" wording appears anywhere in the build (grep the output).
-- **Live delivery:** the message actually arrives (the agreed inbox, the email tool's send log, the CRM record), not just a success message. A booking or order shows up in the real third-party or backend system.
-- **Failure path:** invalid input is blocked, a server error shows the error state, and the spam honeypot and challenge are in place.
+- **Capture (near-final pitch):** submit on the URL being shipped, then check the row in that same database: `wrangler dev` → `wrangler d1 execute <db> --local`; `*.workers.dev` → `wrangler d1 execute <db> --remote`. The success message says only that it was received. No "preview", "prototype", "demo" or "coming soon" wording appears anywhere in the build (grep the output).
+- **Not a form:** a `tel:` link, a map link or an external order/booking URL is proved by following it. Don't add a form just to have something to submit.
+- **Live delivery:** the message actually arrives (the agreed inbox, the email tool's send log, the CRM record), not just a success message. A booking or order shows up in the real third-party or backend system. On a near-final pitch, pending delivery is expected: don't fail the audit because the inbox or email tool isn't connected yet.
+- **Failure path:** invalid input is blocked, a server error shows the error state, and the honeypot is in place. Check a challenge (e.g. Turnstile) only if the plan names one.
 - **Ownership:** a named person receives each conversion. Without one, the site may capture, but don't call it live.
 - **Measurement:** count completed conversions server-side by default (D1 rows, send logs). Cloudflare Web Analytics is pageview-based; propose an events tool only if the PRD needs one, and get approval. Never send form contents to analytics.
 - **Consent + access:** the cookie banner gates analytics, forms work by keyboard, and errors are announced.

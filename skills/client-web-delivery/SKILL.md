@@ -22,7 +22,7 @@ Pin down, in writing:
 
 ## Architecture plan
 
-Infrastructure is selected because a requirement needs it, never because the technology is available. Astro stays the framework unless the user explicitly overrides it. **New projects default to Cloudflare Workers.** If the plan identifies an existing host (a legacy Vercel or Netlify site), name that provider explicitly and keep it — do not migrate it in silence.
+Infrastructure is selected because a requirement needs it, never because the technology is available. Astro stays the framework unless the user explicitly overrides it. **Cloudflare Workers is the standard host for every project.** Use another host only when the user explicitly says so. A project already live elsewhere (a legacy Vercel or Netlify site) moves to Cloudflare as a named step in the plan: new Worker, D1 capture, then the old URL redirected or retired. Never migrate in silence, and never leave a shared link dead.
 
 Three Cloudflare modes:
 
@@ -51,11 +51,17 @@ Copy `assets/architecture-plan-template.md`, fill it, and keep it as the source 
 
 ## Live showcase standard (every client site)
 
-These sites are often built **before** the client has paid, as a **near-final pitch** that wins the job: it must read as about 99% done. Nothing on the site says preview, prototype, demo or coming soon, and every form genuinely captures what is submitted (the primary inquiry form saves to the `inquiries` table until the client's inbox or CRM is connected). The remaining 1% is the client's own: email tool, real photos, domain. Build them to feel fully live. Every site gets all three of these, tuned to the business. They are not optional and do not need a separate request.
+These sites are often built **before** the client has paid, as a **near-final pitch** that wins the job: it must read as about 99% done. Nothing on the site says preview, prototype, demo or coming soon, and every form genuinely captures what is submitted (the primary inquiry form saves to the `inquiries` table until the client's inbox or CRM is connected). The remaining 1% is the client's own: email tool, real photos, domain. Build them to feel fully live. Every site gets all four of these, tuned to the business. They are not optional and do not need a separate request.
 
 1. **Email capture that actually saves.** A newsletter / alert popup (once per visitor, after the cookie choice and ~12s or ~45% scroll, snoozed 14 days when closed, never again after signup) **and** an always-visible inline signup section. Fields: email (required), first name and birthday month/day (optional) when the business can use them. Honeypot field, same-origin check, `ON CONFLICT(email)` upsert. Working endpoint `/api/subscribe` → D1. Test it with `wrangler dev` before deploy (`wrangler d1 migrations apply <name> --local`).
 2. **Cookie consent banner.** Accept / Decline, links to `/privacy#cookies`, remembers the choice in localStorage, and **actually gates** analytics: the analytics script loads only after Accept. Banner copy says what is really stored. Never claim cookies the site doesn't use.
 3. **Privacy policy that matches.** `/privacy` lists exactly what the signup keeps, where it is stored (Cloudflare), how to unsubscribe or delete, the cookie/analytics choice, and that AI imagery is illustrative.
+4. **A second language.** Every site ships in its primary language plus one secondary language, picked in the PRD from who actually buys (Rio Grande Valley and most of Texas → Spanish). The primary stays at `/`, the secondary at `/<code>/` through Astro's `i18n` config (`defaultLocale`, `locales`, `routing.prefixDefaultLocale: false`). Rules:
+   - One copy file per locale (`src/data/<client>.ts`, `src/data/<client>.<code>.ts`) importing the **same** facts, so names, prices, hours and phone numbers can't drift between languages.
+   - Write the second language natively for that audience (how a local owner actually talks, including regional usage), not word for word. Hooks get rewritten, not translated.
+   - Both languages get every page, the forms, the popup, the banner, the privacy page and the 404. `<html lang>` per page, `hreflang` alternates plus `x-default`, and a language switch built from the template's own nav-link style.
+   - The API stores the visitor's `locale` with each signup and inquiry.
+   - A fluent person on the client's side reviews the second-language copy; that goes on the setup-list.
 
 Pick the signup hook from what the business sells. Promise only what the client will send, and put the promise on the setup-list for confirmation:
 
@@ -92,7 +98,7 @@ Copy `assets/setup-list-template.md` into the project, fill it in for THIS clien
 | **Analytics** | Which tool; any consent/cookie requirements for their region. |
 | **A licensed font or stock asset** | Proof of license — or approval to swap for a free equivalent. |
 
-Always also request: **what the signup promises** (and which email tool sends it), **domain**, **public phone + email to publish**, **team/staff photos + bios**, **real reviews + permission to use names**, **factual/medical/legal sign-off** on any regulated copy, and **rights to any AI or stock imagery**.
+Always also request: **who reviews the second-language copy**, **what the signup promises** (and which email tool sends it), **domain**, **public phone + email to publish**, **team/staff photos + bios**, **real reviews + permission to use names**, **factual/medical/legal sign-off** on any regulated copy, and **rights to any AI or stock imagery**.
 
 ## Stage 4 — Pre-launch gate
 

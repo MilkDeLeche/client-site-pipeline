@@ -26,7 +26,7 @@ Run this before any website goes live. It has two halves: **technical ship-readi
 6. **Canonical** — every page emits `<link rel="canonical">` with the absolute URL. Requires the framework's `site`/base URL to be set.
 7. **robots.txt allows AI** — exists AND does not block AI crawlers. For AEO/GEO you WANT `GPTBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-Web`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended` allowed. Include the `Sitemap:` line.
 8. **Sitemap** — `sitemap-index.xml` / `sitemap.xml` generated and referenced from robots.txt.
-9. **Lang attribute** — `<html lang="…">` set to the correct language.
+9. **Lang attribute** — `<html lang="…">` set to the correct language on every page of every locale, with `hreflang` alternates (plus `x-default`) between the language versions.
 10. **Alt text** — every `<img>` has `alt` (decorative images → `alt=""`). Count imgs vs imgs-with-alt.
 11. **No exposed source maps** — no `.map` files in the build output; they leak your original source. Turn off the bundler's production sourcemap option (Vite `build.sourcemap: false`, etc.).
 12. **No exposed secrets / public storage** — no `.env`, service-account keys (`*key*.json`), tokens, or credentials in the build output or in `public/` (which ships verbatim). Confirm any cloud storage bucket is not publicly listing or serving private files. Secrets live in env vars, never web-served.

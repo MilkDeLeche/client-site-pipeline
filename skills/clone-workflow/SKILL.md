@@ -222,13 +222,22 @@ structure** unless explicitly asked. If the client says "only replace images,
 not the template," that means the `<style>` blocks stay byte-identical — prove
 it by only editing frontmatter and markup.
 
+Swapping content is how you *implement* Phase B. It is not the definition of
+done: Phase B is done when someone in the client's target buyer group sees, on
+the first screen, that the site is for them, what they'd get, and real proof of it.
+
 **Phase B strategy gate.** Before the first substitution, read `PRD.md`, the
 facts file and `architecture-plan.md`, and open
-`references/intent-aware-rebrand.md`. Inventory the template's design grammar
-and write `section-purpose-map.md`: each inherited section and CTA mapped to its
+`references/intent-aware-rebrand.md`. Run it as the senior room it describes
+(strategist, copywriter, art director, UX lead). Open every client file and
+write `media-inventory.md`: what is really in frame, never judged by the
+filename. Inventory the template's design grammar and write
+`section-purpose-map.md`: each inherited section and CTA mapped to its
 business purpose, approved copy, real proof, fitting media and the action it
 drives. Present a short rebrand plan, and build structural changes only after
-approval. If the PRD is missing or unapproved, Phase B is blocked.
+approval. If the PRD is missing, Phase B is blocked. A draft PRD still allows
+the research, the media inventory and the rebrand plan; the plan is how the PRD
+gets approved.
 
 ### 6. Connect functionality — Phase C
 
@@ -369,7 +378,8 @@ project shipped a 179MB bundle that way; moving it out took it to 1.8MB.
   the slot; never ship visible placeholder art.
 - AI images (e.g. Krea) may fill mood and gaps, styled like the template's
   photography, but never stand in for the client's own projects, team, results
-  or reviews. Label them illustrative where they could be mistaken for real work,
-  and put "send your real photos" on the setup-list.
+  or reviews, and never hold a claim slot (hero, services, proof) when real
+  client work exists for that claim. Label them illustrative where they could
+  be mistaken for real work, and put "send your real photos" on the setup-list.
 - A near-final pitch never says preview, prototype, demo or coming soon, in copy,
   alt text, titles or form messages.

@@ -3,6 +3,22 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.4.0] — 2026-10-15
+
+Phase B is judged by the buyer, not by the slots. Found running v1.3.1 on an agency pitch (Timeless Media): every image and heading was replaced, the page still spoke to nobody, and real client reels sat in a folder while AI mood images held the hero and the service cards.
+
+- `clone-workflow` Phase B (`references/intent-aware-rebrand.md`) defines **done**: someone in the target buyer group sees, on the first screen, that the site is for them, what they'd get, and real proof. Swapping content is the method, not the goal.
+- **The room:** Phase B runs as four senior roles, each writing its part before the build: strategist/analyst (buyers by situation, research), copywriter (a hook bank in the buyer's words), art director (media truth and slot assignment), UX/front-end lead (grammar, funnel gaps, build). After the build, each role **redlines** the running page and the misses get fixed.
+- **Media-truth inventory** (`media-inventory.md`): every client file is opened and logged by what's actually in frame, its origin (real, AI-generated, stock) and the slots it may enter. Filenames are not evidence. Claim slots (hero, services, proof) take real work whenever it exists; AI images fill true gaps only.
+- **Headlines name the buyer's situation** ("Got a bar?"); service titles named after departments are a failed Phase B. Punchy lines are fine; invented reviews, prices, contact details and results are still banned.
+- Research has a floor: three peer sites, the industry guidance, the client's best-performing posts, and, for agencies, their buyers' industries.
+- The rebrand plan must answer what the page still fails to do and whether an existing section pattern should be duplicated to do it.
+- A **draft** PRD blocks an invented positioning, not the research, the media inventory or the plan.
+- **Lead capture is a Phase B decision per site type:** the money action (call, order, booking, directions or a form), qualifying fields only where the owner uses them, D1 capture so no lead is lost, and a failure message that hands the visitor a working channel instead of a dead end.
+- **Cloudflare Workers is the standard host for every project.** A site already on Vercel or Netlify moves over as a named step with its old URL redirected, never silently.
+- **Every site ships a second language** as part of the live showcase standard (Spanish for RGV / Texas clients): `/<code>/` via Astro i18n, one copy file per locale over the same facts, written natively (not translated word for word), `hreflang` + `x-default`, locale stored with each signup and inquiry, and a fluent client review on the setup-list. The PRD, architecture-plan and setup-list templates and the launch audit's lang check follow.
+- New gates and anti-patterns to match. **Phase A, the grammar limits and the ban on fake proof are unchanged.**
+
 ## [1.3.1] — 2026-10-15
 
 Fixes found by running v1.3 on a real near-final pitch (Kasocri Construction).

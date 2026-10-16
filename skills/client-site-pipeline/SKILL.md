@@ -11,7 +11,7 @@ Five skills. Run them **in this order**. Each one produces an artifact the next 
 |---|---|---|---|
 | 1 | `client-web-delivery` | Start of the job | `PRD.md` read (if supplied) or drafted, and approved, with the site's intent: who buys, what they must believe, the one action that makes money; setup-list exists; client facts live in **one** `src/data/` file; `architecture-plan.md` exists with a reason for every service; no invented phone/reviews/prices or infrastructure |
 | 2 | `clone-intake` | Before any clone build | Live template URL + repo `.txt` dumps (scrolled to the section) + motion video |
-| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent section by section (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
+| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent section by section by the senior room, from a media-truth inventory, until the first screen speaks to the target buyer with real proof (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
 | 4 | `launch-audit` | After build, **before** public launch | Production build audited; privacy / 404 / titles / no fake testimonials; remaining asks stay on the setup-list |
 | 5 | `seo` | After it is live (or on a rebuild, snapshot URLs **before** step 3) | Crawlable HTML, GBP/NAP if local, no `noindex` left on, redirects if replacing an old site |
 
@@ -19,7 +19,7 @@ Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run bui
 
 ## Live showcase standard (every site, Phase C)
 
-Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype, demo or coming soon, and every form really captures what is submitted (signups to `/api/subscribe`, the primary inquiry form to `/api/inquiries`). Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, and a privacy page that matches. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first, with `noindex`. Removing `noindex` belongs to step 5, after the client buys and the real domain is on.
+Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype, demo or coming soon, and every form really captures what is submitted (signups to `/api/subscribe`, the primary inquiry form to `/api/inquiries`). Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, a privacy page that matches, and a second language (Spanish for RGV / Texas clients) on every page, form and popup. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first, with `noindex`. Removing `noindex` belongs to step 5, after the client buys and the real domain is on.
 
 ## What each later skill actually is
 
@@ -51,6 +51,7 @@ Step 1 is not done without a `PRD.md` (template: `client-web-delivery` → `asse
 | Architecture | `architecture-plan.md` |
 | Missing client facts | the setup-list |
 | Visual reference | clone-intake evidence |
+| What each client file actually shows | `media-inventory.md` (Phase B) |
 | Why each section says what it says | `section-purpose-map.md` (Phase B) |
 | Proof that conversions work | `conversion-acceptance.md` (launch-audit) |
 | What actually shipped | the source and the production build |
@@ -60,7 +61,7 @@ Do not invent a fact to fill the data file, and do not invent a service to fill 
 
 ## Architecture gate
 
-Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. New projects default to Cloudflare Workers. A static marketing site stays static: no login, no R2, no server-rendered pages, just because those exist. The only standing exception is the capture API Worker + D1 from the live showcase standard: a `subscribers` table, plus an `inquiries` table when the PRD's `primary_action` is a form.
+Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. Cloudflare Workers is the standard host for every project; a site already live elsewhere moves over as a named step in the plan, with the old URL redirected. A static marketing site stays static: no login, no R2, no server-rendered pages, just because those exist. The only standing exception is the capture API Worker + D1 from the live showcase standard: a `subscribers` table, plus an `inquiries` table when the PRD's `primary_action` is a form.
 
 ## After step 5
 

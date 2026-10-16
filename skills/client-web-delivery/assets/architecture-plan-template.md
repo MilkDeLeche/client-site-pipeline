@@ -1,5 +1,6 @@
 ---
 framework: astro
+locales: [en, es]            # primary first; every site ships a second language (live showcase standard)
 
 deployment:
   provider: cloudflare-workers

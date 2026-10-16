@@ -31,6 +31,8 @@ give us. Send these back and we go live. (Translate to the client's language if 
    Confirm you will actually send that, and {{what the birthday treat / alert is}}. Tell us which email tool
    you want to send from (Brevo, Mailchimp, Klaviyo, or your POS's marketing tool). Until then,
    signups are saved safely and we hand you the list.
+6b. **Second language** — the site is also in {{Spanish}}. Who on your side reads it before launch
+   to make sure it sounds like you?
 7. **Who gets a new inquiry** — the name and inbox for {{estimate / project inquiry}} requests (only if the site has an
    inquiry form). Until then, every request is saved and handed to you; the site never promises a reply.
 

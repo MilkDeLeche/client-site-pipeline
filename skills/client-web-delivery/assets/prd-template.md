@@ -18,6 +18,7 @@ Copy to `PRD.md` at the project root. This is a **starter, not an approved PRD**
 | Reference template | {{URL / name}}, license: {{owned / to buy / unknown}} |
 | Sources reviewed | {{their site, Google profile, reviews, social, menu/booking pages, the client's brief}}, {{dates}} |
 | Facts file | `src/data/{{client}}.ts` |
+| Languages | primary `{{en}}`, secondary `{{es}}`: {{why: who actually buys}} |
 
 ## 1. What the business does
 

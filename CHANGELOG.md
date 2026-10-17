@@ -9,6 +9,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Phase B's copywriter drafts with `copywriting` and filters every line, in both languages, through `antislop-copywriting`; the redline uses `antislop-ui`, `antislop-layoutmobile` and `antislop-human` as the checklist for what Phase B/C added.
 - The cloned template is antislop's design direction: it filters additions and never restyles the Phase A clone (findings against the template become rebrand-plan proposals). Neither skill overrides the ban on invented facts.
 - `launch-audit` runs antislop's contrast checker and Delivery Gate.
+- Phase B runs antislop in **DURING** mode: the copywriter and UX lead write with these skills from the first draft, and Phase B closes with the Delivery Gate report. They are not an after-the-fact rewrite.
 
 ## [1.4.0] — 2026-10-15
 

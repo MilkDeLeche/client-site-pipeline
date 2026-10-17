@@ -36,7 +36,7 @@ npx skills add miqdadbadjuber/anti-slop -g
 Then tell them to start a new session: skills load when a session starts. Do not continue the job without them, and do not fetch or write skill files yourself.
 
 **How the pipeline uses them, and what wins:**
-- antislop asks once per session whether to run **during** the work or **after** it. For pipeline work, recommend *during* for Phase B/C additions; the redline doubles as its *after* audit. Follow its own mode and pointer-block rules.
+- **Phase B writes with these skills, in antislop's DURING mode.** The copywriter drafts every line through `copywriting` and `antislop-copywriting`, and the UX lead builds every addition through `antislop-ui`, `antislop-layoutmobile` and `antislop-human`, from the first draft. They are how Phase B writes, not a cleanup pass afterward. antislop asks once per session; answer *during* for pipeline work, and follow its own mode and pointer-block rules. Phase B ends with antislop's Delivery Gate report.
 - antislop wants design direction (`DESIGN.md`). In this pipeline the **cloned template is the direction**: point it at the design-grammar inventory in `section-purpose-map.md`. antislop filters what we add and write. It never restyles the Phase A clone; a finding against the inherited template goes into the rebrand plan as a proposal, not an edit.
 - `copywriting` drafts; `antislop-copywriting` filters. Neither overrides the ban on invented facts: reviews, prices, contact details and results still come only from the facts file.
 

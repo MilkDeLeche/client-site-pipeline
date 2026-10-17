@@ -3,6 +3,13 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.5.0] — 2026-10-17
+
+- **Required companion skills.** `client-site-pipeline` now checks, before step 1, for `copywriting` (`coreyhaines31/marketingskills`) and the `antislop` pack (`miqdadbadjuber/anti-slop`). If either is missing it stops, names them, and gives the install commands. `install.sh` / `install.ps1` print the same reminder.
+- Phase B's copywriter drafts with `copywriting` and filters every line, in both languages, through `antislop-copywriting`; the redline uses `antislop-ui`, `antislop-layoutmobile` and `antislop-human` as the checklist for what Phase B/C added.
+- The cloned template is antislop's design direction: it filters additions and never restyles the Phase A clone (findings against the template become rebrand-plan proposals). Neither skill overrides the ban on invented facts.
+- `launch-audit` runs antislop's contrast checker and Delivery Gate.
+
 ## [1.4.0] — 2026-10-15
 
 Phase B is judged by the buyer, not by the slots. Found running v1.3.1 on an agency pitch (Timeless Media): every image and heading was replaced, the page still spoke to nobody, and real client reels sat in a folder while AI mood images held the hero and the service cards.

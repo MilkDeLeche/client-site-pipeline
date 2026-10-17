@@ -32,3 +32,12 @@ Get-ChildItem -Directory $src | ForEach-Object {
 
 Write-Host ""
 Write-Host "-> $dest"
+
+# Required companion skills (see client-site-pipeline -> "Required companion skills").
+$missing = @('copywriting', 'antislop') | Where-Object { -not (Test-Path (Join-Path $dest $_)) }
+if ($missing) {
+    Write-Host ""
+    Write-Host "Required companion skills missing: $($missing -join ', ')"
+    Write-Host "  npx skills add coreyhaines31/marketingskills --skill copywriting -g"
+    Write-Host "  npx skills add miqdadbadjuber/anti-slop -g"
+}

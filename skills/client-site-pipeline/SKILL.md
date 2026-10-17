@@ -17,6 +17,29 @@ Five skills. Run them **in this order**. Each one produces an artifact the next 
 
 Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run build`. Do not run 5 as a substitute for 4. DESIGN.md / TypeUI files are tokens only; they are not a step.
 
+## Required companion skills (check before step 1)
+
+The pipeline needs two outside skill packs. Check that they are installed before doing anything else; they are not optional.
+
+| Skill | From | Used for |
+|---|---|---|
+| `copywriting` | `coreyhaines31/marketingskills` | Phase B copywriter: the hook bank, headlines, CTAs, in both site languages |
+| `antislop` (core) + `antislop-copywriting`, `antislop-ui`, `antislop-layoutmobile`, `antislop-human` | `miqdadbadjuber/anti-slop` | The slop filter on every line of copy and every UI addition; the redline; the launch audit's contrast and delivery checks |
+
+**If any is missing, stop.** Name the missing skills and give the user these commands (global install, recommended; drop `-g` for one project only):
+
+```bash
+npx skills add coreyhaines31/marketingskills --skill copywriting -g
+npx skills add miqdadbadjuber/anti-slop -g
+```
+
+Then tell them to start a new session: skills load when a session starts. Do not continue the job without them, and do not fetch or write skill files yourself.
+
+**How the pipeline uses them, and what wins:**
+- antislop asks once per session whether to run **during** the work or **after** it. For pipeline work, recommend *during* for Phase B/C additions; the redline doubles as its *after* audit. Follow its own mode and pointer-block rules.
+- antislop wants design direction (`DESIGN.md`). In this pipeline the **cloned template is the direction**: point it at the design-grammar inventory in `section-purpose-map.md`. antislop filters what we add and write. It never restyles the Phase A clone; a finding against the inherited template goes into the rebrand plan as a proposal, not an edit.
+- `copywriting` drafts; `antislop-copywriting` filters. Neither overrides the ban on invented facts: reviews, prices, contact details and results still come only from the facts file.
+
 ## Live showcase standard (every site, Phase C)
 
 Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype, demo or coming soon, and every form really captures what is submitted (signups to `/api/subscribe`, the primary inquiry form to `/api/inquiries`). Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, a privacy page that matches, and a second language (Spanish for RGV / Texas clients) on every page, form and popup. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first, with `noindex`. Removing `noindex` belongs to step 5, after the client buys and the real domain is on.
@@ -29,7 +52,7 @@ Most of these sites go up before the client pays, as a **near-final pitch**: it 
 
 ## Agent rule
 
-On a new client clone, read this skill first, then open **only the current step’s** skill. Name the step out loud (“step 2, clone-intake”). When architecture is being chosen, say “Current step: Architecture / Setup”. When the user jumps ahead (“do SEO”), say which step they skipped and what is missing.
+On a new client clone, read this skill first and run the **Required companion skills** check, then open **only the current step’s** skill. Name the step out loud (“step 2, clone-intake”). When architecture is being chosen, say “Current step: Architecture / Setup”. When the user jumps ahead (“do SEO”), say which step they skipped and what is missing.
 
 ## PRD gate
 

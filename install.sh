@@ -26,3 +26,14 @@ done
 
 echo
 echo "→ $dest"
+
+# Required companion skills (see client-site-pipeline → "Required companion skills").
+missing=""
+[ -d "$dest/copywriting" ] || missing="$missing copywriting"
+[ -d "$dest/antislop" ] || missing="$missing antislop"
+if [ -n "$missing" ]; then
+  echo
+  echo "Required companion skills missing:$missing"
+  echo "  npx skills add coreyhaines31/marketingskills --skill copywriting -g"
+  echo "  npx skills add miqdadbadjuber/anti-slop -g"
+fi

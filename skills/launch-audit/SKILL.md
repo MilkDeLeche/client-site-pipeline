@@ -31,6 +31,8 @@ Run this before any website goes live. It has two halves: **technical ship-readi
 11. **No exposed source maps** — no `.map` files in the build output; they leak your original source. Turn off the bundler's production sourcemap option (Vite `build.sourcemap: false`, etc.).
 12. **No exposed secrets / public storage** — no `.env`, service-account keys (`*key*.json`), tokens, or credentials in the build output or in `public/` (which ships verbatim). Confirm any cloud storage bucket is not publicly listing or serving private files. Secrets live in env vars, never web-served.
 
+**Companion checks** — run `antislop-human`'s contrast checker on the built pages, and antislop's Delivery Gate on everything Phase B/C added. Both skills are required by `client-site-pipeline`; if they're missing, stop and give the install commands from there.
+
 ## Legal checklist — don't get sued
 
 13. **Privacy policy page exists** (`/privacy`) and is linked in the footer.

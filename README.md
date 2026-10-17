@@ -145,6 +145,16 @@ These run through every skill:
 The skills are plain folders with a `SKILL.md`. Drop them where your agent looks
 for skills.
 
+**Required companion skills.** The pipeline also needs two outside packs. It
+checks for them at the start of every job and stops if they're missing:
+
+```bash
+npx skills add coreyhaines31/marketingskills --skill copywriting -g   # Phase B copy
+npx skills add miqdadbadjuber/anti-slop -g                             # slop filter: copy, UI, mobile, contrast
+```
+
+Start a new session after installing; skills load at session start.
+
 ### Claude Code
 
 ```bash

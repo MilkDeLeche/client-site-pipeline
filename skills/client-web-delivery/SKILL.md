@@ -45,7 +45,7 @@ Storage: logos and photos that change only by deploy stay in Astro static assets
 
 Analytics default for a suitable new project: Cloudflare Web Analytics, one system, disclosed in the privacy policy. If the client already named another tool, use that instead.
 
-Every selected service needs a `reason`. Missing business facts stay on the setup-list. Content strategy is required; a blog is not. A dead blog of generic articles is not an SEO asset. Client-editable publishing needs auth and persistent storage; developer-committed Markdown does not.
+Every selected service needs a `reason`. Add-ons are opt-in per client, never standard: an AI sales/lead chat, for example, goes only on sites whose owner wants it and is never listed as part of the base offer. Missing business facts stay on the setup-list. Content strategy is required; a blog is not. A dead blog of generic articles is not an SEO asset. Client-editable publishing needs auth and persistent storage; developer-committed Markdown does not.
 
 Copy `assets/architecture-plan-template.md`, fill it, and keep it as the source of truth for Phase C and the launch audit.
 
@@ -108,6 +108,8 @@ Before shipping, **invoke the `launch-audit` skill** and clear its checklist: no
 
 - Get a **green production build locally first**.
 - For the API Worker: leave `database_id` **out** of the D1 binding (only `binding` + `database_name`); the first `wrangler deploy` provisions the database. Wrangler does not run migrations on deploy, so the Worker runs the schema (`CREATE TABLE IF NOT EXISTS`, imported from the migration `.sql`) before its first insert. Pin Node with `.node-version` (`22`) and `engines`. Prove it the way Cloudflare will build it: clone the repo into a clean folder, `npm ci`, `npm run build`, `wrangler deploy --dry-run`, then `wrangler dev` against an empty local D1 and post a signup.
+- Renaming or deleting files in `public/` (re-encoded video, swapped images): keep the old URLs alive with a `public/_redirects` entry (`/video/old/* /video/new/:splat 301`). A page already open or cached on a phone still points at the old paths, and media that 404s just sits still.
+- Hero copy changed? Recapture the share image (`og:image`) from the live hero at 1200x630, keep it under about 300 KB (WhatsApp drops larger previews), and bump its cache-busting version so apps refetch it.
 - Git-connected deploy (no local login needed): Workers & Pages → Import a repository; build command `npm run build`, deploy command `npx wrangler deploy`, project name = `name` in `wrangler.jsonc`. Write these settings into the project README. Showcase sites deploy to the `*.workers.dev` address first, with `noindex` on; the client's domain is attached, and `noindex` removed, after they say yes.
 - Ship to the host named in `architecture-plan.md`. New projects: Cloudflare Workers (static assets unless `server_runtime_required: true`). Legacy projects: the provider the plan already recorded (Vercel, Netlify, or otherwise).
 - **Verify the live URL, not just the build** — load the real pages and confirm the deploy went green in the host dashboard.

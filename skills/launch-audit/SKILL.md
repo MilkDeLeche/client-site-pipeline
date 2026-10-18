@@ -21,7 +21,7 @@ Run this before any website goes live. It has two halves: **technical ship-readi
 1. **View source not empty** — shipped HTML must contain real content, not just a JS shell. SSG/SSR (Astro, Next, SvelteKit) render content server-side; a pure client-rendered SPA may ship an empty `<div id="root">` — bad for SEO and AI crawlers. Grep the built index for known body text.
 2. **404 page** — a custom `404.html` exists, uses the site layout, and offers a path back (home / primary CTA).
 3. **Unique titles** — every page has its own `<title>`; none share the layout default. List them and diff.
-4. **OG image** — `og:image` (+ `twitter:image`) present with an **absolute** URL, ideally a purpose-built 1200×630 asset.
+4. **OG image** — `og:image` (+ `twitter:image`) present with an **absolute** URL, ideally a purpose-built 1200×630 asset under ~300 KB, that shows the **current** hero (a screenshot of an older version is the first thing a shared link shows).
 5. **Structured data** — JSON-LD present and valid for the site type (LocalBusiness / Organization / Product / Article), plus breadcrumbs and per-page types. Validate with Google's Rich Results Test.
 6. **Canonical** — every page emits `<link rel="canonical">` with the absolute URL. Requires the framework's `site`/base URL to be set.
 7. **robots.txt allows AI** — exists AND does not block AI crawlers. For AEO/GEO you WANT `GPTBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-Web`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended` allowed. Include the `Sitemap:` line.

@@ -3,6 +3,14 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.6.0] — 2026-10-18
+
+Lessons from shipping the Timeless Media pitch.
+
+- `clone-workflow` Phase B adds **hook voice: finesse, not corn**. The payoff half of a hook is the owner's outcome in an everyday phrase (about five words), section headings are confident labels, and there's no forced slang, stunt lines or instructions as headings. Includes the real before/after rewrites the client chose, and offering two or three options when a hook carries the page.
+- `client-web-delivery`: add-ons such as an AI sales chat are opt-in per client, never part of the standard offer; renamed or deleted media keep their old URLs alive through `public/_redirects`; the share image is recaptured whenever hero copy changes (1200x630, under ~300 KB, cache-busted).
+- `launch-audit`: the OG check confirms the share image shows the current hero and stays under ~300 KB.
+
 ## [1.5.0] — 2026-10-17
 
 - **Required companion skills.** `client-site-pipeline` now checks, before step 1, for `copywriting` (`coreyhaines31/marketingskills`) and the `antislop` pack (`miqdadbadjuber/anti-slop`). If either is missing it stops, names them, and gives the install commands. `install.sh` / `install.ps1` print the same reminder.

@@ -108,7 +108,20 @@ Create `section-purpose-map.md`: one row per inherited section and CTA, **before
 | Edit type | `CONTENT_ONLY` / `BRAND_TOKEN` / `GRAMMAR_ADDITION` / `USER_DIRECTED` / `CONFLICT` |
 | Status | `READY` / `NEEDS_ASSET` / `NEEDS_FACT` / `NEEDS_APPROVAL` / `NOT_APPLICABLE` |
 
-**Headlines name the buyer's situation.** Hero lines, section headings and card titles speak to the visitor's situation in their words: "Got a bar?", "Listing this month?", "Opening a spot?". Titles named after the vendor's departments ("Video Production", "Professional Content", "Socials Management") fill a card and make nobody feel seen. They are a failed Phase B even when every word is true.
+**Headlines name the buyer's situation.** Hero lines, section headings and card titles speak to the visitor's situation in their words: "Got a bar?", "Got a listing?", "Opening soon?". Titles named after the vendor's departments ("Video Production", "Professional Content", "Socials Management") fill a card and make nobody feel seen. They are a failed Phase B even when every word is true.
+
+**Hook voice: finesse, not corn.** A hook has two halves: the buyer's situation, then the payoff. The payoff is what the owner gets or feels, in a phrase people already say out loud, in about five words. The body copy does the explaining. Real rewrites from a client pitch, where the owner's version won:
+
+| Corny or literal | With finesse | Why |
+|---|---|---|
+| Got a shop? → The brand, on the car | Got a nice ride? → Let's show it off | Describes the shot vs. names the owner's pride |
+| Got a listing? → Let them walk it from their phone | Got a listing? → Let it sell itself | Explains the mechanism vs. states the outcome |
+| Let's make it look booked | Let's put it on the map | A narrow result vs. the one every buyer wants |
+| Got a spot? | (cut) | Forced slang; trying to sound local reads as corny |
+| Real Valley spots. Real footage. | Serving the Valley. | A staccato stunt vs. a confident label |
+| Tap a reel to watch it on Instagram. | Our work | An instruction as a heading vs. a plain label |
+
+"Can the reader picture it?" (copywriting) means picture the result, not the footage. Section headings are confident labels, never stunts or instructions. When a hook carries the page, offer the owner two or three options and let them pick or tweak; their ear for their own customers beats ours.
 
 Example (home builder on a roofing template, and only because these assets existed): the hero gets an offer-first headline plus a real finished home at dusk. The "brands we work with" logo row is removed (no real partners). The ratings row is reused with three real home photos and a true portfolio count instead of fake stars. The process section's steps are rewritten into the client's real build process. The testimonials section is hidden until there are permissioned reviews.
 

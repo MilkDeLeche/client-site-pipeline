@@ -69,8 +69,19 @@ else fail "no robots.txt"; fi
 echo "[8] Sitemap"
 { ls "$DIR"/sitemap*.xml >/dev/null 2>&1 && pass "sitemap present"; } || fail "no sitemap*.xml"
 
-echo "[9] Lang attribute"
-{ grep -q '<html[^>]*\blang=' "$idx" && pass "$(grep -o '<html[^>]*lang="[^"]*"' "$idx" | head -1)"; } || fail "no <html lang>"
+echo "[9] Lang attribute (+ hreflang when the site has a second language)"
+{ grep -q '<html[^>]*\blang=' "$idx" && pass "$(grep -o '<html[^>]*lang="[^"]*"' "$idx" | head -1 | grep -o 'lang="[^"]*"') on index.html"; } || fail "no <html lang>"
+# Every page, not just the home page: count pages per <html lang>, and flag pages with none.
+langs=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && { grep -o '<html[^>]*>' "$f" | head -1 | grep -o ' lang="[^"]*"' || echo ' lang="(none)"'; }; done | sort | uniq -c | sed 's/ lang=//; s/"//g' | awk '{printf "%s%s (%s)", sep, $2, $1; sep=", "}')
+echo "      per page: $langs"
+case "$langs" in *"(none)"*) fail "some pages have no <html lang>";; esac
+nlang=$(echo "$langs" | tr ',' '\n' | grep -vc '(none)')
+if [ "$nlang" -gt 1 ]; then
+  # Two or more languages: every page except the 404s needs hreflang alternates (incl. x-default).
+  content=$(echo "$pages" | grep -vc '/404\.html$\|/404/index\.html$')
+  alt=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -l 'hreflang="x-default"' "$f"; done | grep -c .)
+  if [ "$alt" -ge "$content" ]; then pass "hreflang + x-default on $alt of $content non-404 pages"; else fail "hreflang + x-default on only $alt of $content non-404 pages"; fi
+fi
 
 echo "[10] Alt text"
 total=$(grep -rho '<img[^>]*>' "$DIR" --include=*.html | wc -l)
@@ -92,7 +103,11 @@ if [ -n "$hosts" ]; then echo "$hosts" | sed 's/^/      /'; echo "      ^ cross-
 echo
 echo "== Legal items (verify by hand in code) =="
 if [ -f "$DIR/privacy/index.html" ] || [ -f "$DIR/privacy.html" ]; then priv='page present'; else priv='MISSING'; fi
-plinks=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -lE 'href="(/|\./|\.\./)*privacy(\.html|/)?(#[^"]*)?"' "$f"; done | grep -c .)
+# One privacy page per language: /privacy plus e.g. /es/privacy (directory or file layout).
+nprivacy=$(echo "$pages" | grep -cE '(^|/)privacy(\.html|/index\.html)$')
+[ "$nprivacy" -gt 1 ] && priv="$priv ($nprivacy language versions)"
+# A link counts with or without a locale prefix: /privacy, /es/privacy, /pt-br/privacy.
+plinks=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -lE 'href="(/|\./|\.\./)*([a-z]{2}(-[a-z]{2})?/)?privacy(\.html|/)?(#[^"]*)?"' "$f"; done | grep -c .)
 echo "  [13] /privacy page exists + linked in footer?  ->  $priv; linked from $plinks of $(echo "$pages" | grep -c .) pages"
 echo "  [14] data-collection disclosed (analytics/forms)?"
 echo "  [15] AI usage disclosed (generated imagery = illustrative)?"

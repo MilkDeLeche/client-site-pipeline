@@ -3,6 +3,13 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.6.1] — 2026-10-19
+
+Audit fixes found running v1.6 on a two-language pitch (Kasocri Construction, English + Spanish at `/es`).
+
+- `launch-audit/scripts/audit.sh` check [13] counts privacy links with a locale prefix (`/es/privacy`, `/pt-br/privacy`) and reports how many language versions of the privacy page exist. Before, every Spanish page showed as unlinked (21 of 40 instead of 40 of 40).
+- Check [9] reports `<html lang>` on every page, grouped by language, and fails on pages with none. When the build has two or more languages it also requires `hreflang` alternates with `x-default` on every non-404 page. Before, it read only `index.html`.
+
 ## [1.6.0] — 2026-10-18
 
 Lessons from shipping the Timeless Media pitch.

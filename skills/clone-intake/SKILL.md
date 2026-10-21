@@ -5,11 +5,30 @@ description: Intake checklist for template clones. Requires a live page URL plus
 
 # Clone intake
 
-**Pipeline step 2 of 5** (`client-site-pipeline`). Previous: `client-web-delivery`. Next: `clone-workflow`. Do not start cloning until this checklist passes.
+**Pipeline step 2** (`client-site-pipeline`, steps 0–5). Previous: `client-web-delivery`. Next: `clone-workflow`. Do not start cloning until this checklist passes.
 
 Stop and check the kit before building. Missing pieces get guessed. Say which ones are missing, then proceed only if the user wants a guess.
 
 This is the gate in front of `clone-workflow`. Read that skill after intake passes.
+
+## Vet the template first (before collecting anything)
+
+Read `creative-direction.md` (`brand-discovery`). Then check each candidate link, whether it was picked before or after discovery:
+
+| Check | What to record |
+|---|---|
+| **Template or real company** | Templates: a marketplace page, `*.webflow.io` / `*.framer.website`, "Get template", demo copy. A real company's site (named team, real clients, a "website by" credit) is a reference brand: study it, never clone it. |
+| **License** | Free, paid or unclear. Production needs it settled; it goes on the setup-list. |
+| **Look** | A plain name plus the designer's term, and whether it matches the chosen direction. |
+| **Size** | Screens tall, rough word count, number of sections. |
+| **Work it needs** | How many projects or images it takes to look full, against what the client really has (`media-inventory.md`, PRD proof). A layout built for a deep portfolio looks empty with four pieces. |
+| **Navigation** | Plain words in the menu? An icon-only menu fails buyers who aren't tech-savvy. |
+| **Motion** | How much it moves, and whether toning it down would break it. |
+| **Claim slots** | Can the hero and work slots carry the client's real media (video, if that's the work)? Which slots need claims the client can't make (partner logos, awards) and will come out in Phase B? |
+| **Phone** | How the first screen and the menu read at phone width. |
+| **Clone cost** | Webflow exports readable HTML and CSS that port close to verbatim. Framer generates hashed classes and its own animation runtime: doable, but a slower Phase A. |
+
+Verdict per candidate: **fits**, **fits with noted removals**, or **poor fit**. If two candidates land on the same direction, say so. If the user keeps a poor fit, record the tradeoff and their approval in `creative-direction.md` §7 and clone it faithfully anyway; the mismatch is a Phase B conversation, never a Phase A fix.
 
 ## What to collect (you / the user)
 
@@ -76,6 +95,7 @@ is the most common way a clone quietly turns into a redesign — see the gate in
 ## Agent checklist (start of a clone or section redline)
 
 ```
+- [ ] Template vetted against creative-direction.md (template, not a real company; license noted; verdict recorded)
 - [ ] Live URL in the chat or PRD
 - [ ] Dump is a repo .txt (reference.txt, referencenew.txt, projects.txt, …)
 - [ ] For this section: dump was captured while that section was on screen

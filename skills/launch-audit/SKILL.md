@@ -5,7 +5,7 @@ description: Pre-launch / ship-readiness audit for any website before it goes li
 
 # Launch Audit
 
-**Pipeline step 4 of 5** (`client-site-pipeline`). Previous: `clone-workflow`. Next: `seo`. Run on the production build, not the dev server. Do not treat this as SEO — that is the next skill, after launch.
+**Pipeline step 4** (`client-site-pipeline`, steps 0–5). Previous: `clone-workflow`. Next: `seo`. Run on the production build, not the dev server. Do not treat this as SEO — that is the next skill, after launch.
 
 Run this before any website goes live. It has two halves: **technical ship-readiness** and **legal / don't-get-sued**. Do not eyeball the source — **build the site and inspect the actual shipped output** (`dist/`, `build/`, `out/`, `.output/public/`, or `.vercel/output/static`), then verify the legal items in the codebase, then report pass/fail with concrete fixes.
 

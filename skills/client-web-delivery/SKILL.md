@@ -5,7 +5,7 @@ description: A safe, repeatable workflow for delivering a client website end-to-
 
 # Client Web Delivery
 
-**Pipeline step 1 of 5** (`client-site-pipeline`). Next: `clone-intake`. Do not clone a template until this step has a `PRD.md` (a `reference-only` one is enough for Phase A), a setup-list, a single `src/data/` file for client facts, and an `architecture-plan.md`.
+**Pipeline step 1** (`client-site-pipeline`, steps 0–5). Previous: `brand-discovery`. Next: `clone-intake`. Do not clone a template until this step has a `PRD.md` (a `reference-only` one is enough for Phase A), a setup-list, a single `src/data/` file for client facts, and an `architecture-plan.md`.
 
 A repeatable, professional workflow for shipping a client website without surprises. Five stages. The signature artifact is the **setup-list**: one page of everything you need FROM the client, so you never chase them for it piecemeal.
 
@@ -13,7 +13,8 @@ A repeatable, professional workflow for shipping a client website without surpri
 
 Pin down, in writing:
 
-- **`PRD.md` first.** If the user supplied a PRD (file, doc, link), read it and keep its decisions; add a labeled supplement for gaps and never overwrite it. If it is only a seed (the client's website link in a text file, even one named `PRD.md`), keep its bytes (copy a `PRD.md` seed to `PRD.seed.md`), research that site and their public profiles, extract facts to `src/data/`, and write the full `PRD.md` at status `draft`. Otherwise draft one from `assets/prd-template.md`. A PRD is **intent**, not contact details: what the business sells and to whom, where visitors come from, what they must believe, the one action that makes the business money, what completes it, and who answers it. Get it approved (client for production, builder for a near-final pitch). Publishable facts still go in the one `src/data/` file.
+- **Read `creative-direction.md` first** (step 0, `brand-discovery`). It informs the PRD's tone, service order, audience and proof plan, and its research is reused, not redone. The PRD stays canonical for business goals and functional needs; the creative direction stays canonical for how the business comes across. A conflict between them becomes a question, not a silent overwrite. On a pitch, the builder's approval is fine and stays labeled as the builder's.
+- **`PRD.md` next.** If the user supplied a PRD (file, doc, link), read it and keep its decisions; add a labeled supplement for gaps and never overwrite it. If it is only a seed (the client's website link in a text file, even one named `PRD.md`), keep its bytes (copy a `PRD.md` seed to `PRD.seed.md`), research that site and their public profiles, extract facts to `src/data/`, and write the full `PRD.md` at status `draft`. Otherwise draft one from `assets/prd-template.md`. A PRD is **intent**, not contact details: what the business sells and to whom, where visitors come from, what they must believe, the one action that makes the business money, what completes it, and who answers it. Get it approved (client for production, builder for a near-final pitch). Publishable facts still go in the one `src/data/` file.
 - Business identity, target market, and the ONE goal of the site (book / call / buy / lead), taken from the PRD.
 - **Where the money and the data live:** which external systems will this site connect to or hand off to? (POS / payments, booking / scheduling, CMS, email / CRM, maps, analytics, chat.) This single question determines the whole setup-list.
 - Brand assets on hand vs. missing (logo, photos, fonts, copy, reviews).

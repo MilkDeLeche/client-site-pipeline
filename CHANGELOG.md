@@ -3,6 +3,17 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.7.0] — 2026-10-21
+
+Direction before template. Found on an agency pitch: the build was clean and on-brand for the owner's trendy social edits, and the owner still pushed back. He wanted a much simpler site that his non-technical buyers could follow, sized to the amount of work he actually had, and he had been measuring himself against a competitor with a much deeper portfolio. Nobody had asked him how the business should come across.
+
+- **New step 0, `brand-discovery`.** Before the PRD, the agent does the homework (site, socials, Google profile, any brand the owner looks up to) and writes a **vibe read** that keeps confirmed, observed, guessed and unknown apart, with where the client is now next to where they want to be. Then a short **ask-first list**: three to five questions the builder can text the owner, each tied to what was found, naming what the answer decides, ordered so template-changing questions come first. It uses open techniques (this or that, reacting to real versions, plain-word questions, asking why, "never this", unpacking vague words such as "simpler"), never hidden steering. Two or three named directions follow (plain name plus the designer term), and the result is saved to `creative-direction.md` from the new `assets/creative-direction-template.md`. On a pitch with no interview, the builder approves a labeled guess and takes the questions to the meeting.
+- **Templates vs. reference brands.** Every link is sorted: a template is a clone candidate once licensed; a real company's site is studied for its niche, promise, proof and buying path, and is never cloned or quoted for claims.
+- **`clone-intake` vets the template first:** template or real company, license, look against the direction, size, how much work it needs to look full, navigation in plain words, motion, claim slots, phone, and clone cost (Webflow vs. Framer). A poor fit the user keeps is recorded and still cloned faithfully.
+- **Creative direction gate.** Client-facing Phase B needs an approved PRD and an approved creative direction (client for production, builder for a pitch). A draft of either blocks settling the look, not the research, media inventory or rebrand plan. `reference-only` skips step 0.
+- Phase B's room checks the direction: the strategist against the intended impression, the copywriter in the approved voice, the art director owning compliance, the UX lead on whether the buyer can picture their own result. Every redline checks the page against `creative-direction.md`; direction clashes use the existing `CONFLICT` / `NEEDS_APPROVAL` states.
+- The orchestrator now treats `creative-direction.md` as the strategy and the cloned template as how it looks (antislop gets both). The PRD template points to the direction in §5 and §6 and adds an acceptance item. Step headers now read "steps 0–5". **Phase A, the grammar limits and the ban on fake proof are unchanged.** The install scripts already copy every skill folder and needed no change.
+
 ## [1.6.1] — 2026-10-19
 
 Audit fixes found running v1.6 on a two-language pitch (Kasocri Construction, English + Spanish at `/es`).

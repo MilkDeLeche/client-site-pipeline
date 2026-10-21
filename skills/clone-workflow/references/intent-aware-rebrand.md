@@ -1,6 +1,6 @@
 # Phase B: intent-aware rebrand
 
-Loaded by `clone-workflow` when Phase B starts. It does not change Phase A, Phase C, or the five-step order.
+Loaded by `clone-workflow` when Phase B starts. It does not change Phase A, Phase C, or the step order.
 
 Phase A gave you a faithful clone of a template the user chose because they love how it looks and moves. Phase B turns it into a site that **sells for this business**. That means the right message, proof and action in each slot, while the page still looks like the template built it. Don't just swap photos at random.
 
@@ -15,6 +15,7 @@ Swapping content into the template's slots is *how* you implement Phase B. It is
 - [ ] Phase A is verified against the source, screenshot crops and video, and still reachable as a baseline (route or `reference/phase-a-snapshot/`).
 - [ ] `PRD.md` is `approved` or `approved-with-blockers` (for a near-final pitch the builder approves it). A `reference-only` PRD allows Phase A only; finish the business brief before client-facing Phase B.
   A **draft** PRD blocks an invented positioning. It does not block the research, the media-truth inventory, or drafting buyer hooks and slot assignments for approval. Do that work and bring the PRD to approval; don't settle for the one move that needs no decision (swapping images).
+- [ ] `creative-direction.md` is `approved` or `approved-with-blockers` (the client for production; the builder, labeled a guess, for a near-final pitch). A draft blocks settling the look as final, not the work above.
 - [ ] `src/data/<client>.ts` holds the publishable facts; the setup-list holds what's missing.
 - [ ] `architecture-plan.md` exists for anything that must actually work.
 - [ ] Every brand asset and photo has a known source and right to use.
@@ -33,12 +34,12 @@ Phase B is four jobs. Work through each role in turn, in writing, before buildin
 
 | Role | Owns | Writes |
 |---|---|---|
-| **Strategist / analyst** | Who buys, sorted by *situation* ("opening a second location", "listing goes live Friday"), the words they use, where they arrive from, what they must believe, the funnel. Research before opinions (section 1). | PRD research table, the buyer list in `section-purpose-map.md` |
-| **Copywriter** | Writes with the `copywriting` skill and `antislop-copywriting` from the first draft (antislop DURING mode), not as a later rewrite. A hook bank: one line per buyer situation, in the buyer's words, written in **both** site languages (the second language is rewritten for how local owners talk, never translated word for word). Headlines, card titles, CTA support lines. Punchy is welcome; invented reviews, prices, contact details and result numbers are not. | Hook bank and copy columns in `section-purpose-map.md` |
-| **Art director** | The media-truth inventory (section 2b), then which real file proves which claim in which slot. Krea/AI only where no real file can do the job, prompted from the researched visual style. | `media-inventory.md`, media column of the map |
-| **UX / front-end lead** | The design-grammar inventory (section 2), the lead capture for this site type (section 5), what the page still fails to do (section 7, step 5), grammar additions, the build, the redline loop. | Grammar block, rebrand plan, the build |
+| **Strategist / analyst** | Who buys, sorted by *situation* ("opening a second location", "listing goes live Friday"), the words they use, where they arrive from, what they must believe, the funnel. Research before opinions (section 1). Checks the page against the impression in `creative-direction.md` and keeps the positioning truthful to where the client is now. | PRD research table, the buyer list in `section-purpose-map.md` |
+| **Copywriter** | Writes in the approved voice from `creative-direction.md`, with the `copywriting` skill and `antislop-copywriting` from the first draft (antislop DURING mode), not as a later rewrite. A hook bank: one line per buyer situation, in the buyer's words, written in **both** site languages (the second language is rewritten for how local owners talk, never translated word for word). Headlines, card titles, CTA support lines. Punchy is welcome; invented reviews, prices, contact details and result numbers are not. | Hook bank and copy columns in `section-purpose-map.md` |
+| **Art director** | The media-truth inventory (section 2b), then which real file proves which claim in which slot. Krea/AI only where no real file can do the job, prompted from the researched visual style. Owns compliance with the approved creative direction: hierarchy, imagery, motion intensity, the feel of the first screen. | `media-inventory.md`, media column of the map |
+| **UX / front-end lead** | The design-grammar inventory (section 2), whether the chosen buyer can tell what's offered and picture their own result, the lead capture for this site type (section 5), what the page still fails to do (section 7, step 5), grammar additions, the build, the redline loop. | Grammar block, rebrand plan, the build |
 
-**Redline, then fix.** After the build, each role reviews the running page on desktop and phone against its own column and the first-screen test, with the antislop skills as the checklist for what we added (`antislop-ui`, `antislop-layoutmobile`, `antislop-human`, `antislop-copywriting`; the cloned template's grammar is their design direction), and writes its misses one line each ("Strategist: a realtor can't tell this is for them until the fourth section"). Fix them, then run the round once more if anything structural changed. A role that finds nothing says why. "Looks good" is not a review.
+**Redline, then fix.** After the build, each role reviews the running page on desktop and phone against its own column and the first-screen test, with the antislop skills as the checklist for what we added (`antislop-ui`, `antislop-layoutmobile`, `antislop-human`, `antislop-copywriting`; the cloned template's grammar is their design direction), and writes its misses one line each ("Strategist: a realtor can't tell this is for them until the fourth section"). Every redline also checks the page against `creative-direction.md`: hierarchy, how the positioning reads, motion intensity, imagery, tone, how plain the navigation is, readability on a phone, and whether the real proof earns trust ("Art director: the direction says calm, the hero runs three animations at once"). Fix them, then run the round once more if anything structural changed. A role that finds nothing says why. "Looks good" is not a review.
 
 ## 1. Read the business, not the photos folder
 
@@ -173,7 +174,7 @@ A `near-final-pitch` is built before the sale but must read as about 99% done:
 
 ## 7. Phase B sequence
 
-1. Read the PRD and the facts file; note confirmed, proposed and missing facts.
+1. Read the PRD, `creative-direction.md` and the facts file; note confirmed, proposed and missing facts.
 2. Research (section 1) and log it in the PRD. Write the buyer list by situation.
 3. Walk the verified Phase A clone on desktop and phone; write the design-grammar inventory.
 4. Open every client file and write `media-inventory.md`. Then write `section-purpose-map.md` with the hook bank.
@@ -187,7 +188,7 @@ A `near-final-pitch` is built before the sale but must read as about 99% done:
 
 ## 8. When the template can't serve a requirement (`CONFLICT`)
 
-Don't redesign quietly. State the requirement and why the inherited layout can't meet it. Then offer options from smallest to largest:
+Don't redesign quietly. State the requirement and why the inherited layout can't meet it. A clash between the clone's look and the approved creative direction is a `CONFLICT` too: mark the affected rows `CONFLICT` / `NEEDS_APPROVAL` in the map and bring it to the user. Then offer options from smallest to largest:
 
 - **A.** Adapt an existing component.
 - **B.** A dedicated page or flow built from the template's grammar.
@@ -199,6 +200,7 @@ Give the impact of each on layout, motion and mobile. Sometimes the honest answe
 
 **Phase B passes when:**
 - Someone in the target buyer group can tell from the first screen that the site is for them, what they'd get, and see real proof of it.
+- The page reads as the approved creative direction, and every direction conflict was raised, not silently resolved.
 - `media-inventory.md` exists, and every client file in a claim slot was opened, not judged by its name.
 - Headlines and card titles name buyer situations, not service departments.
 - The rebrand plan answered what the page still fails to do.
@@ -212,7 +214,7 @@ Give the impact of each on layout, motion and mobile. Sometimes the honest answe
 
 **Phase B is blocked when:**
 - Phase A isn't verified.
-- The PRD is missing or unapproved for client work.
+- The PRD or `creative-direction.md` is missing or unapproved for client work (name the missing decision).
 - A required claim is missing, or a required image is missing and neither a client photo nor a labeled illustrative image can honestly fill it.
 - A business-critical change needs unapproved structure.
 
@@ -226,6 +228,7 @@ Give the impact of each on layout, motion and mobile. Sometimes the honest answe
 - All the proof behind a one-at-a-time slider, and nobody asked whether a grid pattern the template already has should show it.
 - "The PRD says leads, so I added a generic form section with new styling."
 - "This competitor looks premium, so it converts."
+- "The client's Instagram is high-energy, so the site should be too." (The direction comes from what the owner said, in `creative-direction.md`.)
 - "The form shows a success message, so the email works."
 - "The client sells food, so they need reservations, a shop and a chatbot."
 - A button, font or spacing value that appears nowhere in the original template.

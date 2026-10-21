@@ -1,15 +1,15 @@
 # Client Site Pipeline
 
 **An opinionated, end-to-end workflow for cloning a website into a client-ready
-build and shipping it without surprises — packaged as six composable
+build and shipping it without surprises — packaged as seven composable
 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) / Agent SDK skills.**
 
 The pipeline takes a project from *"here's a template I like"* to *"it's live and
-ranking"* in five ordered steps. Each step is a self-contained skill that
+ranking"* in six ordered steps (0–5). Each step is a self-contained skill that
 produces a concrete artifact the next step depends on. Skip a step and the next
 one tells you what's missing.
 
-<sub>Skills: 6 · Steps: 5 · Zero runtime dependencies · Works with Claude Code and the Claude Agent SDK</sub>
+<sub>Skills: 7 · Steps: 6 (0–5) · Zero runtime dependencies · Works with Claude Code and the Claude Agent SDK</sub>
 
 ---
 
@@ -24,6 +24,9 @@ The common failure modes are always the same:
   nobody notices until the client does.
 - The site ships with an empty view-source, no privacy policy, fabricated
   testimonials, or a `robots.txt` that blocks the crawlers that matter.
+- The site is correct and good-looking, and still wrong for the owner, because
+  nobody asked how they want the business to come across. Their Instagram
+  style gets read as their brand.
 - SEO is treated as a launch checkbox instead of the practice it is, and a
   rebuild silently drops the rankings the old site had.
 
@@ -36,14 +39,16 @@ pass before the next one starts.
 
 | # | Skill | Runs | Done when |
 |---|-------|------|-----------|
+| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**; a short **ask-first list** put to the owner (or carried to the pitch meeting); two or three named **directions**; an approved **`creative-direction.md`** |
 | **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | An approved **PRD** captures the site's intent (who buys, what they must believe, the one action that makes money); a **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; nothing invented |
-| **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
+| **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Template **vetted** against the approved direction; live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
 | **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only, mapped to the PRD section by section by a senior room (strategist, copywriter, art director, UX lead) from a media-truth inventory, until the first screen sells to the target buyer with real proof, built from the template's own design grammar **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page, a second language) |
 | **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, a signup that saves a row, a banner that gates analytics, every enabled conversion proven end to end, **no fabricated testimonials** |
 | **5** | [`seo`](skills/seo/SKILL.md) | After launch (snapshot old URLs *before* step 3 on a rebuild) | Crawlable HTML, GBP / NAP consistent if local, no stray `noindex`, redirects in place if replacing an old site |
 
 ```mermaid
 flowchart LR
+    Z["0 · brand-discovery<br/><i>vibe read + ask-first list + direction</i>"] --> A
     A["1 · client-web-delivery<br/><i>PRD + setup-list + architecture plan</i>"] --> B["2 · clone-intake<br/><i>URL + DOM dumps + video</i>"]
     B --> C["3 · clone-workflow<br/><i>A clone → B rebrand → C functionality</i>"]
     C --> D["4 · launch-audit<br/><i>ship / don't-get-sued gate</i>"]
@@ -59,6 +64,21 @@ loud, and refuses to skip ahead.
 ---
 
 ## The skills
+
+### 0 · `brand-discovery` — how the business should come across
+Runs before the PRD. The agent does the homework (their site, socials, Google
+profile, any brand they look up to) and writes a **vibe read** that keeps what
+the owner said apart from what was observed and what is only a guess. Every
+link is sorted into a **template** (a clone candidate once licensed) or a
+**reference brand** (studied for its niche, promise, proof and buying path,
+never copied). Then comes a short **ask-first list**: three to five questions
+the builder can text the owner, each tied to what was found and naming what
+the answer decides, using this-or-that picks and plain-word questions instead
+of design jargon. The result is two or three named directions and an approved
+`creative-direction.md`
+([template](skills/brand-discovery/assets/creative-direction-template.md)).
+On a pitch with no interview, the builder approves a labeled guess and takes
+the questions to the meeting.
 
 ### 1 · `client-web-delivery` — intake & handoff
 A repeatable five-stage workflow for shipping a client site. It starts from a
@@ -124,6 +144,9 @@ These run through every skill:
   URLs — one `src/data/` file, never inline in components.
 - **Never invent a fact.** No fabricated prices, reviews, credentials, results,
   or hours. Placeholder + a line on the setup-list instead.
+- **Direction before template.** Ask how the owner wants to come across
+  before a template is settled. A template the user loves is not an approved
+  direction, and a client's Instagram style is not their brand.
 - **Intent before content.** The PRD says who buys and what action makes the
   business money; Phase B places content to serve that, not at random.
 - **Clone before you rebrand, and verify in between.** Reinterpreting a template
@@ -195,7 +218,7 @@ orchestrator:
 
 or just describe the job — *"start the clone workflow for this client"* — and
 the agent will pick up `client-site-pipeline`, then work through
-`client-web-delivery` → `clone-intake` → `clone-workflow` → `launch-audit` →
+`brand-discovery` → `client-web-delivery` → `clone-intake` → `clone-workflow` → `launch-audit` →
 `seo`, one step at a time, in order.
 
 ---
@@ -205,6 +228,8 @@ the agent will pick up `client-site-pipeline`, then work through
 ```
 skills/
   client-site-pipeline/   orchestrator — read first, enforces the order
+  brand-discovery/        step 0 — vibe read, ask-first list, creative direction
+    assets/creative-direction-template.md
   client-web-delivery/    step 1 — intake, setup-list, architecture plan, handoff
     assets/prd-template.md
     assets/setup-list-template.md

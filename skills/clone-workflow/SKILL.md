@@ -5,7 +5,7 @@ description: Clone a real website into a client-ready Astro mockup at near-100% 
 
 # Template Clone Workflow
 
-**Pipeline step 3 of 5** (`client-site-pipeline`). Previous: `clone-intake`. Next: `launch-audit`. If the live URL, repo `.txt` dump, or motion video is missing, go back to `clone-intake` first. Do not start Phase C without `architecture-plan.md`.
+**Pipeline step 3** (`client-site-pipeline`, steps 0–5). Previous: `clone-intake`. Next: `launch-audit`. If the live URL, repo `.txt` dump, or motion video is missing, go back to `clone-intake` first. Do not start Phase C without `architecture-plan.md`.
 
 Turn a real website into a client-ready mockup for a different business, in Astro,
 at near-100% visual fidelity — then swap the content.
@@ -226,8 +226,8 @@ Swapping content is how you *implement* Phase B. It is not the definition of
 done: Phase B is done when someone in the client's target buyer group sees, on
 the first screen, that the site is for them, what they'd get, and real proof of it.
 
-**Phase B strategy gate.** Before the first substitution, read `PRD.md`, the
-facts file and `architecture-plan.md`, and open
+**Phase B strategy gate.** Before the first substitution, read `PRD.md`,
+`creative-direction.md`, the facts file and `architecture-plan.md`, and open
 `references/intent-aware-rebrand.md`. Run it as the senior room it describes
 (strategist, copywriter, art director, UX lead). Open every client file and
 write `media-inventory.md`: what is really in frame, never judged by the
@@ -235,9 +235,12 @@ filename. Inventory the template's design grammar and write
 `section-purpose-map.md`: each inherited section and CTA mapped to its
 business purpose, approved copy, real proof, fitting media and the action it
 drives. Present a short rebrand plan, and build structural changes only after
-approval. If the PRD is missing, Phase B is blocked. A draft PRD still allows
-the research, the media inventory and the rebrand plan; the plan is how the PRD
-gets approved.
+approval. If the PRD or `creative-direction.md` is missing, client-facing
+Phase B is blocked. A draft of either still allows the research, the media
+inventory and the rebrand plan; the plan is how they get approved. When the
+clone's look conflicts with the approved direction, raise it as a `CONFLICT`
+in the rebrand plan (a better template, or an approved controlled change),
+never as a silent restyle.
 
 ### 6. Connect functionality — Phase C
 

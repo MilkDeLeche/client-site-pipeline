@@ -5,7 +5,7 @@ description: Full SEO, local SEO and GEO/AEO practice — audit, fix, rank, and 
 
 # SEO
 
-**Pipeline step 5 of 5** (`client-site-pipeline`). Previous: `launch-audit`. Do not skip the launch audit. If this is a rebuild of a live site, snapshot old URLs and rankings before `clone-workflow`.
+**Pipeline step 5** (`client-site-pipeline`, steps 0–5). Previous: `launch-audit`. Do not skip the launch audit. If this is a rebuild of a live site, snapshot old URLs and rankings before `clone-workflow`.
 
 Search visibility across three surfaces that now matter equally:
 

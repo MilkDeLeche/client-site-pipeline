@@ -73,11 +73,13 @@ A beautiful or popular site is a design reference, not evidence that it converts
 - **Main objections:** {{price, trust, timeline, fit, logistics}}
 - **Proof available:** {{real projects, permissioned reviews, process, licenses where verified}}
 - **Proof missing:** {{goes on the setup-list}}
-- **Tone:** {{client-approved adjectives and an example line}}
+- **Tone:** {{from `creative-direction.md`: the three words and the approved example line}}
 - **Primary CTA label + destination:** {{e.g. "Request an Estimate" → /contact#estimate}}
 
 ## 6. The template and the creative direction
 
+- **Creative direction:** `creative-direction.md`, status {{draft / approved / approved-with-blockers}}, approved by {{client / builder}}. Chosen direction: {{plain name}}. Should come across as: {{three words}}. Never looks like: {{anti-goals}}. References studied: {{links and what was taken from each}}.
+- **Template chosen is not direction approved.** The template fit check lives in `creative-direction.md` §7.
 - **Why this template was chosen:** {{the look, type, motion, sections the user loves}}
 - **Must-preserve:** {{strongest visual features; Phase A clones all of it regardless}}
 - **Brand assets:** {{logo files, palette, fonts, photos; rights for each}}
@@ -108,6 +110,7 @@ No credentials in this file. The architecture plan picks the smallest stack for 
 ## 9. Acceptance
 
 - [ ] A visitor can tell what's offered and what to do next without guessing.
+- [ ] The intended buyer and the client recognize the approved direction in the site's look and voice.
 - [ ] Every claim and image honestly represents this business; illustrative images are labeled.
 - [ ] The site still looks and moves like the chosen template, apart from approved changes.
 - [ ] Every enabled conversion was tested end to end (see `launch-audit` → conversion journey checks).
@@ -123,5 +126,5 @@ No credentials in this file. The architecture plan picks the smallest stack for 
 | {{destination inbox}} | `CONFIRMED` / `PROPOSED` / `UNKNOWN` / `BLOCKED` | | | |
 
 - **Safe to start Phase A?** {{yes after clone-intake; the PRD never changes Phase A}}
-- **Safe to start Phase B?** {{yes/no + blockers}}
+- **Safe to start Phase B?** {{yes/no + blockers; needs this PRD and `creative-direction.md` approved}}
 - **Safe to switch conversions live?** {{yes/no + missing owners and systems}}

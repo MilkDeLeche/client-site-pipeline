@@ -71,14 +71,15 @@ A beautiful or popular site is a design reference, not evidence that it converts
 - **Value proposition (one sentence):** {{specific and honest}}
 - **Top three things a visitor must understand:** {{1}} / {{2}} / {{3}}
 - **Main objections:** {{price, trust, timeline, fit, logistics}}
-- **Proof available:** {{real projects, permissioned reviews, process, licenses where verified}}
+- **What leads:** {{from `creative-direction.md` §4: the emphasis the site leads with, e.g. products, craft, deliverables, verified results, credibility}}
+- **Proof available:** {{real projects, permissioned reviews, process, licenses where verified; results only with a source, date and permission}}
 - **Proof missing:** {{goes on the setup-list}}
 - **Tone:** {{from `creative-direction.md`: the three words and the approved example line}}
 - **Primary CTA label + destination:** {{e.g. "Request an Estimate" → /contact#estimate}}
 
 ## 6. The template and the creative direction
 
-- **Creative direction:** `creative-direction.md`, status {{draft / approved / approved-with-blockers}}, approved by {{client / builder}}. Chosen direction: {{plain name}}. Should come across as: {{three words}}. Never looks like: {{anti-goals}}. References studied: {{links and what was taken from each}}.
+- **Creative direction:** `creative-direction.md`, status {{deferred / draft / approved / approved-with-blockers}}, approved by {{client / builder}} (approval record in §8). Chosen direction: {{plain name}}. Should come across as: {{three words}}. Never looks like: {{anti-goals}}. References studied: {{links and what was taken from each}}.
 - **Template chosen is not direction approved.** The template fit check lives in `creative-direction.md` §7.
 - **Why this template was chosen:** {{the look, type, motion, sections the user loves}}
 - **Must-preserve:** {{strongest visual features; Phase A clones all of it regardless}}

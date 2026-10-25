@@ -13,3 +13,11 @@ desktop.ini
 *.log
 .scratch/
 tmp/
+
+# Python (optional discovery PDF kit)
+__pycache__/
+*.pyc
+.venv/
+
+# Client material never belongs in this public repo
+discovery/

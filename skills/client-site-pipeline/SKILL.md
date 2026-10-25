@@ -9,7 +9,7 @@ Six skills, steps 0–5. Run them **in this order**. Each one produces an artifa
 
 | Step | Skill | When | Done when |
 |---|---|---|---|
-| 0 | `brand-discovery` | Start of the job, before the PRD and before a template is settled | Vibe read written; every link sorted into template or reference brand; the ask-first list asked (or carried to the pitch meeting); two or three directions offered; `creative-direction.md` saved with its approval type |
+| 0 | `brand-discovery` | Start of the job, before the PRD and before a template is settled | Yes / Skip for now chosen (a skip saves `creative-direction.md` as `deferred`, resumable); vibe read written; every link sorted into template or reference brand, with the quality each reference is admired for; the ask-first list asked (or carried to the pitch meeting); what leads recorded next to the evidence that exists; two or three directions offered; `creative-direction.md` saved with its alignment statement and approval record |
 | 1 | `client-web-delivery` | Start of the job | `PRD.md` read (if supplied) or drafted, and approved, with the site's intent: who buys, what they must believe, the one action that makes money; setup-list exists; client facts live in **one** `src/data/` file; `architecture-plan.md` exists with a reason for every service; no invented phone/reviews/prices or infrastructure |
 | 2 | `clone-intake` | Before any clone build | Template vetted against `creative-direction.md`; live template URL + repo `.txt` dumps (scrolled to the section) + motion video |
 | 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent and the approved creative direction section by section by the senior room, from a media-truth inventory, until the first screen speaks to the target buyer with real proof (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
@@ -18,7 +18,7 @@ Six skills, steps 0–5. Run them **in this order**. Each one produces an artifa
 
 Do not run 1 on a new client without 0 (`reference-only` skips 0). Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run build`. Do not run 5 as a substitute for 4. DESIGN.md / TypeUI files are tokens only; they are not a step, and they encode a chosen direction without choosing it.
 
-## Required companion skills (check before step 0)
+## Required companion skills and tools (set up before step 0)
 
 The pipeline needs two outside skill packs. Check that they are installed before doing anything else; they are not optional.
 
@@ -27,14 +27,14 @@ The pipeline needs two outside skill packs. Check that they are installed before
 | `copywriting` | `coreyhaines31/marketingskills` | Phase B copywriter: the hook bank, headlines, CTAs, in both site languages |
 | `antislop` (core) + `antislop-copywriting`, `antislop-ui`, `antislop-layoutmobile`, `antislop-human` | `miqdadbadjuber/anti-slop` | The slop filter on every line of copy and every UI addition; the redline; the launch audit's contrast and delivery checks |
 
-**If any is missing, stop.** Name the missing skills and give the user these commands (global install, recommended; drop `-g` for one project only):
+**Run the setup yourself; the user doesn't install anything.** At the start of a job, run:
 
 ```bash
-npx skills add coreyhaines31/marketingskills --skill copywriting -g
-npx skills add miqdadbadjuber/anti-slop -g
+node ~/.claude/skills/client-site-pipeline/scripts/setup.mjs
+# project install: node .claude/skills/client-site-pipeline/scripts/setup.mjs
 ```
 
-Then tell them to start a new session: skills load when a session starts. Do not continue the job without them, and do not fetch or write skill files yourself.
+It checks Node 18+, both companion packs, ffmpeg (motion contact sheets) and the PDF kit's Python packages (optional), installs whatever is missing (`npx skills add … -g -a claude-code -y`, winget or Homebrew, `pip`), and prints a summary. A companion pack installed during this session loads in the next one; until then, read its `SKILL.md` from the skills directory directly and follow it. **Stop only when the summary still says `MISSING`:** tell the user what failed and the command that failed, and don't continue the job without the companion skills. If Node itself is missing, install the LTS (`winget install OpenJS.NodeJS.LTS` / `brew install node`), then run the setup.
 
 **How the pipeline uses them, and what wins:**
 - **Phase B writes with these skills, in antislop's DURING mode.** The copywriter drafts every line through `copywriting` and `antislop-copywriting`, and the UX lead builds every addition through `antislop-ui`, `antislop-layoutmobile` and `antislop-human`, from the first draft. They are how Phase B writes, not a cleanup pass afterward. antislop asks once per session; answer *during* for pipeline work, and follow its own mode and pointer-block rules. Phase B ends with antislop's Delivery Gate report.
@@ -53,7 +53,7 @@ Most of these sites go up before the client pays, as a **near-final pitch**: it 
 
 ## Agent rule
 
-On a new client clone, read this skill first and run the **Required companion skills** check, then start at step 0 and open **only the current step’s** skill. Name the step out loud (“step 2, clone-intake”). When architecture is being chosen, say “Current step: Architecture / Setup”. When the user jumps ahead (“do SEO”), say which step they skipped and what is missing.
+On a new client clone, read this skill first and run the setup in **Required companion skills and tools**, then start at step 0 and open **only the current step’s** skill. Name the step out loud (“step 2, clone-intake”). When architecture is being chosen, say “Current step: Architecture / Setup”. When the user jumps ahead (“do SEO”), say which step they skipped and what is missing.
 
 ## PRD gate
 
@@ -70,7 +70,9 @@ Step 1 is not done without a `PRD.md` (template: `client-web-delivery` → `asse
 
 Step 0 is not done without a `creative-direction.md` (template: `brand-discovery` → `assets/creative-direction-template.md`).
 
-- Client-facing Phase B needs an approved PRD **and** an approved creative direction: the client's approval for production, the builder's (labeled a guess) for a near-final pitch. A draft blocks settling the look as final, not the research, the media inventory or the rebrand plan.
+- Client-facing Phase B needs an approved PRD **and** an approved creative direction: the client's approval of the alignment statement for production, the builder's (labeled a guess) for a near-final pitch. A draft blocks settling the look as final, not the research, the media inventory or the rebrand plan. A returned questionnaire or PDF is input, not approval.
+- **Skip for now** saves the step as `deferred`: a pitch can be built on the builder's labeled guess, and production treats it like a draft. Resume step 0 from the saved file when the pitch becomes paid work, the owner replies, the owner pushes back, or the client returns. Nothing collected before the skip is discarded.
+- A client who rejects or questions a built design goes to `brand-discovery` → `references/feedback-diagnosis.md` before any rebuild. The previous direction is kept and the change logged.
 - `reference-only` skips step 0; Phase A runs as a pure fidelity clone.
 - The PRD is canonical for the business, `creative-direction.md` for how it comes across. Conflicts between them become questions, never silent overwrites.
 - A template the user loves is not an approved direction. `clone-intake` checks the fit before Phase A; the direction never changes Phase A.
@@ -79,7 +81,8 @@ Step 0 is not done without a `creative-direction.md` (template: `brand-discovery
 
 | What | Where |
 |---|---|
-| How the business should come across: impression, voice, look, motion, what to avoid | `creative-direction.md` |
+| How the business should come across: impression, voice, look, motion, what leads, what to avoid, the alignment statement and its approval | `creative-direction.md` |
+| Raw discovery answers, questionnaires, returned PDFs | the project's gitignored `discovery/` folder |
 | Business intent and strategy | `PRD.md` |
 | Client facts | one `src/data/` file |
 | Architecture | `architecture-plan.md` |

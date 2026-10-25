@@ -1,0 +1,6 @@
+# Only for the optional discovery PDF kit (discovery_pdf.py). The rest of the
+# pipeline needs none of these. Python 3.9 or newer.
+reportlab==4.2.5
+pypdf==5.1.0
+# Test-only, for rendering pages to images; the tests skip that check without it.
+# pypdfium2==4.30.0

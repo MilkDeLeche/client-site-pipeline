@@ -9,7 +9,7 @@ ranking"* in six ordered steps (0–5). Each step is a self-contained skill that
 produces a concrete artifact the next step depends on. Skip a step and the next
 one tells you what's missing.
 
-<sub>Skills: 7 · Steps: 6 (0–5) · Zero runtime dependencies · Works with Claude Code and the Claude Agent SDK</sub>
+<sub>Skills: 7 · Steps: 6 (0–5) · Dependencies installed automatically by the installer and the agent · Works with Claude Code and the Claude Agent SDK</sub>
 
 ---
 
@@ -39,7 +39,7 @@ pass before the next one starts.
 
 | # | Skill | Runs | Done when |
 |---|-------|------|-----------|
-| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**; a short **ask-first list** put to the owner (or carried to the pitch meeting); two or three named **directions**; an approved **`creative-direction.md`** |
+| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template (or **skipped for now** and resumed later) | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**, and what each one is admired for; a short **ask-first list** put to the owner by text, call or an optional fillable PDF (or carried to the pitch meeting); **what leads** next to the evidence that exists; two or three named **directions**; a **`creative-direction.md`** with an alignment statement the client approved |
 | **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | An approved **PRD** captures the site's intent (who buys, what they must believe, the one action that makes money); a **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; nothing invented |
 | **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Template **vetted** against the approved direction; live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
 | **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only, mapped to the PRD section by section by a senior room (strategist, copywriter, art director, UX lead) from a media-truth inventory, until the first screen sells to the target buyer with real proof, built from the template's own design grammar **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page, a second language) |
@@ -79,6 +79,27 @@ of design jargon. The result is two or three named directions and an approved
 ([template](skills/brand-discovery/assets/creative-direction-template.md)).
 On a pitch with no interview, the builder approves a labeled guess and takes
 the questions to the meeting.
+
+The step opens with **Yes / Skip for now**. A skip saves the file as
+`deferred` with everything gathered so far, and the step resumes from it when
+the pitch turns into paid work or the client pushes back. Questions come from
+a [question bank](skills/brand-discovery/references/question-bank.md) of
+decisions every business has, with add-ons per industry. The bank also
+separates *what should lead* (products, craft, deliverables, verified results,
+credibility and more) from *the evidence that exists*, and decodes what a
+reference is actually admired for. The client approves a short **alignment
+statement**; a returned questionnaire is input, not approval. When a client
+rejects a design, [feedback diagnosis](skills/brand-discovery/references/feedback-diagnosis.md)
+finds which decision was wrong before anything is rebuilt, and the earlier
+direction is kept.
+
+**Optional PDF kit.** `scripts/discovery_pdf.py` turns the same questions into
+a branded, fillable PDF (any number of sending agencies, logo optional,
+English or Spanish) and reads returned copies back, flagging blanks,
+conflicts and flattened copies. It needs `pip install -r
+skills/brand-discovery/scripts/requirements.txt`; nothing else in the
+pipeline does. Nothing is hosted: you send the file yourself, and agency
+profiles and client answers stay out of this repo.
 
 ### 1 · `client-web-delivery` — intake & handoff
 A repeatable five-stage workflow for shipping a client site. It starts from a
@@ -168,32 +189,46 @@ These run through every skill:
 The skills are plain folders with a `SKILL.md`. Drop them where your agent looks
 for skills.
 
-**Required companion skills.** The pipeline also needs two outside packs. It
-checks for them at the start of every job and stops if they're missing:
+### What it needs (installed for you)
+
+| Need | Why | Required |
+|---|---|---|
+| Node 18+ | Runs the setup, Astro builds, Wrangler, `seo/scripts/google-index.js` | Yes |
+| [`copywriting`](https://github.com/coreyhaines31/marketingskills) skill | Phase B copy | Yes |
+| [`antislop`](https://github.com/miqdadbadjuber/anti-slop) pack | Slop filter on copy, UI, mobile, contrast | Yes |
+| ffmpeg | Contact sheets from template motion videos (`clone-workflow`) | Yes |
+| Python 3.9+ with `reportlab`, `pypdf` | The discovery PDF kit only ([requirements](skills/brand-discovery/scripts/requirements.txt)) | No |
+
+Nobody installs these by hand. The installers below run
+[`setup.mjs`](skills/client-site-pipeline/scripts/setup.mjs) after copying
+the skills, and the orchestrator tells the agent to run the same script at the
+start of every job. It installs whatever is missing (`npx skills add`, winget
+or Homebrew, `pip`) and stops the job only if a required item still fails.
+Companion skills installed mid-session load in the next session.
 
 ```bash
-npx skills add coreyhaines31/marketingskills --skill copywriting -g   # Phase B copy
-npx skills add miqdadbadjuber/anti-slop -g                             # slop filter: copy, UI, mobile, contrast
+node ~/.claude/skills/client-site-pipeline/scripts/setup.mjs           # check and install
+node ~/.claude/skills/client-site-pipeline/scripts/setup.mjs --check   # report only
 ```
-
-Start a new session after installing; skills load at session start.
 
 ### Claude Code
 
 ```bash
 # from a clone of this repo
-./install.sh            # macOS / Linux  → ~/.claude/skills/
+./install.sh            # macOS / Linux  → ~/.claude/skills/, then setup
 ```
 
 ```powershell
 # Windows PowerShell
-./install.ps1           # → $HOME\.claude\skills\
+./install.ps1           # → $HOME\.claude\skills\, then setup
 ```
 
-Or copy by hand:
+`--no-setup` / `-NoSetup` copies the skills only. Or copy by hand, then run the
+setup:
 
 ```bash
 cp -r skills/* ~/.claude/skills/
+node ~/.claude/skills/client-site-pipeline/scripts/setup.mjs
 ```
 
 Project-scoped instead of global? Copy into `.claude/skills/` inside the repo
@@ -228,8 +263,12 @@ the agent will pick up `client-site-pipeline`, then work through
 ```
 skills/
   client-site-pipeline/   orchestrator — read first, enforces the order
+    scripts/setup.mjs     installs the tools and companion skills the pipeline needs
   brand-discovery/        step 0 — vibe read, ask-first list, creative direction
     assets/creative-direction-template.md
+    assets/questions.example.json · assets/agency-profile.example.json
+    references/question-bank.md · references/feedback-diagnosis.md
+    scripts/discovery_pdf.py (+ tests, requirements.txt)   optional PDF kit
   client-web-delivery/    step 1 — intake, setup-list, architecture plan, handoff
     assets/prd-template.md
     assets/setup-list-template.md

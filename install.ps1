@@ -1,13 +1,17 @@
 <#
-    Install the pipeline skills into a Claude Code / Agent SDK skills directory.
+    Install the pipeline skills into a Claude Code / Agent SDK skills directory,
+    then install what they need (companion skills, ffmpeg, the PDF kit's Python
+    packages) through client-site-pipeline\scripts\setup.mjs.
 
       ./install.ps1                    -> $HOME\.claude\skills\
       ./install.ps1 C:\path\to\skills  -> a custom location
       ./install.ps1 -Project           -> .\.claude\skills\ in the current repo
+      ./install.ps1 -NoSetup           -> copy the skills only
 #>
 param(
     [string]$Path,
-    [switch]$Project
+    [switch]$Project,
+    [switch]$NoSetup
 )
 
 $ErrorActionPreference = 'Stop'
@@ -33,11 +37,25 @@ Get-ChildItem -Directory $src | ForEach-Object {
 Write-Host ""
 Write-Host "-> $dest"
 
-# Required companion skills (see client-site-pipeline -> "Required companion skills").
-$missing = @('copywriting', 'antislop') | Where-Object { -not (Test-Path (Join-Path $dest $_)) }
-if ($missing) {
+if ($NoSetup) { exit 0 }
+
+$setup = Join-Path $dest 'client-site-pipeline\scripts\setup.mjs'
+
+# Node runs the setup (and every Astro build), so get it first.
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
     Write-Host ""
-    Write-Host "Required companion skills missing: $($missing -join ', ')"
-    Write-Host "  npx skills add coreyhaines31/marketingskills --skill copywriting -g"
-    Write-Host "  npx skills add miqdadbadjuber/anti-slop -g"
+    if (Get-Command winget -ErrorAction SilentlyContinue) {
+        Write-Host "Node not found; installing the LTS with winget..."
+        winget install --id OpenJS.NodeJS.LTS -e --silent --accept-source-agreements --accept-package-agreements
+        $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [Environment]::GetEnvironmentVariable('Path', 'User')
+    }
+    if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+        Write-Host "Node 18+ is required. Install the LTS from https://nodejs.org, then run:"
+        Write-Host "  node `"$setup`""
+        exit 1
+    }
 }
+
+Write-Host ""
+node $setup
+exit $LASTEXITCODE

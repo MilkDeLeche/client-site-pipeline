@@ -1,0 +1,107 @@
+{
+  "_readme": "Example only (a made-up restaurant). Copy to the project's private discovery/ folder, keep only the questions the homework left open, and rewrite the options from what the research found. Same ids in a text or call version keep the answers comparable.",
+  "version": 1,
+  "locale": "en",
+  "page_size": "letter",
+  "date": "2026-01-15",
+  "client": { "name": "Example Family Kitchen" },
+  "title": "A few questions before we design",
+  "intro": "Five minutes, no wrong answers. We looked at your site and your Instagram, so these are only the decisions we can't make without you.",
+  "questions": [
+    {
+      "id": "visitor",
+      "decides": "who the first screen speaks to",
+      "type": "single",
+      "prompt": "Who do you most want to reach with the new site?",
+      "options": [
+        { "value": "families", "label": "Families looking for a weekend meal" },
+        { "value": "lunch", "label": "People who work nearby, at lunch" },
+        { "value": "events", "label": "People planning a party or catering" },
+        { "value": "regulars", "label": "Our regulars, so they come back more" }
+      ],
+      "note": true
+    },
+    {
+      "id": "action",
+      "decides": "the main button",
+      "type": "single",
+      "prompt": "What should a visitor do first?",
+      "options": [
+        { "value": "order", "label": "Order online" },
+        { "value": "call", "label": "Call us" },
+        { "value": "visit", "label": "Get directions and come in" },
+        { "value": "book", "label": "Book a table or an event" }
+      ]
+    },
+    {
+      "id": "lead",
+      "decides": "what the first screen shows",
+      "type": "single",
+      "prompt": "What should people see first?",
+      "help": "Pick the one that would make a stranger walk in.",
+      "options": [
+        { "value": "product", "label": "The food itself" },
+        { "value": "place", "label": "The place and the people" },
+        { "value": "explain", "label": "A simple menu and prices" },
+        { "value": "credibility", "label": "How long we've been here and what people say" }
+      ],
+      "note": true
+    },
+    {
+      "id": "proof",
+      "decides": "what the site can show as proof",
+      "type": "multi",
+      "max": 3,
+      "prompt": "What can we show? Only what you already have.",
+      "options": [
+        { "value": "photos", "label": "Real photos of our food and place" },
+        { "value": "reviews", "label": "Google or Yelp reviews we can quote" },
+        { "value": "press", "label": "A local article or award" },
+        { "value": "years", "label": "How many years we've been open" },
+        { "value": "none_yet", "label": "Nothing yet, we need photos" }
+      ]
+    },
+    {
+      "id": "feel",
+      "decides": "the look and the voice",
+      "type": "multi",
+      "max": 2,
+      "prompt": "Which two words should describe how the site feels?",
+      "options": [
+        { "value": "warm", "label": "Warm" },
+        { "value": "simple", "label": "Simple" },
+        { "value": "lively", "label": "Lively" },
+        { "value": "classy", "label": "Classy" },
+        { "value": "traditional", "label": "Traditional" },
+        { "value": "modern", "label": "Modern" }
+      ]
+    },
+    {
+      "id": "reference",
+      "decides": "what to take from a site they like",
+      "type": "multi",
+      "max": 2,
+      "prompt": "You mentioned a restaurant site you like. What do you like about it?",
+      "options": [
+        { "value": "look", "label": "How it looks" },
+        { "value": "message", "label": "What it says about the place" },
+        { "value": "order", "label": "What it shows first" },
+        { "value": "trust", "label": "The reviews or awards it shows" },
+        { "value": "easy", "label": "How easy it is to order or book" }
+      ],
+      "links": [ { "label": "The site you sent us", "url": "https://example.com/" } ],
+      "note": true
+    },
+    {
+      "id": "never",
+      "decides": "the hard limits",
+      "type": "text",
+      "lines": 3,
+      "prompt": "Anything we must keep, avoid or never say?"
+    }
+  ],
+  "conflicts": [
+    { "when": [["feel", "simple"], ["feel", "lively"]], "message": "Simple and lively pull in different directions; ask which one wins on the first screen." },
+    { "when": [["lead", "credibility"], ["proof", "none_yet"]], "message": "They want to lead with credibility but have no proof yet; ask what they can share, or lead with something else." }
+  ]
+}

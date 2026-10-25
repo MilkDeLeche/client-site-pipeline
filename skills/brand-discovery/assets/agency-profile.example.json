@@ -1,0 +1,27 @@
+{
+  "_readme": "Example agency profile for the discovery PDF. Copy it to a private folder outside any public repo (suggested: ~/.client-site-pipeline/agencies/<slug>.json), one file per sending agency. Leave logo.primary null to use the agency name in type. Logos must be PNG or JPG; fonts are optional TrueType files.",
+  "slug": "example-studio",
+  "name": "Example Studio",
+  "contact": {
+    "email": "hello@example.com",
+    "phone": null,
+    "website": "example.com",
+    "instagram": null
+  },
+  "logo": {
+    "primary": null,
+    "dark": null,
+    "status": "pending"
+  },
+  "colors": {
+    "ink": "#121212",
+    "muted": "#555555",
+    "accent": "#121212",
+    "line": "#C9C9C9",
+    "paper": "#FFFFFF"
+  },
+  "fonts": {
+    "regular": null,
+    "bold": null
+  }
+}

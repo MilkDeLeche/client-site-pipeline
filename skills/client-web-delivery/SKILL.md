@@ -20,6 +20,19 @@ Pin down, in writing:
 - Brand assets on hand vs. missing (logo, photos, fonts, copy, reviews).
 - Domain: owned or to buy.
 - Write `architecture-plan.md` from the requirements you already have (template: `assets/architecture-plan-template.md`), reconciled with the PRD's functional needs and primary conversion. Infer the smallest stack. Do not stop to ask “Supabase or Convex?” when the brief is a brochure site.
+- **Offer and packages,** when the business sells services in packages or tiers (agencies, contractors, salons, gyms, photographers) and the PRD doesn't already define them. See below.
+
+### Offer and packages (`packages.md`)
+
+Write `packages.md` (template: `assets/packages-template.md`) before Phase B copy, so the template's pricing slot and service cards have something true to say instead of being cut:
+
+- Group what the business sells into packages a buyer can compare: one-time work, monthly plans, bundles. Tiers stack, each including the one below, so the more a client wants the more it costs and nothing surprising is added later. Use as many tiers as the offer really has, not three by default.
+- Research the local market: two to four competitors in the client's city or region that publish prices, with links and the date checked, and national benchmarks only where local prices aren't public. Label which is which.
+- A price the owner hasn't set is labeled a suggestion. Nothing reaches the site until the owner sets it; until then the pricing slot lists what's included and ends on the primary CTA.
+- Keep the builder's own tools and costs (email service, chatbot platform, margins) out of `packages.md` and anything the client may see.
+- Put on the setup-list: the owner's prices, contract terms, and whether the site shows prices.
+
+`packages.md` is the source for the pricing section and the service names on every design option. Restaurants and retail don't need it: their menu and products are facts in `src/data/`.
 
 ## Architecture plan
 

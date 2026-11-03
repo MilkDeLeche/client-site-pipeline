@@ -54,6 +54,8 @@ Then record **where they are now** (how much real work exists, what they can hon
 
 **Decode what is admired.** A reference is usually admired for one quality, not the whole site: its visual design, its positioning, its content hierarchy, its credibility, how easy it is to buy from, its volume of work, or something else in the owner's words. Ask which ("What's the one thing you'd take from that site?") and record it per reference. Only that quality transfers; the table in `references/question-bank.md` says what does and doesn't. Envy of a competitor is often about the volume of work, not the interface, and those have different fixes. A good-looking competitor is a pattern, not proof that it converts. A reference is never a template to clone unless it is a licensed template and the admired quality is how it looks.
 
+**Map the argument when they admire how it sells.** When the quality is positioning, content hierarchy or how easy it is to buy, write its argument map under that reference in `creative-direction.md`: the hidden problem it names, how it shows proof, the system it sells, how the offer is structured (services, packages, terms), the objections it answers, and its one CTA. Mark which points the client can honestly make today and which need a fact first (a package, a term, a real result). Phase B follows the map with the client's own facts; the reference's wording, numbers and claims never transfer.
+
 ## 3. The ask-first list
 
 Three to five questions for a text or a call (up to about nine in the PDF), each settling a decision the homework left open. `references/question-bank.md` lists the core decisions every business has and two or three add-ons per industry. Each question:

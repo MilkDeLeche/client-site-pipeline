@@ -3,6 +3,18 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.9.0] — 2026-11-03
+
+Sell the offer, keep the template. Found on an agency pitch weeks after Phase B shipped: the owner compared the Phase A clone with the live site and found sections that had been simplified or cut without his knowledge (an image mosaic turned into five text cards, the pricing block removed because there were no prices, case-study details dropped), and no report had told him. He also found the "Got a bar?" service cards corny once he saw a reference agency that simply named its services and listed what each includes, and he wanted that on every design.
+
+- **Hooks in the hero, named services in the cards.** The v1.4 rule "headlines and card titles name the buyer's situation" is split. The hero speaks to a buyer situation or a hidden problem and pays it off. Service cards use the plain name a buyer would search for ("Video & Reels", "Social Media Management", "Websites"), a body that shows the result, and what's included. What fails is a vague department title with nothing under it. The gate and anti-patterns changed to match.
+- **Hooks must pay off.** A hook that only names the problem reads as a downer, and one that scolds the owner reads as a lecture. Three real failed lines and their fixes were added to the hook voice table.
+- **Offer and packages before copy.** New `packages.md` step in `client-web-delivery` (template: `assets/packages-template.md`) for businesses that sell packaged services: tiers that stack, local published prices with links and the date checked, national benchmarks labeled as such, owner-unset prices labeled suggestions, builder tools and costs kept out. It feeds the pricing slot and the service names on every design option. A missing price is no longer a reason to cut Pricing.
+- **No silent cuts.** Every template slot is refilled with real material first. Simplifying a rich section counts as a removal. A removal needs the user's approval and goes in a cut log, and Phase B ends by handing over a template-vs-site report, section by section. Template text hardcoded in a shared component moves into the data file with the template's wording as fallback, so the Phase A baseline still renders unchanged.
+- **Argument maps for reference brands.** When a reference is admired for how it sells, step 0 maps its argument (hidden problem, proof, system, offer structure, objections, CTA) and marks which points the client can honestly make today. Phase B follows the map with the client's facts; the reference's wording and numbers never transfer.
+- **One services list across design options.** Every design reads services from one shared source; no design borrows another's card copy by title lookup.
+- Minimal edits elsewhere: the orchestrator's step 1 and 3 rows and sources of truth, the README step table, the rebrand plan (now lists the named services and packages), two acceptance scenarios (pricing with no prices yet, stats the client can't back). **Phase A, the grammar rules, the ban on invented proof, antislop, copywriting and the approval gates are unchanged.**
+
 ## [1.8.0] — 2026-10-24
 
 Client alignment. Step 0 now works for any trade, can be skipped on a cold pitch without losing anything, and ends with something the client actually approves. Everything is an edit to `brand-discovery` in place: no second discovery skill, no second PRD, no separate proof inventory.

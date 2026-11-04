@@ -1,7 +1,7 @@
 # Client Site Pipeline
 
 **An opinionated, end-to-end workflow for cloning a website into a client-ready
-build and shipping it without surprises — packaged as seven composable
+build and shipping it without surprises — packaged as eight composable
 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) / Agent SDK skills.**
 
 The pipeline takes a project from *"here's a template I like"* to *"it's live and
@@ -9,7 +9,7 @@ ranking"* in six ordered steps (0–5). Each step is a self-contained skill that
 produces a concrete artifact the next step depends on. Skip a step and the next
 one tells you what's missing.
 
-<sub>Skills: 7 · Steps: 6 (0–5) · Dependencies installed automatically by the installer and the agent · Works with Claude Code and the Claude Agent SDK</sub>
+<sub>Skills: 8 · Steps: 6 (0–5) · Dependencies installed automatically by the installer and the agent · Works with Claude Code and the Claude Agent SDK</sub>
 
 ---
 
@@ -39,10 +39,10 @@ pass before the next one starts.
 
 | # | Skill | Runs | Done when |
 |---|-------|------|-----------|
-| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template (or **skipped for now** and resumed later) | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**, and what each one is admired for; a short **ask-first list** put to the owner by text, call or an optional fillable PDF (or carried to the pitch meeting); **what leads** next to the evidence that exists; two or three named **directions**; a **`creative-direction.md`** with an alignment statement the client approved |
+| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template (or **skipped for now** and resumed later) | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**, and what each one is admired for; a short **ask-first list** put to the owner by text, call or an optional fillable PDF (or carried to the pitch meeting); **what leads** next to the evidence that exists; two or three named **directions**; a **`creative-direction.md`** with an alignment statement the client approved; a **`language-bank.md`** started with the buyers' own words |
 | **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | An approved **PRD** captures the site's intent (who buys, what they must believe, the one action that makes money); a **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; a **packages** file with local price research when the business sells packaged services; nothing invented |
 | **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Template **vetted** against the approved direction; live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
-| **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only, mapped to the PRD section by section by a senior room (strategist, copywriter, art director, UX lead) from a media-truth inventory, until the first screen sells to the target buyer with real proof, built from the template's own design grammar, with every template slot kept or its cut approved and reported **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page, a second language) |
+| **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only, mapped to the PRD section by section by a senior room (strategist, copywriter, art director, UX lead) from a media-truth inventory, until the first screen sells to the target buyer with real proof and hero lines the owner picked from a researched shortlist, built from the template's own design grammar, with every template slot kept or its cut approved and reported **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page, a second language) |
 | **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, a signup that saves a row, a banner that gates analytics, every enabled conversion proven end to end, **no fabricated testimonials** |
 | **5** | [`seo`](skills/seo/SKILL.md) | After launch (snapshot old URLs *before* step 3 on a rebuild) | Crawlable HTML, GBP / NAP consistent if local, no stray `noindex`, redirects in place if replacing an old site |
 
@@ -154,6 +154,22 @@ cited by AI assistants. Detailed references for
 [GEO/AEO](skills/seo/references/geo-aeo.md) and
 [measurement](skills/seo/references/measurement.md), plus a
 [`google-index.js`](skills/seo/scripts/google-index.js) helper.
+
+### `copy-bank` — the hook library steps 0 and 3 write from
+Not a step. Copywriters rarely invent a strong line from nothing: they find
+how the buyer already talks, match the line to how aware the buyer is of the
+problem, write far more lines than they need, and let the owner's ear pick.
+[`copy-bank`](skills/copy-bank/SKILL.md) is that method plus a library that
+grows with every client:
+[hook patterns](skills/copy-bank/patterns.md) with credited real examples and
+the awareness level each fits, a [banned list](skills/copy-bank/banned.md) of
+category clichés, competitor lines and every line an owner rejected (with
+why), the [lines owners approved](skills/copy-bank/approved.md), and
+[buyer words by trade](skills/copy-bank/industries/) with sources. Step 0
+starts a per-client `language-bank.md` from web research; Phase B writes 30+
+candidates from it, filters them (counter, swap, payoff, picture, truth,
+banned, trademark tests), and hands the owner a shortlist. Their picks and
+rejections go back into the bank.
 
 ---
 
@@ -276,8 +292,12 @@ skills/
     assets/client-handoff-template.md
     assets/client-handoff-visual-prompt-template.md
   clone-intake/           step 2 — the gate in front of cloning
+  copy-bank/              hook library used by steps 0 and 3 — grows with every client
+    patterns.md · banned.md · approved.md · industries/*.md
+    assets/language-bank-template.md
   clone-workflow/         step 3 — clone (A), rebrand (B), connect (C)
     references/intent-aware-rebrand.md
+    references/image-prompts.md
   launch-audit/           step 4 — ship / don't-get-sued gate
     scripts/audit.sh
   seo/                    step 5 — SEO / local / GEO-AEO

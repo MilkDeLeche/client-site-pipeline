@@ -5,14 +5,14 @@ description: Ordered end-to-end workflow for a client site clone — brand disco
 
 # Client site pipeline
 
-Six skills, steps 0–5. Run them **in this order**. Each one produces an artifact the next one needs. If that artifact is missing, stop and do the earlier skill — do not improvise.
+Six skills, steps 0–5, plus `copy-bank`, the shared hook library that steps 0 and 3 use (it is not a step of its own). Run the steps **in this order**. Each one produces an artifact the next one needs. If that artifact is missing, stop and do the earlier skill — do not improvise.
 
 | Step | Skill | When | Done when |
 |---|---|---|---|
-| 0 | `brand-discovery` | Start of the job, before the PRD and before a template is settled | Yes / Skip for now chosen (a skip saves `creative-direction.md` as `deferred`, resumable); vibe read written; every link sorted into template or reference brand, with the quality each reference is admired for; the ask-first list asked (or carried to the pitch meeting); what leads recorded next to the evidence that exists; two or three directions offered; `creative-direction.md` saved with its alignment statement and approval record |
+| 0 | `brand-discovery` | Start of the job, before the PRD and before a template is settled | Yes / Skip for now chosen (a skip saves `creative-direction.md` as `deferred`, resumable); vibe read written; every link sorted into template or reference brand, with the quality each reference is admired for; the ask-first list asked (or carried to the pitch meeting); what leads recorded next to the evidence that exists; two or three directions offered; `creative-direction.md` saved with its alignment statement and approval record; `language-bank.md` §1–4 started with the buyers' own words (`copy-bank`) |
 | 1 | `client-web-delivery` | Start of the job | `PRD.md` read (if supplied) or drafted, and approved, with the site's intent: who buys, what they must believe, the one action that makes money; setup-list exists; client facts live in **one** `src/data/` file; `architecture-plan.md` exists with a reason for every service; `packages.md` exists when the business sells packaged services (prices the owner hasn't set are labeled suggestions); no invented phone/reviews/prices or infrastructure |
 | 2 | `clone-intake` | Before any clone build | Template vetted against `creative-direction.md`; live template URL + repo `.txt` dumps (scrolled to the section) + motion video |
-| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent and the approved creative direction section by section by the senior room, from a media-truth inventory, until the first screen speaks to the target buyer with real proof, with every template slot kept or its cut approved and reported (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
+| 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent and the approved creative direction section by section by the senior room, from a media-truth inventory, until the first screen speaks to the target buyer with real proof and hero lines the owner picked from a `language-bank.md` shortlist, with every template slot kept or its cut approved and reported (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
 | 4 | `launch-audit` | After build, **before** public launch | Production build audited; privacy / 404 / titles / no fake testimonials; remaining asks stay on the setup-list |
 | 5 | `seo` | After it is live (or on a rebuild, snapshot URLs **before** step 3) | Crawlable HTML, GBP/NAP if local, no `noindex` left on, redirects if replacing an old site |
 
@@ -40,6 +40,7 @@ It checks Node 18+, both companion packs, ffmpeg (motion contact sheets) and the
 - **Phase B writes with these skills, in antislop's DURING mode.** The copywriter drafts every line through `copywriting` and `antislop-copywriting`, and the UX lead builds every addition through `antislop-ui`, `antislop-layoutmobile` and `antislop-human`, from the first draft. They are how Phase B writes, not a cleanup pass afterward. antislop asks once per session; answer *during* for pipeline work, and follow its own mode and pointer-block rules. Phase B ends with antislop's Delivery Gate report.
 - antislop wants design direction (`DESIGN.md`). In this pipeline **`creative-direction.md` is the strategy and the cloned template is how it looks**: point antislop at both, the chosen direction and the design-grammar inventory in `section-purpose-map.md`. antislop filters what we add and write. It never restyles the Phase A clone; a finding against the inherited template goes into the rebrand plan as a proposal, not an edit.
 - `copywriting` drafts; `antislop-copywriting` filters. Neither overrides the ban on invented facts: reviews, prices, contact details and results still come only from the facts file.
+- **`copy-bank` (part of this pipeline) supplies what they draft from:** the buyers' own words found by research, hook patterns with credited real examples, the lines owners rejected, and the lines owners picked. Every hero and hook starts there, and every owner pick or rejection is logged back into it, so the bank grows with each client.
 
 ## Live showcase standard (every site, Phase C)
 
@@ -86,6 +87,8 @@ Step 0 is not done without a `creative-direction.md` (template: `brand-discovery
 | Business intent and strategy | `PRD.md` |
 | Client facts | one `src/data/` file |
 | The offer: packages, what each includes, prices the owner set, local price research | `packages.md` (step 1, when the business sells packaged services) |
+| The buyers' words, the hook candidates, the shortlist and the owner's picks | `language-bank.md` (started at step 0, finished in Phase B) |
+| What lands and what doesn't, across every client | `copy-bank` (`approved.md`, `banned.md`, `industries/`) |
 | What Phase B cut from the template, why, and who approved it | the cut log and template-vs-site report (Phase B, step 9) |
 | Architecture | `architecture-plan.md` |
 | Missing client facts | the setup-list |

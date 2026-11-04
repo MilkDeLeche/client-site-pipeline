@@ -3,6 +3,21 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.10.0] — 2026-11-03
+
+A copy bank, so hooks come from research instead of the agent's head. On the same agency pitch the owner rejected the hero lines twice ("they make no sense", "so generic") even though they followed every v1.9.0 rule. The rules block bad patterns; they don't supply good material. Working copywriters get it from the buyer's own words, from a swipe file of patterns, from writing many lines and cutting hard, and from the owner's ear.
+
+- **New `copy-bank` skill** (not a step): the method plus a shared library that grows with every client.
+  - `patterns.md`: 17 hook structures, each with real credited examples (study only, never shipped), the buyer awareness level it fits (Schwartz), and when it works and fails.
+  - `banned.md`: category clichés in English and Spanish, competitor lines seen in the market with sources and dates, the AI tells in one place, and every line an owner rejected with the reason.
+  - `approved.md`: lines owners picked, with the pattern, trade, region, source and date. No client names.
+  - `industries/creative-agency.md`: the first trade file, with verbatim buyer quotes from public threads (marked secondary), the hidden problem and the honest payoff, buyer-side research labeled as notes, the RGV competitor read, and a reference brand's argument map.
+  - `assets/language-bank-template.md`: the per-client file. §1–4 (buyer situations and awareness, buyer words, the avoid list, the owner's words) start at step 0; §5–7 (30+ candidates, the shortlist, the owner's answer and the log) are written in Phase B.
+- **The filter** every candidate passes before the owner sees it: counter test (would the owner say it at the counter?), swap test (could a competitor sign it?), payoff, picture, truth, banned and trademark checks.
+- **The loop closes.** Picks go to `approved.md`, rejections to `banned.md` with the owner's reason, new buyer words and competitor lines to the trade file, written in the source checkout so a reinstall doesn't erase them.
+- **Image prompts for true gaps.** New `clone-workflow/references/image-prompts.md`, linked from the existing AI-image rule. It covers four things. A gap audit: an AI image only where no real file can honestly fill the slot, and never in a "this is our work" slot. A prompt recipe written from the client's own footage: its light, grade and lens, the region said concretely, clean surfaces described positively. A photo-editor check of every output: hands, gibberish letterforms, stock look, implied claims. A per-project `image-prompts.md` log with the alt label, privacy disclosure and inventory row. First used on the same pitch for the one slot every design got wrong (the search service, shown with a house, a store opening and a clothing tag). Two variants, one rejected because it read as phone use while driving, and one edit pass to remove gibberish street names.
+- **Wired in, minimal edits:** `brand-discovery` homework starts `language-bank.md`; the Phase B copywriter writes the hook bank from it and offers a shortlist; one new gate (hero lines are the owner's picks from the shortlist, logged) and one anti-pattern; the orchestrator's step 0 and 3 rows, companion notes and sources of truth; the README. **The steps, their order, Phase A, the hook voice rules, the ban on invented facts, antislop and copywriting are unchanged.**
+
 ## [1.9.0] — 2026-11-03
 
 Sell the offer, keep the template. Found on an agency pitch weeks after Phase B shipped: the owner compared the Phase A clone with the live site and found sections that had been simplified or cut without his knowledge (an image mosaic turned into five text cards, the pricing block removed because there were no prices, case-study details dropped), and no report had told him. He also found the "Got a bar?" service cards corny once he saw a reference agency that simply named its services and listed what each includes, and he wanted that on every design.

@@ -45,6 +45,8 @@ Then record **where they are now** (how much real work exists, what they can hon
 - Their social style is not automatically the site style. Their posts show what their audience responds to (Phase B uses that); they don't decide how the site looks.
 - A business name or logo hints at an aspiration. It is still a guess until the owner confirms it.
 
+**Start the language bank in the same pass.** Copy `copy-bank/assets/language-bank-template.md` to the project as `language-bank.md` and fill §1–4 (`copy-bank` §2–3): the buyer situations and how aware each is of the problem, the buyers' own words from reviews, comments and threads (verbatim, with links and dates, in every site language), what peer businesses already say, and the phrases the owner uses about their business. Read the `copy-bank` files for the trade first and add what you find to them. Phase B writes the hooks from this file; a hero written without it is a guess.
+
 ## 2. Sort every link: template or reference brand
 
 | | Template | Reference brand |

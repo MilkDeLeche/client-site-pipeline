@@ -318,6 +318,7 @@ src/data/<client>.ts            every business fact, one place
 reference/template/             fetched real HTML/CSS/JS, when the template is a live site — primary source for Phase A
 src/pages/index.astro           concept picker (links every design) — or the Phase A template clone, before rebrand begins
 src/pages/design-N/index.astro  one page per concept
+src/pages/designs/index.astro   options shelf for the owner, finished designs only (references/design-options-shelf.md)
 src/components/designN/         components, namespaced per concept
 src/styles/designN.css          tokens + motion block, per concept
 public/assets/designN/          that concept's art

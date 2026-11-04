@@ -27,14 +27,15 @@ Open every output before using it, at full size:
 
 - Hands, fingers, phone shape, reflections, any letterforms (AI text renders as gibberish; it must be blurred or absent).
 - Does it look like the client's footage, or like stock? If it looks like stock, retake with the grade and lens from step 2.
-- Does it make a claim the client can't back (a five-star rating, a "#1" badge, a crowd that implies results)? Then it's out.
-- Crop it to every slot that will use it and check the subject survives on desktop and phone.
+- Does it make a claim the client can't back: a rating, a "#1" badge or a result attributed to the client or a named business, or a crowd that implies results? Then it's out. A generic interface with no names and no readable figures, labeled as an illustration, can show what the service does.
+- Brand marks. Models invent real logos (a retailer's sign came out on a store wall). Never use a real app's logo or a look-alike, even when the copy names the app and the owner asks for one: it reads as that company's endorsement and invites a trademark complaint. Use generic icons (a chat bubble, a sparkle, a map pin in a magnifier) and let the copy name the apps.
+- Crop it to every slot that will use it and check the subject survives on desktop and phone. Check each slot's real shape first: a short, wide card cut the subject out of a 9:16 image, so pick or generate the source whose shape matches the slot.
 
 Name a bad output plainly and retake with one correction at a time.
 
 ## 4. Use it, label it, log it
 
-- Alt text describes it as an illustration ("Illustration: a phone showing a map pin outside a local storefront at night").
+- Alt text describes it as an illustration ("Illustration: a phone and laptop showing local search results and a rising analytics chart").
 - Add it to `media-inventory.md` with origin `AI-generated` and the slots it may enter.
 - Record it in the project's `image-prompts.md`: slot, claim, why no real file fits, model, the full prompt, aspect and resolution, date, which variant was used and why, the file path, and the alt text.
 - The privacy page discloses AI imagery (`launch-audit` checks it). "Send us a real photo for this" goes on the setup-list when one could replace it later.

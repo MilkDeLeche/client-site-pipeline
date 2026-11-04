@@ -71,3 +71,20 @@ The line, the trade and region, the owner's reason in their words (or the reason
 | The post gets the look. → The page gets the call. / El post llama la atención. → La página recibe la llamada. | Creative agency, RGV TX | A clever-sounding split the owner couldn't parse; "they make no sense" | 2026-11 |
 | The shoot is the easy part. The quiet Tuesday is where the business disappears. | Creative agency, RGV TX | "So generic." Argues a point instead of saying what they get | 2026-11 |
 | Service cards written as stages ("the month after you open") | Creative agency, RGV TX | Owner wanted named services with what's included | 2026-11 |
+
+## 5. Cut in a generic-wording pass
+
+Lines the builder wrote that failed the swap test on a later read, when the owner asked for everything to sound handpicked. Same use as §4: never offer them again.
+
+| Line | Trade, region | Why it was cut | Date |
+|---|---|---|---|
+| This is the output. / Esto es lo que entregamos. (work slider heading) | Creative agency, RGV TX | Any agency could sign it, and it had replaced the owner's approved "Serving the Valley." | 2026-11-04 |
+| The part nobody explains. / Lo que nadie explica. (FAQ heading) | Creative agency, RGV TX | A tease instead of a label | 2026-11-04 |
+| They search. You show up. / They land. They book. / They come back. / We keep it running. | Creative agency, RGV TX | Staccato steps; "they book" is a result we can't promise. Replaced by plain labels | 2026-11-04 |
+| One crew from the first shoot to the last post. | Creative agency, RGV TX | A false range | 2026-11-04 |
+| The website turns a view into a call, a quote or a booking. | Creative agency, RGV TX | Inanimate subject with a human verb, and a promised result | 2026-11-04 |
+| Short on time? (popup heading) | Creative agency, RGV TX | Fits any business; replaced by "Got a date in mind?" | 2026-11-04 |
+| Let's get your business seen. (closing line) | Creative agency, RGV TX | Generic; the owner's approved "Let's put it on the map." says it better | 2026-11-04 |
+| Why isn't Instagram enough? (FAQ question) | Creative agency, RGV TX | An "X isn't Y" frame that talks down to the owner's main channel | 2026-11-04 |
+| Designed and built for you (website feature) | Creative agency, RGV TX | Fits any web shop | 2026-11-04 |
+| The name, on the car / The chair, still posting / The shop, under the lights / A house they can walk first (work titles) | Creative agency, RGV TX | Shot descriptions as titles, the pattern the owner rejected in §4 | 2026-11-04 |

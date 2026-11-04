@@ -102,6 +102,8 @@ Write these to the pipeline's source checkout (the folder that holds `install.sh
 - A famous brand's tagline with one word swapped.
 - A rejected line offered again to the same owner, or to the next client.
 - Picks and rejections kept in the chat only, so the bank never grows.
+- A copy pass that overwrites an approved line. Diff every pass against `approved.md` first: on one pitch an owner-approved section heading was replaced by a weaker one and only caught in a later pass.
+- Shot descriptions, staccato fragments or clever splits as work titles and step titles. Plain labels ("Sports bar promo", "Hosting and upkeep") read as chosen; stunts read as filler.
 
 ## Acceptance scenarios
 

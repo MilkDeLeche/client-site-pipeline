@@ -298,6 +298,7 @@ skills/
   clone-workflow/         step 3 — clone (A), rebrand (B), connect (C)
     references/intent-aware-rebrand.md
     references/image-prompts.md
+    references/design-options-shelf.md
   launch-audit/           step 4 — ship / don't-get-sued gate
     scripts/audit.sh
   seo/                    step 5 — SEO / local / GEO-AEO

@@ -3,6 +3,15 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.11.0] — 2026-11-04
+
+Putting the options in front of the owner, and the fixes a real handover turned up. On the same agency pitch the owner had turned down build after build, so the builder put the four finished designs on one page for him to choose from, and asked for one more pass to cut anything generic.
+
+- **New `clone-workflow/references/design-options-shelf.md`.** One page with the finished options, for an owner who can't pick from descriptions. It shows finished designs only: the Phase A template baselines are never shown and come off the deployed site, and template code ships only once its licence is bought. Each option gets a plain name, the owner's own words for the direction and a few facts, written to the owner as "you", never template product names. The page is unlisted (`noindex`, out of the sitemap) and shows one language per visit, picked from the browser. Opening a design goes to the real page. Every design gets a way back, shown only to visitors who came from the shelf, clear of the page's own buttons and reachable by keyboard. Verification covers real clicks with an `elementFromPoint` check (a full-width logo band had covered a Close button), state checks instead of mid-animation screenshots in throttled automation browsers, and a clean-clone build. Linked from the rebrand reference and the folder conventions.
+- **Image prompts:** no real app logos or look-alikes, even when the copy names the app and the owner asks for them: use generic icons and let the copy name the apps. The rating rule is narrowed: a rating or result attributed to the client is out, while a generic, unnamed interface labeled as an illustration may show what the service does. Crop to each slot's real shape (a short, wide card cut the subject out of a tall image).
+- **Wordmark swaps:** when the client's name replaces a full-width wordmark, the box takes its height from the type, the fit adds back the letter-spacing after the last letter, and a longer name stays on one line at a smaller size. A fixed-height box had clipped the letters, and the fit had cut off the last one.
+- **Copy bank:** `banned.md` §5 logs the lines cut in a generic-wording pass and why (staccato steps, shot descriptions as titles, a tease as a heading, a false range). Two new anti-patterns: a copy pass that overwrites an approved line (diff against `approved.md` first, because an owner-approved heading had been replaced), and stunts as work titles or step titles where plain labels read as chosen.
+
 ## [1.10.0] — 2026-11-03
 
 A copy bank, so hooks come from research instead of the agent's head. On the same agency pitch the owner rejected the hero lines twice ("they make no sense", "so generic") even though they followed every v1.9.0 rule. The rules block bad patterns; they don't supply good material. Working copywriters get it from the buyer's own words, from a swipe file of patterns, from writing many lines and cutting hard, and from the owner's ear.

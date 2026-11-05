@@ -3,6 +3,14 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.13.1] — 2026-11-05
+
+Copy-bank additions from a residential building-design pitch, and skill descriptions that fit claude.ai uploads.
+
+- **New `copy-bank/industries/home-design.md`:** buyer words for custom-home design from published client reviews and a Houzz thread (being heard and guided, the dream in their heads, not like the neighbors, cost fear), the hidden problems with honest payoffs, and the RGV competitor read. Building designers in Texas are never called architects.
+- **`banned.md`:** home-design category clichés in English and Spanish ("Build your dream home", "Designed around you", "La casa de tus sueños"), two RGV competitor lines, and four lines the owner rejected (a swap-test hero, a staccato hook, buyer situations as service titles, a three-beat tagline).
+- **Descriptions under 1,024 characters** for `brand-discovery` and `client-web-delivery`, the Agent Skills limit claude.ai enforces on upload. Same triggers, fewer words.
+
 ## [1.13.0] — 2026-11-05
 
 A second poster page that sells the plan, and the setup now installs everything the pitch kit uses. The builder read page 1 as "the introduction" and asked for one more page with selling points ("one page is good, two pages is perfect, three is too boring"). They also asked that the setup install the kit's tools like everything else in the pipeline.

@@ -30,6 +30,12 @@ Lines that any competitor could sign. If a candidate is close to one of these, i
 - Contamos tu historia
 - Somos los mejores del Valle
 
+**Home design, home building (English and Spanish)**
+- Build your dream home / Your dream home awaits / Where dreams come home
+- Turning houses into homes / Your vision, our expertise / From vision to reality
+- Designed around you / Homes designed around you
+- La casa de tus (sus) sueños / Hacemos realidad tu (su) sueño
+
 **Any trade**
 - Quality you can trust / Service you can count on
 - Where quality meets…
@@ -47,6 +53,8 @@ What peers already say, so we don't. Trade, region, date read, source. Add to th
 | "Bring your vision to life" / "For brands ready to stand out, not fit in." / "Content that converts" / "Stress-free management" | Social media agency, Brownsville TX | 2026-11-03 | [visionbtx.com](https://visionbtx.com/) |
 | Service departments as the whole message: Creative Strategy, Software Solutions, Media Production, Digital Marketing, Web Solutions | Marketing agency, McAllen TX | 2026-11-03 | [studiomediaagency.com](https://studiomediaagency.com/) |
 | "We run ads. You get real sales." / "Stop guessing. Start selling." | Reference brand (ad agency for service businesses) | 2026-11-03 | [wesellitagency.com](https://wesellitagency.com/). Studied for how it sells, see `industries/creative-agency.md`; its wording never transfers |
+| "Custom Home Design for Deep South Texas" / "Let's Talk" | Residential building designer, RGV TX | 2026-10-16 | godesigntx.com |
+| "Get in touch" (the only CTA, over a built-home photo) | Residential building designer, Brownsville TX | 2026-10-16 | jonathangarciadesigns.com |
 
 ## 3. AI tells
 
@@ -94,3 +102,7 @@ Lines the builder wrote that failed the swap test on a later read, when the owne
 | Ready to discuss the dream home of your future? / Ready to Build Your Dream Home? | Custom home builder, RGV TX | Category cliché; project-page CTA became "Build a Home Like This One" | 2026-11-04 |
 | Once the details are sorted out, our team brings it on home. | Custom home builder, RGV TX | A pun in a process step; replaced by "Our team completes the build and hands you the keys." | 2026-11-04 |
 | Building a new home is easier than you think (process summary) | Custom home builder, RGV TX | Fits any builder; replaced by a label the page proves ("Five steps from your first call to move-in day") | 2026-11-04 |
+| Designed around you / Homes designed around you. (hero) | Residential building designer, RGV TX | Fails the swap test: any designer or builder could sign it | 2026-11-05 |
+| Your lot. Your home. / Su lote. Su casa. (hero hook) | Residential building designer, RGV TX | A staccato stunt with no payoff | 2026-11-05 |
+| Got a lot and an idea / Need plans the city will approve / Want to see it before you build / Building with a contractor (service titles) | Residential building designer, RGV TX | Buyer situations as service titles, the "Got a …?" pattern; services get their plain names with what's included | 2026-11-05 |
+| 20 custom homes. / Every one in 3D. / First consultation free. (3-line tagline) | Residential building designer, RGV TX | A three-beat staccato list used for rhythm | 2026-11-05 |

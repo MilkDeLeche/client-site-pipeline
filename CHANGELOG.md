@@ -3,6 +3,16 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.13.0] — 2026-11-05
+
+A second poster page that sells the plan, and the setup now installs everything the pitch kit uses. The builder read page 1 as "the introduction" and asked for one more page with selling points ("one page is good, two pages is perfect, three is too boring"). They also asked that the setup install the kit's tools like everything else in the pipeline.
+
+- **Page 2 of the plan poster** (`assets/pitch-poster-page2-template.html`, "Page 2" in `references/pitch-kit.md`). It shows the owner a problem they haven't noticed yet: sites built once and then left behind, and social pages that search can't find. Then it shows the plan already handling it. It has one stat card from a primary source that was opened and cited on the page, six to eight service cards (SEO + GEO, updates every month, email marketing, Google reviews, secure and private, a monthly growth report, every request right away, and AI chat only when the builder offers it to this client), two more sections of the live site (the work gallery on desktop and the primary form on a phone), and a "One competitive monthly price" bar naming the bills it replaces, with the QR again. Two pages at most. Page footers read "Page 1 of 2" and "Page 2 of 2".
+- **Scripts:** `scripts/shots.py` takes desktop, phone (Pixel 7) and single-section screenshots. Section shots hide fixed and sticky bars and wait for reveal animations. `scripts/render_pages.py` renders each page to a 2550x3300 PNG and a one-page PDF, merges them, and fails on a second sheet or a QR that doesn't decode. Both were tested on the first kit. In Git Bash, set `MSYS_NO_PATHCONV=1` before passing site paths.
+- **Setup installs the pitch kit:** `setup.mjs` checks for Google Chrome and installs it if missing (winget or Homebrew), along with the Python packages in `client-web-delivery/scripts/requirements.txt` (qrcode, pillow, numpy, opencv, playwright, pypdf). It tries a user install first and falls back to a private environment. Python is now installed even with `--no-optional`, because the kit needs it.
+- **Copy bank:** `industries/creative-agency.md` gets the research for a monthly website plan (owners' worries: a designer who disappears, a fee for a site that never changes, whether a flat fee is fair, "Facebook is enough"), marked as notes until opened, plus the opened BrightLocal 2026 stat.
+- **Unchanged:** page 1, the steps and their order, Phase A, the ban on invented facts and results, AI chat as opt-in.
+
 ## [1.12.0] — 2026-11-05
 
 A pitch kit, so a near-final pitch can be sold in one meeting. On a home-builder pitch the builder needed something the person doing the selling could put in front of the owner. A one-page plan poster with a QR to the live pitch, plus a contract-questions sheet, was what made it "easy to present to the client".

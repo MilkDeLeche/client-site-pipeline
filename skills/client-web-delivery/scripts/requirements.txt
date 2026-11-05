@@ -1,0 +1,10 @@
+# The pitch kit's Python packages (make_qr.py, shots.py, render_pages.py).
+# Installed by client-site-pipeline/scripts/setup.mjs. Python 3.9 or newer.
+# shots.py and render_pages.py drive the installed Google Chrome, so no
+# Playwright browser download is needed.
+qrcode>=7.4
+pillow>=10.0
+numpy>=1.24
+opencv-python-headless>=4.8
+playwright>=1.45
+pypdf>=4.0

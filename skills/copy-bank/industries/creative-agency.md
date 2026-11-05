@@ -58,3 +58,18 @@ See `banned.md` §2. In short: local agencies lead with service departments and 
 5. **One CTA,** repeated: book a free strategy call.
 
 What transfers: the order of the argument, named services with what's included, one CTA. What doesn't: its numbers, its claims and its wording.
+
+## Buying a monthly website plan (pitch kit research, 2026-11-05)
+
+Same buyer, deciding whether a monthly website plan is worth paying for. Written for page 2 of the pitch kit poster (`client-web-delivery/references/pitch-kit.md`). These came from search results and weren't opened, so they're notes, not quotes: open the thread before putting any line on a page.
+
+| Theme | What owners worry about | Where it came up |
+|---|---|---|
+| The designer disappears | Designers stop answering calls and emails, and the owner can't get their site, files or logins back | [Chris Lema](https://chrislema.com/markdown/web-designer-goes-awol); [UK Business Forums](https://www.ukbusinessforums.co.uk/threads/problems-with-web-developer-part-2.291590/post-2504925) |
+| Paying for nothing | A monthly fee with a site that never changes; "a stale site on a retainer" means the retainer isn't working | [vendor blog](https://skiptheagency.pages.dev/blog/site-two-years-old-never-updated) (vendor, weigh it) |
+| Flat fee, if it's fair | A flat monthly fee appeals as long as it isn't too high | [UK Business Forums](https://www.ukbusinessforums.co.uk/goto/post?id=2073734) |
+| "Facebook is enough" | Referral trades say they're booked without a site; social pages don't show up in search | [JLC](https://www.jlconline.com/business/putting-social-media-to-work-for-a-construction-business_o/); contractor-marketing blogs (vendor) |
+
+Proof that held up when opened: BrightLocal, Local Consumer Review Survey 2026. 45% of US consumers used AI tools for local business recommendations, up from 6% in 2025 (1,002 US adults, published 2026-03-10; [source](https://www.brightlocal.com/research/lcrs-ai-trust/), opened 2026-11-05). Used on the first kit's stat card under "Instagram isn't a search engine."
+
+Answers on the kit: the headline ("Most websites get built once, then forgotten.") answers the stale-site worry, the ownership answers on the contract sheet answer the disappearing designer, and the "one competitive monthly price" bar answers whether the fee is fair.

@@ -2,7 +2,7 @@
 
 A near-final pitch site wins the job only if someone can walk it into the owner's office. The pitch kit is the small set of print-ready pieces the builder (or whoever does the selling) takes to that meeting. It is built once the pitch site is live and passes the live showcase standard, and it is sent to the client or printed only when the builder says it is ready.
 
-First used on a home-builder pitch: a one-page plan poster with a QR to the live pitch, plus a contract-questions sheet the seller kept on hand. The builder called it "easy to present to the client".
+First used on a home-builder pitch: a two-page plan poster with a QR to the live pitch (page 1 the plan, page 2 why it's worth it), plus a contract-questions sheet the seller kept on hand. The builder called it "easy to present to the client".
 
 ## Where it lives: `deliverables/`, gitignored
 
@@ -12,14 +12,27 @@ Every client project has a `deliverables/` folder at its root, listed in `.gitig
 deliverables/
   setup-list.md                    the asks (step 1)
   pitch/
-    <client>-plan-poster.png       2550x3300, letter at 300 dpi
-    <client>-plan-poster.pdf       one letter page
+    <client>-plan.pdf              both poster pages, letter
+    <client>-plan-page1.png        2550x3300, letter at 300 dpi
+    <client>-plan-page2.png
     <client>-qr.png                the QR alone, for cards and stickers
     <client>-contract-questions.pdf
-    src/                           poster.html and its images, to rebuild it
+    src/                           poster.html, page2.html and their images, to rebuild them
   client-handoff.md                after step 5
   client-handoff-visual-prompt.md
 ```
+
+## Tools (installed by the pipeline setup)
+
+`client-site-pipeline/scripts/setup.mjs` installs everything the kit needs: Google Chrome, and Python with `scripts/requirements.txt` (qrcode, pillow, numpy, opencv, playwright, pypdf). If the summary says `off` for the pitch kit, rerun the setup before you start. The kit's three scripts:
+
+| Script | Does |
+| --- | --- |
+| `scripts/shots.py` | Screenshots of the live pitch: a desktop page, one section by CSS selector (fixed and sticky bars hidden), a phone page (Pixel 7) |
+| `scripts/make_qr.py` | The logo QR, decoded at four sizes; exits 1 if any fail |
+| `scripts/render_pages.py` | Each page to a 2550x3300 PNG and a one-page PDF, merged; checks one sheet per page and, with `--qr`, the QR on every page |
+
+In Git Bash, set `MSYS_NO_PATHCONV=1` before passing site paths like `/=desk`, or Bash rewrites them into Windows paths.
 
 - New project: add `deliverables/` to `.gitignore` when the folder is created.
 - Existing project where `deliverables/` is already tracked: add it to `.gitignore`, then `git rm -r --cached deliverables` so the files stay on disk and leave the repo. Say so in the commit message.
@@ -30,9 +43,13 @@ deliverables/
 - The pitch site is deployed at its showcase URL (`*.workers.dev`, `noindex`) with the latest copy. If the project's repo is connected to Cloudflare, pushing to `main` deploys it. Confirm the live URL shows the change before you make a QR for it.
 - Check the live pages once: home in both languages, privacy in both languages, and a missing page returning the custom 404. Grep the HTML for leftover template names, `lorem`, `coming soon`, `prototype`, `demo` (read the context, because form hints and other-language words are false hits).
 
-## 1. The plan poster (one page)
+## 1. The plan poster (two pages)
 
-Template: `assets/pitch-poster-template.html`. One letter-size page that says what the owner gets, what it costs, and lets them see it right away.
+Two letter pages, never more. Page 1 introduces the plan: what the owner gets and what it costs, and they can see the site right away. Page 2 sells it: why the monthly price is worth paying. One page is good and two are better. A third page is one the owner won't read.
+
+### Page 1: the plan
+
+Template: `assets/pitch-poster-template.html`.
 
 Top to bottom:
 
@@ -51,31 +68,51 @@ Rules:
 - Use the site's own fonts, brand color and logo, so the poster reads as the same brand as the site.
 - The poster goes through the same copy filter as the site (`copywriting` + `antislop-copywriting`): plain words, no hype, no em-dash pile-ups.
 
+### Page 2: why it's worth it
+
+Template: `assets/pitch-poster-page2-template.html`. Page 1 lists what's included; page 2 sells it. It shows the owner a problem they haven't noticed yet, then shows the plan already handling it.
+
+Top to bottom:
+
+1. **Header:** same logo, with the label `WHAT YOU GET EVERY MONTH`.
+2. **Headline: the problem.** Sites that get built once and then left alone fall behind the competitors who keep posting. "Most websites get built once, then forgotten." The line under it says the plan keeps their site working every month, so it keeps up with the businesses around them.
+3. **Visual band:** two sections of the live pitch that aren't the hero shown on page 1. Pick the ones that prove the plan: the gallery or work section (new work keeps going up) on desktop, and the primary form with its call/text bar on a phone (requests come straight to them). Next to them is **one stat card**: a short hook ("Instagram isn't a search engine."), one number, a sentence on what it means, and the source with its year and sample size.
+4. **Six to eight service cards.** Each card gives the service name a buyer understands and one or two lines on what it does for them. The standard set:
+   - Found on Google and AI search (SEO + GEO). Social posts don't show up when someone asks Google or ChatGPT for a business nearby; a website set up with the right facts does.
+   - Updates every month: new work, listings, photos, prices. The site keeps pace with competitors instead of going stale.
+   - Email marketing to the signup list (the newsletter or alerts).
+   - Google reviews: a ready link and QR card for every finished job.
+   - Secure and private: encrypted pages, spam-protected forms, requests in a private database (when the site has one), never shared or sold.
+   - A monthly growth report: visits, where people found them, how many asked.
+   - Every request, right away: phone and inbox alerts with the person's name and number.
+   - **Optional:** an AI chat card, only when the builder offers chat to this client. Not every client gets one.
+5. **Value bar:** "One competitive monthly price." Then the bills it replaces ("No separate bills for hosting, search setup, email marketing and edits."), the price, and the QR again.
+6. **Footer:** same as page 1, with `Page 2 of 2` (page 1 says `Page 1 of 2`).
+
+Writing it:
+- **Research first, the `copy-bank` way.** Look for what owners in this trade say about websites, social media and web designers (forums, Reddit, trade press) and log the useful words in the trade file. On the first kit, what came up was fear of a designer who disappears, sites left un-updated for years, and "Facebook is enough". The headline answers the second; the cards answer the rest.
+- **The stat comes from a primary source you opened**, not a search snippet or a blog repeating it. Print the source, year and sample on the card. Check it again before each new kit, since these numbers move quickly. The first kit used BrightLocal's Local Consumer Review Survey 2026: 45% of US consumers used AI tools for local business recommendations, up from 6% in 2025 (1,002 US adults; [source](https://www.brightlocal.com/research/lcrs-ai-trust/), checked 2026-11-05).
+- **"Competitive" stays general.** Don't compare against named competitors or prices you haven't checked. The value line names the separate bills the plan replaces.
+- Every card is something the builder delivers at this price, written as what it does once set up (an alert needs the client's inbox, a report needs analytics on). The rules for page 1 apply here too: no results promised, no unconfirmed vendor capability.
+- Copy through `copywriting` + `antislop-copywriting`. Look at the render for one-word last lines in the cards and rewrite them rather than shrinking the type.
+
 ### Screenshots of the live pitch
 
-Hide the cookie banner and signup popup with a storage-state file that sets the site's own localStorage keys (for example `{"origins":[{"origin":"<url>","localStorage":[{"name":"<consent key>","value":"declined"},{"name":"<popup key>","value":"1"}]}]}`), then:
+`scripts/shots.py` hides the cookie banner and signup popup with a storage-state file that sets the site's own localStorage keys (for example `{"cookies":[],"origins":[{"origin":"<url>","localStorage":[{"name":"<consent key>","value":"declined"},{"name":"<popup key>","value":"1"}]}]}`):
 
 ```bash
-npx -y playwright@1.49.1 screenshot --channel chrome --load-storage state.json \
-  --viewport-size "1440,900" --wait-for-timeout 2500 <url> desk.png
-npx -y playwright@1.49.1 screenshot --channel chrome --load-storage state.json \
-  --device "Pixel 7" --wait-for-timeout 2500 <url> phone.png
+python scripts/shots.py <url> src --state state.json   --page "/=desk" --phone "/=phone"   --section ".section_our-work=work" --phone "/contact=form"
 ```
 
-The iPhone devices fail with `--channel chrome` ("Unsupported webkit channel"); Pixel 7 works.
+A section shot hides fixed and sticky bars so the header doesn't cover it, and scrolls first so reveal animations finish. Phone shots use Pixel 7, because the iPhone devices fail with the Chrome channel. Open every shot before using it: a half-revealed card or a popup that slipped through shows up here.
 
 ### Rendering
 
-Render with headless Chrome. The page is 1275x1650 CSS px, and scale 2 gives 2550x3300 (letter at 300 dpi):
-
 ```bash
-chrome --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=2 \
-  --window-size=1275,1650 --screenshot=poster.png "file:///<abs path>/poster.html"
-chrome --headless=new --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf=poster.pdf "file:///<abs path>/poster.html"
+python scripts/render_pages.py ../<client>-plan.pdf poster.html page2.html --qr <live pitch url>
 ```
 
-The template's print rule (`@media print { html, body { width: 816px; height: 1056px } .poster { zoom: .64 } }`) keeps the PDF to one letter page. Check that the PDF has exactly one page, and look at the PNG before calling it done: text covered by a mockup, an orphaned word, or a card running past the page are the usual faults.
+Each page is 1275x1650 CSS px. The script renders it at scale 2 to a 2550x3300 PNG (letter at 300 dpi) and prints it to a one-page PDF (the templates' print rule zooms to .64). It merges the pages and fails if a page runs to a second sheet or a QR doesn't decode. Then look at both PNGs: text covered by a mockup, a one-word last line, or a section squeezed because the page overflowed (keep `flex-shrink: 0` on fixed-height bands) are the usual faults. Copy the PNGs up to `deliverables/pitch/` with their final names.
 
 ## 2. The QR code
 
@@ -102,9 +139,10 @@ Template: `assets/contract-questions-template.md`. Plain questions an owner asks
 
 ## Done when
 
+- [ ] The pipeline setup reports Google Chrome and the pitch kit `ok`
 - [ ] `deliverables/` exists and is in `.gitignore` (and untracked if it was tracked)
 - [ ] The live pitch shows the latest copy, and the pages above load
-- [ ] Poster PNG (2550x3300) and a one-page PDF, every claim checked against the data file and the current site
+- [ ] Both poster pages as PNGs (2550x3300) and one two-page PDF, every claim checked against the data file and the current site, the page 2 stat opened at its source and cited
 - [ ] The QR decodes at every size and on the rendered poster, and points at the live pitch
 - [ ] Contract-questions PDF, with the defaults the agent chose listed for the builder to confirm
 - [ ] The builder is told where the folder is, and that nothing goes to the client until they say it's ready

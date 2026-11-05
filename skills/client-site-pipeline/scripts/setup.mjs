@@ -8,7 +8,9 @@
  *   node <skills>/client-site-pipeline/scripts/setup.mjs --no-optional   skip the PDF kit
  *
  * Required: Node 18+, the companion skills (copywriting, antislop), ffmpeg.
- * Optional: Python 3.9+ with reportlab and pypdf, for brand-discovery's PDF kit.
+ * Installed too: Google Chrome and Python 3.9+ with the pitch kit packages
+ * (client-web-delivery/scripts/requirements.txt), for the pitch kit.
+ * Optional: reportlab and pypdf, for brand-discovery's PDF kit.
  * Exit code 1 only when a required item is still missing at the end.
  */
 import { spawnSync } from 'node:child_process';
@@ -28,6 +30,7 @@ const skillsDir = resolve(here, '..', '..');
 const globalSkills = join(homedir(), '.claude', 'skills');
 const pdfRequirements = join(skillsDir, 'brand-discovery', 'scripts', 'requirements.txt');
 const pdfVenv = join(homedir(), '.client-site-pipeline', 'pyenv');
+const pitchRequirements = join(skillsDir, 'client-web-delivery', 'scripts', 'requirements.txt');
 
 const COMPANIONS = [
   { name: 'copywriting', args: ['coreyhaines31/marketingskills', '--skill', 'copywriting'] },
@@ -92,39 +95,67 @@ function findPython() {
   }
   return null;
 }
-const pdfReady = ([cmd, pre]) => run(cmd, [...pre, '-c', 'import reportlab, pypdf']).ok;
 const venvPython = WIN ? join(pdfVenv, 'Scripts', 'python.exe') : join(pdfVenv, 'bin', 'python');
 
-if (!SKIP_OPTIONAL) {
-  let py = findPython();
-  if (!py && !CHECK_ONLY) {
-    installWith('Python', WIN
-      ? [['winget', ['install', '--id', 'Python.Python.3.12', '-e', '--silent', '--accept-source-agreements', '--accept-package-agreements']]]
-      : MAC ? [['brew', ['install', 'python']]] : []);
-    py = findPython();
+// Installs one Python kit from its requirements file: a user install first,
+// a private environment where user installs are blocked (PEP 668).
+function pythonKit(py, label, requirements, imports, fallback) {
+  const ready = ([cmd, pre]) => run(cmd, [...pre, '-c', `import ${imports}`]).ok;
+  if (!py) { report(label, false, `Python not found; ${fallback}`, false); return; }
+  if (ready(py) || (existsSync(venvPython) && ready([venvPython, []]))) {
+    report(label, true, `ready: ${ready(py) ? [py[0], ...py[1]].join(' ') : venvPython}`, false);
+    return;
   }
-  if (!py) {
-    report('PDF kit (Python 3.9+)', false, 'Python not found; the PDF kit stays off, ask by text or call', false);
-  } else if (pdfReady(py) || (existsSync(venvPython) && pdfReady([venvPython, []]))) {
-    report('PDF kit (reportlab, pypdf)', true, `ready: ${pdfReady(py) ? [py[0], ...py[1]].join(' ') : venvPython}`, false);
-  } else if (CHECK_ONLY) {
-    report('PDF kit (reportlab, pypdf)', false, `missing: ${[py[0], ...py[1]].join(' ')} -m pip install --user -r "${pdfRequirements}"`, false);
-  } else {
-    const [cmd, pre] = py;
-    console.log('  installing the PDF kit packages...');
-    let ok = run(cmd, [...pre, '-m', 'pip', 'install', '--user', '-r', pdfRequirements], { quiet: false }).ok && pdfReady(py);
-    let using = [cmd, ...pre].join(' ');
-    if (!ok) {
-      // Systems that block user installs (PEP 668) get a private environment instead.
-      console.log(`  user install not allowed here; creating ${pdfVenv}`);
-      ok = run(cmd, [...pre, '-m', 'venv', pdfVenv], { quiet: false }).ok
-        && run(venvPython, ['-m', 'pip', 'install', '-r', pdfRequirements], { quiet: false }).ok
-        && pdfReady([venvPython, []]);
-      using = venvPython;
-    }
-    report('PDF kit (reportlab, pypdf)', ok, ok ? `ready: ${using}` : 'install failed; ask by text or call', false);
+  if (CHECK_ONLY) {
+    report(label, false, `missing: ${[py[0], ...py[1]].join(' ')} -m pip install --user -r "${requirements}"`, false);
+    return;
   }
+  const [cmd, pre] = py;
+  console.log(`  installing ${label}...`);
+  let ok = run(cmd, [...pre, '-m', 'pip', 'install', '--user', '-r', requirements], { quiet: false }).ok && ready(py);
+  let using = [cmd, ...pre].join(' ');
+  if (!ok) {
+    console.log(`  user install not allowed here; using ${pdfVenv}`);
+    ok = (existsSync(venvPython) || run(cmd, [...pre, '-m', 'venv', pdfVenv], { quiet: false }).ok)
+      && run(venvPython, ['-m', 'pip', 'install', '-r', requirements], { quiet: false }).ok
+      && ready([venvPython, []]);
+    using = venvPython;
+  }
+  report(label, ok, ok ? `ready: ${using}` : `install failed; ${fallback}`, false);
 }
+
+let py = findPython();
+if (!py && !CHECK_ONLY) {
+  installWith('Python', WIN
+    ? [['winget', ['install', '--id', 'Python.Python.3.12', '-e', '--silent', '--accept-source-agreements', '--accept-package-agreements']]]
+    : MAC ? [['brew', ['install', 'python']]] : []);
+  py = findPython();
+}
+
+if (!SKIP_OPTIONAL) {
+  pythonKit(py, 'PDF kit (reportlab, pypdf)', pdfRequirements, 'reportlab, pypdf', 'the PDF kit stays off, ask by text or call');
+}
+
+// 5. Pitch kit (client-web-delivery → "Pitch kit"): Google Chrome renders the
+// poster pages and drives the screenshots; Python makes and checks the QR.
+const CHROME_PATHS = WIN
+  ? [join(process.env.ProgramFiles || 'C:\\Program Files', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+     join(process.env['ProgramFiles(x86)'] || 'C:\\Program Files (x86)', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+     join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe')]
+  : MAC ? ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'] : [];
+const chromeFound = () => CHROME_PATHS.some((p) => existsSync(p))
+  || ['google-chrome', 'google-chrome-stable', 'chromium'].some((c) => has(c));
+if (chromeFound()) {
+  report('Google Chrome', true, 'installed', false);
+} else if (CHECK_ONLY) {
+  report('Google Chrome', false, 'missing', false);
+} else {
+  const ok = installWith('Google Chrome', WIN
+    ? [['winget', ['install', '--id', 'Google.Chrome', '-e', '--silent', '--accept-source-agreements', '--accept-package-agreements']]]
+    : MAC ? [['brew', ['install', '--cask', 'google-chrome']]] : []) && chromeFound();
+  report('Google Chrome', ok, ok ? 'installed now' : (WIN || MAC ? 'install failed; the pitch kit can\'t render' : 'missing: install Chrome or Chromium with your package manager'), false);
+}
+pythonKit(py, 'Pitch kit (QR, shots, render)', pitchRequirements, 'qrcode, PIL, cv2, numpy, playwright, pypdf', 'the pitch kit can\'t make its QR or pages');
 
 // Summary
 console.log('\nClient Site Pipeline setup');

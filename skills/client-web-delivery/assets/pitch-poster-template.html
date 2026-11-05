@@ -1,0 +1,112 @@
+<!doctype html>
+<!--
+  Pitch kit plan poster (references/pitch-kit.md). One letter page.
+  Copy to deliverables/pitch/src/poster.html and replace every {{...}}.
+  Files next to it: logo.png, band.jpg (the client's own photo), desk.png,
+  phone.png (live-pitch screenshots), qr.png (scripts/make_qr.py), and the
+  site's own font file. Set --brand / --brand-d to the site's colors.
+  Render: 1275x1650 at --force-device-scale-factor=2 -> 2550x3300 PNG;
+  print-to-pdf -> one letter page (print rule below).
+  Every plan item must be something the builder delivers at this price.
+  Every "today" row must be checked on the client's current site.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>{{CLIENT}} Website Plan</title>
+<style>
+@font-face{font-family:Brand;src:url({{FONT_FILE}}) format("truetype");font-weight:200 800}
+@page{size:8.5in 11in;margin:0}
+:root{--brand:#1e4872;--brand-d:#163657;--ink:#121a2b;--gray:#5d6675;--line:#dfe4ea;--bg:#f4f6f8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1275px;height:1650px;background:#fff;font-family:Brand,system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.poster{width:1275px;height:1650px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:44px 64px 0}
+header img{height:92px}
+.tag{font-size:15px;font-weight:700;letter-spacing:.14em;color:var(--brand);border:2px solid var(--brand);border-radius:999px;padding:10px 20px}
+.intro{padding:30px 64px 0}
+h1{font-size:68px;line-height:1.02;letter-spacing:-.025em;font-weight:700}
+.intro p{font-size:23px;line-height:1.4;color:var(--gray);margin-top:14px;max-width:1150px}
+.visual{position:relative;margin:30px 0 0;height:470px}
+.band{position:absolute;inset:0 0 70px 0;background:url(band.jpg) center/cover}
+.browser{position:absolute;left:64px;bottom:0;width:660px;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 60px rgba(18,26,43,.35),0 0 0 1px rgba(18,26,43,.08)}
+.browser .bar{height:30px;background:#eef1f4;display:flex;align-items:center;gap:8px;padding:0 14px}
+.browser .bar i{width:11px;height:11px;border-radius:50%;background:#c9d0d8;display:block}
+.browser img{display:block;width:100%}
+.phone{position:absolute;left:760px;bottom:-6px;width:205px;border-radius:34px;background:#111;padding:9px;box-shadow:0 30px 60px rgba(18,26,43,.4)}
+.phone img{display:block;width:100%;border-radius:26px;height:400px;object-fit:cover;object-position:top}
+.chip{position:absolute;right:64px;bottom:96px;background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 14px 30px rgba(18,26,43,.25);font-size:17px;font-weight:600;line-height:1.35;max-width:210px}
+.chip b{display:block;font-size:13px;letter-spacing:.12em;color:var(--brand);margin-bottom:4px}
+main{display:grid;grid-template-columns:1fr 400px;gap:28px;padding:30px 64px 0;flex:1}
+.plan{background:var(--brand);color:#fff;border-radius:22px;padding:30px 34px 28px}
+.price{display:flex;align-items:baseline;gap:12px}
+.price strong{font-size:84px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.price span{font-size:26px;font-weight:600;opacity:.9}
+.plan .lead{font-size:19px;opacity:.85;margin:6px 0 18px}
+ul{list-style:none;display:grid;gap:11px}
+li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+li svg,.extra svg{width:26px;height:26px;margin-top:1px}
+li b{display:block;font-size:19px;font-weight:700;line-height:1.25}
+li small,.extra small{display:block;font-size:15px;line-height:1.35;opacity:.8;margin-top:2px}
+.extra{margin-top:18px;border:2px dashed rgba(255,255,255,.45);border-radius:14px;padding:14px 18px;display:grid;grid-template-columns:30px 1fr;gap:10px}
+.extra b{font-size:19px}
+.extra .pill{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.12em;background:#fff;color:var(--brand);border-radius:999px;padding:4px 10px;margin-left:8px;vertical-align:3px}
+.side{display:flex;flex-direction:column;gap:22px}
+.qr{border:2px solid var(--line);border-radius:22px;padding:24px;text-align:center;background:#fff}
+.qr img{width:290px;height:290px;display:block;margin:0 auto}
+.qr h3{font-size:26px;font-weight:800;margin-top:10px}
+.qr p{font-size:16px;color:var(--gray);margin-top:4px}
+.compare{background:var(--bg);border-radius:22px;padding:22px 24px}
+.compare h4{font-size:14px;letter-spacing:.14em;color:var(--brand);margin-bottom:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:15px;line-height:1.3;padding:9px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row .old{color:var(--gray)}
+.row .new{font-weight:700}
+.row.head{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--gray);padding-top:0}
+footer{padding:20px 64px 34px;font-size:15px;color:var(--gray)}
+@media print{html,body{width:816px;height:1056px;overflow:hidden}.poster{zoom:.64}}
+</style></head>
+<body><div class="poster">
+<header><img src="logo.png" alt="{{CLIENT}}"><div class="tag">MONTHLY WEBSITE PLAN</div></header>
+
+<section class="intro">
+  <h1>Your new website<br>is already built.</h1>
+  <!-- One line, two at most: what is on it, in the owner's terms. -->
+  <p>{{SUBTITLE}}</p>
+</section>
+
+<section class="visual">
+  <div class="band"></div>
+  <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="desk.png" alt=""></div>
+  <div class="phone"><img src="phone.png" alt=""></div>
+  <!-- A real count from the data file, e.g. ALL 15 HOMES / Each with its own page and full photo gallery -->
+  <div class="chip"><b>{{PROOF_LABEL}}</b>{{PROOF_LINE}}</div>
+</section>
+
+<main>
+  <section class="plan">
+    <div class="price"><strong>{{PRICE}}</strong><span>/ month</span></div>
+    <p class="lead">Everything below is included.</p>
+    <ul>
+      <!-- One <li> per included item: bold name + one plain line. 5 to 7 items fit. -->
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>{{ITEM}}</b><small>{{ITEM_LINE}}</small></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>{{ITEM}}</b><small>{{ITEM_LINE}}</small></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>{{ITEM}}</b><small>{{ITEM_LINE}}</small></div></li>
+    </ul>
+    <!-- Optional add-on the owner can choose. Delete the block if there is none. -->
+    <div class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><div><b>{{ADDON}}<span class="pill">INCLUDED IF YOU WANT IT</span></b><small>{{ADDON_LINE}}</small></div></div>
+  </section>
+
+  <aside class="side">
+    <div class="qr"><img src="qr.png" alt="QR code to the new {{CLIENT}} website"><h3>Scan to see it</h3><p>Open your camera and point it here</p></div>
+    <div class="compare">
+      <h4>WHAT CHANGES</h4>
+      <div class="row head"><div>YOUR SITE TODAY</div><div>YOUR NEW SITE</div></div>
+      <!-- Three rows. Check every "today" claim on their live site the day you make this. -->
+      <div class="row"><div class="old">{{TODAY}}</div><div class="new">{{NEW}}</div></div>
+      <div class="row"><div class="old">{{TODAY}}</div><div class="new">{{NEW}}</div></div>
+      <div class="row"><div class="old">{{TODAY}}</div><div class="new">{{NEW}}</div></div>
+    </div>
+  </aside>
+</main>
+
+<footer>Prepared for {{CLIENT}} · {{AREA}}</footer>
+</div></body></html>

@@ -109,8 +109,13 @@ otherwise) that records the site's business intent. Its signature
 artifacts are the **setup-list** (everything you need *from* the client) and
 the **architecture-plan** (the smallest stack that requirement actually needs:
 Astro, Cloudflare static or Worker, database none / Supabase / Convex, auth,
-R2 only for post-launch uploads). After SEO it runs once more to write
-`deliverables/client-handoff.md`. Ships with templates in
+R2 only for post-launch uploads). When a near-final pitch is live, it builds
+the **pitch kit** the seller hands the owner: a one-page plan poster with a
+logo QR to the live pitch, and a contract-questions sheet
+([`references/pitch-kit.md`](skills/client-web-delivery/references/pitch-kit.md)).
+After SEO it runs once more to write `deliverables/client-handoff.md`.
+Everything in `deliverables/` is gitignored in the client project, so prices
+and terms never reach the repo. Ships with templates in
 [`assets/`](skills/client-web-delivery/assets/).
 
 ### 2 · `clone-intake` — the gate in front of cloning

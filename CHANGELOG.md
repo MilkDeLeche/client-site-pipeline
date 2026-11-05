@@ -3,6 +3,18 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.12.0] — 2026-11-05
+
+A pitch kit, so a near-final pitch can be sold in one meeting. On a home-builder pitch the builder needed something the person doing the selling could put in front of the owner. A one-page plan poster with a QR to the live pitch, plus a contract-questions sheet, was what made it "easy to present to the client".
+
+- **New `client-web-delivery/references/pitch-kit.md`**, with a short "Pitch kit" section in the skill and a note in the orchestrator. It is not a step and does not replace the launch audit.
+  - **Plan poster** (`assets/pitch-poster-template.html`): the client's logo, "Your new website is already built.", a real photo of their work (upscaled, never generated) with desktop and phone screenshots of the live pitch, one proof chip from the data file, the price and what's included, opt-in add-ons in a separate box, a QR card, and a three-row "what changes" comparison, each "today" claim checked on the client's current site. No results promised (rankings, sales), no capability a vendor hasn't confirmed, no seller details unless asked. Includes the render commands (2550x3300 PNG, one-page letter PDF) and the screenshot recipe (storage state to hide the banner and popup; Pixel 7, because the iPhone devices fail with the Chrome channel).
+  - **QR** (`scripts/make_qr.py`): error correction H, logo at most 24% wide, brand color; it decodes the result at four sizes and exits 1 on any failure. Decode it on the rendered poster as well, then scan the print with a phone.
+  - **Contract-questions sheet** (`assets/contract-questions-template.md`): money, edits, canceling, ownership, what's not included, getting started, and the line for anything not on the sheet. Terms are the builder's. The agent drafts defaults only where the builder hasn't said, and lists each one as a suggestion to confirm. A buyout that hands over site files is promised only if the template license allows it.
+- **`deliverables/` is gitignored** in every client project (setup-list, pitch kit, handoff), so prices, terms and owner details never reach the repo. A tracked folder is ignored and untracked with `git rm -r --cached`. Sources of truth and the README updated.
+- **Copy bank:** `banned.md` §5 logs six lines cut in a builder-site wording pass: question hooks as service and feature titles, a "tradition of excellence" line, dream-home clichés, a pun headline, and "easier than you think".
+- **Unchanged:** the steps and their order, Phase A, the ban on invented facts, AI chat as an opt-in add-on, antislop and copywriting.
+
 ## [1.11.0] — 2026-11-04
 
 Putting the options in front of the owner, and the fixes a real handover turned up. On the same agency pitch the owner had turned down build after build, so the builder put the four finished designs on one page for him to choose from, and asked for one more pass to cut anything generic.

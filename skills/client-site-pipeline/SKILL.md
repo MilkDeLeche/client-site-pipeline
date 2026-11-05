@@ -46,6 +46,8 @@ It checks Node 18+, both companion packs, ffmpeg (motion contact sheets) and the
 
 Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype, demo or coming soon, and every form really captures what is submitted (signups to `/api/subscribe`, the primary inquiry form to `/api/inquiries`). Every site ships with: a signup popup + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, a privacy page that matches, and a second language (Spanish for RGV / Texas clients) on every page, form and popup. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Showcase deploys go to `*.workers.dev` first, with `noindex`. Removing `noindex` belongs to step 5, after the client buys and the real domain is on.
 
+**Pitch kit.** Once the pitch is live, `client-web-delivery` → “Pitch kit” builds what the seller hands the owner: a one-page plan poster with a logo QR to the live pitch, and a contract-questions sheet. It is saved in the project's gitignored `deliverables/` folder and goes to the client only when the builder says it's ready. It is not a step and does not replace the launch audit.
+
 ## What each later skill actually is
 
 **`launch-audit`** — ship / don’t-get-sued gate. Privacy policy on `/privacy` (what you collect including newsletter fields, cookie/analytics choice, AI use, font/analytics third parties), a signup that saves a row, a banner that gates analytics, real testimonials only, view-source not empty, custom 404, unique titles, OG image, schema, canonical, robots that allow AI crawlers, sitemap, alt text, no secrets in the build.
@@ -97,7 +99,8 @@ Step 0 is not done without a `creative-direction.md` (template: `brand-discovery
 | Why each section says what it says | `section-purpose-map.md` (Phase B) |
 | Proof that conversions work | `conversion-acceptance.md` (launch-audit) |
 | What actually shipped | the source and the production build |
-| What the client is told | `deliverables/client-handoff.md` |
+| What the owner is shown to buy (plan poster, QR, contract questions) | `deliverables/pitch/` (gitignored) |
+| What the client is told | `deliverables/client-handoff.md` (gitignored) |
 
 Do not invent a fact to fill the data file, and do not invent a service to fill the architecture plan. If a business answer would change the architecture and cannot be inferred, put that question on the setup-list in business language (“Should a booked time disappear for everyone else immediately?”), not as a vendor quiz (“Supabase or Convex?”).
 

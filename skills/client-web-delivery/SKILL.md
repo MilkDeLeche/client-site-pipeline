@@ -1,6 +1,6 @@
 ---
 name: client-web-delivery
-description: A safe, repeatable workflow for delivering a client website end-to-end — intake (starting from a PRD, or drafting one from a seed link to the client's current site), an architecture plan, build, the "what we need from the client" setup-list, the pre-launch gate, deploy, and a final client handoff. Use when starting or finishing a client website project, when the user asks "what do I need from the client", wants a client setup / onboarding list or handoff document, wants to choose hosting, database, auth, or storage, wants to hand a project off, or wants a professional / safe / repeatable workflow for shipping client sites. Produces a per-project setup-list (from assets/setup-list-template.md) and architecture-plan (from assets/architecture-plan-template.md) tailored to whatever external systems the site connects to (payments/POS, booking, CMS, email, maps, analytics, fonts, chat). Ties in the `launch-audit` skill (the pre-launch gate) and the `seo` skill (post-launch growth). Runs per-project.
+description: A safe, repeatable workflow for delivering a client website end-to-end — intake (starting from a PRD, or drafting one from a seed link to the client's current site), an architecture plan, build, the "what we need from the client" setup-list, the pre-launch gate, deploy, and a final client handoff. Use when starting or finishing a client website project, when the user asks "what do I need from the client", wants a client setup / onboarding list or handoff document, wants to choose hosting, database, auth, or storage, wants to hand a project off, wants a pitch kit to sell a near-final pitch (a plan poster with a working QR, a contract-questions sheet, a deliverables folder), or wants a professional / safe / repeatable workflow for shipping client sites. Produces a per-project setup-list (from assets/setup-list-template.md) and architecture-plan (from assets/architecture-plan-template.md) tailored to whatever external systems the site connects to (payments/POS, booking, CMS, email, maps, analytics, fonts, chat). Ties in the `launch-audit` skill (the pre-launch gate) and the `seo` skill (post-launch growth). Runs per-project.
 ---
 
 # Client Web Delivery
@@ -91,6 +91,14 @@ Pick the signup hook from what the business sells. Promise only what the client 
 
 Blog: not part of this standard yet. A client-editable blog needs an admin login and storage; decide it per client.
 
+## Pitch kit (near-final pitch, before the sale)
+
+When the pitch site is live and passes the standard above, build what the seller takes to the owner: a one-page **plan poster** (the price, what's included, a real photo of the client's work with screenshots of the live pitch, a "what changes" comparison checked on their current site, and a logo QR to the live pitch), plus a **contract-questions sheet** with one- or two-sentence answers on money, edits, canceling, ownership, what's not included and getting started. Method, render commands and checks: `references/pitch-kit.md`. Templates: `assets/pitch-poster-template.html`, `assets/contract-questions-template.md`. QR: `scripts/make_qr.py` (it fails unless the code decodes at every size).
+
+- Everything sent to the client by hand lives in the project's **`deliverables/` folder, which is gitignored** (setup-list, pitch kit, handoff). If it is already tracked, ignore it and `git rm -r --cached deliverables`. Tell the builder where it is; git does not back it up.
+- Prices, contract terms and what's included are the builder's. Draft defaults only where they haven't said, and list each one as a suggestion to confirm. Put no results on the poster (rankings, sales), and no capability a vendor hasn't confirmed.
+- Nothing goes to the client until the builder says it's ready.
+
 ## Stage 2 — Build
 
 Build the site. Keep every client-supplied fact in ONE data file so it's swappable. **Do not invent facts** (prices, reviews, credentials, results) — leave a clear placeholder and add the real item to the setup-list (in a near-final pitch, omit the fact or hide its section instead of showing a placeholder).
@@ -135,7 +143,7 @@ Hand off to the **`seo`** skill for Google Business Profile, keyword/content str
 
 ## Final handoff (after SEO)
 
-Run this skill again only to explain what shipped. Canonical file: `deliverables/client-handoff.md` (template: `assets/client-handoff-template.md`). Then `deliverables/client-handoff-visual-prompt.md` (template: `assets/client-handoff-visual-prompt-template.md`) so a presentation tool can make a booklet later. The Markdown file is the source of truth. A PDF is optional and is not a dependency of this skill.
+Run this skill again only to explain what shipped. Canonical file: `deliverables/client-handoff.md` (in the gitignored `deliverables/` folder) (template: `assets/client-handoff-template.md`). Then `deliverables/client-handoff-visual-prompt.md` (template: `assets/client-handoff-visual-prompt-template.md`) so a presentation tool can make a booklet later. The Markdown file is the source of truth. A PDF is optional and is not a dependency of this skill.
 
 Write only what production actually has: client data, `architecture-plan.md`, the build, real integrations, SEO output, verified brand assets. No invented features, rankings, certifications, backups, or testimonials. Omit empty sections. Explain each technology in one plain sentence (what it does for this client), and keep a short technical appendix for the developer.
 

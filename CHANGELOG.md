@@ -3,6 +3,21 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.14.0] — 2026-11-06
+
+A skill for motion-site prompt templates. The builder has many "recreate this page exactly" prompts for motion sites, each tied to one fictional brand's hosted assets, and had never used them for a client. On a building designer's design picker, one such prompt (five cut-out scenes for a Nordic cabin brand) was rebuilt with three of the client's houses. The builder asked for the method to be kept.
+
+- **New `motion-template` skill** (not a step). Written as general rules, because no two templates are the same: study how the template works, work out what assets it needs, produce the same kind of assets from the client's work, clone the template as given and check it against the template. The first job is kept only as a worked example.
+  - **Reading the template:** it reads the prompt and lists every asset and the motion spec, names the technique, and studies the template's art for style only.
+  - **Mapping and approval:** it maps each asset to a real client file, an AI image made from a client file, or code. It swaps the place and the copy (the client's published words first), puts a different client project in each scene, and hands the builder an asset plan with a credit quote before anything is generated.
+  - **References:**
+    - `references/techniques.md`: how to spot layered cut-out scenes, scroll-scrubbed frame sequences (one image-to-video clip from the cheapest suitable model, such as Kling 4.0 Flash, cut into frames with ffmpeg), video heroes, stills with effects, and shader or 3D, with the assets and models each needs and a prompt order that gets the flat style right the first time.
+    - `references/build-and-check.md`: the scene engine (transitions as pure functions of t that play backwards, `settle`, input, nav tone, return flow), the layout lessons (ground band, then trees, then the subject in front so it stands on its lawn; portrait sizing; per-scene contrast; parallax layers trimmed to their frames), copy rules, and the verification list.
+    - `assets/asset-plan-template.md`: the plan the builder approves.
+- **One generation per AI image** across the pipeline: `clone-workflow/references/image-prompts.md` no longer suggests two variants. The builder asks for a retake when one is wanted.
+- **Wired in:** `design-options-shelf.md` (a shelf built from a motion template), the orchestrator note, the README.
+- **Unchanged:** the steps and their order, Phase A, the ban on invented facts and on AI images in "this is our work" slots.
+
 ## [1.13.1] — 2026-11-05
 
 Copy-bank additions from a residential building-design pitch, and skill descriptions that fit claude.ai uploads.

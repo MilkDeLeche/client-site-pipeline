@@ -11,6 +11,7 @@ First used on an agency pitch: four finished designs on a shelf of VHS boxes, on
 - **Names the owner reads.** A plain name per option (Bold, Minimal, Noir, Editorial), the owner's own words for the direction ("Calm and spacious", from `creative-direction.md`), one line on what the site is like, and facts (fewest sections, quote form on the page, languages). Template product names and platform names mean nothing to the owner, so leave them out.
 - **Written to the owner.** They are the reader: "the businesses you've worked with", not "the owner asked for".
 - **Cover art can be AI.** It labels an option, not the client's work. Log it in the project's `image-prompts.md`, give each cover that design's palette and a scene from its own content, and check every output for real brand logos the model invented (one cover came out with a retailer's logo on a store wall).
+- **Built from a motion-site template.** When the builder supplies a motion-site prompt (scroll scenes, frame sequences) for the shelf, use `motion-template`: it names the technique, maps the template's assets to the client's work, and gets the asset plan and its credit cost approved before generating anything.
 
 ## How it behaves
 

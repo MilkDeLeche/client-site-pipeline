@@ -19,7 +19,7 @@ The image has to sit next to the client's real work without looking like a diffe
 5. **Camera and light:** lens, aperture, focus point, film grain, the color grade copied from the real footage.
 6. **Clean surfaces, said positively:** "every sign and surface is clean and unmarked, blurred into soft color" instead of "no text". No brand names, no logos, no readable UI, no recognizable faces.
 
-Pick the model with `krea-generate`'s shortlist: a precise subject that has to look real goes to a high-fidelity model, while mood and illustration can use a faster, cheaper one. Make two variants that differ in one idea (place, angle), not ten.
+Pick the model with `krea-generate`'s shortlist: a precise subject that has to look real goes to a high-fidelity model, while mood and illustration can use a faster, cheaper one. Generate each image **once** and use it: no variant rounds and no retakes on your own. Write the strongest prompt up front and fix small faults in code (crop, composite, white-out). A new generation happens only when the builder asks for one, after you've said what it costs. On one pitch, retake rounds burned about 1,500 credits, and the builder set this rule.
 
 ## 3. Check it like a photo editor
 

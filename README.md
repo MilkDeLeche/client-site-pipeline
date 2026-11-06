@@ -160,6 +160,16 @@ cited by AI assistants. Detailed references for
 [measurement](skills/seo/references/measurement.md), plus a
 [`google-index.js`](skills/seo/scripts/google-index.js) helper.
 
+### `motion-template`: motion-site prompts, rebuilt for the client
+
+Motion-site prompts are written for one fictional brand, with that brand's hosted images. [`motion-template`](skills/motion-template/SKILL.md) keeps the technique and swaps the rest:
+
+- **Technique:** it reads the prompt and names the technique ([techniques](skills/motion-template/references/techniques.md)): layered cut-out scenes, a video cut into scroll frames, a video hero, stills with effects, shaders.
+- **Asset plan:** it maps every asset to the client's own work and hands the builder an [asset plan](skills/motion-template/assets/asset-plan-template.md) with models and credit costs to approve.
+- **Build:** it generates each asset once, rebuilds the engine and checks it ([build and check](skills/motion-template/references/build-and-check.md)).
+
+It's used for the options shelf and for heroes, and it isn't a step.
+
 ### `copy-bank` — the hook library steps 0 and 3 write from
 Not a step. Copywriters rarely invent a strong line from nothing: they find
 how the buyer already talks, match the line to how aware the buyer is of the

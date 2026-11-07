@@ -3,6 +3,10 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.20.1] — 2026-11-07
+
+- **Social videos are opt-in** (builder: niche, not every client has TikTok). The orchestrator now has a "Finishing touches" step near the end of Phase B that asks the builder which extras the client wants: a logo loading animation, and the client's social videos. `client-web-delivery`'s social-video rules apply only after a yes.
+
 ## [1.20.0] — 2026-11-07
 
 - **`client-web-delivery`, social videos:** autoplay muted with the platform's own unmute (no sound a visitor didn't ask for). Start players one at a time, about 1.5 s apart, after simultaneous loads returned "Player error". Reload a stalled player once. Keep players only for the cards showing. Start loading them behind a home page's loading screen. This replaces the earlier tap-to-play rule.

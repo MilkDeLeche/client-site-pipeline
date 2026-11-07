@@ -91,7 +91,7 @@ Pick the signup hook from what the business sells. Promise only what the client 
 | Service trades (HVAC, plumbing, landscaping, cleaning) | “Seasonal tune-up reminders” — maintenance reminders, seasonal specials |
 | Events, venues | “Get the lineup” — upcoming events, presales |
 
-**The client's social videos** (TikTok, Reels, Shorts), when the PRD or the old site uses them:
+**The client's social videos** (TikTok, Reels, Shorts). **Optional, never by default.** Not every client posts video. Ask the builder during the finishing touches (see the orchestrator), and build it only when they say the client wants it. Then:
 - Take the video ids from the client's current site or their own links; never scrape a profile page past a captcha.
 - Show a local cover under every player. Use the platform's current player: TikTok's old `embed/v2` iframe and its profile (creator) embed show "overload-protect triggered", while its `player/v1` iframe plays.
 - **Autoplay muted, never with sound:** the platform's own volume button unmutes. Builders want the videos moving, and sound a visitor didn't ask for annoys clients.
@@ -99,7 +99,7 @@ Pick the signup hook from what the business sells. Promise only what the client 
 - On a home page with a loading screen, start loading the players behind it, so they're already playing when the visitor reaches them.
 - A muted background loop (in a menu or a hero frame) loads only while that element is open or on screen, and is removed when it closes. Reduced motion keeps the still cover.
 - Covers live in the repo, next to a short list of ids the client adds to. Auto-updating to their newest uploads needs the platform's official API with the client's authorization, so it goes on the setup-list for after the sale.
-- The privacy page names the platform and says it loads only when the visitor plays a video.
+- The privacy page names the platform and says when its player loads.
 
 Blog: not part of this standard yet. A client-editable blog needs an admin login and storage; decide it per client.
 

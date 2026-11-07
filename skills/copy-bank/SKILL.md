@@ -30,6 +30,8 @@ Copy `assets/language-bank-template.md` to the project as `language-bank.md`. Fi
 1. The client's own reviews, comments, DMs and FAQs; what customers say to the owner at the counter (ask).
 2. Reviews of competitors and of the category (Google, Yelp, Facebook).
 3. Threads where buyers talk among themselves (Reddit, Facebook groups, forums), in the site's languages. Spanish-speaking buyers write differently from translated English; search in Spanish too.
+   - **When second-language buyer threads are gated or thin** (common: local Spanish talk often lives in closed Facebook groups), collect the trade's everyday words in that language from what is open: local government pages in that language (permits, licenses), local classifieds and freelance listings, regional news, peer businesses on both sides of the border. Write them into `language-bank.md` §2b as a glossary: the word locals use, the textbook word it replaces, and where it was seen. Example from a building-design pitch: "render" (not "renderizado"), "sacar el permiso", "supervisión de obra", "el Valle", "platíquenos", "la primera consulta es gratis".
+   - Write second-language copy **from the meaning, not from the English sentence.** Drop, merge or change words when that's how a local would say it. Read every line aloud: if it sounds like a manual, a dubbed film or a dictionary, rewrite it. Short UI labels too ("(SCROLL DOWN)" → "(SIGA BAJANDO)", not "(DESLICE HACIA ABAJO)").
 4. Peer sites in the client's region. These feed §3, the avoid list, not the hooks.
 5. Industry surveys and studies. Research notes only: a number reaches the page only from a primary source, with its date.
 
@@ -97,7 +99,7 @@ Write these to the pipeline's source checkout (the folder that holds `install.sh
 - Writing the hero from the template's copy or from your own head, with an empty §2.
 - "Most used taglines for agencies" as the source. Those go into `banned.md`.
 - One perfect line handed to the owner. Give a shortlist with sources.
-- The Spanish line translated from the English one.
+- The Spanish line translated from the English one, including the labels, form fields and image descriptions. On one pitch a native speaker called a translated Spanish site "muy IA" and said it made no sense: dictionary words ("renderizado", "verificación de pagos"), English word order ("Eficaz, eficiente y detallado: así es…") and literal UI labels.
 - A buyer statistic from a blog on the page.
 - A famous brand's tagline with one word swapped.
 - A rejected line offered again to the same owner, or to the next client.

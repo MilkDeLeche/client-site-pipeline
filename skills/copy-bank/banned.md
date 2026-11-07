@@ -79,6 +79,7 @@ The line, the trade and region, the owner's reason in their words (or the reason
 | The post gets the look. → The page gets the call. / El post llama la atención. → La página recibe la llamada. | Creative agency, RGV TX | A clever-sounding split the owner couldn't parse; "they make no sense" | 2026-11 |
 | The shoot is the easy part. The quiet Tuesday is where the business disappears. | Creative agency, RGV TX | "So generic." Argues a point instead of saying what they get | 2026-11 |
 | Service cards written as stages ("the month after you open") | Creative agency, RGV TX | Owner wanted named services with what's included | 2026-11 |
+| "Eficaz, eficiente y detallado: así es el proceso creativo de LDG." / "Diseñadores profesionales de casas" / "Revisión de variaciones" / "Verificación de pagos" / "Cumplimiento del diseño" / "(DESLICE HACIA ABAJO)" / "renderizado 3D" | Building designer, RGV TX (Spanish site) | A native speaker: "no tiene sentido… es muy IA". Each was the English phrase put into Spanish word by word. Rewritten as "Con orden, rapidez y cuidado en cada detalle: así trabajamos en LDG.", "Diseñadores de casas a la medida", "Trámite de excepciones (variance)", "Revisión de cobros", "Que la obra siga el diseño", "(SIGA BAJANDO)", "render 3D" | 2026-11 |
 
 ## 5. Cut in a generic-wording pass
 

@@ -24,6 +24,24 @@ First filled 2026-11-05 for a Rio Grande Valley (Brownsville, TX) building-desig
 
 Spanish-language buyer words: none collected yet. Valley homebuilding talk happens in Facebook groups behind a login. Ask the owner how clients talk at the first meeting, in Spanish too.
 
+### Spanish trade glossary (RGV / northern Mexico, 2026-11-06)
+
+From open pages: a Reynosa municipal permit page, Spanish-language design and render studios, freelance listings for permit drawings. Use the left column.
+
+| Say | Instead of | Seen on |
+|---|---|---|
+| render, render 3D, recorrido virtual / recorrido en 3D | renderizado, visualización arquitectónica | design and render studio sites |
+| planos listos para el permiso; sacar el permiso; licencia de construcción | documentos de construcción, planos aptos para permisos | municipal permit page; freelance listings ("planos para permisos municipales") |
+| supervisión de obra; la obra; obra negra | administración de la construcción | municipal permit page; builder sites |
+| casa a la medida | casa personalizada, residencia a medida | builder and designer sites |
+| terreno (lote is also common) | parcela, sitio | everyday use |
+| la primera consulta es gratis | consulta de cortesía / complimentaria | rewritten from "complimentary consultation" |
+| Platíquenos su proyecto | Inicie un proyecto | everyday Mexican Spanish for "tell us" |
+| el Valle (todo el Valle) | el Valle del Río Grande (fine once, formal) | everyday local use |
+| trámite de excepciones (variance) | revisión de variaciones | keep the English term in parentheses: it's what the city calls it |
+
+Never "arquitecto" for a building designer: say diseñador / diseñadores de casas.
+
 ## What the themes say
 
 - The strongest theme is **being heard and guided**, not the look of the house. Reviews praise patience, comfort, answers to questions, being walked through a process they didn't understand.

@@ -3,6 +3,15 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.15.1] — 2026-11-06
+
+Spanish that reads as written, not translated. A native speaker reviewing the building-designer pitch said the Spanish "no tiene sentido… es muy IA": dictionary words, English word order and literal UI labels.
+
+- **`copy-bank` §2:** when second-language buyer threads are gated, build a glossary of the trade's everyday words in that language from open sources (local government pages, classifieds, freelance listings, regional peers) in `language-bank.md` §2b. Write from the meaning, not the English sentence, and read every line aloud, labels and form fields included.
+- **`copy-bank` anti-patterns, `banned.md` §4:** the rejected Spanish lines and what replaced them.
+- **`industries/home-design.md`:** a Spanish trade glossary for RGV home design.
+- **Unchanged:** the steps and their order, the hook method, the ban on invented facts.
+
 ## [1.15.0] — 2026-11-06
 
 Language and the pages every pitch needs. On the building-designer pitch the designs had gone up in English only, without a privacy page or a 404. The builder asked for Spanish on every page, served automatically by the visitor's system language with no button. A native Spanish speaker on the builder's side flagged missing accents and word-for-word translations as the thing that makes Spanish copy cringe.

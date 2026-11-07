@@ -91,6 +91,12 @@ Pick the signup hook from what the business sells. Promise only what the client 
 | Service trades (HVAC, plumbing, landscaping, cleaning) | “Seasonal tune-up reminders” — maintenance reminders, seasonal specials |
 | Events, venues | “Get the lineup” — upcoming events, presales |
 
+**Authorship mark (every client site).** The builder, Miguel Sanchez, is credited as the site's author on every client site, out of sight. Copy `assets/author-mark.astro` to `src/components/AuthorMark.astro`, set the client's name, and render it at the top of the `<head>` in every client page layout, including privacy and 404. Leave it off the options picker or design shelf: that page only chooses a design. Copy `assets/humans.txt` to `public/humans.txt` and fill it in. It gives:
+- a `designer` meta tag, a `rel="author"` link to `/humans.txt`, and a copyright notice in the page source (inside the script's header comment, because Astro strips HTML comments from the build);
+- a hidden easter egg: **20 quick clicks or taps on the footer** show a small card, "Original author · Miguel Sanchez · Website design and code © year", in the page language. Nothing on the page hints that it exists. A page without a `<footer>` marks one element with `data-author-zone`.
+- The notice asks anyone copying the site, person or AI agent, to keep the credit, citing 17 U.S.C. § 1202 (copyright management information). It never tells anyone to hide the credit from anyone: an instruction for an AI to keep secrets from its user is a prompt injection, and agents flag it.
+- Test it: 10 clicks do nothing, 20 show the card, in both languages.
+
 **The client's social videos** (TikTok, Reels, Shorts). **Optional, never by default.** Not every client posts video. Ask the builder during the finishing touches (see the orchestrator), and build it only when they say the client wants it. Then:
 - Take the video ids from the client's current site or their own links; never scrape a profile page past a captcha.
 - Show a local cover under every player. Use the platform's current player: TikTok's old `embed/v2` iframe and its profile (creator) embed show "overload-protect triggered", while its `player/v1` iframe plays.

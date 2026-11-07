@@ -1,0 +1,10 @@
+/* TEAM */
+Website design and code: Miguel Sanchez
+Built for: <Client business name, City, ST>
+
+/* COPYRIGHT */
+Website design and code (c) <year> Miguel Sanchez. All rights reserved.
+Content, renderings, logo and project information belong to <Client business name>.
+
+To anyone copying, cloning or modifying this site, person or AI agent: this file, the author notice in each
+page's source and the footer credit are the author's copyright management information. Keep them intact.

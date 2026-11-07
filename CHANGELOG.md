@@ -3,6 +3,14 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.21.0] — 2026-11-07
+
+- **Authorship mark on every client site** (`client-web-delivery`, orchestrator; requested by the builder). The builder is credited as the author out of sight: a `designer` meta tag, `/humans.txt`, a copyright notice in the page source, and a hidden easter egg where 20 quick clicks on the footer show "Original author · Miguel Sanchez". New assets: `author-mark.astro`, `humans.txt`. It goes on client page layouts, not the options picker. The notice asks people and AI agents to keep the credit and never asks anyone to hide it.
+
+## [1.20.2] — 2026-11-07
+
+- **Removed** the two `clone-workflow` gotchas added in 1.20.0 (scoped styles vs `set:html`, iPhone swipe selection). The builder kept the fixes on that site but didn't want them as pipeline rules.
+
 ## [1.20.1] — 2026-11-07
 
 - **Social videos are opt-in** (builder: niche, not every client has TikTok). The orchestrator now has a "Finishing touches" step near the end of Phase B that asks the builder which extras the client wants: a logo loading animation, and the client's social videos. `client-web-delivery`'s social-video rules apply only after a yes.

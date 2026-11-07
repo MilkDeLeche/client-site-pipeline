@@ -92,6 +92,7 @@ Write these to the pipeline's source checkout (the folder that holds `install.sh
 | 0, `brand-discovery` homework | Start `language-bank.md` §1–4: buyer situations, buyer words, the competitor avoid list, the owner's own words |
 | 3, Phase B copywriter | Write §5 candidates from the patterns, filter, put the shortlist in the rebrand plan; the hook bank in `section-purpose-map.md` points to the picks |
 | After the owner picks | §7 logging; the hero is built from the picked lines only |
+| Pitch kit poster (`client-web-delivery` → `references/pitch-kit.md`) | §2 research on the owner buying a website plan (Reddit, forums, reviews) and on how their buyers choose; every poster line traced to an opened quote in `deliverables/pitch/poster-language.md`; new owner words logged in the trade file |
 | Client feedback on copy ("it's generic", "makes no sense") | Log the rejected lines with the reason, go back to §2 for more buyer words, then §4 |
 
 ## Anti-patterns

@@ -157,6 +157,27 @@ if (chromeFound()) {
 }
 pythonKit(py, 'Pitch kit (QR, shots, render)', pitchRequirements, 'qrcode, PIL, cv2, numpy, playwright, pypdf', 'the pitch kit can\'t make its QR or pages');
 
+// 6. Responsive audit (clone-workflow → references/responsive-audit.md): Playwright's Chromium and WebKit
+// (Safari's engine) browsers. The Python playwright package itself comes with the pitch kit above.
+if (py) {
+  const withPw = [py, [venvPython, []]].find(([c, pre]) => (c === venvPython ? existsSync(venvPython) : true) && run(c, [...pre, '-c', 'import playwright']).ok);
+  const probe = 'from playwright.sync_api import sync_playwright\nwith sync_playwright() as p:\n    [b.launch().close() for b in (p.chromium, p.webkit)]';
+  const launches = () => withPw && run(withPw[0], [...withPw[1], '-c', probe]).ok;
+  if (!withPw) {
+    report('Responsive audit browsers', false, 'needs the pitch kit\'s playwright package first', false);
+  } else if (launches()) {
+    report('Responsive audit browsers', true, 'Chromium + WebKit ready', false);
+  } else if (CHECK_ONLY) {
+    report('Responsive audit browsers', false, `missing: ${[withPw[0], ...withPw[1]].join(' ')} -m playwright install chromium webkit`, false);
+  } else {
+    console.log('  installing Playwright Chromium + WebKit...');
+    const ok = run(withPw[0], [...withPw[1], '-m', 'playwright', 'install', 'chromium', 'webkit'], { quiet: false }).ok && launches();
+    report('Responsive audit browsers', ok, ok ? 'Chromium + WebKit installed now' : 'install failed; the responsive audit can\'t test Safari', false);
+  }
+} else {
+  report('Responsive audit browsers', false, 'Python not found; the responsive audit can\'t run', false);
+}
+
 // Summary
 console.log('\nClient Site Pipeline setup');
 for (const r of results) {

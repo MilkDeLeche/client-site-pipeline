@@ -242,6 +242,19 @@ clone's look conflicts with the approved direction, raise it as a `CONFLICT`
 in the rebrand plan (a better template, or an approved controlled change),
 never as a silent restyle.
 
+### 5b. Responsive and cross-browser audit (end of Phase B)
+
+Before the Delivery Gate, on the production build: every page at 320, 360,
+390, 768, 1024 and 1440 in Chromium and in **WebKit (Safari's engine)**, the
+second language at the phone widths, with `scripts/responsive_audit.py`. It
+scrolls like a person (smooth-scroll libraries undo `scrollTo`), then flags
+pages wider than the screen (and names the culprit), blank bands it confirms
+with a screenshot, and the site's own errors. Diagnose each one (Phase A copy
+first: ours or the port?), fix it at its cause, scoped to its breakpoint, and
+re-run the whole matrix. Method, causes seen so far and the done-when:
+`references/responsive-audit.md`. Re-run it after Phase C and whenever the
+builder reports something on a phone.
+
 ### 6. Connect functionality — Phase C
 
 Starts only after Phase B. Read `architecture-plan.md` and implement **only** what it selected: database, auth, R2, booking, API routes, admin, CMS, forms, integrations. If the plan says `none`, do not add that system.

@@ -3,6 +3,15 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.23.0] — 2026-11-07
+
+Builder-requested, after a building-designer pitch where a full pass found blank bands and sideways scrolling that a look on one phone had missed.
+
+- **Responsive and cross-browser audit, end of Phase B** (`clone-workflow` step 5b, `references/responsive-audit.md`, `scripts/responsive_audit.py`). Every page at 320, 360, 390, 768, 1024 and 1440 in Chromium and WebKit (Safari's engine), the second language at phone widths, on the production build. The script scrolls like a person (smooth-scroll libraries undo `scrollTo`), then reports pages wider than the screen with the culprit found by bisecting the DOM, blank bands confirmed by a screenshot (effective opacity, the page's own background ignored), and the site's own errors apart from third-party ones. The reference has the diagnosis order (screenshot, name the element, Phase A copy: ours or the port?, the rule and its media query), the causes seen so far with their fixes, and the fix rules. It runs before antislop's Delivery Gate, again after Phase C, and on any phone report. The setup now installs Playwright's Chromium and WebKit and reports `Responsive audit browsers`.
+- **Pitch kit poster copy comes from `copy-bank` research.** Every poster line (plan items, headline, cards, value bar) is written from owners' and buyers' own words, opened and linked in `deliverables/pitch/poster-language.md`, never from the kit's examples. The page 2 template's generic headline and value line are now placeholders. New "Poster copy: research first" section: where to look (Reddit through a mirror when blocked, forums, the client's reviews), open every thread, trace each line, send any promise a line creates to the builder and the contract sheet. Opened quotes logged in `copy-bank/industries/creative-agency.md` and `home-design.md`; the rejected generic lines in `banned.md`.
+- **The poster PDF is built from the rendered PNGs** (`render_pages.py`). Chrome's print-to-PDF draws shadows, blurs and rounded cards as image tiles that phone PDF viewers show as squares and broken shadows. `--vector` keeps Chrome's print for pages without them. The QR check ignores a trailing slash.
+- **Social videos on phones use vertical 9:16 frames** (`client-web-delivery`, opt-in section).
+
 ## [1.22.1] — 2026-11-07
 
 - **No AI attribution in commits or PRs** (builder): no `Co-Authored-By:` line for an AI and no "Generated with …" line, in client repos or this one. The rule is in the orchestrator's agent rule, the client `CLAUDE.md` template, and this repo's own `CLAUDE.md`.

@@ -13,6 +13,7 @@ deliverables/
   setup-list.md                    the asks (step 1)
   pitch/
     <client>-plan.pdf              both poster pages, letter
+    poster-language.md             the owners' words behind every poster line, with links (copy-bank)
     <client>-plan-page1.png        2550x3300, letter at 300 dpi
     <client>-plan-page2.png
     <client>-qr.png                the QR alone, for cards and stickers
@@ -30,7 +31,7 @@ deliverables/
 | --- | --- |
 | `scripts/shots.py` | Screenshots of the live pitch: a desktop page, one section by CSS selector (fixed and sticky bars hidden), a phone page (Pixel 7) |
 | `scripts/make_qr.py` | The logo QR, decoded at four sizes; exits 1 if any fail |
-| `scripts/render_pages.py` | Each page to a 2550x3300 PNG and a one-page PDF, merged; checks one sheet per page and, with `--qr`, the QR on every page |
+| `scripts/render_pages.py` | Each page to a 2550x3300 PNG, and one PDF built from those PNGs (it looks the same on every phone); checks one sheet per page and, with `--qr`, the QR on every page |
 
 In Git Bash, set `MSYS_NO_PATHCONV=1` before passing site paths like `/=desk`, or Bash rewrites them into Windows paths.
 
@@ -66,6 +67,7 @@ Rules:
 - A feature that depends on a client account or setup (auto-replies, alerts by email, review requests) is described as what it does once set up, and its setup goes on the setup-list.
 - Don't claim a capability the chosen vendor hasn't confirmed (for example, an AI chat answering in the second language).
 - Use the site's own fonts, brand color and logo, so the poster reads as the same brand as the site.
+- **Every line on both pages comes from research, never from a list.** Plan items, the headline, the cards and the value bar are written from what owners actually say (see "Poster copy: research first" below). The item *names* and examples in this file say what the plan includes; they are not the wording. On the first kits, lines written from them ("Most websites get built once, then forgotten", "One competitive monthly price", "Secure and private") read as generic and AI-written to the builder.
 - The poster goes through the same copy filter as the site (`copywriting` + `antislop-copywriting`): plain words, no hype, no em-dash pile-ups.
 
 ### Page 2: why it's worth it
@@ -75,9 +77,9 @@ Template: `assets/pitch-poster-page2-template.html`. Page 1 lists what's include
 Top to bottom:
 
 1. **Header:** same logo, with the label `WHAT YOU GET EVERY MONTH`.
-2. **Headline: the problem.** Sites that get built once and then left alone fall behind the competitors who keep posting. "Most websites get built once, then forgotten." The line under it says the plan keeps their site working every month, so it keeps up with the businesses around them.
+2. **Headline: the problem, in the words the research turned up.** A problem the owner hasn't put into words yet, said the way owners or their buyers say it, with the payoff in the line under it. Example from a building-designer kit: homeowners on r/Architects said they look for architects "who have work on their websites already", so the headline became "Before they call, they look at your work." and the line under it: a builder or a friend gives them your name, they look you up, and your newest homes go up every month. (An earlier generic version, "Most websites get built once, then forgotten.", was rejected as AI-sounding.)
 3. **Visual band:** two sections of the live pitch that aren't the hero shown on page 1. Pick the ones that prove the plan: the gallery or work section (new work keeps going up) on desktop, and the primary form with its call/text bar on a phone (requests come straight to them). Next to them is **one stat card**: a short hook ("Instagram isn't a search engine."), one number, a sentence on what it means, and the source with its year and sample size.
-4. **Six to eight service cards.** Each card gives the service name a buyer understands and one or two lines on what it does for them. The standard set:
+4. **Six to eight service cards.** Each card gives the service name a buyer understands and one or two lines on what it does for them, written from the research (each card answers a worry or a want an owner wrote down). What the standard set covers (the wording is the research's, not this list's):
    - Found on Google and AI search (SEO + GEO). Social posts don't show up when someone asks Google or ChatGPT for a business nearby; a website set up with the right facts does.
    - Updates every month: new work, listings, photos, prices. The site keeps pace with competitors instead of going stale.
    - Email marketing to the signup list (the newsletter or alerts).
@@ -86,15 +88,29 @@ Top to bottom:
    - A monthly growth report: visits, where people found them, how many asked.
    - Every request, right away: phone and inbox alerts with the person's name and number.
    - **Optional:** an AI chat card, only when the builder offers chat to this client. Not every client gets one.
-5. **Value bar:** "One competitive monthly price." Then the bills it replaces ("No separate bills for hosting, search setup, email marketing and edits."), the price, and the QR again.
+5. **Value bar:** one line on the price, answering the worry the research found about paying for a website, then what the price covers, the price, and the QR again. Example: an owner wrote "I know the feeling of paying for something you don't understand", so the bar said "One price, and you know what it covers." and listed what's in it.
 6. **Footer:** same as page 1, with `Page 2 of 2` (page 1 says `Page 1 of 2`).
 
 Writing it:
-- **Research first, the `copy-bank` way.** Look for what owners in this trade say about websites, social media and web designers (forums, Reddit, trade press) and log the useful words in the trade file. On the first kit, what came up was fear of a designer who disappears, sites left un-updated for years, and "Facebook is enough". The headline answers the second; the cards answer the rest.
+- **Research first, the `copy-bank` way** (next section). No poster line is written before it.
 - **The stat comes from a primary source you opened**, not a search snippet or a blog repeating it. Print the source, year and sample on the card. Check it again before each new kit, since these numbers move quickly. The first kit used BrightLocal's Local Consumer Review Survey 2026: 45% of US consumers used AI tools for local business recommendations, up from 6% in 2025 (1,002 US adults; [source](https://www.brightlocal.com/research/lcrs-ai-trust/), checked 2026-11-05).
-- **"Competitive" stays general.** Don't compare against named competitors or prices you haven't checked. The value line names the separate bills the plan replaces.
+- **No price comparisons you haven't checked.** Don't compare against named competitors or prices. "Competitive" on its own is a filler word; say what the price covers instead.
 - Every card is something the builder delivers at this price, written as what it does once set up (an alert needs the client's inbox, a report needs analytics on). The rules for page 1 apply here too: no results promised, no unconfirmed vendor capability.
 - Copy through `copywriting` + `antislop-copywriting`. Look at the render for one-word last lines in the cards and rewrite them rather than shrinking the type.
+
+### Poster copy: research first (`copy-bank`)
+
+Load `copy-bank` and run its §2 research for the poster's reader: the owner deciding on a monthly website plan. Two sides:
+
+- **Owners talking about websites and web designers:** paying monthly and not knowing for what, a designer who stops answering, not owning the domain or the logins, a site nobody sees, never getting reviews, no time to update it. Reddit first (r/smallbusiness, r/webhosting, r/webdesign, r/EntrepreneurRideAlong, the trade's own subreddit), then forums and trade press. When reddit.com blocks the fetcher, read the thread through a public mirror and mark it secondary. Search the mirror's domain with `site:` to find threads.
+- **The owner's buyers choosing a business like theirs:** how they find one and what they check before calling (on one kit: homeowners checking an architect's website for past work), in the trade's subreddit and in the client's own reviews.
+
+Then:
+- **Open every thread you quote.** Search summaries paraphrase. Write each quote verbatim, under 15 words, with the link, who said it (owner, buyer, or a seller describing clients: weigh the last) and the date read.
+- **Write `deliverables/pitch/poster-language.md`:** the quotes by theme, then a table of every poster line: the line, the quote or fact it comes from, and the filter result (counter, swap, payoff, truth, banned). A line with no source is cut, or labeled a guess for the builder.
+- **Promises go to the builder.** A line built from a worry can turn into a contract term ("the domain and logins stay in your name"). List each one for the builder to confirm, and put it on the contract-questions sheet too.
+- **Log new owner words** in the trade file (`copy-bank/industries/`), per copy-bank §7. Ask the builder before writing to the pipeline.
+- After the render, look for one-word last lines and rewrite the line; never shrink the type.
 
 ### Screenshots of the live pitch
 
@@ -112,7 +128,7 @@ A section shot hides fixed and sticky bars so the header doesn't cover it, and s
 python scripts/render_pages.py ../<client>-plan.pdf poster.html page2.html --qr <live pitch url>
 ```
 
-Each page is 1275x1650 CSS px. The script renders it at scale 2 to a 2550x3300 PNG (letter at 300 dpi) and prints it to a one-page PDF (the templates' print rule zooms to .64). It merges the pages and fails if a page runs to a second sheet or a QR doesn't decode. Then look at both PNGs: text covered by a mockup, a one-word last line, or a section squeezed because the page overflowed (keep `flex-shrink: 0` on fixed-height bands) are the usual faults. Copy the PNGs up to `deliverables/pitch/` with their final names.
+Each page is 1275x1650 CSS px. The script renders it at scale 2 to a 2550x3300 PNG (letter at 300 dpi), and builds the PDF from those PNGs, one letter page each, so the PDF looks exactly like the PNG. Chrome's own print-to-PDF draws soft shadows, blurs and rounded cards as many small image tiles, and phone PDF viewers (iOS Files and Preview, several Android viewers) showed them as "buggy squares" and broken shadows on the first kits. Chrome still prints each page once, as the overflow check (the templates' print rule zooms to .64). `--vector` merges that print instead, for a page with no shadows or blurs when selectable text matters. It fails if a page runs to a second sheet or a QR doesn't decode (a trailing slash doesn't count). Open the PDF on a phone once before it goes out. Then look at both PNGs: text covered by a mockup, a one-word last line, or a section squeezed because the page overflowed (keep `flex-shrink: 0` on fixed-height bands) are the usual faults. Copy the PNGs up to `deliverables/pitch/` with their final names.
 
 ## 2. The QR code
 
@@ -142,7 +158,8 @@ Template: `assets/contract-questions-template.md`. Plain questions an owner asks
 - [ ] The pipeline setup reports Google Chrome and the pitch kit `ok`
 - [ ] `deliverables/` exists and is in `.gitignore` (and untracked if it was tracked)
 - [ ] The live pitch shows the latest copy, and the pages above load
-- [ ] Both poster pages as PNGs (2550x3300) and one two-page PDF, every claim checked against the data file and the current site, the page 2 stat opened at its source and cited
+- [ ] Both poster pages as PNGs (2550x3300) and one two-page PDF built from them, opened on a phone; every claim checked against the data file and the current site, the page 2 stat opened at its source and cited
+- [ ] `poster-language.md` traces every poster line to an opened quote or a fact; the promises it created are listed for the builder
 - [ ] The QR decodes at every size and on the rendered poster, and points at the live pitch
 - [ ] Contract-questions PDF, with the defaults the agent chose listed for the builder to confirm
 - [ ] The builder is told where the folder is, and that nothing goes to the client until they say it's ready

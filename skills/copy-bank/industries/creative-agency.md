@@ -72,4 +72,23 @@ Same buyer, deciding whether a monthly website plan is worth paying for. Written
 
 Proof that held up when opened: BrightLocal, Local Consumer Review Survey 2026. 45% of US consumers used AI tools for local business recommendations, up from 6% in 2025 (1,002 US adults, published 2026-03-10; [source](https://www.brightlocal.com/research/lcrs-ai-trust/), opened 2026-11-05). Used on the first kit's stat card under "Instagram isn't a search engine."
 
-Answers on the kit: the headline ("Most websites get built once, then forgotten.") answers the stale-site worry, the ownership answers on the contract sheet answer the disappearing designer, and the "one competitive monthly price" bar answers whether the fee is fair.
+Answers on the first kit: the headline ("Most websites get built once, then forgotten.") answered the stale-site worry, and the "one competitive monthly price" bar answered whether the fee was fair. On the second kit the builder called those lines generic and AI-sounding (`banned.md` §5), and the poster was rewritten from the opened quotes below.
+
+### Opened quotes (pitch kit research, 2026-11-07)
+
+Read through the `reddit.sentinel-team.org` mirror (reddit.com blocks the fetcher), so secondary: open the original before printing a line as a quote. On the poster they shape the wording.
+
+| Theme | Quote | Who | Source |
+|---|---|---|---|
+| Paying for what they don't understand | "I know the feeling of paying for something you don't understand" | commenter, r/webhosting | [thread](https://reddit.sentinel-team.org/posts/1r159w1/snapshots/2026-02-11T03%3A31%3A15.851336Z) |
+| A site nobody uses | "almost nobody uses our website it's just there as a legacy thing" | owner paying $100/mo | same |
+| Not in control | "the login was through the marketing agencies website." / "a basic low traffic site you don't control" | owner / commenter | same |
+| Not owning it | "You may not even actually have ownership of your website." | commenter, r/webhosting | [thread](https://reddit.sentinel-team.org/posts/1qeewwq/snapshots/2026-01-20T05%3A40%3A49.552135Z) |
+| Designer goes quiet | "may 'steal' the site or just not respond to requests" | charity staffer, same thread | same |
+| Not found | "I don't think people see it" | small health-care owner, r/webdesign | [thread](https://reddit.sentinel-team.org/posts/1rrya7r/snapshots/2026-03-13T11%3A43%3A31.775997Z) |
+| Reviews: said, not posted | "Customers will tell us in person that they loved the service" / "almost nobody does it." | owner, r/EntrepreneurRideAlong | [thread](https://reddit.sentinel-team.org/posts/1rq57dr/snapshots/2026-03-11T01%3A23%3A07.053576Z) |
+| Reviews: afraid to nag | "I don't want to annoy customers by constantly asking" | same owner | same |
+| Reviews: what worked | "we started asking for reviews right after delivery" / "made the ask super simple, one-click" | commenter | same |
+| Edits done for them | "they like that they don't have to do the edits themselves" | web developer describing his clients, r/webdev (seller side, weigh it) | [thread](https://reddit.sentinel-team.org/posts/1pkbbzv/snapshots/2025-12-12T16%3A30%3A21.305655Z) |
+
+What they became on the second kit: "One price, and you know what it covers." (paying for what they don't understand); "The site is yours: the domain, the logins and every request stay in your name" (not owning it; a contract term the builder confirms); "Reviews right after delivery: clients tell you in person they love the work, then forget to post" (reviews); "Edits every month: text or email the change" (edits done for them).

@@ -1,14 +1,21 @@
 """Render pitch-kit pages to print files and check them (references/pitch-kit.md).
 
-    python render_pages.py <out.pdf> <page1.html> [page2.html] [--qr <url>]
+    python render_pages.py <out.pdf> <page1.html> [page2.html] [--qr <url>] [--vector]
 
-For each page: a 2550x3300 PNG next to the HTML (letter at 300 dpi) and a
-one-page letter PDF. Then all pages are merged into <out.pdf>. It fails if
-a page prints to more than one sheet, or, with --qr, if any page's QR code
-doesn't decode to that URL. Pages beyond two are refused: one page is good,
-two is the most an owner reads.
+For each page: a 2550x3300 PNG next to the HTML (letter at 300 dpi). The
+merged <out.pdf> is built from those PNGs, one letter page each, so the PDF
+looks exactly like the PNG on every viewer. Chrome's own print-to-PDF draws
+soft shadows, blurs and rounded cards as many small image tiles, and phone
+PDF viewers (iOS Files/Preview, several Android viewers) show them as
+"buggy squares" and broken shadows. --vector merges Chrome's print instead
+(selectable text, smaller file) for when the page has no shadows or blurs.
 
-Uses the installed Google Chrome. Needs: pip install pypdf opencv-python-headless
+Chrome still prints each page once, as the overflow check: it fails if a page
+prints to more than one sheet. With --qr, it fails if any page's QR code
+doesn't decode to that URL (a trailing slash doesn't count as a difference).
+Pages beyond two are refused: one page is good, two is the most an owner reads.
+
+Uses the installed Google Chrome. Needs: pip install pypdf opencv-python-headless pillow
 """
 import argparse
 import os
@@ -19,6 +26,7 @@ from pathlib import Path
 
 import cv2
 import pypdf
+from PIL import Image
 
 CANDIDATES = [
     r"C:\Program Files\Google\Chrome\Application\chrome.exe",
@@ -44,16 +52,21 @@ def chrome(exe, *args):
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
+def same_url(a, b):
+    return (a or "").rstrip("/") == (b or "").rstrip("/")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("out")
     ap.add_argument("pages", nargs="+")
     ap.add_argument("--qr", help="URL every page's QR code must decode to")
+    ap.add_argument("--vector", action="store_true", help="merge Chrome's vector print instead of the PNGs")
     a = ap.parse_args()
     if len(a.pages) > 2:
         sys.exit("Two pages at most.")
     exe = find_chrome()
-    writer = pypdf.PdfWriter()
+    pngs, pdfs = [], []
     ok = True
     for html in map(Path, a.pages):
         html = html.resolve()
@@ -67,13 +80,24 @@ def main():
         ok &= sheets == 1
         if a.qr:
             data, _, _ = cv2.QRCodeDetector().detectAndDecode(cv2.imread(str(png)))
-            good = data == a.qr
+            good = same_url(data, a.qr)
             ok &= good
             line += ", QR " + ("OK" if good else f"FAIL ({data or 'not found'})")
         print(line)
-        writer.append(str(pdf))
-    writer.write(a.out)
-    print("merged", len(a.pages), "page(s) ->", a.out)
+        pngs.append(png)
+        pdfs.append(pdf)
+    if a.vector:
+        writer = pypdf.PdfWriter()
+        for pdf in pdfs:
+            writer.append(str(pdf))
+        writer.write(a.out)
+        kind = "vector (Chrome print)"
+    else:
+        # 2550x3300 at 300 dpi = exactly 8.5x11 in. High JPEG quality keeps the QR and small type crisp.
+        imgs = [Image.open(p).convert("RGB") for p in pngs]
+        imgs[0].save(a.out, "PDF", resolution=300, quality=92, save_all=True, append_images=imgs[1:])
+        kind = "from the PNGs (looks the same on every viewer)"
+    print("merged", len(a.pages), "page(s) ->", a.out, kind)
     sys.exit(0 if ok else 1)
 
 

@@ -21,6 +21,9 @@ First filled 2026-11-05 for a Rio Grande Valley (Brownsville, TX) building-desig
 | Builder habits | "It's what builders are used to building" | same | primary |
 | Cost fear | "I had always assumed it was a cost issue" | same | primary |
 | Stock plans almost fit | "80-90% solutions, but not exactly what we want" | a Houzz thread, via search summary, 2026-11-05 | secondary: open before quoting |
+| They check the portfolio first | "I would be searching for architects who have work on their websites already" | r/Architects, ["Question re: communicating with Architects"](https://reddit.sentinel-team.org/posts/1se6hg0/snapshots/2026-04-07T07%3A48%3A24.083747Z) (mirror), read 2026-11-07 | secondary (mirror) |
+| A referral, then the website | "I reached out to a local architect through a recommendation" / "They didn't have much as far as examples of their work on their website" | same thread, a homeowner planning an ADU | secondary (mirror) |
+| Portfolios go stale | "I find architects are kind of bad at maintaining their portfolio" | same thread, a commenter | secondary (mirror) |
 
 Spanish-language buyer words: none collected yet. Valley homebuilding talk happens in Facebook groups behind a login. Ask the owner how clients talk at the first meeting, in Spanish too.
 

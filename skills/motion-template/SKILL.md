@@ -1,6 +1,6 @@
 ---
 name: motion-template
-description: Turn a motion-site prompt template (a long "recreate this page exactly" prompt with hosted asset URLs, layers, timings and fonts, such as a scroll-scene or frame-sequence site) into a site for a different client, with the client's own work as the art. Studies how the template works, works out what assets it needs, maps each asset to the client, and hands the builder an asset plan with models and credit costs to approve before anything is generated. Then generates each asset once, clones the template as given with the client's art and copy, and checks it against the template. Use when the builder pastes a motion-site prompt or template, says "recreate this for <client>", "use this style for the design picker", "make the hero like this site", or wants the options shelf built as a motion site. Not a pipeline step: used inside Phase B (the options shelf, a hero) after the facts and copy exist.
+description: Turn a motion-site prompt template (a long "recreate this page exactly" prompt with hosted asset URLs, layers, timings and fonts, such as a scroll-scene or frame-sequence site) into a site for a different client, with the client's own work as the art. Studies how the template works, works out what assets it needs, maps each asset to the client, and hands the builder an asset plan with models and credit costs to approve before anything is generated. Then generates each asset once, clones the template as given with the client's art and copy, and checks it against the template. Use when the builder pastes a motion-site prompt or template, says "recreate this for <client>", "use this style for the design picker", "make the hero like this site", or wants the options shelf built as a motion site. Also makes the logo loading animation for each design (a short generated clip that builds the logo, reversed so it ends on the real file), when the builder asks for a loader, a "Lottie-like" or motion-graphics logo, or a loading screen. Not a pipeline step: used inside Phase B (the options shelf, a hero) after the facts and copy exist.
 ---
 
 # Motion template
@@ -59,5 +59,6 @@ The template is the spec. Where it gives a value (a layer order, a timing, a pos
 | File | Use |
 |---|---|
 | `references/techniques.md` | Techniques seen so far: how to recognize them, what assets they need, which models make them. A starting point, not a full list |
+| `references/logo-loader.md` | The logo loading animation: the look per design, the reversed-clip trick, encoding, page code, checks |
 | `references/build-and-check.md` | General build rules, the verification list, and a worked example from the first job |
 | `assets/asset-plan-template.md` | The plan the builder approves before any credits are spent |

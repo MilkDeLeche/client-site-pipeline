@@ -3,6 +3,11 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.18.0] — 2026-11-07
+
+- **Logo loading animation workflow** (`motion-template/references/logo-loader.md`): pick a loader idea per design look, build the start frame from the real logo, prompt the mark coming apart and reverse the clip, encode, page code, checks. The orchestrator and `motion-template`'s description now point to it, so it's found when a builder asks for a loader.
+- **One generation per image or video, pipeline-wide** (orchestrator). The rule was already in `motion-template` and the image-prompt reference; it now covers every generated asset. Preflight the cost, submit once, fix small faults in code, and make a second generation only when the builder asks. It keeps credit spending low without lowering quality.
+
 ## [1.17.0] — 2026-11-07
 
 - **`motion-template` technique F, a logo loading animation:** start a short image-to-video clip on the real logo, prompt the mark coming apart in the design's look, then reverse the clip, so it builds the mark and ends on the exact logo file. Includes encoding, poster, timing and background matching. From the building-designer pitch: three loaders (blueprint lines, ink on paper, soft 3D spheres), one generation each.

@@ -177,7 +177,7 @@ One label, taken from the PRD, on every primary button the inventory recorded. D
 
 A `near-final-pitch` is built before the sale but must read as about 99% done:
 
-- No "preview", "prototype", "demo", "coming soon", lorem ipsum or template leftovers anywhere: copy, alt text, titles, form messages.
+- No "preview", "prototype", "demo", "coming soon", lorem ipsum or template leftovers anywhere: copy, alt text, titles, form messages, and attributes that only show in view-source (builder layer names such as Framer's `data-framer-name`: on one pitch a layer name still carried the template author's copyright line).
 - Every CTA goes somewhere real. Every form genuinely captures what's submitted: signups to `/api/subscribe` and the primary inquiry form to `/api/inquiries` (both D1), until the client's inbox, CRM or Brevo is connected. A missing fact is omitted or its section hidden, never shown as a visible placeholder. Success messages say only what is true ("Thanks, your message was received").
 - The remaining 1% is the client's own: their email tool, real photos, domain, approvals. It is listed on the setup-list in their language.
 - The pitch link stays private: `*.workers.dev`, `noindex` until they buy. None of this shows on the page.

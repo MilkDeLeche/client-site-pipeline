@@ -3,6 +3,14 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.19.0] — 2026-11-07
+
+Coded logo loaders. On the building-designer pitch the builder rejected two generated loader clips (ink, glossy spheres) as making no sense for the brand, and liked coded ones much better.
+
+- **`logo-loader.md` rewritten:** study the brand first (the logo's construction, exact colors, trade, each design's look), then ask the builder **coded or video**, with a recommendation and a comparison table. The coded workflow: trace the logo into SVG (OpenCV contours from the largest file), draw-on strokes with `pathLength`, a pure-CSS 00→100 count, clipped pieces for assemblies, leaving after the mark and the page load (fade or curtain). Three worked ideas: blueprint construction, outline draw-on, isometric assembly. The video workflow stays as the second option.
+- **Orchestrator and `motion-template`** point to the ask-first step.
+- **`intent-aware-rebrand`:** the leftover check covers attributes that only show in view-source (builder layer names), after a Framer layer name kept the template author's copyright line.
+
 ## [1.18.0] — 2026-11-07
 
 - **Logo loading animation workflow** (`motion-template/references/logo-loader.md`): pick a loader idea per design look, build the start frame from the real logo, prompt the mark coming apart and reverse the clip, encode, page code, checks. The orchestrator and `motion-template`'s description now point to it, so it's found when a builder asks for a loader.

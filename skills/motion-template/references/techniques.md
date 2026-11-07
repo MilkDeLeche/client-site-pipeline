@@ -80,7 +80,7 @@ Then plan the same kind of assets for the client, and say in the asset plan what
 
 ## F. Logo loading animation (generated, reversed)
 
-A short clip that builds the client's logo on the loading screen, one per design in that design's look. Start an image-to-video clip on the real logo, prompt the mark coming apart, then reverse it, so it ends on the exact logo file. One generation per loader. The full workflow, with prompts, encoding, page code and checks, is in `logo-loader.md`.
+A short loader that builds the client's logo on the loading screen, one per design in that design's look. Study the brand and the logo's construction, then ask the builder: coded (SVG + CSS: outline draw-on, isometric assembly, blueprint construction; no credits) or video (an image-to-video clip that takes the real logo apart, reversed so it ends on the exact file; one generation each). The full workflow is in `logo-loader.md`.
 
 ## Mixed templates
 

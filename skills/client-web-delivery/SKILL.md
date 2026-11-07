@@ -91,6 +91,13 @@ Pick the signup hook from what the business sells. Promise only what the client 
 | Service trades (HVAC, plumbing, landscaping, cleaning) | “Seasonal tune-up reminders” — maintenance reminders, seasonal specials |
 | Events, venues | “Get the lineup” — upcoming events, presales |
 
+**The client's social videos** (TikTok, Reels, Shorts), when the PRD or the old site uses them:
+- Take the video ids from the client's current site or their own links; never scrape a profile page past a captcha.
+- Show a local cover with a play button, and load the platform's player only on tap, one at a time. A page that loads many players at once trips the platform's rate limit. Example: TikTok's old `embed/v2` iframe and its profile (creator) embed show "overload-protect triggered"; its `player/v1` iframe plays.
+- A muted background loop (in a menu or a hero frame) loads only while that element is open or on screen, and is removed when it closes. Reduced motion keeps the still cover.
+- Covers live in the repo, next to a short list of ids the client adds to. Auto-updating to their newest uploads needs the platform's official API with the client's authorization, so it goes on the setup-list for after the sale.
+- The privacy page names the platform and says it loads only when the visitor plays a video.
+
 Blog: not part of this standard yet. A client-editable blog needs an admin login and storage; decide it per client.
 
 ## Pitch kit (near-final pitch, before the sale)

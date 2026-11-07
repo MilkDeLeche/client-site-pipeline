@@ -3,6 +3,14 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.16.0] — 2026-11-07
+
+The client's social videos on a pitch. The building designer's old site played TikToks through iframes that showed "overload-protect triggered"; the pitch puts them back so they play.
+
+- **`client-web-delivery` live showcase standard:** social video rules. Use ids from the client's own site; show local covers and load the player on tap, one at a time (TikTok's `player/v1` plays where `embed/v2` and the profile embed hit the rate limit). A muted background loop loads only while visible and stops when closed. Auto-updating to the newest uploads needs the platform's API and the client's authorization, so it goes on the setup-list. The privacy page names the platform.
+- **`copy-bank/approved.md`:** the builder's hero pick for the building-design pitch.
+- **Unchanged:** the steps and their order, the hook method, the ban on invented facts.
+
 ## [1.15.1] — 2026-11-06
 
 Spanish that reads as written, not translated. A native speaker reviewing the building-designer pitch said the Spanish "no tiene sentido… es muy IA": dictionary words, English word order and literal UI labels.

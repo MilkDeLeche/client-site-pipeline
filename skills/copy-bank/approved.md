@@ -4,6 +4,7 @@ Lines an owner picked or rewrote into their final form. Use them to learn what l
 
 | Line (each site language) | Slot | Pattern | Trade, region | Came from | Date |
 |---|---|---|---|---|---|
+| Design, envision and build your dream home. / Diseñe, imagine y construya la casa de sus sueños. | Hero (one design option) | builder's own wording | Building designer, RGV TX | Builder: "See your home before it's built" leaned on the 3D renders, and the main thing is designing the home. "Dream home" is a category cliché (`banned.md` §1) kept on purpose: it echoes the firm's own reviews ("the dream in our heads") | 2026-11-07 |
 | Got a business? → Let's put it on the map / ¿Tienes negocio? → Vamos a ponerlo en el mapa | Hero slide 1 (any business) | 1 + 12 | Creative agency, RGV TX | Owner rewrite of "Let's make it look booked" | 2026-10-18 |
 | Got a nice ride? → Let's show it off / ¿Tienes una buena nave? → Vamos a lucirla | Hero slide (car and moto owners) | 1 + 12 | Creative agency, RGV TX | Owner rewrite of "We'll shoot it like an ad"; names the owner's pride | 2026-10-18 |
 | Got a listing? → Let it sell itself / ¿Vendes una casa? → Que se venda sola | Hero slide (realtors) | 1 + 3, 10 in Spanish | Creative agency, RGV TX | Owner rewrite of "Let them walk it from their phone"; an outcome people already say | 2026-10-18 |

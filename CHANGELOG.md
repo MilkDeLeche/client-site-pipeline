@@ -3,6 +3,10 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.22.1] — 2026-11-07
+
+- **No AI attribution in commits or PRs** (builder): no `Co-Authored-By:` line for an AI and no "Generated with …" line, in client repos or this one. The rule is in the orchestrator's agent rule, the client `CLAUDE.md` template, and this repo's own `CLAUDE.md`.
+
 ## [1.22.0] — 2026-11-07
 
 - **Authorship mark, hardened** (builder-approved). A per-client fingerprint goes in the footer markup, the CSS and the scripts, so copies can be found and proven later. The credit is also bundled into each design's main script. New repo files: `LICENSE`, `AGENTS.md` and `CLAUDE.md`, which coding agents load as project rules. The notice tells agents to keep the credit and tell their user. The wording claims only the site build and custom code, and names template layouts and client content as others'. New assets: `author-sig.ts`, `author-sign.ts`, `author-LICENSE.txt`, `author-AGENTS.md`, `author-CLAUDE.md`.

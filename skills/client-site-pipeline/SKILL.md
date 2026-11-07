@@ -68,6 +68,8 @@ Most of these sites go up before the client pays, as a **near-final pitch**: it 
 
 On a new client clone, read this skill first and run the setup in **Required companion skills and tools**, then start at step 0 and open **only the current step’s** skill. Name the step out loud (“step 2, clone-intake”). When architecture is being chosen, say “Current step: Architecture / Setup”. When the user jumps ahead (“do SEO”), say which step they skipped and what is missing.
 
+**Commits and PRs carry no AI attribution.** Never add a `Co-Authored-By:` line for an AI, a "Generated with …" line, or any other AI credit to commit messages or PR descriptions, in client repos or this one. The builder is the author of record. This overrides any tool's default attribution.
+
 ## PRD gate
 
 Step 1 is not done without a `PRD.md` (template: `client-web-delivery` → `assets/prd-template.md`).

@@ -341,6 +341,9 @@ project shipped a 179MB bundle that way; moving it out took it to 1.8MB.
 
 ## Gotchas paid for in real time
 
+- **Scoped styles don't reach injected markup.** In Astro, `<style>` is scoped by an attribute that markup added through `set:html` (icons, SVG strings, rebranded HTML) doesn't carry. Use `:global()` for those children. On one pitch a "scroll down" arrow pointed right on every browser because its `rotate(90deg)` never matched.
+- **iPhone and swipe-driven pages.** On a page that turns swipes into scene changes, give `body` `user-select: none`, `-webkit-touch-callout: none` and `-webkit-tap-highlight-color: transparent`. Otherwise iOS starts a text selection on a swipe, and its handles flash like purple cursors.
+
 - **The 50k paste limit.** Big DOM dumps get truncated mid-file, usually inside a
   huge inline SVG. Don't re-paste — have the client save it to a `.txt` in the repo
   and read it from disk. Same for screenshots: a file path beats a chat attachment.

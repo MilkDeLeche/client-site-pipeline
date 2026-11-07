@@ -3,6 +3,11 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.20.0] — 2026-11-07
+
+- **`client-web-delivery`, social videos:** autoplay muted with the platform's own unmute (no sound a visitor didn't ask for). Start players one at a time, about 1.5 s apart, after simultaneous loads returned "Player error". Reload a stalled player once. Keep players only for the cards showing. Start loading them behind a home page's loading screen. This replaces the earlier tap-to-play rule.
+- **`clone-workflow` gotchas:** Astro's scoped styles don't reach `set:html` markup (use `:global()`). Swipe-driven pages need `user-select: none` and no tap highlight on iPhone.
+
 ## [1.19.1] — 2026-11-07
 
 - **`logo-loader.md` rewritten around understanding, not a style list.** Read the logo's construction (geometry, stroke or fill, meaningful pieces, color roles, type), the client's craft and how they want to come across, and the design's own motion and what follows the loader. Finish the sentence "this mark is ___, so it should come together by ___". Then design one idea: structure, then form, then color; the logo's own geometry for every guide and move; choreography; a typographic frame tied to the real load; an exit with the page's energy. The first job's loaders are kept only as an example of that reasoning. The check asks whether the motion would make sense for a different client; if it would, it's generic.

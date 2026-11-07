@@ -93,7 +93,10 @@ Pick the signup hook from what the business sells. Promise only what the client 
 
 **The client's social videos** (TikTok, Reels, Shorts), when the PRD or the old site uses them:
 - Take the video ids from the client's current site or their own links; never scrape a profile page past a captcha.
-- Show a local cover with a play button, and load the platform's player only on tap, one at a time. A page that loads many players at once trips the platform's rate limit. Example: TikTok's old `embed/v2` iframe and its profile (creator) embed show "overload-protect triggered"; its `player/v1` iframe plays.
+- Show a local cover under every player. Use the platform's current player: TikTok's old `embed/v2` iframe and its profile (creator) embed show "overload-protect triggered", while its `player/v1` iframe plays.
+- **Autoplay muted, never with sound:** the platform's own volume button unmutes. Builders want the videos moving, and sound a visitor didn't ask for annoys clients.
+- **Start players one at a time, about 1.5 s apart.** Players that load at the same instant get "Player error". Reload a player once if it hasn't reported playing within about 7 s. Keep players only for the cards showing (3 on desktop, 1 on a phone).
+- On a home page with a loading screen, start loading the players behind it, so they're already playing when the visitor reaches them.
 - A muted background loop (in a menu or a hero frame) loads only while that element is open or on screen, and is removed when it closes. Reduced motion keeps the still cover.
 - Covers live in the repo, next to a short list of ids the client adds to. Auto-updating to their newest uploads needs the platform's official API with the client's authorization, so it goes on the setup-list for after the sale.
 - The privacy page names the platform and says it loads only when the visitor plays a video.

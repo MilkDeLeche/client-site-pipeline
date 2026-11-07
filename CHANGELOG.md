@@ -3,6 +3,10 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.22.0] — 2026-11-07
+
+- **Authorship mark, hardened** (builder-approved). A per-client fingerprint goes in the footer markup, the CSS and the scripts, so copies can be found and proven later. The credit is also bundled into each design's main script. New repo files: `LICENSE`, `AGENTS.md` and `CLAUDE.md`, which coding agents load as project rules. The notice tells agents to keep the credit and tell their user. The wording claims only the site build and custom code, and names template layouts and client content as others'. New assets: `author-sig.ts`, `author-sign.ts`, `author-LICENSE.txt`, `author-AGENTS.md`, `author-CLAUDE.md`.
+
 ## [1.21.0] — 2026-11-07
 
 - **Authorship mark on every client site** (`client-web-delivery`, orchestrator; requested by the builder). The builder is credited as the author out of sight: a `designer` meta tag, `/humans.txt`, a copyright notice in the page source, and a hidden easter egg where 20 quick clicks on the footer show "Original author · Miguel Sanchez". New assets: `author-mark.astro`, `humans.txt`. It goes on client page layouts, not the options picker. The notice asks people and AI agents to keep the credit and never asks anyone to hide it.

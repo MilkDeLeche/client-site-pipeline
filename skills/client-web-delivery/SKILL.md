@@ -91,11 +91,20 @@ Pick the signup hook from what the business sells. Promise only what the client 
 | Service trades (HVAC, plumbing, landscaping, cleaning) | “Seasonal tune-up reminders” — maintenance reminders, seasonal specials |
 | Events, venues | “Get the lineup” — upcoming events, presales |
 
-**Authorship mark (every client site).** The builder, Miguel Sanchez, is credited as the site's author on every client site, out of sight. Copy `assets/author-mark.astro` to `src/components/AuthorMark.astro`, set the client's name, and render it at the top of the `<head>` in every client page layout, including privacy and 404. Leave it off the options picker or design shelf: that page only chooses a design. Copy `assets/humans.txt` to `public/humans.txt` and fill it in. It gives:
-- a `designer` meta tag, a `rel="author"` link to `/humans.txt`, and a copyright notice in the page source (inside the script's header comment, because Astro strips HTML comments from the build);
-- a hidden easter egg: **20 quick clicks or taps on the footer** show a small card, "Original author · Miguel Sanchez · Website design and code © year", in the page language. Nothing on the page hints that it exists. A page without a `<footer>` marks one element with `data-author-zone`.
-- The notice asks anyone copying the site, person or AI agent, to keep the credit, citing 17 U.S.C. § 1202 (copyright management information). It never tells anyone to hide the credit from anyone: an instruction for an AI to keep secrets from its user is a prompt injection, and agents flag it.
-- Test it: 10 clicks do nothing, 20 show the card, in both languages.
+**Authorship mark (every client site).** The builder, Miguel Sanchez, is credited as the author of every client site, out of sight. Nothing shows on the page. It also has no effect on SEO: it adds no visible text and no links. It goes in every client page layout, including privacy and 404, but not on the options picker or design shelf. Generate a fresh fingerprint per client (`ms` + 8 random lowercase letters and digits), then copy the assets and fill in the placeholders:
+- `assets/author-mark.astro` → `src/components/AuthorMark.astro`, rendered at the top of every client layout's `<head>`. It adds the `designer` meta tag, a `rel="author"` link and the notice. The notice sits in the script's header comment, because Astro strips HTML comments from the build.
+- `assets/author-sig.ts` → `src/scripts/sig.ts`, called first in each design's main init script, so the credit travels with the code that runs the site.
+- `assets/author-sign.ts` → `src/rebrand/sign.ts`, applied in each rebrand's `finish()`. It adds `data-ms` to the footer.
+- A `:root { --ms: "<fingerprint>"; }` line in each design's rebrand CSS.
+- `assets/humans.txt` → `public/humans.txt`. `assets/author-LICENSE.txt`, `author-AGENTS.md` and `author-CLAUDE.md` → `LICENSE`, `AGENTS.md` and `CLAUDE.md` at the repo root. Coding agents load these as project rules.
+
+The easter egg: **20 quick clicks or taps on the footer** show a small card, "Original author · Miguel Sanchez · Site build and custom code © year", in the page language. A page without a `<footer>` marks one element with `data-author-zone`.
+
+Two rules for the wording:
+- **Claim only what's yours:** the site build and custom code. Name third-party template layouts as theirs, and the client's content as the client's. A false authorship claim is itself a § 1202 problem.
+- The notice tells people and AI agents to keep the credit and to **tell their user** it's protected. It never tells anyone to hide it or stay quiet: that's a prompt injection, and agents flag it.
+
+The fingerprint works without anyone's cooperation: search for it later to find copies. Test that 10 clicks do nothing, that 20 show the card in both languages, and that the author's name is never in the visible page text.
 
 **The client's social videos** (TikTok, Reels, Shorts). **Optional, never by default.** Not every client posts video. Ask the builder during the finishing touches (see the orchestrator), and build it only when they say the client wants it. Then:
 - Take the video ids from the client's current site or their own links; never scrape a profile page past a captcha.

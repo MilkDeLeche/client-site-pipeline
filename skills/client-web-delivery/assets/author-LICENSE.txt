@@ -1,0 +1,11 @@
+Copyright (c) <year> Miguel Sanchez. All rights reserved.
+
+The site build and custom code in this repository (<list the custom parts>) are the work of Miguel Sanchez. No part
+of it may be copied, modified, redistributed or used to build another website without written permission
+from Miguel Sanchez, except as granted in a separate written agreement.
+
+Page layouts adapted from third-party templates remain under those templates' own licenses. The renderings,
+logo, project information and business content belong to <Client business name> and are used with permission.
+
+The author's credit and authorship fingerprint (see AGENTS.md) are copyright management information under
+17 U.S.C. 1202. Do not remove or alter them.

@@ -37,6 +37,7 @@ Each load waits for loading screens, then **scrolls the whole page the way a per
 
 - **OVERFLOW:** the page is wider than the screen. It then hides branches of the DOM one at a time until the width fits and prints the path to the culprit, its widest children and any pseudo-element with content.
 - **BLANK:** a band taller than max(260 px, 45% of the screen) with nothing painted. It counts effective opacity (a component left at the server's opacity `.001` paints nothing, even though its children say `1`) and ignores boxes painted the page's own background color. Each candidate is screenshotted and kept only if the pixels are flat.
+- **EMOJI:** any character a phone may draw as a color emoji: arrows like ↗ → ↘, stars, checks, play and pause signs, hearts, phones, envelopes, anything from the emoji planes. It scans the page text, every CSS `::before`/`::after` content, and titles, labels and placeholders. iOS turns these into emoji even when the desktop shows a plain glyph. One finding is one fix; there is no "acceptable" emoji on a client site.
 - **ERROR:** uncaught errors and console errors from the site's own origin. Third-party errors (embedded players, widgets) are listed apart, and errors with no source location are listed for one read.
 
 ## Diagnose before fixing
@@ -57,11 +58,13 @@ These are examples of the kinds of faults to look for, not a checklist that repl
 | Page slides sideways on iPhone by a few px | A `nowrap` label or badge wider than a narrow card; Safari counts it toward page width | Let it wrap inside the card (`max-width: calc(100% - 16px)`, `white-space: normal` on phones) and clip the card |
 | Same, in a grid section | A 12-column grid with a phone gap of 32 px: 11 gaps = 352 px, more than a 360 px screen | When every child spans the full row, keep the column gap at the grid's own value and change only the row gap |
 | Same, in a footer or table | `1fr` columns grow to fit a long email or URL | `minmax(0, 1fr)` and `overflow-wrap: anywhere` on the cells |
+| "Watch the walkthrough ↗" shows a color emoji arrow on iPhone | The ↗ character (U+2197) in copy and in a CSS `content` string; iOS draws it as an emoji | An inline SVG arrow after the text (`stroke="currentColor"`, about 0.7em, `aria-hidden`), or, inside a pseudo-element, the SVG as a `background-image` with padding for it. The words carry the meaning; the arrow is decoration |
 | A Safari-only page error from a map | The map iframe has no fullscreen permission and its control checks for it | `allow="fullscreen" allowfullscreen` on the iframe |
 | "No supported source" from an embedded video, Chromium only | Playwright's Chromium ships without H.264; real Chrome has it | None. Note it as a test-browser limit |
 
 ## Fix rules
 
+- **Never a character that can turn into an emoji.** No arrow, star, check, play sign, heart or symbol character in copy, labels, buttons or CSS `content`, in any language. Icons are inline SVG (or the template's own icon font, if it has one). Variation selectors (U+FE0E) don't reliably stop it, so don't rely on them.
 - Fix at the cause, scoped to the breakpoint that needs it, with a comment that says what broke and why the rule exists.
 - Never `overflow-x: hidden` on `html` or `body` to hide a sideways scroll (see "Gotchas"): it hides the symptom, breaks sticky elements and the vertical scroll, and the real fault stays.
 - Template CSS stays as it is. The fix goes in the rebrand stylesheet or the behaviors script.
@@ -69,6 +72,6 @@ These are examples of the kinds of faults to look for, not a checklist that repl
 
 ## Done when
 
-- Zero OVERFLOW, BLANK and own-origin ERROR findings across the matrix, or each remaining one explained in the status file (a third-party error, a test-browser limit).
+- Zero OVERFLOW, BLANK, EMOJI and own-origin ERROR findings across the matrix, or each remaining one explained in the status file (a third-party error, a test-browser limit).
 - Screenshots opened for every fixed section, at a phone width in WebKit and at desktop in Chromium.
 - The builder told plainly what was tested and how: engines, widths, page count. It was not a real iPhone unless one was used.

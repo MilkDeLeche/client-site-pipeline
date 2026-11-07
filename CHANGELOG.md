@@ -3,6 +3,10 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.23.1] — 2026-11-07
+
+- **No character that can turn into an emoji** (builder rule: on iPhone, "Watch the walkthrough ↗" showed a color emoji arrow, "nada profesional"). Arrows, stars, checks, play signs and other symbol characters never go in copy, labels or CSS `content`; icons are inline SVG. The rule is in the orchestrator and `references/responsive-audit.md` (with the fix for pseudo-elements). `responsive_audit.py` has a new EMOJI check over page text, `::before`/`::after` content, titles, labels and placeholders.
+
 ## [1.23.0] — 2026-11-07
 
 Builder-requested, after a building-designer pitch where a full pass found blank bands and sideways scrolling that a look on one phone had missed.

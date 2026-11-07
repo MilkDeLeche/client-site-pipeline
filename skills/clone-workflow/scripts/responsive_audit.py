@@ -13,6 +13,9 @@ once, so reveal animations and lazy components start, then checks:
   BLANK     a band of the page taller than max(260px, 45% of the screen) with nothing painted in
             it. Each candidate is screenshotted and kept only if the pixels really are flat, so
             pinned sections and light backgrounds the DOM scan misses don't count.
+  EMOJI     a character a phone may draw as a color emoji (an arrow like U+2197, a star, a check, a play
+            sign...) in the page's text, a CSS ::before/::after content, a title, label or placeholder.
+            iOS does this even when the desktop shows a plain glyph. Use an inline SVG instead.
   ERROR     an uncaught page error or console error from the site's own origin. Errors raised by
             third-party players and widgets are listed apart, since they aren't ours to fix.
 
@@ -106,6 +109,28 @@ PROBE = """() => {
   return { sw: document.documentElement.scrollWidth, vw, vh, H, gaps };
 }"""
 
+EMOJI = """() => {
+  // characters a phone can draw as a color emoji (Unicode Emoji=Yes, text presentation included): arrows,
+  // stars, checks, play/pause, hearts, phones, envelopes, plus anything in the emoji planes.
+  // (c) and (R) count only when followed by the emoji selector FE0F.
+  const R = [[0x203C,0x203C],[0x2049,0x2049],[0x2122,0x2122],[0x2139,0x2139],[0x2194,0x2199],[0x21A9,0x21AA],[0x231A,0x231B],
+    [0x2328,0x2328],[0x23CF,0x23CF],[0x23E9,0x23F3],[0x23F8,0x23FA],[0x24C2,0x24C2],[0x25AA,0x25AB],[0x25B6,0x25B6],[0x25C0,0x25C0],
+    [0x25FB,0x25FE],[0x2600,0x27BF],[0x2934,0x2935],[0x2B05,0x2B07],[0x2B1B,0x2B1C],[0x2B50,0x2B50],[0x2B55,0x2B55],[0x3030,0x3030],
+    [0x303D,0x303D],[0x3297,0x3297],[0x3299,0x3299],[0x1F000,0x1FAFF]];
+  const bad = (s) => [...s].filter((c, i, a) => { const p = c.codePointAt(0);
+    if (p === 0xA9 || p === 0xAE) return a[i + 1] === '\\uFE0F';
+    return R.some(([x, y]) => p >= x && p <= y); });
+  const out = new Map();
+  const add = (chars, where) => { for (const c of chars) { const k = 'U+' + c.codePointAt(0).toString(16).toUpperCase() + ' ' + c; if (!out.has(k)) out.set(k, where.slice(0, 80)); } };
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n; (n = w.nextNode());) { const b = bad(n.textContent); if (b.length && !n.parentElement.closest('script,style')) add(b, n.textContent.trim()); }
+  for (const e of document.body.querySelectorAll('*')) for (const p of ['::before', '::after']) {
+    const c = getComputedStyle(e, p).content; if (c && c !== 'none' && c !== 'normal') { const b = bad(c); if (b.length) add(b, `${e.tagName.toLowerCase()}.${(e.getAttribute('class') || '').split(' ')[0]}${p} ${c}`); } }
+  for (const e of document.querySelectorAll('[title],[aria-label],input[placeholder],textarea[placeholder]')) for (const a of ['title', 'aria-label', 'placeholder']) {
+    const v = e.getAttribute(a); if (v) { const b = bad(v); if (b.length) add(b, `${a}="${v}"`); } }
+  return [...out].map(([k, v]) => `${k}  in: ${v}`);
+}"""
+
 BISECT = """() => {
   const vw = document.documentElement.clientWidth, sw = () => document.documentElement.scrollWidth;
   const label = (e) => { const c = getComputedStyle(e), r = e.getBoundingClientRect();
@@ -190,6 +215,9 @@ async def audit(a):
                         r = await page.evaluate(PROBE)
                         if r["sw"] > r["vw"]:
                             row["overflow"] = {"page_width": r["sw"], "screen": r["vw"], **(await page.evaluate(BISECT))}
+                        emoji = await page.evaluate(EMOJI)
+                        if emoji:
+                            row["emoji"] = emoji
                         blanks = [g for g in r["gaps"] if await flat(page, g[0], g[1], r["vh"])]
                         if blanks:
                             row["blank"] = blanks
@@ -211,7 +239,7 @@ async def audit(a):
             await browser.close()
     report.sort(key=lambda r: (r["engine"], r["page"], r["width"]))
     for r in report:
-        bad = [k for k in ("failed", "overflow", "blank", "errors") if k in r]
+        bad = [k for k in ("failed", "overflow", "blank", "emoji", "errors") if k in r]
         if not bad:
             continue
         found += 1
@@ -223,6 +251,8 @@ async def audit(a):
                 print(f"             {x}")
         for g in r.get("blank", []):
             print(f"           blank {g[0]}..{g[1]} ({g[1] - g[0]}px)")
+        for m in r.get("emoji", [])[:4]:
+            print(f"           emoji on phones: {m}")
         for m in r.get("errors", [])[:3]:
             print(f"           error {m[:160]}")
         if "failed" in r:

@@ -249,7 +249,9 @@ Before the Delivery Gate, on the production build: every page at 320, 360,
 second language at the phone widths, with `scripts/responsive_audit.py`. It
 scrolls like a person (smooth-scroll libraries undo `scrollTo`), then flags
 pages wider than the screen (and names the culprit), blank bands it confirms
-with a screenshot, and the site's own errors. Diagnose each one (Phase A copy
+with a screenshot, any character a phone may draw as an emoji (iOS turns ↗,
+★, ✓ and the like into color emoji: icons are always inline SVG), and the
+site's own errors. Diagnose each one (Phase A copy
 first: ours or the port?), fix it at its cause, scoped to its breakpoint, and
 re-run the whole matrix. Method, causes seen so far and the done-when:
 `references/responsive-audit.md`. Re-run it after Phase C and whenever the

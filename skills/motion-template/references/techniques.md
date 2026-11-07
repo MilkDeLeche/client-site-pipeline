@@ -78,6 +78,16 @@ When a template matches none of these, work it out from the prompt and its asset
 
 Then plan the same kind of assets for the client, and say in the asset plan what you worked out, so the builder can confirm it before anything is generated. Add the technique to this file afterwards.
 
+## F. Logo loading animation (generated, reversed)
+
+A short "motion graphics" loader that builds the client's mark, one per design, in that design's look (linework for an editorial or drafting look, ink on paper for a cream or print look, soft 3D for a warm, rounded look).
+
+- **The start frame is the real logo**, square, centered at about a third of the width, on the loading screen's background color. Rebuild it from the largest logo file (a small PNG scaled up shows jagged edges).
+- **Prompt the logo coming apart** (strokes splitting into drafting lines, ink bleeding into paper, the mark bursting into glossy spheres), on a locked-off camera, with the background named and kept flat, and no text or extra objects. Then **reverse the clip** (`ffmpeg -vf reverse`). The animation now builds the mark and ends on the actual logo file, so the brand colors and shapes on screen at the end are exact, not redrawn by the model.
+- Image-to-video at the shortest length (3 s), 1:1, the cheapest tier of the model the user names. One generation per design; keep it unless the user asks for another.
+- Encode about 640px H.264, no audio, `+faststart`, speed it up about 1.2×: around 100–300 KB. Its first raw frame is the poster, so a phone that blocks autoplay still shows the logo.
+- On the page: muted, `playsinline`, autoplay; on `ended` hold about 0.5 s, then fade the screen; a 5 s cap so it never blocks the page; reduced motion skips it. Sample the clip's corner color for the loading screen's background, and feather the video's edge with a radial `mask-image` (models drift the background a little: a vignette, a floor).
+
 ## Mixed templates
 
 List the techniques per scene and plan assets per scene. The plan's total is what the builder approves.

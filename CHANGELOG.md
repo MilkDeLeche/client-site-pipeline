@@ -3,6 +3,10 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.17.0] — 2026-11-07
+
+- **`motion-template` technique F, a logo loading animation:** start a short image-to-video clip on the real logo, prompt the mark coming apart in the design's look, then reverse the clip, so it builds the mark and ends on the exact logo file. Includes encoding, poster, timing and background matching. From the building-designer pitch: three loaders (blueprint lines, ink on paper, soft 3D spheres), one generation each.
+
 ## [1.16.0] — 2026-11-07
 
 The client's social videos on a pitch. The building designer's old site played TikToks through iframes that showed "overload-protect triggered"; the pitch puts them back so they play.

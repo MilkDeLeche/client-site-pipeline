@@ -3,6 +3,24 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.15.0] — 2026-11-06
+
+Language and the pages every pitch needs. On the building-designer pitch the designs had gone up in English only, without a privacy page or a 404. The builder asked for Spanish on every page, served automatically by the visitor's system language with no button. A native Spanish speaker on the builder's side flagged missing accents and word-for-word translations as the thing that makes Spanish copy cringe.
+
+- **Language follows the system language** (`client-web-delivery` live showcase standard, orchestrator):
+  - A head script reads `navigator.languages[0]` and sends second-language systems to `/<code>/`.
+  - `?lang=` overrides it for previews and is remembered for the visit.
+  - There's no language button or popup, and no geolocation. This replaces the earlier "language switch in the nav" rule.
+  - The 404 picks its language in place.
+- **Spanish spelled and written natively** (`client-web-delivery`, `copy-bank`):
+  - every accent, tilde, `¿` and `¡`
+  - formal `usted` by default
+  - rewritten, never word for word
+  - read by a native speaker before it goes to the owner
+  - client reviews stay in the reviewer's own language
+- **Privacy page and custom 404 from the first pitch deploy,** in both languages, before the forms or email tool exist. The privacy page describes only what the site does that day.
+- **Unchanged:** the steps and their order, the forms and D1 capture in Phase C, the ban on invented facts.
+
 ## [1.14.0] — 2026-11-06
 
 A skill for motion-site prompt templates. The builder has many "recreate this page exactly" prompts for motion sites, each tied to one fictional brand's hosted assets, and had never used them for a client. On a building designer's design picker, one such prompt (five cut-out scenes for a Nordic cabin brand) was rebuilt with three of the client's houses. The builder asked for the method to be kept.

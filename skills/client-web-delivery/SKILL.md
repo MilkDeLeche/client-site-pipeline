@@ -73,7 +73,9 @@ These sites are often built **before** the client has paid, as a **near-final pi
 4. **A second language.** Every site ships in its primary language plus one secondary language, picked in the PRD from who actually buys (Rio Grande Valley and most of Texas → Spanish). The primary stays at `/`, the secondary at `/<code>/` through Astro's `i18n` config (`defaultLocale`, `locales`, `routing.prefixDefaultLocale: false`). Rules:
    - One copy file per locale (`src/data/<client>.ts`, `src/data/<client>.<code>.ts`) importing the **same** facts, so names, prices, hours and phone numbers can't drift between languages.
    - Write the second language natively for that audience (how a local owner actually talks, including regional usage), not word for word. Hooks get rewritten, not translated.
-   - Both languages get every page, the forms, the popup, the banner, the privacy page and the 404. `<html lang>` per page, `hreflang` alternates plus `x-default`, and a language switch built from the template's own nav-link style.
+   - Spanish is spelled correctly: every accent and tilde, plus `¿` and `¡`. Use formal `usted` unless the brand speaks informally. A word-for-word line reads as cringe to a native speaker, so rewrite it. A native speaker reads the Spanish before it goes to the owner. Client reviews stay in the reviewer's own language: translating a quote puts words in their mouth.
+   - Both languages get every page, the forms, the popup, the banner, the privacy page and the 404, with `<html lang>` per page and `hreflang` alternates plus `x-default`.
+   - **Language follows the visitor's system language. Don't add a language button or popup, and don't use location.** A small head script reads `navigator.languages[0]`: a second-language system goes to `/<code>/…`, and anything else to the primary language. `?lang=` overrides it for previews and sharing, and is remembered for the visit (`sessionStorage`). The 404 is one page, so it picks its language the same way, in place.
    - The API stores the visitor's `locale` with each signup and inquiry.
    - A fluent person on the client's side reviews the second-language copy; that goes on the setup-list.
 
@@ -123,6 +125,8 @@ Copy `assets/setup-list-template.md` into the project, fill it in for THIS clien
 Always also request: **who reviews the second-language copy**, **what the signup promises** (and which email tool sends it), **domain**, **public phone + email to publish**, **team/staff photos + bios**, **real reviews + permission to use names**, **factual/medical/legal sign-off** on any regulated copy, and **rights to any AI or stock imagery**.
 
 ## Stage 4 — Pre-launch gate
+
+A **privacy page and a custom 404 ship with the first pitch deploy,** in both languages, even before the forms or the email tool are connected. The privacy page describes only what the site does that day (no analytics means it says so), and it's updated when the forms, analytics or email tool go live.
 
 Before shipping, **invoke the `launch-audit` skill** and clear its checklist: non-empty view-source, 404, unique titles, OG image, structured data, canonical, robots-allows-AI, sitemap, lang, alt text, no exposed source maps or secrets, and the legal items (a privacy policy disclosing data collection + AI usage + third-party processors, and real testimonials). Also confirm the live showcase standard works: the banner gates analytics, the popup and inline signup save a row (check with `wrangler d1 execute <name> --local`), and the privacy page matches. Fix the ❌s you can; keep client-blocked items on the setup-list.
 

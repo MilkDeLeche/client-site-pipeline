@@ -53,7 +53,7 @@ A hero for owners "with a problem they didn't know they had" is written for unaw
 
 ## 4. Write many, from the patterns
 
-At least **30 candidates per hero**, across at least six patterns from `patterns.md`, written in every site language. Write the second language natively, the way local owners talk; never translate word for word. Service cards, signup hooks and section heads need fewer, but still several options each.
+At least **30 candidates per hero**, across at least six patterns from `patterns.md`, written in every site language. Write the second language natively, the way local owners talk; never translate word for word. In Spanish, every accent, tilde, `¿` and `¡` is in place (a line missing them reads as careless to a native speaker), with formal `usted` unless the brand speaks informally. Service cards, signup hooks and section heads need fewer, but still several options each.
 
 Each candidate records its pattern and the §2 quote or fact it comes from. A line with no source in §2 or the facts file is a guess and is labeled as one.
 

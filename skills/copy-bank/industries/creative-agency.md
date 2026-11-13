@@ -92,3 +92,31 @@ Read through the `reddit.sentinel-team.org` mirror (reddit.com blocks the fetche
 | Edits done for them | "they like that they don't have to do the edits themselves" | web developer describing his clients, r/webdev (seller side, weigh it) | [thread](https://reddit.sentinel-team.org/posts/1pkbbzv/snapshots/2025-12-12T16%3A30%3A21.305655Z) |
 
 What they became on the second kit: "One price, and you know what it covers." (paying for what they don't understand); "The site is yours: the domain, the logins and every request stay in your name" (not owning it; a contract term the builder confirms); "Reviews right after delivery: clients tell you in person they love the work, then forget to post" (reviews); "Edits every month: text or email the change" (edits done for them).
+
+## Ad hooks by niche (2026-11-13)
+
+For ads that sell the agency to owners in each trade. A website hero line is not an ad line: the hero welcomes someone who already came, the ad has to stop an owner who is scrolling past. Ads written from hero lines alone read as generic to the builder.
+
+**What a niche ad line does,** in order: names who it's for ("Bar owners in the Valley"), names the problem they haven't put into words, then pays off in an everyday phrase. The call-out can sit in a small line above the headline. The owner rules still hold: no scolding the owner, no problem-only lines, no forced slang (`banned.md` §4).
+
+**Formats working now** (dated; recheck every batch):
+
+- Niche call-out ("If you run a ___ in ___"): the format most guides recommend for local businesses ([zeely](https://zeely.ai/blog/hooks-for-tiktok-video-ads/), [captain-hook](https://captain-hook.ai/article/viral-hooks-2026)); vendor sources, directional.
+- From a week's tracking of business and marketing posts that beat their own account's usual reach (562 posts, 325 accounts, TikTok and Instagram, measured 2026-11-13, [tryvolume](https://tryvolume.app/working/business-and-marketing)): an exact script to say today; calling out a trendy tactic as a mistake; mocking the niche's golden rule, then flipping it; side-by-side bad and good versions; proof shown in the first second. For a static ad, the usable ones are the call-out, the tactic called out (the tactic, never the owner), and side-by-side.
+- What a local competitor runs right now (Meta Ad Library, read 2026-11-13): WeSell It's newest ad opens on the reader's situation in the Valley, then the problem they haven't named (only the people who already know them know how good they are), then what the agency films. Its other ads lead with client revenue numbers. Study the shape; never borrow the line or the numbers.
+- Paid-social ads that look like ads get scrolled past; ads that look like a native post do better (Reddit and Instagram advice summarized by [stackmatix](https://www.stackmatix.com/blog/instagram-advertising-reddit)). Ask Ad Studio for a native-post look: the real photo big, the line in bold type, little else.
+
+**By niche.** ★ = shortlisted for the next batch. Source of each problem in brackets.
+
+| Niche | Problem they haven't named | Candidate lines | Notes |
+|---|---|---|---|
+| Bars | The packed nights never reach the people deciding where to go on a slow one [bar guides: events and Stories fill slow nights; this file's hidden-problem table] | ★ Friday's packed. Let Tuesday see it. · Your best nights happen off camera. · Your trivia night deserves a reel. | Call-out above: "Bar owners in the Valley" |
+| Barbers and beauty | Clients choose by the work they can see, and most cuts never get posted [barber case: clients drove from other states after seeing his videos; reels showing the finished work] | ★ Every fade is an ad. Let's post them. · Your clients already brag about you. Give them something to share. | Show the finished work in the first glance |
+| Car and bike | Months on a build, one parking-lot photo [detailing guides: transformation and reveal reels travel] | ★ Months on the build. Let's show it off right. · The before and after sells itself. We'll film both. | "Show it off" and "sells itself" are owner-approved idioms |
+| Realtors | Buyers judge the home on a phone before they ask for a showing [an economist quoted by Axios on "screen appeal"; listing-video guides] | ★ The first showing happens on their phone. Let's make it a good one. · An open house, every day. | Never quote the economist's phrase as our line. Avoid "tour it on their phone" (cut before as too close to a rejected line) |
+| Any owner, social media | Posting is the job done at 11pm after closing, so it stops [this file's buyer words: "It's exhausting", "doing it all myself"] | ★ Posting after close again? We'll take it off your plate. · You run the place all day. We'll run the page. | The second is close to the hero; use one, not both |
+| Only on Instagram | People ask Google and ChatGPT where to go, and an Instagram page doesn't answer [BrightLocal LCRS 2026: 45% used AI tools for local recommendations] | ★ They asked ChatGPT where to go. Make sure it knows you. | The 45% goes in the caption with its source, not on the ad |
+
+Cut on the way: "Instagram is rented space" (a cliché in the category), "Only on Instagram? Half your town looks you up somewhere else" (an unsourced number), "List it Monday, on their phones by Friday" (promises a turnaround nobody set), "Valley business owners: you're great at what you do" (too close to a competitor's live ad).
+
+Spanish versions: not written yet. Write them natively per niche before the first Spanish ad.

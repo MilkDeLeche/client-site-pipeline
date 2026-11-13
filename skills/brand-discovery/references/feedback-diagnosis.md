@@ -14,6 +14,7 @@ Don't restyle, don't swap the template, and don't defend the design. A quick, ch
 
 | Layer | Sounds like | Check | Where the fix lives |
 |---|---|---|---|
+| What they get | "They show the output", "My buyers need to see what I have for them", a competitor's site with plans on it | Can a buyer say what they'd receive and what it's called, from the page alone? | `packages.md`, a plans section, the owner sheet (part 1) |
 | Promise | "That's not what we do", "Sounds too big for us" | Hero line against the PRD offer and where they are now | Copy, PRD |
 | Audience | "My customers won't get this" | Who the first screen speaks to | `visitor`, the buyer list |
 | Offer order | "We mostly do X, not Y" | Section order against what they want more of | `offer`, section map |
@@ -24,8 +25,12 @@ Don't restyle, don't swap the template, and don't defend the design. A quick, ch
 | Navigation and clarity | "Where do I click?", "Couldn't find prices" | Menu labels, the main button, what's above the fold on a phone | Section map, CTA |
 | Technical quality | "It's slow", "Broken on my phone" | `launch-audit`, a device check | The build, not the direction |
 | One element | "I don't like that font" | That element only | A token or a component |
+| Not the site | "The social page looks amateur", "I'm not ready to launch" | The front door: the profile, listing or ad a visitor sees before the site (name, handle, photo, bio, link) | Its own job, scoped and priced apart from the site. Say so |
+| Fear of choosing | "I don't want to pick the wrong one", silence, an answer to a different question, praise for something else you made | Nothing on the page. The ask is too big or too open | Shrink the ask: one recommendation, a veto, a fallback and a date (the owner sheet) |
 
 One complaint can touch two layers. "Too much" is often density plus promise: the site looks like a firm ten times their size.
+
+Check **What they get** before any look layer. An owner who can't see their offer on the page often says it as a look problem ("simpler", "more professional", "like theirs"), and a new look won't fix it. Check **Not the site** and **Fear of choosing** when the owner praises the work and still doesn't move.
 
 ## 4. Ask one locating question
 
@@ -58,6 +63,14 @@ Before changing §7 or §8, copy the current chosen direction and alignment stat
 
 Then rebuild in Phase B and redline against the revised direction.
 
+## 8. When they don't answer, or answer something else
+
+Silence after a locating question is the Fear of choosing layer, not a reason to build more. Don't send a third option, a longer explanation or a reminder with the same open question.
+
+- Put the decision on the owner sheet (`SKILL.md` section 8): the one option you recommend, a veto question, a fallback and a date.
+- If they praised something else you made (a one-page sheet, a post, a poster), that is the format they can react to. Put the open decision in that format.
+- When the date passes, each fallback stands as the builder's decision, logged `default, owner silent`. The job moves, and the owner can still change it.
+
 ## Example (anonymized)
 
 A video agency pitch, built in the owner's high-energy social style. His reply: "It's nice, but it's too much." Diagnosis:
@@ -67,6 +80,7 @@ A video agency pitch, built in the owner's high-energy social style. His reply: 
 - **Layers:** audience (restaurant owners, not other creatives), what leads (`deliverables` over a showreel), density (twelve sections for six projects), promise (the hero read like a large agency).
 - **Size:** strategy. The previous direction was kept as v1 in §9; a revised alignment statement was approved by text; the rebuild kept the template and cut it to five sections.
 
+
 ## Anti-patterns
 
 - Rebuilding the whole site after "I don't like it".
@@ -74,3 +88,5 @@ A video agency pitch, built in the owner's high-energy social style. His reply: 
 - Overwriting the old direction instead of versioning it.
 - Treating silence, or "looks fine" on an unrelated message, as approval of a revision.
 - Fixing the look when the complaint was about the offer or the proof.
+- Sending more options to an owner who hasn't picked from the ones they have.
+- Reading "the social page" as "the site", or the other way round, without asking which.

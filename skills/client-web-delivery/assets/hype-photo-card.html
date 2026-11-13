@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  Hype set: PHOTO CARD (references/hype-set.md). A real photo fills the card and a few words sit on its quiet area.
+  Copy to deliverables/hype/src/<name>.html and replace every {{...}}.
+  photo.png: a real photo of their work, or the post image from the Instagram mockups.
+  --photo-size and --photo-pos move the picture so its subject clears the words:
+    cover / 50% 100%                       the picture as shot, bottom edge kept (subject low, words on the space above)
+    max(140vw,81vh) auto / 0% 50%          zoomed, subject pushed to the right half (words on the left)
+  --ink is the words' color: it must read at 4.5:1 or better on the part of the photo it sits on. Look at the render.
+  Render: python scripts/render_cards.py deliverables/hype deliverables/hype/src/<name>.html  (add --size 1080x1920 for the story)
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>{{CLIENT}} photo card</title>
+<style>
+@font-face{font-family:Brand;src:url({{FONT_FILE}}) format("truetype");font-weight:200 800}
+:root{--photo:url(photo.png);--photo-size:cover;--photo-pos:50% 100%;--ink:#121212;--accent:#b23a0a;--words:58vw}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:Brand,system-ui,sans-serif}
+.card{position:relative;width:100vw;height:100vh;background:#000 var(--photo) var(--photo-pos)/var(--photo-size) no-repeat;color:var(--ink);display:flex;flex-direction:column;padding:7.4vw;overflow:hidden}
+header{display:flex;align-items:center;justify-content:space-between;font-size:2.6vw;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.label{color:var(--accent)}
+.words{margin-top:6vw;max-width:var(--words)}
+h1{font-size:9.4vw;line-height:1.02;font-weight:800;letter-spacing:-.03em;text-wrap:balance}
+.sub{font-size:3.9vw;line-height:1.32;margin-top:2.6vw;text-wrap:pretty}
+.where{display:inline-block;margin-top:3vw;font-size:2.3vw;font-weight:700;background:var(--ink);color:#fff;padding:1.3vw 2.2vw;border-radius:1vw}
+</style></head>
+<body><div class="card">
+  <header><span>{{CLIENT}}</span><span class="label">{{LABEL, e.g. NEW WEBSITE}}</span></header>
+  <div class="words">
+    <h1>{{HEADLINE, one short line}}</h1>
+    <p class="sub">{{ONE LINE of plain fact}}</p>
+    <!-- The pitch address while it is a pitch; the real domain once they buy. Remove the line to leave it off. -->
+    <p class="where">{{ADDRESS}}</p>
+  </div>
+</div></body></html>

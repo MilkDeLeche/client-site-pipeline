@@ -1,0 +1,28 @@
+<!doctype html>
+<!--
+  Launch reel: THE SITE, MOVING, IN A PHONE DRAWN IN CODE (references/launch-reel.md). The screen recording plays inside
+  a CSS phone, so it always fits. One line above it.
+  Copy to deliverables/reel/src/phone-frame.html and replace every {{...}}.
+  scroll-phone.mp4: reel.py record <pitch url> src/scroll-phone.mp4 --size 412x952 --seconds 10 --scroll
+  Film it:  python scripts/reel.py record deliverables/reel/src/phone-frame.html deliverables/reel/src/part-site.mp4 --size 1080x1920 --seconds 10
+  --ink on --bg must read at 4.5:1 or better.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>{{CLIENT}} site in a phone</title>
+<style>
+@font-face{font-family:Brand;src:url({{FONT_FILE}}) format("truetype");font-weight:200 800}
+:root{--bg:#121212;--ink:#ffffff;--accent:#ffd166}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:Brand,system-ui,sans-serif;background:var(--bg)}
+.card{width:100vw;height:100vh;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;align-items:center;padding:9vh 7.4vw 0;overflow:hidden}
+.label{font-size:2.6vw;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:7.4vw;line-height:1.05;font-weight:800;letter-spacing:-.03em;text-align:center;margin-top:2vw;text-wrap:balance}
+/* The phone takes the rest of the height and runs off the bottom edge; the video fills its screen exactly. */
+.phone{flex:1;min-height:0;margin-top:5vh;width:62vw;background:#0d0d0f;border-radius:7vw 7vw 0 0;padding:1.8vw 1.8vw 0;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 4vw 10vw rgba(0,0,0,.45)}
+.phone video{display:block;width:100%;aspect-ratio:412/952;object-fit:cover;object-position:top;border-radius:5.4vw 5.4vw 0 0;background:#fff}
+</style></head>
+<body><div class="card">
+  <p class="label">{{LABEL, e.g. NEW WEBSITE}}</p>
+  <h1>{{ONE LINE, researched or owner-picked}}</h1>
+  <div class="phone"><video src="scroll-phone.mp4" autoplay muted playsinline></video></div>
+</div></body></html>

@@ -39,8 +39,8 @@ pass before the next one starts.
 
 | # | Skill | Runs | Done when |
 |---|-------|------|-----------|
-| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template (or **skipped for now** and resumed later) | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**, and what each one is admired for; a short **ask-first list** put to the owner by text, call or an optional fillable PDF (or carried to the pitch meeting); **what leads** next to the evidence that exists; two or three named **directions**; a **`creative-direction.md`** with an alignment statement the client approved; a **`language-bank.md`** started with the buyers' own words |
-| **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | An approved **PRD** captures the site's intent (who buys, what they must believe, the one action that makes money); a **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; a **packages** file with local price research when the business sells packaged services; nothing invented |
+| **0** | [`brand-discovery`](skills/brand-discovery/SKILL.md) | Start of the job, before the PRD and the template (or **skipped for now** and resumed later) | A **vibe read** of their site and socials; every link sorted into **template** or **reference brand**, and what each one is admired for; a short **ask-first list** put to the owner by text, call or the **owner sheet** (one fillable PDF with the plans, the open decisions and a fallback and date for each; or carried to the pitch meeting); **what leads** next to the evidence that exists; a **market read** (the place, the competition screen by screen, how buyers search, tags, what heroes lead with) with a **template search brief** from the design scout; named **directions** with one recommended; a **`creative-direction.md`** with an alignment statement the client approved; a **`language-bank.md`** started with the buyers' own words |
+| **1** | [`client-web-delivery`](skills/client-web-delivery/SKILL.md) | Start of the job | An approved **PRD** captures the site's intent (who buys, what they must believe, the one action that makes money); a **setup-list** exists; every client fact lives in **one** `src/data/` file; an **architecture-plan** exists and every service has a reason; a **packages** file with local price research when the business sells packaged services (the owner sees it as plans on the owner sheet, never as the file); a **request form** designed for this business from research when the money action is a form; **mockups** and a **hype set** (coming-soon, stat and phone cards) beside the pitch kit; nothing invented |
 | **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Template **vetted** against the approved direction; live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
 | **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only, mapped to the PRD section by section by a senior room (strategist, copywriter, art director, UX lead) from a media-truth inventory, until the first screen sells to the target buyer with real proof and hero lines the owner picked from a researched shortlist, built from the template's own design grammar, with every template slot kept or its cut approved and reported, and a **responsive audit** clean at six widths in Chromium and WebKit (Safari) **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page, a second language) |
 | **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, a signup that saves a row, a banner that gates analytics, every enabled conversion proven end to end, **no fabricated testimonials** |
@@ -56,6 +56,8 @@ flowchart LR
     E -.->|handoff booklet| A
     E -.->|rebuild: snapshot URLs first| C
 ```
+
+**One start.** Say "start the pipeline" and it reads the builder's saved answers, asks whether to find a business to pitch or use one already in mind, takes one brief, and runs to a finished pitch with two pauses: the template pick and the approval before anything goes out. Around the six steps it also carries weekly ads from Krea Ad Studio, a guard that keeps `deliverables/` out of git, prospecting, a brand kit for owners without one, mockups, a hype set, a launch reel, a proposal, an owner sheet, outreach drafts and a pitch tracker ([kickoff](skills/client-site-pipeline/references/kickoff.md)).
 
 The orchestrator skill — [`client-site-pipeline`](skills/client-site-pipeline/SKILL.md) —
 is what an agent reads first. It enforces the order, names the current step out
@@ -74,8 +76,8 @@ link is sorted into a **template** (a clone candidate once licensed) or a
 never copied). Then comes a short **ask-first list**: three to five questions
 the builder can text the owner, each tied to what was found and naming what
 the answer decides, using this-or-that picks and plain-word questions instead
-of design jargon. The result is two or three named directions and an approved
-`creative-direction.md`
+of design jargon. The result is a set of named directions with one
+recommended and an approved `creative-direction.md`
 ([template](skills/brand-discovery/assets/creative-direction-template.md)).
 On a pitch with no interview, the builder approves a labeled guess and takes
 the questions to the meeting.
@@ -93,9 +95,28 @@ rejects a design, [feedback diagnosis](skills/brand-discovery/references/feedbac
 finds which decision was wrong before anything is rebuilt, and the earlier
 direction is kept.
 
-**Optional PDF kit.** `scripts/discovery_pdf.py` turns the same questions into
-a branded, fillable PDF (any number of sending agencies, logo optional,
-English or Spanish) and reads returned copies back, flagging blanks,
+**The owner sheet.** One fillable PDF the owner answers once, saved in the
+project's `deliverables/` folder: the plans with a suggested price and a blank
+for their own, the recommended design with a veto question, and the facts only
+they have (who gets requests, permission to name clients, a photo). Every tick
+has a fallback, so an open question can't hold a job for weeks, and the
+options are lettered so "4C 5A" by text is a full answer. On an outbound
+pitch it goes with the pitch as the way to steer it ("if this isn't it yet,
+fill this in"); for a client who came to the builder it goes before the
+build.
+
+**Research that stands in for the interview.** Most of these sites are
+pitched to owners who never asked, so step 0 reads the market for them
+([market read](skills/brand-discovery/references/market-read.md)): who lives
+where the business sells, the local competitors' first screens, forms and
+offers, how buyers search, the tags in use, and what heroes lead with in the
+trade. A [design scout](skills/brand-discovery/references/design-scout.md)
+then finds reference sites and writes a template search brief: the Land-book
+filters, Awwwards categories and neighbor trades that get the builder close
+to the right template.
+
+`scripts/discovery_pdf.py` builds it (any number of sending agencies, logo
+optional, English or Spanish) and reads returned copies back, flagging blanks,
 conflicts and flattened copies. It needs `pip install -r
 skills/brand-discovery/scripts/requirements.txt`; nothing else in the
 pipeline does. Nothing is hosted: you send the file yourself, and agency

@@ -10,6 +10,12 @@ flags blanks, conflicts and flattened copies. `answers-template` writes the same
 answers file, empty, for answers collected by text or call (provenance
 "transcribed").
 
+The same file builds the owner sheet (SKILL.md section 8): a "section" item
+starts a part, a "prices" item lists plans with a suggested price and a field
+for the owner's own, a question's "default" prints what happens if nobody
+answers by "decide_by", and "reply_by_text" letters the options so the owner
+can answer in a text message.
+
 Needs reportlab and pypdf (requirements.txt); the rest of the pipeline does not.
 Nothing here sends, hosts or uploads anything: the operator sends the PDF
 through their own channel and reads the returned copy locally. Keep agency
@@ -40,6 +46,12 @@ TEXT = {
         "page": "Page {n}",
         "version": "Version {v}",
         "reply_to": " to {who}",
+        "by_text": "Easier by text? Send the question number and the letter, like 4B 5A.",
+        "price_hint": "Write your price, or leave the line blank to keep ours.",
+        "suggested": "Suggested",
+        "your_price": "Your price",
+        "default": "No answer by {date}? We'll go with: {label}",
+        "default_no_date": "No answer? We'll go with: {label}",
     },
     "es": {
         "prepared_for": "Preparado para",
@@ -59,6 +71,12 @@ TEXT = {
         "page": "Página {n}",
         "version": "Versión {v}",
         "reply_to": " a {who}",
+        "by_text": "¿Más fácil por mensaje? Manda el número de la pregunta y la letra, por ejemplo 4B 5A.",
+        "price_hint": "Escribe tu precio, o deja la línea en blanco para dejar el nuestro.",
+        "suggested": "Sugerido",
+        "your_price": "Tu precio",
+        "default": "¿Sin respuesta para el {date}? Nos vamos con: {label}",
+        "default_no_date": "¿Sin respuesta? Nos vamos con: {label}",
     },
 }
 
@@ -71,6 +89,11 @@ def load_json(path):
 
 def text_for(locale):
     return TEXT.get((locale or "en")[:2], TEXT["en"])
+
+
+def asked(spec):
+    """The items that take an answer. A "section" only starts a part of the sheet."""
+    return [q for q in spec.get("questions", []) if q.get("type", "single") != "section"]
 
 
 def _circle_arc_stream(size, r, arcs=(0, 1, 2, 3), rotated=False):
@@ -157,7 +180,7 @@ def build(questions_path, agency_path, out_path):
     c = canvas.Canvas(str(out_path), pagesize=(page_w, page_h))
     c.setTitle(f"{spec.get('title', 'Questions')} · {client.get('name', '')}".strip(" ·"))
     c.setAuthor(agency_name)
-    c.setSubject("Client discovery questionnaire")
+    c.setSubject(spec.get("subject", "Client discovery questionnaire"))
     form = c.acroForm
     form.circleArcStream = _circle_arc_stream  # this form only; see the function
     state = {"page": 1, "y": page_h - margin}
@@ -223,6 +246,9 @@ def build(questions_path, agency_path, out_path):
     # How to fill it in, in a light box.
     contact_txt = t["reply_to"].format(who=reply_who) if reply_who else ""
     steps = [s.format(contact=contact_txt) for s in t["how"]]
+    by_text = bool(spec.get("reply_by_text"))
+    if by_text:
+        steps.append(t["by_text"])
     # 14 top padding + 18 title row + each step + 12 bottom padding.
     box_h = 44 + sum(measure(f"{i + 1}.  {s}", regular, 9.5, width - 28, 13) + 3 for i, s in enumerate(steps))
     ensure(box_h + 10)
@@ -253,32 +279,109 @@ def build(questions_path, agency_path, out_path):
         )
         state["y"] -= h + 6
 
-    for n, q in enumerate(spec.get("questions", []), start=1):
-        qid, qtype = q["id"], q.get("type", "single")
-        options = list(q.get("options", []))
-        if q.get("not_sure", qtype != "text"):
+    decide_by = spec.get("decide_by")
+    price_w, gap = 92, 12  # the owner's price field, and the space between the two price columns
+    n = 0
+    for q in spec.get("questions", []):
+        qtype = q.get("type", "single")
+        if qtype == "section":
+            # A part of the sheet: a rule, its title, and one or two plain sentences.
+            body_h = measure(q["text"], regular, 10.5, width, 14.5) if q.get("text") else 0
+            ensure(34 + measure(q["title"], bold, 15, width, 19) + body_h + 60)
+            c.setStrokeColor(colors["line"])
+            c.setLineWidth(0.6)
+            c.line(margin, state["y"], margin + width, state["y"])
+            state["y"] -= 14
+            para(q["title"], bold, 15, colors["ink"], leading=19)
+            if q.get("text"):
+                state["y"] -= 2
+                para(q["text"], regular, 10.5, colors["ink"], leading=14.5)
+            state["y"] -= 16
+            continue
+
+        n += 1
+        qid = q["id"]
+        choice = qtype in ("single", "multi")
+        options = list(q.get("options", [])) if choice else []
+        if choice and q.get("not_sure", True):
             options.append({"value": "not_sure", "label": t["not_sure"]})
-        has_other = q.get("other", qtype != "text")
-        if has_other:
+        if choice and q.get("other", True):
             options.append({"value": "other", "label": t["other"]})
 
         hint = q.get("help") or (
-            t["pick_one"] if qtype == "single" else t["pick_up_to"].format(n=q["max"]) if q.get("max") else t["pick_any"] if qtype == "multi" else ""
+            t["pick_one"] if qtype == "single" else t["pick_up_to"].format(n=q["max"]) if q.get("max")
+            else t["pick_any"] if qtype == "multi" else t["price_hint"] if qtype == "prices" else ""
         )
         head_h = measure(f"{n}.  {q['prompt']}", bold, 12.5, width, 16.5) + (measure(hint, regular, 9.5, width, 13) if hint else 0)
-        first_row = 22 if qtype != "text" else 26
-        ensure(head_h + first_row + 8)
+        first_row = 26 if qtype == "text" else 48 if qtype == "prices" else 22
+        head_h += 17 * len(q.get("links", []))
+        # A tick question stays on one page when it fits: an option alone on the next page gets missed.
+        block_h = head_h + first_row + 8
+        if choice:
+            rows_h = sum(
+                max(20, len(simpleSplit(f"{chr(65 + i)}. {o['label']}" if by_text else o["label"], regular, 10.5,
+                                        width - 24 - (190 if o["value"] == "other" else 0))) * 14 + 6)
+                for i, o in enumerate(options))
+            whole = head_h + 6 + rows_h + (29 if q.get("default") else 0) + (48 if q.get("note") else 0)
+            if whole <= page_h - 2 * margin - 10:
+                block_h = whole
+        ensure(block_h)
         para(f"{n}.  {q['prompt']}", bold, 12.5, colors["ink"], leading=16.5)
         if hint:
             state["y"] -= 2
             para(hint, regular, 9.5, colors["muted"], leading=13)
+        # Links sit under the prompt: the owner opens what the question is about, then answers.
+        for link in q.get("links", []):
+            state["y"] -= 3
+            c.setFont(regular, 10)
+            c.setFillColor(colors["accent"])
+            label = link.get("label") or link["url"]
+            c.drawString(margin, state["y"] - 10, label)
+            c.linkURL(link["url"], (margin, state["y"] - 13, margin + c.stringWidth(label, regular, 10), state["y"]), relative=0)
+            state["y"] -= 14
         state["y"] -= 6
 
         if qtype == "text":
             text_box(f"q.{qid}", q["prompt"], q.get("lines", 3))
+        elif qtype == "prices":
+            # One row per plan: what it is on the left, our number and the owner's on the right.
+            suggested_x = margin + width - price_w - gap - 86
+            text_w = suggested_x - margin - 16
+            c.setFont(regular, 8.5)
+            c.setFillColor(colors["muted"])
+            c.drawString(suggested_x, state["y"] - 9, t["suggested"])
+            c.drawString(margin + width - price_w, state["y"] - 9, t["your_price"])
+            state["y"] -= 15
+            for row in q.get("rows", []):
+                detail = simpleSplit(row.get("detail", ""), regular, 9.5, text_w) if row.get("detail") else []
+                row_h = max(30, 16 + len(detail) * 12.5 + 10)
+                ensure(row_h)
+                c.setStrokeColor(colors["line"])
+                c.setLineWidth(0.4)
+                c.line(margin, state["y"], margin + width, state["y"])
+                top = state["y"] - 8
+                c.setFont(bold, 10.5)
+                c.setFillColor(colors["ink"])
+                c.drawString(margin, top - 9, row["label"])
+                c.setFont(regular, 10.5)
+                c.drawString(suggested_x, top - 9, str(row.get("suggested", "")))
+                c.setFont(regular, 9.5)
+                c.setFillColor(colors["muted"])
+                for i, line in enumerate(detail):
+                    c.drawString(margin, top - 23 - i * 12.5, line)
+                form.textfield(name=f"q.{qid}.{row['id']}", tooltip=f"{q['prompt']} {row['label']}: {t['your_price']}", value="",
+                               x=margin + width - price_w, y=top - 15, width=price_w, height=19, fontName="Helvetica", fontSize=10,
+                               borderStyle="solid", borderColor=colors["line"], fillColor=colors["paper"],
+                               textColor=colors["ink"], forceBorder=True)
+                state["y"] -= row_h
+            if q.get("note", False):
+                state["y"] -= 4
+                ensure(14 + 34)
+                para(t["note"], regular, 9.5, colors["muted"], leading=13)
+                text_box(f"q.{qid}.note", f"{q['prompt']} {t['note']}", 2)
         else:
-            for opt in options:
-                label = opt["label"]
+            for index, opt in enumerate(options):
+                label = f"{chr(65 + index)}. {opt['label']}" if by_text else opt["label"]
                 label_w = width - 24 - (190 if opt["value"] == "other" else 0)
                 lines = simpleSplit(label, regular, 10.5, label_w)
                 row_h = max(20, len(lines) * 14 + 6)
@@ -301,19 +404,19 @@ def build(questions_path, agency_path, out_path):
                                    borderStyle="underlined", borderColor=colors["line"], fillColor=colors["paper"],
                                    textColor=colors["ink"], forceBorder=True)
                 state["y"] -= row_h
+            if q.get("default"):
+                # What happens if nobody answers, so an open question can't hold the job.
+                chosen = next((o["label"] for o in q.get("options", []) if o["value"] == q["default"]), q["default"])
+                line = (t["default"].format(date=decide_by, label=chosen) if decide_by
+                        else t["default_no_date"].format(label=chosen))
+                state["y"] -= 3
+                ensure(measure(line, regular, 9.5, width, 13) + 4)
+                para(line, regular, 9.5, colors["muted"], leading=13)
             if q.get("note", False):
                 state["y"] -= 2
                 ensure(14 + 34)
                 para(t["note"], regular, 9.5, colors["muted"], leading=13)
                 text_box(f"q.{qid}.note", f"{q['prompt']} {t['note']}", 2)
-        for link in q.get("links", []):
-            ensure(16)
-            c.setFont(regular, 9.5)
-            c.setFillColor(colors["accent"])
-            label = link.get("label") or link["url"]
-            c.drawString(margin, state["y"] - 10, label)
-            c.linkURL(link["url"], (margin, state["y"] - 13, margin + c.stringWidth(label, regular, 9.5), state["y"]), relative=0)
-            state["y"] -= 16
         state["y"] -= 16
 
     footer()
@@ -358,13 +461,24 @@ def _pdf_values(pdf_path):
 
 
 def blank_answers(spec, provenance):
-    return {
+    answers = {}
+    for q in asked(spec):
+        a = {"type": q.get("type", "single"), "value": None, "values": [], "other_text": "", "note": "", "state": "blank"}
+        if a["type"] == "prices":
+            a["prices"] = {row["id"]: "" for row in q.get("rows", [])}
+        if q.get("default"):
+            a["default"] = q["default"]
+        answers[q["id"]] = a
+    out = {
         "questions_version": spec.get("version", 1),
         "provenance": provenance,
         "status": "empty",
-        "answers": {q["id"]: {"type": q.get("type", "single"), "value": None, "values": [], "other_text": "", "note": "", "state": "blank"} for q in spec.get("questions", [])},
+        "answers": answers,
         "flags": [],
     }
+    if spec.get("decide_by"):
+        out["decide_by"] = spec["decide_by"]
+    return out
 
 
 def read(pdf_path, questions_path):
@@ -384,9 +498,15 @@ def read(pdf_path, questions_path):
         v = values.get(name)
         return "" if v is None else str(v).strip()
 
-    for q in spec.get("questions", []):
+    for q in asked(spec):
         qid, qtype = q["id"], q.get("type", "single")
         a = out["answers"][qid]
+        if qtype == "prices":
+            # A blank price keeps the suggestion, so it is an answer, not a gap.
+            a["prices"] = {row["id"]: text(f"q.{qid}.{row['id']}") for row in q.get("rows", [])}
+            a["note"] = text(f"q.{qid}.note")
+            a["state"] = "answered" if any(a["prices"].values()) or a["note"] else "kept"
+            continue
         if qtype == "text":
             a["value"] = text(f"q.{qid}") or None
         elif qtype == "single":
@@ -404,7 +524,11 @@ def read(pdf_path, questions_path):
         chosen = a["values"] if qtype == "multi" else [a["value"]] if a["value"] else []
         if not chosen and not a["other_text"] and not a["note"]:
             a["state"] = "blank"
-            out["flags"].append({"id": qid, "issue": "blank"})
+            flag = {"id": qid, "issue": "blank"}
+            if q.get("default"):
+                # After decide_by the default stands as the builder's decision, never as the owner's approval.
+                flag["default"] = q["default"]
+            out["flags"].append(flag)
         elif chosen == ["not_sure"] or (qtype == "multi" and "not_sure" in chosen and len(chosen) == 1):
             a["state"] = "not_sure"
         else:
@@ -426,7 +550,8 @@ def read(pdf_path, questions_path):
             out["flags"].append({"issue": "conflict", "message": rule.get("message", "These answers pull in different directions; ask one clarifying question.")})
 
     states = [a["state"] for a in out["answers"].values()]
-    out["status"] = "empty" if all(s == "blank" for s in states) else "complete" if "blank" not in states else "partial"
+    untouched = all(s in ("blank", "kept") for s in states)  # "kept" means no price was typed
+    out["status"] = "empty" if untouched else "complete" if "blank" not in states else "partial"
     return out
 
 

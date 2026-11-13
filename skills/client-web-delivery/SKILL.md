@@ -31,6 +31,8 @@ Write `packages.md` (template: `assets/packages-template.md`) before Phase B cop
 - A price the owner hasn't set is labeled a suggestion. Nothing reaches the site until the owner sets it; until then the pricing slot lists what's included and ends on the primary CTA.
 - Keep the builder's own tools and costs (email service, chatbot platform, margins) out of `packages.md` and anything the client may see.
 - Put on the setup-list: the owner's prices, contract terms, and whether the site shows prices.
+- **The owner never gets this file.** It reaches them as part 1 of the owner sheet (`brand-discovery` section 8): each plan with what's in it, a suggested price and a blank for their own, as a PDF in `deliverables/owner-sheet/`. The builder checks the numbers first.
+- **In anything a person reads, they are plans** (or the trade's own word: menu, services, memberships). "Packages" is the file name and stays in here.
 
 `packages.md` is the source for the pricing section and the service names on every design option. Restaurants and retail don't need it: their menu and products are facts in `src/data/`.
 
@@ -119,12 +121,31 @@ The fingerprint works without anyone's cooperation: search for it later to find 
 
 Blog: not part of this standard yet. A client-editable blog needs an admin login and storage; decide it per client.
 
-## Pitch kit (near-final pitch, before the sale)
+## The request form (designed for each client)
 
-When the pitch site is live and passes the standard above, build what the seller takes to the owner: a two-page **plan poster** (page 1: the price, what's included, a real photo of the client's work with screenshots of the live pitch, a "what changes" comparison checked on their current site, and a logo QR to the live pitch; page 2: why it's worth the monthly price, with a problem the owner hasn't noticed yet, one sourced stat, six to eight service cards and two more sections of the live site), plus a **contract-questions sheet** with one- or two-sentence answers on money, edits, canceling, ownership, what's not included and getting started. Method, render commands and checks: `references/pitch-kit.md`. Templates: `assets/pitch-poster-template.html`, `assets/pitch-poster-page2-template.html`, `assets/contract-questions-template.md`. Scripts: `scripts/shots.py` (screenshots), `scripts/make_qr.py` (fails unless the QR decodes at every size), `scripts/render_pages.py` (PNGs, and one PDF built from them so it looks the same on a phone, with checks). Every poster line is written from `copy-bank` research (owners' own words, opened and linked in `deliverables/pitch/poster-language.md`), never from the examples. The pipeline setup installs what they need.
+When the money action is a form, there is no standard field list: a plant seller, a caterer and a roofer each need different things before they can give a real answer. The agent designs the form for this business the way it writes the hero, from research. Method and checks: `references/request-form.md`.
 
-- Everything sent to the client by hand lives in the project's **`deliverables/` folder, which is gitignored** (setup-list, pitch kit, handoff). If it is already tracked, ignore it and `git rm -r --cached deliverables`. Tell the builder where it is; git does not back it up.
-- Prices, contract terms and what's included are the builder's. Draft defaults only where they haven't said, and list each one as a suggestion to confirm. Put no results on the poster (rankings, sales), and no capability a vendor hasn't confirmed.
+In short: name the moment (what the visitor asks for and what the owner does next), find what the owner needs for a real first reply (their current intake, three to five competitor forms from the market read, how the trade talks about it), find what buyers want to say (reviews and threads), then test every field: would the owner's first reply change with this answer, and can the buyer give it in five seconds? Seven visible fields at most, labels in the buyers' words, a promise after sending that the owner confirmed. The field table goes in `PRD.md` section 2 with the reason for each field.
+
+**Agencies and the builder's own site** ask for the lead's Instagram or site link, which starts that client's step 0, and they use the owner sheet (`brand-discovery` section 8) once a lead becomes a client. Other clients' sites get only their own form.
+
+## Pitch kit and deliverables (near-final pitch, before the sale)
+
+When the pitch site is live and passes the standard above, build what the builder takes to the owner. Each piece has its own reference; `references/deliverables-overview.md` has the summary of all of them.
+
+| Piece | Reference | Templates and scripts |
+|---|---|---|
+| Plan poster (two pages) and contract-questions sheet | `references/pitch-kit.md` | `assets/pitch-poster-template.html`, `assets/pitch-poster-page2-template.html`, `assets/contract-questions-template.md`, `scripts/shots.py`, `scripts/make_qr.py`, `scripts/render_pages.py` |
+| Proposal: what it costs, how to say yes | `references/proposal.md` | `assets/proposal-template.html`, numbers from the builder profile |
+| Instagram mockups: the logo as the profile picture, the launch post, the site in the bio | `references/mockups.md` | `assets/ig-post-image.html`, `assets/ig-post-mockup.html`, `assets/ig-profile-mockup.html`, `scripts/render_cards.py` |
+| Hype set: coming-soon, stat and phone cards | `references/hype-set.md` | `assets/hype-*.html`, `scripts/render_cards.py`, `scripts/census.py` |
+| Launch reel | `references/launch-reel.md` | `scripts/reel.py`, `assets/reel-phone-frame.html`, `assets/reel-stat-card.html` |
+| Brand board (when a brand kit was made) | `brand-discovery` → `references/brand-kit.md` | `assets/brand-board.html` |
+| Weekly ads, after launch: five a week from Krea Ad Studio, for the builder's own agency and for clients whose plan includes marketing | `references/ad-studio.md` | `assets/ads-log-template.md`, the Krea `ad_studio_*` tools |
+
+- Everything sent to the client by hand lives in the project's **`deliverables/` folder, which is gitignored, always**: `client-site-pipeline` → `scripts/guard_private.mjs` adds the ignore lines, untracks anything already committed, and installs a pre-commit hook that refuses to commit it. It is where the builder checks anything before it goes to a person, and nothing in it reaches an owner as Markdown: what goes out is a PDF, an image or a video. Tell the builder where it is; git does not back it up.
+- Screens and client work are real. Every line is researched (`copy-bank`, then what is working now on Pinterest and Reddit); every number is exact, sourced and printed with its source. Krea makes only the setting, one generation each, quoted first.
+- Prices, contract terms and what's included are the builder's (the builder profile). Draft defaults only where they haven't said, and list each one as a suggestion to confirm. No results promised, and no capability a vendor hasn't confirmed.
 - Nothing goes to the client until the builder says it's ready.
 
 ## Stage 2 — Build
@@ -133,7 +154,9 @@ Build the site. Keep every client-supplied fact in ONE data file so it's swappab
 
 ## Stage 3 — The setup-list (what you need FROM the client)
 
-Copy `assets/setup-list-template.md` into the project, fill it in for THIS client, and send it. What you request depends on what the site connects to — use the map below. Golden rule: **collect everything once, in one document.**
+Copy `assets/setup-list-template.md` into the project and fill it in for THIS client. What you request depends on what the site connects to — use the map below. Golden rule: **collect everything once, in one document.**
+
+**The setup-list is the builder's tracker. The owner gets the owner sheet.** The asks that need the owner's head (prices, permission to name clients, who answers requests, what the signup promises, a photo) go on the owner sheet in plain words, as ticks, each with a fallback and one date (`brand-discovery` section 8). Credentials, vendor names, API keys and environment variables never appear on it: those are handled on a call or a screen-share after the owner has said yes. A setup-list sent as-is reads like a developer's checklist, and an owner who can't answer half of it answers none of it.
 
 ### Integration → what to request
 

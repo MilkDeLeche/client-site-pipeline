@@ -30,6 +30,24 @@ These apply to every industry. Rewrite the options from the homework; the exampl
 | `reference` | What to take from a site they like (decoding, below) | When they name or send one | What do you like about that site? | ¿Qué te gusta de esa página? |
 | `never` | Hard limits | Always | Anything we must keep, avoid or never say? | ¿Algo que debamos mantener, evitar o nunca decir? |
 
+## Owner sheet items
+
+Parts 2 and 3 of the owner sheet (`SKILL.md` section 8) use these next to the core decisions. Each tick question names its fallback: the option that claims nothing new.
+
+| id | Decides | Question | Fallback |
+|---|---|---|---|
+| `prices_show` | Whether the site shows prices | Should the site show these prices? | No prices: list what's in each plan and let them ask |
+| `design_veto` | The design | Go with this one? (Yes / Yes, but change one thing / No, show me another) | Yes |
+| `their_word` | What a word of theirs means | You said "…". What is that, to you? Offer two or three concrete meanings | The reading the homework supports, labeled a guess in §1 |
+| `front_door` | Whether the problem is the site or the page in front of it | You said the page looks "…". Which part? | None: ask again |
+| `names_ok` | Whether clients are named | Can the site name the businesses you've worked with? | Not yet: describe the work without names |
+| `inbox` | Who answers a request | When someone asks, who gets it? The email and the phone number | None: the form can't be called live |
+| `contact_public` | Whether a phone and email show | Should that number and email show on the site? | The form only |
+| `social_name` | The name the site and the social page share | The page says X and the site says Y. Which name wins? | None: only the owner can change it |
+| `face` | Whether the owner appears | A photo of you on the site? | No: keep it about the work |
+
+**Quote their word back.** When the owner used a word that could mean several things, the question repeats it in quotation marks and the options are what it could mean. "Simpler" becomes fewer sections, less movement, fewer words, or a calmer look. "The output" becomes what a client gets, results in numbers, or the finished work shown bigger.
+
 ## What leads: showcase emphasis
 
 "Show our work" means different things in different trades. Record two things separately, in `creative-direction.md` §4:

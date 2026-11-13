@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+  Hype set: STAT CARD (references/hype-set.md). One number, nothing else competing with it.
+  Copy to deliverables/hype/src/stat-1.html and replace every {{...}}.
+  Colors: set the four variables to the client's brand. --on-brand must read on --brand at 4.5:1 or better.
+  Photo version: add class="photo" to .card and set --bg to a real photo or a Krea background (no words in it).
+  --wash is how much of the brand color covers the photo (.82 for a busy photo, less for a dark, quiet one). Look at the render:
+  every line must still read at 4.5:1 where the photo is brightest.
+  Render: python scripts/render_cards.py deliverables/hype deliverables/hype/src/stat-1.html
+          add --size 1080x1920 for the story version.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>{{CLIENT}} stat card</title>
+<style>
+@font-face{font-family:Brand;src:url({{FONT_FILE}}) format("truetype");font-weight:200 800}
+:root{--brand:#1e4872;--on-brand:#ffffff;--accent:#ffd166;--bg:none;--wash:.82}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:Brand,system-ui,sans-serif}
+.card{position:relative;width:100vw;height:100vh;background:var(--brand);color:var(--on-brand);display:flex;flex-direction:column;padding:7.4vw}
+/* The photo sits under a wash of the brand color so the type keeps its contrast everywhere. */
+.card.photo{background:var(--brand) var(--bg) center/cover no-repeat}
+.card.photo::before{content:"";position:absolute;inset:0;background:var(--brand);opacity:var(--wash)}
+.card>*{position:relative}
+header{display:flex;align-items:center;gap:2vw;font-size:2.6vw;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+header img{height:5.6vw;width:auto}
+main{flex:1;display:flex;flex-direction:column;justify-content:center}
+.hook{font-size:7.2vw;line-height:1.08;font-weight:700;letter-spacing:-.02em;text-wrap:balance;max-width:16ch}
+.num{display:block;font-size:30vw;line-height:.92;font-weight:800;letter-spacing:-.045em;color:var(--accent);margin-top:4.4vw}
+.means{font-size:3.9vw;line-height:1.32;margin-top:3vw;max-width:25ch;text-wrap:pretty}
+footer{font-size:2.05vw;line-height:1.35;opacity:.86;max-width:60ch}
+</style></head>
+<body><div class="card">
+  <!-- The logo if it reads on the brand color; otherwise the name in type. -->
+  <header><span>{{CLIENT}}</span></header>
+  <main>
+    <p class="hook">{{HOOK: the problem in the buyer's or owner's own words, from hype-language.md}}</p>
+    <strong class="num">{{NUMBER}}</strong>
+    <p class="means">{{WHAT THE NUMBER COUNTS, exactly as the source says it, in one sentence}}</p>
+  </main>
+  <footer>{{SOURCE, YEAR (SAMPLE)}}</footer>
+</div></body></html>

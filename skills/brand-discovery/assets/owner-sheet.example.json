@@ -1,0 +1,138 @@
+{
+  "_readme": "Example only (a made-up lawn care company). Copy to the project's deliverables/owner-sheet/src/ folder. Part 1 comes from packages.md, part 2 from the ask-first list and the recommended design, part 3 from the setup-list in plain words. Twelve numbered items at most. Every tick question that can have one carries a default: the option that claims nothing new. The builder checks each suggested price and sets decide_by before it goes out.",
+  "version": 1,
+  "locale": "en",
+  "page_size": "letter",
+  "date": "2026-01-15",
+  "subject": "Owner sheet",
+  "client": { "name": "Example Lawn Care" },
+  "title": "The last things we need from you",
+  "intro": "Ana, this is everything still open on the site, on one sheet. Most of it is a tick. Skip what you're not sure about and we'll go with the line under the question.",
+  "decide_by": "Friday, January 23",
+  "reply_by_text": true,
+  "questions": [
+    {
+      "type": "section",
+      "title": "What you sell",
+      "text": "This is how the site will describe your services. Change any price, or leave the line blank to keep ours. The prices are in line with what two other crews in town publish."
+    },
+    {
+      "id": "prices_monthly",
+      "decides": "the monthly plans and their prices",
+      "type": "prices",
+      "prompt": "Monthly yard care",
+      "rows": [
+        { "id": "basic", "label": "Every two weeks", "detail": "Mowing, edging and blowing off the walks", "suggested": "$120/mo" },
+        { "id": "weekly", "label": "Every week", "detail": "The same, plus beds weeded once a month", "suggested": "$220/mo" }
+      ]
+    },
+    {
+      "id": "prices_once",
+      "decides": "the one-time jobs and their prices",
+      "type": "prices",
+      "prompt": "One-time jobs",
+      "rows": [
+        { "id": "cleanup", "label": "Yard cleanup", "detail": "Overgrown yards, hauled away the same day", "suggested": "From $250" },
+        { "id": "sod", "label": "New sod", "detail": "Measured and quoted on a visit", "suggested": "By quote" }
+      ]
+    },
+    {
+      "id": "prices_show",
+      "decides": "whether the site shows prices",
+      "type": "single",
+      "prompt": "Should the site show these prices?",
+      "default": "quote",
+      "not_sure": false,
+      "other": false,
+      "options": [
+        { "value": "show", "label": "Yes, show the prices" },
+        { "value": "from", "label": "Show only where each one starts" },
+        { "value": "quote", "label": "No prices. List what's in each and let them ask for a quote" }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "The website",
+      "text": "We'd go with the bright one with your truck up top: you said your customers are older and want it easy to read."
+    },
+    {
+      "id": "design_veto",
+      "decides": "the design",
+      "type": "single",
+      "prompt": "Go with this one?",
+      "default": "yes",
+      "not_sure": false,
+      "other": false,
+      "options": [
+        { "value": "yes", "label": "Yes, go with it" },
+        { "value": "change", "label": "Yes, but change one thing (write it below)" },
+        { "value": "other_design", "label": "No, I want to see a different one" }
+      ],
+      "links": [ { "label": "example-lawn.workers.dev", "url": "https://example-lawn.workers.dev/" } ],
+      "note": true
+    },
+    {
+      "id": "their_word",
+      "decides": "what the first screen leads with",
+      "type": "single",
+      "prompt": "You said the other crew's site looks \"more professional.\" What makes it look that way to you?",
+      "default": "work",
+      "not_sure": false,
+      "options": [
+        { "value": "work", "label": "It shows finished yards, before and after" },
+        { "value": "trust", "label": "It shows their license and reviews" },
+        { "value": "look", "label": "The colors and the logo" }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Only you can answer these"
+    },
+    {
+      "id": "names_ok",
+      "decides": "whether customers are named on the site",
+      "type": "single",
+      "prompt": "Can the site show the street or the neighborhood of a finished yard?",
+      "default": "no_names",
+      "not_sure": false,
+      "other": false,
+      "options": [
+        { "value": "all", "label": "Yes, the neighborhood" },
+        { "value": "no_names", "label": "No. Show the yard and nothing else" }
+      ]
+    },
+    {
+      "id": "inbox",
+      "decides": "who answers a request",
+      "type": "text",
+      "lines": 2,
+      "prompt": "When someone asks for a quote, who gets it? Write the email and the phone number."
+    },
+    {
+      "id": "contact_public",
+      "decides": "whether a phone and email show on the site",
+      "type": "single",
+      "prompt": "Should that phone number show on the site?",
+      "default": "form_only",
+      "not_sure": false,
+      "other": false,
+      "options": [
+        { "value": "show", "label": "Yes, with a button to call" },
+        { "value": "form_only", "label": "Not yet, the quote form only" }
+      ]
+    },
+    {
+      "id": "face",
+      "decides": "whether the owner appears on the site",
+      "type": "single",
+      "prompt": "A photo of you and the crew on the site?",
+      "default": "no_face",
+      "not_sure": false,
+      "other": false,
+      "options": [
+        { "value": "send", "label": "Yes, I'll send one" },
+        { "value": "no_face", "label": "No, keep it about the yards" }
+      ]
+    }
+  ]
+}

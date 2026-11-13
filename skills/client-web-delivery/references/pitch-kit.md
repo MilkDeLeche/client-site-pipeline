@@ -10,7 +10,12 @@ Every client project has a `deliverables/` folder at its root, listed in `.gitig
 
 ```
 deliverables/
-  setup-list.md                    the asks (step 1)
+  setup-list.md                    the builder's tracker of every ask (step 1); never sent as-is
+  owner-sheet/
+    <client>-owner-sheet.pdf       what the owner fills in once: the plans, the design veto, the open facts (brand-discovery section 8)
+    src/                           questions.json and the sender profile, to rebuild it
+  instagram/                       the logo and the site as Instagram posts and a profile page, drawn in code (mockups.md)
+  hype/                            coming-soon, stat and phone cards, post and story sizes (hype-set.md)
   pitch/
     <client>-plan.pdf              both poster pages, letter
     poster-language.md             the owners' words behind every poster line, with links (copy-bank)

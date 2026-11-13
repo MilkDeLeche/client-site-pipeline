@@ -21,3 +21,6 @@ __pycache__/
 
 # Client material never belongs in this public repo
 discovery/
+
+# What goes to the owner by hand and what comes back: never committed.
+deliverables/

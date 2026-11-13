@@ -1,0 +1,84 @@
+<!doctype html>
+<!--
+  Proposal, one letter page (references/proposal.md). Copy to deliverables/pitch/src/proposal.html and replace every {{...}}.
+  Every number comes from the builder profile (~/.client-site-pipeline/builder.json, "offer"). A value the profile
+  leaves empty stays a blank line (class="blank") for the builder to fill in by hand. Never name the builder's tools.
+  Colors: the builder's own brand, or the client's when the builder asks. --ink on --paper and #fff on --brand must read at 4.5:1.
+  Render: python scripts/render_pages.py ../<client>-proposal.pdf proposal.html
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>Proposal for {{CLIENT}}</title>
+<style>
+@font-face{font-family:Brand;src:url({{FONT_FILE}}) format("truetype");font-weight:200 800}
+@page{size:8.5in 11in;margin:0}
+:root{--brand:#121212;--ink:#121212;--muted:#4c4c4c;--line:#d9d9d6;--paper:#ffffff;--tint:#f3f2ef}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1275px;height:1650px;background:var(--paper);font-family:Brand,system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:1275px;height:1650px;padding:70px 84px 56px;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;justify-content:space-between;align-items:baseline;font-size:17px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+header span:last-child{color:var(--muted);font-weight:500;letter-spacing:.02em;text-transform:none}
+h1{font-size:64px;line-height:1.03;font-weight:800;letter-spacing:-.03em;margin-top:44px;max-width:15ch;text-wrap:balance}
+.lead{font-size:24px;line-height:1.4;color:var(--muted);margin-top:16px;max-width:44ch;text-wrap:pretty}
+h2{font-size:17px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:44px;padding-top:18px;border-top:2px solid var(--ink)}
+/* The build price is the one large figure on the page; the two payments sit beside it. */
+.build{display:grid;grid-template-columns:auto 1fr 1fr;gap:40px;align-items:end;margin-top:18px}
+.build strong{font-size:96px;line-height:.9;font-weight:800;letter-spacing:-.04em}
+.build div b{display:block;font-size:34px;font-weight:800;letter-spacing:-.02em}
+.build div span{display:block;font-size:19px;line-height:1.35;color:var(--muted);margin-top:4px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+.plan{border:2px solid var(--line);border-radius:14px;padding:24px 26px}
+.plan.more{border-color:var(--ink);background:var(--tint)}
+.plan h3{font-size:22px;font-weight:800}
+.plan .price{font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:8px}
+.plan .price span{font-size:19px;font-weight:600;color:var(--muted);letter-spacing:0}
+.plan ul{list-style:none;margin-top:14px}
+.plan li{font-size:19px;line-height:1.35;padding:7px 0;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.two p{font-size:19px;line-height:1.42;color:var(--muted);margin-top:12px;text-wrap:pretty}
+.start{margin-top:auto;background:var(--brand);color:#fff;border-radius:14px;padding:26px 30px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+.start b{display:block;font-size:28px;font-weight:800}
+.start span{display:block;font-size:19px;line-height:1.4;opacity:.9;margin-top:6px}
+.sign{font-size:17px;border-top:2px solid #fff;padding-top:8px;min-width:300px;opacity:.9}
+.blank{display:inline-block;min-width:110px;border-bottom:2px solid currentColor;height:1em;vertical-align:baseline}
+footer{margin-top:18px;font-size:15px;color:var(--muted);display:flex;justify-content:space-between}
+@media print{html,body{width:816px;height:1056px;overflow:hidden}.page{zoom:.64}}
+</style></head>
+<body><div class="page">
+  <header><span>{{BUILDER OR AGENCY NAME}}</span><span>Proposal for {{CLIENT}} · {{DATE}}</span></header>
+
+  <h1>{{HEADLINE: the site is built and what saying yes starts}}</h1>
+  <p class="lead">{{ONE LINE: what is on the site, in the owner's terms, and the link to see it}}</p>
+
+  <h2>The website</h2>
+  <div class="build">
+    <strong>{{BUILD PRICE}}</strong>
+    <div><b>{{DOWN}} to start</b><span>{{What starting means: the date work continues, what they get first}}</span></div>
+    <div><b>{{BALANCE}} when you say it's done</b><span>{{What "done" means, in one line}}</span></div>
+  </div>
+
+  <h2>Every month after it's live</h2>
+  <div class="plans">
+    <div class="plan">
+      <h3>{{PLAN 1 NAME}}</h3>
+      <div class="price">{{PRICE}}<span> / month</span></div>
+      <ul><li>{{INCLUDED, in the owner's words}}</li><li>{{INCLUDED}}</li></ul>
+    </div>
+    <div class="plan more">
+      <h3>{{PLAN 2 NAME}}</h3>
+      <div class="price">{{PRICE}}<span> / month</span></div>
+      <!-- An AI chat line only when the builder offers it to this client. -->
+      <ul><li>{{Everything in PLAN 1}}</li><li>{{INCLUDED}}</li><li>{{INCLUDED}}</li><li>{{INCLUDED}}</li><li>{{INCLUDED}}</li></ul>
+    </div>
+  </div>
+
+  <div class="two">
+    <div><h2>What you never deal with</h2><p>{{What the builder sets up and runs for them, as what they're spared. No tool or vendor names.}}</p></div>
+    <div><h2>What stays yours</h2><p>{{The domain, the words, the photos, the list of customers who signed up.}}</p></div>
+  </div>
+
+  <div class="start">
+    <div><b>{{HOW TO START, e.g. Reply YES and send the first payment}}</b><span>Start date: <i class="blank"></i> &nbsp; {{Terms the builder set, or blanks: cancel with <i class="blank"></i> days' notice}}</span></div>
+    <div class="sign">Signature and date</div>
+  </div>
+  <footer><span>Prepared for {{CLIENT}} · {{AREA}}</span><span>{{BUILDER CONTACT}}</span></footer>
+</div></body></html>

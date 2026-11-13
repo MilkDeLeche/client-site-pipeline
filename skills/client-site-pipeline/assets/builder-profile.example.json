@@ -1,0 +1,103 @@
+{
+  "_readme": "The builder's standing answers. Copy to ~/.client-site-pipeline/builder.json (private, outside every repo) and fill it in once. Agents read it at the start of every job and never ask a question it already answers. Tool names and costs in private_tools never reach a client, a site or a deliverable.",
+  "builder": {
+    "name": "Example Builder",
+    "agency": "Example Studio",
+    "phone": null,
+    "email": null,
+    "instagram": null,
+    "agency_profile": "~/.client-site-pipeline/agencies/example-studio.json"
+  },
+  "mode": "outbound",
+  "antislop": "during",
+  "languages": {
+    "primary": "en",
+    "second": "es"
+  },
+  "pauses": [
+    "the template pick, from the search brief",
+    "the approval before anything goes to an owner"
+  ],
+  "cuts": "ask and log before cutting any template slot",
+  "research": {
+    "always_check": [
+      "pinterest",
+      "reddit"
+    ],
+    "design_sources": [
+      "land-book.com",
+      "awwwards.com",
+      "lapa.ninja"
+    ],
+    "template_subscriptions": [
+      "envato",
+      "motionsites"
+    ]
+  },
+  "krea": {
+    "credits_per_job": 500,
+    "one_generation_each": true,
+    "quote_before_generating": true
+  },
+  "offer": {
+    "build": {
+      "price": 1000,
+      "down": 500,
+      "balance": 500,
+      "balance_due": "when the owner says the site is done"
+    },
+    "plans": [
+      {
+        "id": "care",
+        "name": "Care",
+        "price": 100,
+        "per": "month",
+        "includes": [
+          "the site kept online, safe and working",
+          "small fixes"
+        ]
+      },
+      {
+        "id": "growth",
+        "name": "Growth",
+        "price": 200,
+        "per": "month",
+        "includes": [
+          "everything in Care",
+          "found on Google and in AI search",
+          "updates every month",
+          "an email newsletter, designed and sent",
+          "a monthly report"
+        ]
+      }
+    ],
+    "ai_chat": "only when the builder includes it, inside the higher plan",
+    "terms": {
+      "contract": "month to month",
+      "notice_days": null,
+      "edits_per_month": null
+    }
+  },
+  "private_tools": {
+    "email": null,
+    "chat": null,
+    "hosting": "Cloudflare Workers"
+  },
+  "census_api_key": null,
+  "pitch_tracker": "~/.client-site-pipeline/pitches.md",
+  "commits": "no AI attribution",
+  "ads": {
+    "per_week": 5,
+    "credits_per_batch": 750,
+    "brands": [
+      {
+        "name": "Example Studio",
+        "project": "D:/path/to/project",
+        "brand_kit_id": null,
+        "log": "deliverables/ads/ads-log.md",
+        "status": "active"
+      }
+    ],
+    "_note": "Weekly Krea Ad Studio batches (client-web-delivery -> references/ad-studio.md). At the start of a session, an agent checks each active brand's log and says when a batch is due."
+  }
+}

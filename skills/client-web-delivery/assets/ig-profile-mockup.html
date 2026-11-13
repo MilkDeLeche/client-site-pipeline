@@ -1,0 +1,59 @@
+<!doctype html>
+<!--
+  Instagram mockups (references/mockups.md): THE PROFILE PAGE, in a phone drawn in code (no cutout to fit).
+  The logo as the profile picture, the bio with the new site's link, highlights and a grid of their real work.
+  A generic profile layout: no platform logo, and no post, follower or following counts (unmeasured numbers are fabricated claims).
+  Copy to deliverables/instagram/src/profile-mockup.html and replace every {{...}}.
+  avatar.png: the logo mark, square. grid-1.png: the launch post (ig-post-image.html rendered). grid-2..9 and hl-1..4: their real photos
+  or real screenshots of the site. Nothing uncleared may be legible (client names, prices).
+  Render: python scripts/render_cards.py deliverables/instagram deliverables/instagram/src/profile-mockup.html
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>{{CLIENT}} profile mockup</title>
+<style>
+@font-face{font-family:Brand;src:url({{FONT_FILE}}) format("truetype");font-weight:200 800}
+:root{--bg:#f3f2ef;--avatar-bg:#121212;--link:#1d4ed8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.card{width:100vw;height:100vh;background:var(--bg);display:flex;justify-content:center;padding-top:7vw;overflow:hidden}
+/* The phone runs off the bottom edge so the grid can be large; the screen is a box, so the page always fits it. */
+.phone{width:66vw;background:#0d0d0f;border-radius:8vw 8vw 0 0;padding:1.8vw 1.8vw 0;box-shadow:0 3vw 9vw rgba(0,0,0,.25);align-self:flex-start;height:120vh}
+.screen{background:#fff;color:#111;border-radius:6.4vw 6.4vw 0 0;height:100%;overflow:hidden;padding-top:6.4vw}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:0 3.4vw 2vw}
+.bar b{font-size:2.9vw;font-weight:700}
+.bar svg{width:3.6vw;height:3.6vw;stroke:#111;stroke-width:2;fill:none;stroke-linecap:round}
+.top{display:flex;align-items:center;gap:3.2vw;padding:0 3.4vw}
+.avatar{width:15vw;height:15vw;border-radius:50%;background:var(--avatar-bg) center/68% no-repeat;outline:.45vw solid #fff;box-shadow:0 0 0 .8vw #d8d8d8;flex-shrink:0}
+.name b{display:block;font-size:2.5vw;font-weight:700}
+.name span{display:block;font-size:2.1vw;color:#666;margin-top:.4vw}
+.bio{font-size:2.1vw;line-height:1.4;padding:2.2vw 3.4vw 0}
+.bio a{color:var(--link);font-weight:600;text-decoration:none}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:1.4vw;padding:2.4vw 3.4vw 0}
+.buttons span{display:block;text-align:center;font-size:2.1vw;font-weight:600;padding:1.4vw 0;border-radius:1.4vw;background:#efefef}
+.buttons span:first-child{background:#111;color:#fff}
+.hl{display:flex;gap:3vw;padding:2.8vw 3.4vw 2.4vw}
+.hl div{width:10.4vw;text-align:center;font-size:1.7vw}
+.hl i{display:block;width:10.4vw;height:10.4vw;border-radius:50%;background:#ddd center/cover no-repeat;box-shadow:0 0 0 .4vw #fff,0 0 0 .7vw #d4d4d4;margin-bottom:1vw}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.35vw;border-top:1px solid #e6e6e6;padding-top:.35vw}
+.grid i{display:block;aspect-ratio:4/5;background:#ddd center/cover no-repeat}
+</style></head>
+<body><div class="card"><div class="phone"><div class="screen">
+  <div class="bar"><b>{{HANDLE}}</b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
+  <div class="top">
+    <div class="avatar" style="background-image:url(avatar.png)"></div>
+    <div class="name"><b>{{NAME}}</b><span>{{CATEGORY, e.g. Marketing agency}}</span></div>
+  </div>
+  <p class="bio">{{BIO LINE 1, an owner-picked line}}<br>{{BIO LINE 2, where they work}}<br><a>{{THE NEW SITE'S ADDRESS}}</a></p>
+  <div class="buttons" aria-hidden="true"><span>Follow</span><span>Message</span></div>
+  <div class="hl">
+    <div><i style="background-image:url(hl-1.jpg)"></i>{{LABEL}}</div>
+    <div><i style="background-image:url(hl-2.jpg)"></i>{{LABEL}}</div>
+    <div><i style="background-image:url(hl-3.jpg)"></i>{{LABEL}}</div>
+    <div><i style="background-image:url(hl-4.jpg)"></i>{{LABEL}}</div>
+  </div>
+  <div class="grid">
+    <i style="background-image:url(grid-1.png)"></i><i style="background-image:url(grid-2.jpg)"></i><i style="background-image:url(grid-3.jpg)"></i>
+    <i style="background-image:url(grid-4.jpg)"></i><i style="background-image:url(grid-5.jpg)"></i><i style="background-image:url(grid-6.jpg)"></i>
+    <i style="background-image:url(grid-7.jpg)"></i><i style="background-image:url(grid-8.jpg)"></i><i style="background-image:url(grid-9.jpg)"></i>
+  </div>
+</div></div></div></body></html>

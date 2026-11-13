@@ -33,14 +33,17 @@ Copy to `creative-direction.md` at the project root. This is a **starter, not an
 - **Where they are now:** {{how much real work exists, what they can honestly promise today}}
 - **Where they want to be:** {{the impression they're after}}
 - **How we close the gap honestly:** {{selection, hierarchy, process story; never invented proof}}
+- **The front door:** {{where visitors come from first (social page, Google listing, an ad); whether its name, handle, photo, bio and link match the site; if it needs work, that is its own job, named here}}
 
 ## 3. Ask-first list
 
-| id | Question (as asked) | Tied to what we found | Decides | Answer (their words where given) | Channel + date |
-|---|---|---|---|---|---|
-| | | | template / density / motion / voice / offer order / what leads | | text / call / meeting / PDF (`pdf-fields` or `transcribed`) |
+Owner sheet: {{`deliverables/owner-sheet/<client>-owner-sheet.pdf`, sent on DATE by CHANNEL / carried to the meeting / not built yet}}. Decide by: {{date}}.
 
-Not sure means the builder recommends and the owner reacts. Blanks and flags from a returned PDF become follow-up questions.
+| id | Question (as asked) | Tied to what we found | Decides | Fallback if no answer | Answer (their words where given) | Channel + date |
+|---|---|---|---|---|---|---|
+| | | | template / density / motion / voice / offer order / what leads | {{the option that claims nothing new; none when only the owner can act}} | {{or `default, owner silent`}} | text / call / meeting / PDF (`pdf-fields` or `transcribed`) |
+
+Not sure means the builder recommends and the owner reacts. Blanks and flags from a returned PDF become follow-up questions. A fallback that stood is the builder's decision, never the owner's approval.
 
 ## 4. What leads and the evidence
 
@@ -60,10 +63,12 @@ Results appear only with a source, a date and the client's permission.
 
 ## 6. Directions
 
+How many is the builder's call. What they differ on, and why the owner would care: {{what the site says, or how it looks}}. Template search brief: `market-read.md`.
+
 | Plain name / designer term | First 10 seconds | Look (type, color, density, imagery, motion, navigation) | How the real work is used | Gives up | Why it fits | Candidate templates |
 |---|---|---|---|---|---|---|
 
-**Recommended:** {{one, and why}}
+**Recommended:** {{one, and why, in a sentence the owner can veto}}
 
 ## 7. Chosen direction
 
@@ -113,6 +118,9 @@ A returned questionnaire, silence, or "looks good" on an unrelated message is no
 - [ ] The client's real work can carry the direction.
 - [ ] Their buyers would understand a site built this way.
 - [ ] Conflicts and unknowns are recorded before the build.
+- [ ] `market-read.md` is written: the place, the competition, the heroes, three numbers with sources, the template search brief.
+- [ ] The owner sheet is built: it goes with an outbound pitch, or before the build for an inbound client.
+- [ ] Nothing the owner said after seeing a build is missing from §9.
 
 ## 9. Feedback and change log
 

@@ -505,5 +505,105 @@ class BuildAndRead(unittest.TestCase):
                 doc.close()
 
 
+OWNER_SHEET = {
+    "version": 1,
+    "locale": "en",
+    "client": {"name": "Example Lawn Care"},
+    "title": "The last things we need from you",
+    "decide_by": "Friday, March 6",
+    "reply_by_text": True,
+    "questions": [
+        {"type": "section", "title": "What you sell", "text": "Change any price, or leave it."},
+        {"id": "plans", "type": "prices", "prompt": "Monthly plans",
+         "rows": [{"id": "basic", "label": "Basic", "detail": "Mowing every two weeks", "suggested": "$120/mo"},
+                  {"id": "full", "label": "Full", "detail": "Weekly mowing, edging and beds", "suggested": "$260/mo"}]},
+        {"type": "section", "title": "The website"},
+        {"id": "design", "type": "single", "prompt": "Go with the simple design?", "default": "yes", "not_sure": False,
+         "options": [{"value": "yes", "label": "Yes, go"}, {"value": "change", "label": "Yes, but change one thing"}]},
+        {"id": "inbox", "type": "text", "lines": 2, "prompt": "Where should requests go?"},
+    ],
+}
+
+
+@unittest.skipUnless(HAVE_PDF, "reportlab and pypdf not installed (optional)")
+class OwnerSheet(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = pathlib.Path(self._tmp.name)
+        self.questions = write_json(self.tmp, "sheet.json", OWNER_SHEET)
+        self.pdf = self.tmp / "sheet.pdf"
+        self.warnings = discovery_pdf.build(self.questions, EXAMPLE_AGENCY, self.pdf)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_sections_take_no_number_and_no_field(self):
+        from pypdf import PdfReader
+        self.assertEqual(self.warnings, [])
+        text = page_text(self.pdf)
+        self.assertIn("What you sell", text)
+        self.assertIn("1. Monthly plans", text)
+        self.assertIn("2. Go with the simple design?", text)
+        self.assertIn("3. Where should requests go?", text)
+        fields = PdfReader(str(self.pdf)).get_fields()
+        self.assertFalse([name for name in fields if "section" in name])
+
+    def test_each_plan_has_a_price_field_beside_the_suggestion(self):
+        from pypdf import PdfReader
+        fields = PdfReader(str(self.pdf)).get_fields()
+        for row in ("basic", "full"):
+            self.assertEqual(fields[f"q.plans.{row}"].get("/FT"), "/Tx")
+        text = page_text(self.pdf)
+        self.assertIn("$120/mo", text)
+        self.assertIn("Your price", text)
+
+    def test_default_date_and_letters_are_printed(self):
+        text = page_text(self.pdf)
+        self.assertIn("No answer by Friday, March 6? We'll go with: Yes, go", text)
+        self.assertIn("A. Yes, go", text)
+        self.assertIn("B. Yes, but change one thing", text)
+        self.assertIn("Easier by text?", text)
+
+    def test_untouched_sheet_is_empty_and_blank_prices_are_not_flagged(self):
+        result = discovery_pdf.read(self.pdf, self.questions)
+        self.assertEqual(result["status"], "empty")
+        self.assertEqual(result["answers"]["plans"]["state"], "kept")
+        flags = {f.get("id"): f for f in result["flags"]}
+        self.assertNotIn("plans", flags)
+        self.assertEqual(flags["design"]["default"], "yes")
+        self.assertNotIn("default", flags["inbox"])
+        self.assertEqual(result["decide_by"], "Friday, March 6")
+
+    def test_owner_price_and_choice_read_back(self):
+        filled = self.tmp / "filled.pdf"
+        fill(self.pdf, filled, {"q.plans.full": "$240", "q.design": "change", "q.inbox": "ana@example.com"})
+        result = discovery_pdf.read(filled, self.questions)
+        self.assertEqual(result["answers"]["plans"]["prices"], {"basic": "", "full": "$240"})
+        self.assertEqual(result["answers"]["plans"]["state"], "answered")
+        self.assertEqual(result["answers"]["design"]["value"], "change")
+        self.assertEqual(result["status"], "complete")
+
+    def test_answers_template_skips_sections(self):
+        out = self.tmp / "answers.json"
+        self.assertEqual(discovery_pdf.main(["answers-template", str(self.questions), "--out", str(out)]), 0)
+        data = json.loads(out.read_text(encoding="utf-8"))
+        self.assertEqual(list(data["answers"]), ["plans", "design", "inbox"])
+        self.assertEqual(data["answers"]["plans"]["prices"], {"basic": "", "full": ""})
+        self.assertEqual(data["answers"]["design"]["default"], "yes")
+
+    def test_example_owner_sheet_builds_and_follows_its_own_rules(self):
+        example = ASSETS / "owner-sheet.example.json"
+        spec = json.loads(example.read_text(encoding="utf-8"))
+        items = discovery_pdf.asked(spec)
+        self.assertLessEqual(len(items), 12, "the owner sheet takes twelve numbered items at most")
+        self.assertTrue(spec.get("decide_by"))
+        for q in items:
+            if q.get("default"):
+                self.assertIn(q["default"], [o["value"] for o in q["options"]], q["id"])
+        out = self.tmp / "example.pdf"
+        self.assertEqual(discovery_pdf.build(example, EXAMPLE_AGENCY, out), [])
+        self.assertEqual(discovery_pdf.read(out, example)["status"], "empty")
+
+
 if __name__ == "__main__":
     unittest.main()

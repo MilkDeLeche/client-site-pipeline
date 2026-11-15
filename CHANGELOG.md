@@ -3,6 +3,11 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.27.0] — 2026-11-14
+
+- **Amateur check** (orchestrator, `references/amateur-check.md`): a look-for list run on the built page before anything goes to an owner. What makes a page look unfinished (no single line to remember, no button on the first screen, the main action greyed or buried, a grid with empty cells, vertical video cropped wide, small labels, pictures that don't match their words, a page in a different design, content that is in the code and invisible on the page) and what makes it sell weakly (a visitor can't say what they'd get, features without what they do, a long list where a few groups would do). Findings are sorted into fix now, ask the builder, and the owner's call. It grows whenever a builder or an owner calls something amateur.
+- **Which model does what** (`references/kickoff.md` section 7, the state file's new Next actions list, `models` in the builder profile): the strongest model does the thinking; once a plan is approved, applying it can go to a cheaper model. The handoff is a Next actions list written for a model with no memory of the session, with what was tested, what wasn't, and what must not be done without the builder.
+
 ## [1.26.0] — 2026-11-13
 
 - **Weekly ads with Krea Ad Studio** (`client-web-delivery` -> `references/ad-studio.md`, `assets/ads-log-template.md`): five finished static ads a week per brand, for the builder's own agency and for clients whose plan includes marketing. The brand kit is built by hand from approved facts (research from a site can pull in uncleared names and prices); products carry real work and real-site mockups with nothing uncleared legible. Each batch: a dated Pinterest and Reddit check, a plan with researched lines that don't repeat within four weeks, one generation per ad with guardrails (no prices, numbers, reviews or faces), the first ad's cost measured before the rest, every ad read word for word and marked passed or failed, captions, and the next due date. At the start of any session the agent says when a batch is due. The agent never posts and never runs paid ads. Measured on the first batch: about 142 credits per ad.

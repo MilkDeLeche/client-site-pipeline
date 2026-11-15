@@ -99,5 +99,9 @@
       }
     ],
     "_note": "Weekly Krea Ad Studio batches (client-web-delivery -> references/ad-studio.md). At the start of a session, an agent checks each active brand's log and says when a batch is due."
+  },
+  "models": {
+    "strong": "research conclusions, direction, Phase B plan and copy, the amateur check, feedback diagnosis, pipeline changes",
+    "routine": "applying an approved plan, audits and fixes, rendering deliverables, logs, the second language"
   }
 }

@@ -48,6 +48,20 @@ These still stop the run, because they cost money or can't be undone: spending K
 
 `deliverables/readiness-report.md` (template: `assets/readiness-report-template.md`). One page for the builder: what's built, what's a guess, what was checked and how, what the owner still owes, what it cost. It is for the builder only. Then, when the builder approves, `references/outreach.md`.
 
+## 7. Hand routine work to a cheaper model
+
+The builder pays per model, so the strongest one is kept for what only it does well:
+
+| The strongest model | A cheaper model, from an approved plan |
+|---|---|
+| The market read's conclusions and the direction | Applying approved copy and layout changes |
+| The Phase B plan, the hooks and the copy | The responsive audit and its fixes |
+| The amateur check (`amateur-check.md`) and the readiness report | Rendering deliverables from finished templates |
+| Diagnosing an owner's feedback | Updating the logs and maps (cut log, section map, language bank) |
+| Changes to this pipeline | The second language, with a native reviewer |
+
+When the thinking is done and what's left is applying it, stop at a point where the build passes, and write the **Next actions** list in `pipeline-state.md` for a model with no memory of this session: each action names the files, the exact change, and how to tell it's done. Say plainly what was tested and what wasn't, and what must not be done without the builder (pushing, deploying, sending anything). Then tell the builder it is ready to hand off. The profile's `models` entry says which the builder uses for each.
+
 ## A new project folder
 
 `node ~/.claude/skills/client-site-pipeline/scripts/scaffold.mjs <folder> --name "<Business>"` makes the folders, the gitignore entries, the state file, the capture Worker with its two tables, and the Cloudflare config. It prints the one command that adds Astro. It never overwrites a file that exists. After `git init`, run `node ~/.claude/skills/client-site-pipeline/scripts/guard_private.mjs` once so the pre-commit hook is in place before the first commit.

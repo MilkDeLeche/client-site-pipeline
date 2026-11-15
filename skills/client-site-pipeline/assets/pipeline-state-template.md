@@ -33,6 +33,17 @@ Read this first. Update it at the end of every step and before stopping for any 
 | 4 Launch audit | | | |
 | 5 SEO, then handoff | | | |
 
+## Next actions
+
+Written for a model with no memory of the last session. In order. Each one can be done from this row alone.
+
+| # | Do | Files | Done when |
+|---|---|---|---|
+
+**Not without the builder:** {{pushing, deploying, sending or posting anything, spending credits, cutting a template slot}}
+
+**Tested so far:** {{what was run, and the result}} · **Not tested:** {{what wasn't}}
+
 ## Guesses in play
 
 What was decided without the owner. Each one becomes a question on the owner sheet or gets confirmed.

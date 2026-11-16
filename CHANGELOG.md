@@ -3,6 +3,12 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.29.0] — 2026-11-16
+
+- **The signup is a slide-in, not a popup** (`client-web-delivery` → live showcase standard, orchestrator): a small corner card on desktop and a slim bottom bar on phones, no dimmed screen and no modal, shown only after real interest (past the work section or half the page, and about 30 s on the page; exit intent on a mouse after about 10 s), never on arrival or on the quote page. Google's guidance on intrusive interstitials is the reason, plus a 12-second modal that covered the hero reel visitors were watching. How to test the timing with Playwright's fake clock.
+- **The day the real domain goes on** (`seo` → Migration): the domain as the code default for canonicals; robots, llms.txt and old redirect configs; a 301 in the Worker for http, www and `*.workers.dev`; www needs its own DNS record; every old address and handle (schema, footer, error messages, the ad brand kit); Search Console, Bing and Crawler Hints for the builder; one real form submission. On one job the domain served the site while every page still named a dead `workers.dev` address as canonical.
+- **New check `[6b]`** in `launch-audit/scripts/audit.sh`: canonicals, the sitemap and robots.txt all name one host, and with `SITE_HOST=<domain>` it must be the live one.
+
 ## [1.28.0] — 2026-11-16
 
 Lessons from finishing a live client site after its home page was switched to another design.

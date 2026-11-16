@@ -54,6 +54,18 @@ c=$(grep -rl 'rel="canonical"' "$DIR" --include=*.html | wc -l)
 p=$(find "$DIR" -name '*.html' | wc -l)
 { [ "$c" -ge "$p" ] && pass "canonical on all $p page(s)"; } || warn "canonical on $c of $p pages"
 
+echo "[6b] One host everywhere (canonicals, sitemap, robots.txt)"
+# A domain move that misses one of these tells search engines the real page is elsewhere.
+# Pass the live domain to compare against it:  SITE_HOST=example.com bash audit.sh dist
+hosts_all=$( { grep -rhoE 'rel="canonical" href="https?://[^/"]+' "$DIR" --include=*.html | sed -E 's#.*//##';
+  cat "$DIR"/sitemap*.xml 2>/dev/null | grep -oE '<loc>https?://[^/<]+' | sed -E 's#.*//##';
+  grep -hiE '^Sitemap:' "$DIR/robots.txt" 2>/dev/null | grep -oE 'https?://[^/ ]+' | sed -E 's#.*//##'; } | sort -u)
+nh=$(echo "$hosts_all" | grep -c .)
+if [ "$nh" -gt 1 ]; then fail "more than one host: $(echo $hosts_all)"
+elif [ -n "${SITE_HOST:-}" ] && [ "$hosts_all" != "$SITE_HOST" ]; then fail "host is '$hosts_all', expected '$SITE_HOST'"
+elif [ "$nh" -eq 1 ]; then pass "all point at $hosts_all$( [ -z "${SITE_HOST:-}" ] && echo ' (pass SITE_HOST=<domain> to confirm it is the live one)')"
+else warn "no canonical or sitemap host found"; fi
+
 echo "[7] robots.txt allows AI"
 if [ -f "$DIR/robots.txt" ]; then
   if grep -qiE 'Disallow: /$' "$DIR/robots.txt" && ! grep -qi 'Allow: /' "$DIR/robots.txt"; then

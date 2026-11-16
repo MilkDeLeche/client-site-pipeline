@@ -79,6 +79,18 @@ The most expensive SEO mistake is relaunching a site and silently dropping every
 
 A common trap in this repo's own stack: mockups ship `<meta name="robots" content="noindex, nofollow">` deliberately. **Flipping that on launch day is a launch-blocking checklist item.** Grep for it before going live.
 
+### The day the real domain goes on
+
+The pitch lived on `*.workers.dev`; the owner just attached their domain. Do all of this the same day, then check it on the live domain with `curl`, not on the build. On one job the domain was serving the site while every page still declared the `workers.dev` address canonical, and that address had started returning 404, so Google was being told the real page was a dead one.
+
+1. **One canonical address.** Make the domain the code default (`SITE_URL` in `astro.config.mjs` falls back to `https://<domain>`), so canonicals, hreflang, `og:url`, the sitemap and the schema follow even when no build variable is set. Then grep the build for the old host.
+2. **Files that hard-code the host:** `public/robots.txt` (the `Sitemap:` line), `public/llms.txt`, any redirect config for an older host (Vercel `vercel.json`, now `permanent: true` to the domain).
+3. **301 everything else to `https://<domain>` with the same path:** plain `http`, `www`, and the old `*.workers.dev` address. In the "static + API Worker" setup that means `run_worker_first: true` in `wrangler.jsonc` and a redirect at the top of the Worker's `fetch` (GET and HEAD only, skip `localhost` and `127.0.0.1` for local dev), then `env.ASSETS.fetch(request)` for pages. Test locally by sending other `Host` headers to `wrangler dev`.
+4. **`www` needs its own DNS.** If `www.<domain>` doesn't resolve, the builder adds it as a custom domain on the Worker (dashboard → Workers → the Worker → Domains & Routes); the Worker's redirect handles the rest. Don't add routes in `wrangler.jsonc` blind: a wrong route can take the live domain off the Worker.
+5. **Everything that names the old address or an old handle:** the facts file, `sameAs` in the schema, footer and contact links, error messages ("DM us on Instagram @…"), `llms.txt`, the ad tool's brand kit (website, logo URL). Keep links to real posts on an old account; change the profile links.
+6. **For the builder (their accounts):** Search Console for the domain, submit `/sitemap-index.xml`; import into Bing Webmaster Tools; turn on Cloudflare Crawler Hints (IndexNow).
+7. **One real form submission on the live domain.** If the agent's `wrangler` isn't logged in, it can't remove a test row from the live database, and a test inquiry may email the owner, so the builder or the owner sends one real request instead.
+
 ---
 
 ## The phased program

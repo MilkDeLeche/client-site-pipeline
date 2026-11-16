@@ -22,6 +22,8 @@ A wordmark set well in the right typeface is a real logo and can't go wrong the 
 - **Color:** two or three core colors and one accent, taken from the place or the product where possible. Check every text pair for contrast (4.5:1 for body text) and write the pairs that pass.
 - **Voice:** three words and two sample lines, from `creative-direction.md` and `language-bank.md`.
 - **Photo treatment:** how their real photos are cropped and toned, shown on two of their own pictures.
+- **Favicon:** the initials or the mark, drawn as shapes (polygons and rects on a 64-unit grid), never as SVG `<text>`: a favicon can't load web fonts, so text falls back to whatever the device has. Keep strokes about 7 units so it reads at 16 px, generate the `.ico` (16, 32, 48) from the same shapes, and look at it at 16 px before using it. The same shapes can drive a coded loader (`motion-template` → `references/logo-loader.md`).
+- **An accent the owner gives you:** compute its contrast on the backgrounds it will sit on. A light accent (a purple at 3.9:1 on white) is for marks, dots and fills only, never small text; write that in the kit.
 
 ## 3. A symbol, only with the builder's yes
 

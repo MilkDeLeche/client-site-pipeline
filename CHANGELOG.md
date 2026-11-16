@@ -3,6 +3,18 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.28.0] — 2026-11-16
+
+Lessons from finishing a live client site after its home page was switched to another design.
+
+- **Supporting lines** (`copy-bank` §5): captions and step text either say what the client does, or open with a saying, back it with a sourced finding, and say what the client does about it. The source sits in a code comment beside the line; a number is never rounded up or borrowed from an example; a source whose page is gone is dropped. Never describe the agency's workflow to buyers.
+- **Launch audit after a design switch** (`launch-audit`): promoting another design to the home page is a re-run of the audit and of `seo`, with the list of what broke silently on one job (business schema, share image, canonicals on form pages, menus pointing at vanished sections, the policy naming old elements, a noindex page in the sitemap, a column hidden on phones). Privacy links belong next to every form, not only in the footer.
+- **Three new automatic checks** in `launch-audit/scripts/audit.sh`: `[8b]` the sitemap lists no noindex page, `[12c]` every `/#section` link matches an id on that home page, `[13b]` every page with a form links the privacy policy.
+- **Amateur check:** a template column hidden below desktop that now holds selling copy; photos that can't explain an idea, with the fix (three coded directions on one preview page, the builder picks); captions that describe instead of sell.
+- **Speed recipe** (`seo` → `references/technical.md`): measured on a video-first home (phone LCP 2.9 s to 2.0 s, CLS 0.084 to 0.001): poster at display size as WebP and preloaded, self-hosted fonts with the first Latin file preloaded, finding a shift's real source before fixing it, and named crawler groups repeating their Disallow lines.
+- **Logo loader** (`motion-template` → `references/logo-loader.md`): once per visit without a flash on later pages, a hand-off event so the page's own entrance plays after the loader, and a second worked example (a mark cut together like clips on an edit timeline).
+- **Brand colors and favicons** (`brand-discovery`): always ask for exact brand colors, even when there is a logo; favicons drawn as shapes, not SVG text; a light accent the owner gives is for marks only.
+
 ## [1.27.0] — 2026-11-14
 
 - **Amateur check** (orchestrator, `references/amateur-check.md`): a look-for list run on the built page before anything goes to an owner. What makes a page look unfinished (no single line to remember, no button on the first screen, the main action greyed or buried, a grid with empty cells, vertical video cropped wide, small labels, pictures that don't match their words, a page in a different design, content that is in the code and invisible on the page) and what makes it sell weakly (a visitor can't say what they'd get, features without what they do, a long list where a few groups would do). Findings are sorted into fix now, ask the builder, and the owner's call. It grows whenever a builder or an owner calls something amateur.

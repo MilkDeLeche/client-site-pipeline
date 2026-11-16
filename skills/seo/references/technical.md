@@ -60,6 +60,13 @@ Field data (CrUX, in Search Console) beats lab data (Lighthouse). Lighthouse tel
 
 **CLS** — always dimensions. `width`/`height` on every image, reserved space for embeds and ads, no content injected above existing content, `font-display: swap` with a metric-matched fallback to limit the reflow.
 
+**A measured recipe for a video-first local home page** (one job, phone LCP 2.9 s → 2.0 s, CLS 0.084 → 0.001, lab: 390 px, slow 4G at 1.6 Mbps and 150 ms RTT, 4x CPU, three runs each):
+
+- The LCP element was the hero reel's poster. Serve it at the size it's shown (720×1280 for a 9:16 reel on a phone, not the 1080×1920 master), as WebP, and `<link rel="preload" as="image" fetchpriority="high">` it.
+- Fonts from Google cost a render-blocking stylesheet on another origin. Self-host them (`@fontsource-variable/*` in Astro) and preload the one Latin file the first screen uses (import it with `?url` so the preload and the CSS share one hashed file).
+- Find a shift's cause before fixing it: log `layout-shift` entries with their sources. Here it wasn't the headline but a button row that wrapped to two lines in the fallback font and to one line in the real font. Keep such rows on one line where they fit, and add a metric-matched fallback face (`size-adjust`, `ascent-override`) for the rest.
+- A named crawler group in robots.txt ignores the `*` group, so repeat its `Disallow` lines when you list AI crawlers by name.
+
 **Astro specifics.** Ship zero JS by default — only hydrate what needs it, and prefer `client:visible` over `client:load`. `<Image />` from `astro:assets` handles dimensions and formats. Astro inlines small stylesheets and scripts into the HTML rather than emitting separate files — don't conclude an asset is missing because `dist/_astro/` looks empty; grep the HTML.
 
 ## 5. Meta and head

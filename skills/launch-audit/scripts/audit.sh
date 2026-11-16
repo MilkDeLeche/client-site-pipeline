@@ -69,6 +69,21 @@ else fail "no robots.txt"; fi
 echo "[8] Sitemap"
 { ls "$DIR"/sitemap*.xml >/dev/null 2>&1 && pass "sitemap present"; } || fail "no sitemap*.xml"
 
+# Map a site path (/, /es, /bold/) to its built file in either Astro layout.
+built_file() {
+  local p="${1%/}"; [ -z "$p" ] && { echo "$DIR/index.html"; return; }
+  if [ -f "$DIR$p.html" ]; then echo "$DIR$p.html"; elif [ -f "$DIR$p/index.html" ]; then echo "$DIR$p/index.html"; fi
+}
+
+echo "[8b] Sitemap lists only indexable pages"
+locs=$(cat "$DIR"/sitemap*.xml 2>/dev/null | grep -oE '<loc>[^<]+</loc>' | sed -E 's#</?loc>##g; s#^https?://[^/]+##' | grep -v '\.xml$')
+bad=""
+for path in $locs; do
+  f=$(built_file "$path")
+  [ -n "$f" ] && grep -qiE '<meta[^>]+name="robots"[^>]+noindex' "$f" && bad="$bad $path"
+done
+{ [ -z "$bad" ] && pass "no noindex page in the sitemap"; } || fail "sitemap lists noindex page(s):$bad (filter them out of the sitemap)"
+
 echo "[9] Lang attribute (+ hreflang when the site has a second language)"
 { grep -q '<html[^>]*\blang=' "$idx" && pass "$(grep -o '<html[^>]*lang="[^"]*"' "$idx" | head -1 | grep -o 'lang="[^"]*"') on index.html"; } || fail "no <html lang>"
 # Every page, not just the home page: count pages per <html lang>, and flag pages with none.
@@ -96,6 +111,20 @@ echo "[12] No exposed secrets / keys"
 secrets=$(find "$DIR" -type f \( -iname '*.env*' -o -iname '*key*.json' -o -iname '*secret*' -o -iname '*credential*' \) 2>/dev/null | grep -v '_astro' || true)
 { [ -z "$secrets" ] && pass "no secrets/keys in build output"; } || { fail "possible secret files shipped:"; echo "$secrets" | sed 's/^/      /'; }
 
+echo "[12c] Links into a home page land on a real section"
+# Shared pages (privacy, 404, a quote page) often link /#work or /es#faq. When the home page
+# changes, those sections can vanish while the links stay. Each /#x must match an id on that home.
+dead=""
+for f in $pages; do
+  for href in $(grep -oE 'href="/([a-z]{2}(-[a-z]{2})?)?/?#[^"]+"' "$f" | sed -E 's/^href="|"$//g' | sort -u); do
+    home="${href%%#*}"; id="${href#*#}"
+    hf=$(built_file "$home")
+    [ -n "$hf" ] && ! grep -q "id=\"$id\"" "$hf" && dead="$dead $href"
+  done
+done
+dead=$(echo "$dead" | tr ' ' '\n' | grep . | sort -u | tr '\n' ' ')
+{ [ -z "$dead" ] && pass "every /#section link has its section"; } || fail "links to sections that don't exist: $dead"
+
 echo "[12b] Third-party embeds — every external host here must be disclosed in the privacy policy"
 hosts=$(grep -rhoE '(src|href)="https?://[^"]+"' "$DIR" --include=*.html 2>/dev/null | grep -oE 'https?://[^"/]+' | sort | uniq -c | sort -rn)
 if [ -n "$hosts" ]; then echo "$hosts" | sed 's/^/      /'; echo "      ^ cross-check each (analytics, maps, fonts, chat widgets, booking) against /privacy"; else pass "no external hosts embedded"; fi
@@ -109,6 +138,10 @@ nprivacy=$(echo "$pages" | grep -cE '(^|/)privacy(\.html|/index\.html)$')
 # A link counts with or without a locale prefix: /privacy, /es/privacy, /pt-br/privacy.
 plinks=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -lE 'href="(/|\./|\.\./)*([a-z]{2}(-[a-z]{2})?/)?privacy(\.html|/)?(#[^"]*)?"' "$f"; done | grep -c .)
 echo "  [13] /privacy page exists + linked in footer?  ->  $priv; linked from $plinks of $(echo "$pages" | grep -c .) pages"
+# A form is where people hand over data: the policy belongs next to it, not only in a footer
+# the visitor may never reach (a distraction-free quote page has no footer at all).
+noform=$(echo "$pages" | while IFS= read -r f; do [ -n "$f" ] && grep -q '<form' "$f" && ! grep -qE 'href="(/|\./|\.\./)*([a-z]{2}(-[a-z]{2})?/)?privacy' "$f" && echo "${f#$DIR}"; done)
+{ [ -z "$noform" ] && echo "  [13b] ✅ every page with a form links the privacy policy"; } || { echo "  [13b] ❌ pages with a form but no privacy link:"; echo "$noform" | sed 's/^/        /'; }
 echo "  [14] data-collection disclosed (analytics/forms)?"
 echo "  [15] AI usage disclosed (generated imagery = illustrative)?"
 echo "  [16] third-party processors listed (analytics, maps, fonts, booking)?"

@@ -94,6 +94,7 @@ Always settle, in some form, unless the homework already did:
 3. What feels like too much? (when there's a current site or a pitch to react to)
 4. What should people see first, and what can you show for it? (section 4)
 5. Three words for how you should come across, and what it should never look like.
+6. Your brand colors, as exact codes if you have them (or a photo of the sign, the shirt, the cup). Ask even when there's a logo: on one job the owner mentioned his purple only after the site, the ads, the brand board and the mockups had all been made in an orange taken from his profile picture, and every piece had to be redone. Until the answer comes, mark colors read off a screenshot as a guess.
 
 **Question types that get the real answer fast.** Use them openly. No hidden tracking and no steering: an owner defends a direction they know they chose, and second-guesses one they were led into.
 

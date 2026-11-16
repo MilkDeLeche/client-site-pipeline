@@ -71,6 +71,25 @@ Every candidate passes all of these before the owner sees it:
 - **Banned check:** nothing from `banned.md`, and no AI tells (antislop: no em dashes, no "not X, it's Y", no rule-of-three lists, no staccato stunts).
 - **Trademark check:** no famous tagline and no near copy of one. The examples in `patterns.md` are for study.
 
+### Supporting lines: a saying, a finding, what we do
+
+Captions, step text and the line under a section head are where copy goes generic fastest, because the easy move is to describe the thing on screen ("A script that says what you do in plain words, cut tight") or to define it. Builders call that AI filler. Each supporting line does one of two jobs instead:
+
+1. **Say what the client does for the buyer,** in the buyer's terms, or
+2. **Open with something the reader already believes, back it with a sourced finding, then say what the client does about it.** The shape is a saying people repeat ("an apple a day…"), not a definition ("this is an apple").
+
+> Out of sight, out of mind. Research from the Ehrenberg-Bass Institute shows people buy from the brands that come to mind first, so we post for you every day and keep you there.
+
+Rules for the finding:
+
+- Research it (marketing science, the platform's own research, a named survey). Open the source and check the number and what it measures; a blog repeating a number is not the source. If the original page is gone, drop the number.
+- Put the source in a code comment next to the line, so the next pass can recheck it.
+- Never round a number up or adopt one from the builder's example to make the line work. When nothing solid backs it, write the "what we do" version with no number.
+- The saying is everyday and translates as a saying ("Out of sight, out of mind" → "Ojos que no ven, corazón que no siente"), never word for word.
+- One finding per line, and each line names a real service the client sells. Confirm with the builder before the page promises one that isn't on the facts file.
+
+**Never describe the workflow.** "We look at your place and your Instagram, decide what we'd shoot first" tells the buyer how the sausage is made and reads as a confession. Say what they get (a custom quote, a plan, the work), not the steps behind it.
+
 ## 6. Shortlist and the owner's pick
 
 Give the owner three to five lines per slot, each with its pattern and the buyer words behind it, in both languages, plus your recommendation and why. Show them in context when you can (on the running page or a screenshot), because a line reads differently over its photo. The owner picks or tweaks; their ear for their own customers beats ours.
@@ -106,6 +125,7 @@ Write these to the pipeline's source checkout (the folder that holds `install.sh
 - A rejected line offered again to the same owner, or to the next client.
 - Picks and rejections kept in the chat only, so the bank never grows.
 - A copy pass that overwrites an approved line. Diff every pass against `approved.md` first: on one pitch an owner-approved section heading was replaced by a weaker one and only caught in a later pass.
+- A caption that defines the thing beside it, or a sentence about the agency's own process. See §5, "Supporting lines".
 - Shot descriptions, staccato fragments or clever splits as work titles and step titles. Plain labels ("Sports bar promo", "Hosting and upkeep") read as chosen; stunts read as filler.
 
 ## Acceptance scenarios

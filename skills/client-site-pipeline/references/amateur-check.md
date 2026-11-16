@@ -29,6 +29,8 @@ It works on a cloned template too. A premium template filled with a client's rea
 | Blurry, stretched or heavily compressed pictures and video | The work itself looks low quality, which is fatal for anyone selling visual work |
 | Leftovers: template names, placeholder text, a link to nowhere | Proves nobody checked |
 | Something in the code that doesn't show on the page: text the same color as its background, an element under another | Only looking at the render catches it. Blend modes and overlays are the usual cause |
+| A column the template hides below desktop (`display: none` under 1200 px) that now holds selling copy or a link | Templates drop their "nice to have" column on phones. Once it carries the case for a service, most visitors (on phones) never see it. Check every filled slot at phone and tablet width, and move the column under the main one instead of hiding it |
+| Photos that can't explain an idea (stages, a process, a before-and-after) | A real photo shows a moment, not a stage. Build three coded directions on one local preview page with the real captions under each (drawn phone screens, type posters in the brand colors, one simple drawing per idea), let the builder pick, then delete the preview |
 
 ## Sells weakly
 
@@ -41,6 +43,7 @@ It works on a cloned template too. A premium template filled with a client's rea
 | A long list where a few groups would do | Twelve services read as none. Group them under a handful of names |
 | The form asks things that don't change the reply, or misses the one that would | Friction with no benefit (`client-web-delivery` → `references/request-form.md`) |
 | A claim nothing backs: a number, "best", a result | One doubtful claim makes the true ones doubtful too |
+| Captions that describe what's on screen, or lines about how the agency works behind the scenes | Describing isn't selling, and the workflow is the agency's business, not the buyer's. `copy-bank` §5, "Supporting lines" |
 
 ## What it is not
 

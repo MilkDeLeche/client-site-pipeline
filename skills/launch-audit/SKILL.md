@@ -25,21 +25,34 @@ Run this before any website goes live. It has two halves: **technical ship-readi
 5. **Structured data** — JSON-LD present and valid for the site type (LocalBusiness / Organization / Product / Article), plus breadcrumbs and per-page types. Validate with Google's Rich Results Test.
 6. **Canonical** — every page emits `<link rel="canonical">` with the absolute URL. Requires the framework's `site`/base URL to be set.
 7. **robots.txt allows AI** — exists AND does not block AI crawlers. For AEO/GEO you WANT `GPTBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-Web`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended` allowed. Include the `Sitemap:` line.
-8. **Sitemap** — `sitemap-index.xml` / `sitemap.xml` generated and referenced from robots.txt.
+8. **Sitemap** — `sitemap-index.xml` / `sitemap.xml` generated and referenced from robots.txt, listing **only indexable pages**: a `noindex` page in the sitemap sends Google two opposite signals. The script flags any (`[8b]`).
 9. **Lang attribute** — `<html lang="…">` set to the correct language on every page of every locale, with `hreflang` alternates (plus `x-default`) between the language versions.
 10. **Alt text** — every `<img>` has `alt` (decorative images → `alt=""`). Count imgs vs imgs-with-alt.
 11. **No exposed source maps** — no `.map` files in the build output; they leak your original source. Turn off the bundler's production sourcemap option (Vite `build.sourcemap: false`, etc.).
 12. **No exposed secrets / public storage** — no `.env`, service-account keys (`*key*.json`), tokens, or credentials in the build output or in `public/` (which ships verbatim). Confirm any cloud storage bucket is not publicly listing or serving private files. Secrets live in env vars, never web-served.
+- **Links into the home page land somewhere** — every `/#section` link on every page (privacy, 404, quote, the menu of an older design) matches an `id` on that home. The script lists the dead ones (`[12c]`).
 
 **Companion checks** — run `antislop-human`'s contrast checker on the built pages, and antislop's Delivery Gate on everything Phase B/C added. Both skills are required by `client-site-pipeline`; if they're missing, stop and give the install commands from there.
 
 ## Legal checklist — don't get sued
 
-13. **Privacy policy page exists** (`/privacy`) and is linked in the footer.
+13. **Privacy policy page exists** (`/privacy`) and is linked in the footer, **and next to every form** (one short line under the submit button: what the data is for, and the link). A distraction-free quote page has no footer, so a footer link alone leaves it uncovered (`[13b]` in the script).
 14. **Data-collection disclosure** — if you collect ANY data (even cookieless analytics, or a contact form), disclose what, why, and how long.
 15. **AI disclosure** — if the site uses AI (generated imagery, chatbots, AI copy tools), disclose it. For a business showing "results," AI-generated images MUST be labeled illustrative / not real outcomes — otherwise it's misleading advertising (FTC risk), especially in regulated fields (medical, finance, legal).
 16. **Third-party data collectors** — list every third party that can see the visitor: analytics, map embeds, font CDNs (Google Fonts, onlinewebfonts), embedded booking/checkout, tag managers, chat/social widgets. Each usually logs the visitor's IP.
 17. **No fake testimonials** — every review must be real and attributable (source it: Google, Yelp, the POS/booking API). Fabricated reviews plus `aggregateRating` schema = FTC violation + Google manual action. Confirm the source and get permission to republish named reviews.
+
+## When the live design or the home page changes
+
+Run the whole audit again, then `seo`'s audit, the same day. Swapping which design is the home page (an option site promoted to `/`, a redesign) breaks things silently, because each design carries its own head and the shared pages were built for the old one. On one job a single swap lost all of these, and none showed on the page:
+
+- The business schema (it lived in the old layout) and the `twitter:` tags.
+- The share image: it still showed the old hero. Recapture it from the new hero at 1200×630 (hide controls like a "Sound on" button) and add a version query so platforms refetch it.
+- Canonical and hreflang on the new form pages.
+- Privacy and 404 menus pointing at `/#sections` that no longer exist (`[12c]`).
+- The privacy policy naming images and elements that were only in the old design.
+- The old home, now `noindex`, still in the sitemap (`[8b]`).
+- A column the new template hides below desktop, now holding selling copy (`client-site-pipeline` → `references/amateur-check.md`).
 
 ## Architecture-aware checks
 

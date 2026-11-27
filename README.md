@@ -44,6 +44,7 @@ pass before the next one starts.
 | **2** | [`clone-intake`](skills/clone-intake/SKILL.md) | Before any clone build | Template **vetted** against the approved direction; live template **URL** + repo `.txt` DOM dumps (scrolled to each section) + a **motion video** — or a written note of what's missing |
 | **3** | [`clone-workflow`](skills/clone-workflow/SKILL.md) | After intake passes | Template cloned at fidelity **(Phase A)**, *then* rebranded from the data file only, mapped to the PRD section by section by a senior room (strategist, copywriter, art director, UX lead) from a media-truth inventory, until the first screen sells to the target buyer with real proof and hero lines the owner picked from a researched shortlist, built from the template's own design grammar, with every template slot kept or its cut approved and reported, and a **responsive audit** clean at six widths in Chromium and WebKit (Safari) **(Phase B)**, *then* only the functionality in the architecture plan is connected **(Phase C)**, including the **live showcase standard** (signup that saves to D1, cookie banner that gates analytics, matching privacy page, a second language) |
 | **4** | [`launch-audit`](skills/launch-audit/SKILL.md) | On the production build, before go-live | Real SSR view-source, custom 404, unique titles, OG image, JSON-LD, canonical, AI-crawler-friendly `robots.txt`, sitemap, alt text, **no secrets**, a real privacy policy, a signup that saves a row, a banner that gates analytics, every enabled conversion proven end to end, **no fabricated testimonials** |
+| **4b** | [`client-site-security`](skills/client-site-security/SKILL.md) | After the launch audit, before going public and before SEO | Tested on the host that really answers for the domain and in the live database: the public key reads no business table and calls no staff function; signups off; staff can't change state, money or stock except through the official functions; every write has a role decision enforced in the database, the server and the screen; uploads and signed URLs scoped to the shop; every migration **applied** and re-tested; `npm audit` at 0 or each remaining warning explained; an **update brochure** for the owner |
 | **5** | [`seo`](skills/seo/SKILL.md) | After launch (snapshot old URLs *before* step 3 on a rebuild) | Crawlable HTML, GBP / NAP consistent if local, no stray `noindex`, redirects in place if replacing an old site |
 
 ```mermaid
@@ -52,7 +53,8 @@ flowchart LR
     A["1 · client-web-delivery<br/><i>PRD + setup-list + architecture plan</i>"] --> B["2 · clone-intake<br/><i>URL + DOM dumps + video</i>"]
     B --> C["3 · clone-workflow<br/><i>A clone → B rebrand → C functionality</i>"]
     C --> D["4 · launch-audit<br/><i>ship / don't-get-sued gate</i>"]
-    D --> E["5 · seo<br/><i>rank + get cited by AI</i>"]
+    D --> S["4b · client-site-security<br/><i>prove a stranger and a staff member can't</i>"]
+    S --> E["5 · seo<br/><i>rank + get cited by AI</i>"]
     E -.->|handoff booklet| A
     E -.->|rebuild: snapshot URLs first| C
 ```
@@ -167,6 +169,15 @@ robots, sitemap, `lang`, alt text, no exposed source maps or secrets) and
 legal (a privacy policy that discloses data collection + AI use + third-party
 processors; testimonials that are actually real). Ships with
 [`scripts/audit.sh`](skills/launch-audit/scripts/audit.sh).
+
+### 4b · `client-site-security` — the security test
+Runs after the launch audit, on the host that actually answers for the domain
+and against the live database, never on a write-up or the repo alone. Proves
+that a stranger with the public key and a staff member with a real login can't
+do what the screens say they can't: RLS and column grants, security-definer
+functions, triggers, rate limits, uploads and signed URLs, headers and CSP,
+auth settings, and dependencies (upgrade instead of postponing). Insider tests
+run inside a transaction that rolls back. Ends with the owner's update brochure.
 
 ### 5 · `seo` — growth after launch
 Full SEO / local SEO / GEO-AEO practice across the three surfaces that now
@@ -306,7 +317,7 @@ orchestrator:
 or just describe the job — *"start the clone workflow for this client"* — and
 the agent will pick up `client-site-pipeline`, then work through
 `brand-discovery` → `client-web-delivery` → `clone-intake` → `clone-workflow` → `launch-audit` →
-`seo`, one step at a time, in order.
+`client-site-security` → `seo`, one step at a time, in order.
 
 ---
 
@@ -327,6 +338,7 @@ skills/
     assets/architecture-plan-template.md
     assets/client-handoff-template.md
     assets/client-handoff-visual-prompt-template.md
+    references/update-brochure.md   the owner's brochure after every shipped update
   clone-intake/           step 2 — the gate in front of cloning
   copy-bank/              hook library used by steps 0 and 3 — grows with every client
     patterns.md · banned.md · approved.md · industries/*.md
@@ -337,6 +349,7 @@ skills/
     references/design-options-shelf.md
   launch-audit/           step 4 — ship / don't-get-sued gate
     scripts/audit.sh
+  client-site-security/   step 4b — prove a stranger and a staff member can't
   seo/                    step 5 — SEO / local / GEO-AEO
     references/*.md
     scripts/google-index.js

@@ -1,11 +1,11 @@
 ---
 name: client-site-pipeline
-description: Ordered end-to-end workflow for a client site clone — brand discovery (creative direction), client setup-list, architecture plan, clone intake, clone/build, launch audit, then SEO, then a client handoff. Use when starting a client website (including from a seed PRD that is just the client's current site link, or as a near-final pitch built before the sale), cloning a template, choosing hosting/database/auth, or when the user mentions brand-discovery, clone-intake, clone-workflow, client-web-delivery, launch-audit, or seo together. Required order; do not skip ahead.
+description: Ordered end-to-end workflow for a client site clone — brand discovery (creative direction), client setup-list, architecture plan, clone intake, clone/build, launch audit, security test, then SEO, then a client handoff. Use when starting a client website (including from a seed PRD that is just the client's current site link, or as a near-final pitch built before the sale), cloning a template, choosing hosting/database/auth, or when the user mentions brand-discovery, clone-intake, clone-workflow, client-web-delivery, launch-audit, client-site-security, pentest, or seo together. Required order; do not skip ahead.
 ---
 
 # Client site pipeline
 
-Six skills, steps 0–5, plus `copy-bank`, the shared hook library that steps 0 and 3 use (it is not a step of its own). Run the steps **in this order**. Each one produces an artifact the next one needs. If that artifact is missing, stop and do the earlier skill — do not improvise.
+Seven skills, steps 0–5 plus 4b, plus `copy-bank`, the shared hook library that steps 0 and 3 use (it is not a step of its own). Run the steps **in this order**. Each one produces an artifact the next one needs. If that artifact is missing, stop and do the earlier skill — do not improvise.
 
 | Step | Skill | When | Done when |
 |---|---|---|---|
@@ -14,9 +14,20 @@ Six skills, steps 0–5, plus `copy-bank`, the shared hook library that steps 0 
 | 2 | `clone-intake` | Before any clone build | Template vetted against `creative-direction.md`; live template URL + repo `.txt` dumps (scrolled to the section) + motion video |
 | 3 | `clone-workflow` | After intake passes | Template cloned at fidelity (Phase A), then rebranded from the data file only, mapped to the PRD's intent and the approved creative direction section by section by the senior room, from a media-truth inventory, until the first screen speaks to the target buyer with real proof and hero lines the owner picked from a `language-bank.md` shortlist, with every template slot kept or its cut approved and reported, and the responsive audit clean in Chromium and WebKit at every width (Phase B), then only the functionality named in `architecture-plan.md` is connected (Phase C), **including the live showcase standard** |
 | 4 | `launch-audit` | After build, **before** public launch | Production build audited; privacy / 404 / titles / no fake testimonials; remaining asks stay on the setup-list |
+| 4b | `client-site-security` | After launch-audit, before public launch and before SEO | Outside checks pass on the host that actually answers for the domain; insider checks are enforced in the database (RLS, column grants, definer functions, triggers), not only on the screen; every migration applied and re-tested |
 | 5 | `seo` | After it is live (or on a rebuild, snapshot URLs **before** step 3) | Crawlable HTML, GBP/NAP if local, no `noindex` left on, redirects if replacing an old site |
 
-Do not run 1 on a new client without 0 (`reference-only` skips 0). Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run build`. Do not run 5 as a substitute for 4. DESIGN.md / TypeUI files are tokens only; they are not a step, and they encode a chosen direction without choosing it.
+Do not run 1 on a new client without 0 (`reference-only` skips 0). Do not run 3 without 2. Do not run 4 on the dev server — it needs `npm run build`. Do not run 4b against a write-up or the repo alone — it needs the host that answers for the domain and the live database. Do not run 5 as a substitute for 4 or 4b. DESIGN.md / TypeUI files are tokens only; they are not a step, and they encode a chosen direction without choosing it.
+
+## Changing the pipeline (this rule is never skipped)
+
+This is about editing the pipeline's own skill files. It does not change how a site is built.
+
+The builder often says "I like this, add it to the pipeline" about something built for one client. The pipeline is used for every kind of site, and each one has its own brand colors, design and vibe; the orchestrator picks what each site gets. So when writing it into the skills:
+
+- **Add the feature, not that client's look.** Write what the feature is and that it is designed from each site's own brand kit and design. Don't copy the one site's colors, timings or motion into the rule. Example: one bike shop's loader hand-off used a black screen because its brand is black. The pipeline says the loader's background and transition come from each site's brand and design; a blue brand gets blue, a calm design a soft transition, a loud one a bolder one.
+- **The client it came from can be named as an example**, marked "example, not a template", so the rule itself stays open.
+- **Fixed values are fine only where they are the same for every site:** legal, privacy, security, accessibility, the builder rules, and real bugs with their checks.
 
 ## Required companion skills and tools (set up before step 0)
 
@@ -39,6 +50,7 @@ It checks Node 18+, both companion packs, ffmpeg (motion contact sheets), the PD
 **How the pipeline uses them, and what wins:**
 - **Phase B writes with these skills, in antislop's DURING mode.** The copywriter drafts every line through `copywriting` and `antislop-copywriting`, and the UX lead builds every addition through `antislop-ui`, `antislop-layoutmobile` and `antislop-human`, from the first draft. They are how Phase B writes, not a cleanup pass afterward. antislop asks once per session; answer *during* for pipeline work, and follow its own mode and pointer-block rules. Phase B ends with the **responsive and cross-browser audit** (`clone-workflow` → `references/responsive-audit.md`: every page at six widths in Chromium and WebKit, Safari's engine, each finding confirmed by a screenshot and fixed at its cause), then antislop's Delivery Gate report.
 - **No character that a phone can turn into an emoji, ever** (builder rule). Arrows (↗ → ↘), stars, checks, play signs, hearts and other symbol characters become color emoji on iOS. Never put one in copy, buttons, labels or CSS `content`, in any language: icons are inline SVG. The responsive audit flags any that slip through.
+- **Everything written sounds like a person** (builder rule): site copy, owner sheets, handoffs, update brochures and emails. Before writing, look up how real customers and owners talk about the topic (Reddit threads, `copy-bank` research, `deep-research`), write in their words and the owner's language, and pass the draft through `humanizer` / `antislop-copywriting`. Only measured or sourced claims.
 - antislop wants design direction (`DESIGN.md`). In this pipeline **`creative-direction.md` is the strategy and the cloned template is how it looks**: point antislop at both, the chosen direction and the design-grammar inventory in `section-purpose-map.md`. antislop filters what we add and write. It never restyles the Phase A clone; a finding against the inherited template goes into the rebrand plan as a proposal, not an edit.
 - `copywriting` drafts; `antislop-copywriting` filters. Neither overrides the ban on invented facts: reviews, prices, contact details and results still come only from the facts file.
 - **`copy-bank` (part of this pipeline) supplies what they draft from:** the buyers' own words found by research, hook patterns with credited real examples, the lines owners rejected, and the lines owners picked. Every hero and hook starts there, and every owner pick or rejection is logged back into it, so the bank grows with each client.
@@ -47,7 +59,7 @@ It checks Node 18+, both companion packs, ffmpeg (motion contact sheets), the PD
 
 Most of these sites go up before the client pays, as a **near-final pitch**: it must read as about 99% done. Nothing on it says preview, prototype, demo or coming soon, and every form really captures what is submitted (signups to `/api/subscribe`, the primary inquiry form to `/api/inquiries`). Every site ships with: a signup slide-in (a small corner card, a bar on phones, after real interest; never a full-screen popup on arrival) + inline signup that really save to D1 through `/api/subscribe`, a cookie banner that really gates analytics, a privacy page that matches, and a second language (Spanish for RGV / Texas clients) on every page, form and popup, picked automatically from the visitor's system language (no language button, no location), written natively with every accent in place. A privacy page and a custom 404 go up with the first pitch deploy, even before the forms are connected. The signup hook fits the business (juice bar → new drinks, seasonal specials, birthday treats; home builder → new-home alerts). Details and the hook table are in `client-web-delivery` → “Live showcase standard”. Put the promise and the email-tool choice on the setup-list. Every client site also carries the builder's hidden authorship mark (`client-web-delivery` → "Authorship mark"). Showcase deploys go to `*.workers.dev` first, with `noindex`. Removing `noindex` belongs to step 5, after the client buys and the real domain is on.
 
-**Extras, asked for near the end of Phase B** (`references/extras.md`): a motion-site template rebuilt for the client, a logo loading animation (coded or video), and the client's social videos. Ask the builder which ones this client gets; build only those.
+**Extras, asked for near the end of Phase B** (`references/extras.md`): a motion-site template rebuilt for the client, a logo loading animation (coded or video) with its own transition into the hero, and the client's social videos. Ask the builder which ones this client gets; build only those.
 
 **Generated images and video: one generation each.** This applies everywhere in the pipeline: heroes, illustrations, service images, scenes, loaders, clips. Write the strongest prompt up front, quote the cost with `preflight`, submit each asset once, and use what comes back. Don't run retake rounds, variants or "let's see if it's perfect" passes. The point is to keep credit spending low, not to settle for lower quality, so put the effort into the prompt and the start image. Fix small faults in code (crop, trim, mask, composite, color). A second generation happens only when the builder asks for one, after you've said what it costs. When an asset comes out weaker, say so plainly in the report and let the builder decide.
 
@@ -61,7 +73,9 @@ Most of these sites go up before the client pays, as a **near-final pitch**: it 
 
 **`launch-audit`** — ship / don’t-get-sued gate. Privacy policy on `/privacy` (what you collect including newsletter fields, cookie/analytics choice, AI use, font/analytics third parties), a signup that saves a row, a banner that gates analytics, real testimonials only, view-source not empty, custom 404, unique titles, OG image, schema, canonical, robots that allow AI crawlers, sitemap, alt text, no secrets in the build.
 
-**`seo`** — growth after launch. Classic search, Google Business Profile / “near me,” and getting cited by AI assistants. Never invent keyword volumes. If this is a rebuild of a live site, snapshot old URLs and rankings **before** step 3.
+**`client-site-security`** — the gate launch-audit does not cover. Run it on the host that answers for the real domain, with the public key, before SEO. A previous pentest write-up, a committed migration or a role check in the UI is a claim until the database and the live response prove it. A static marketing site only needs its host and dependency checks.
+
+**`seo`** — growth after launch. Classic search, Google Business Profile / “near me,” and getting cited by AI assistants. Never invent keyword volumes. If this is a rebuild of a live site, snapshot old URLs and rankings **before** step 3. Do not start SEO while step 4b is open.
 
 ## Agent rule
 
@@ -139,6 +153,7 @@ Everything that reaches an owner comes out of `deliverables/` as a PDF or an ima
 | What each client file actually shows | `media-inventory.md` (Phase B) |
 | Why each section says what it says | `section-purpose-map.md` (Phase B) |
 | Proof that conversions work | `conversion-acceptance.md` (launch-audit) |
+| What was tested for security, what failed, what was fixed, what the user must set in dashboards | the setup-list's security section (step 4b) |
 | What actually shipped | the source and the production build |
 | What the owner is shown to buy (plan poster, QR, contract questions) | `deliverables/pitch/` (gitignored) |
 | What the client is told | `deliverables/client-handoff.md` (gitignored) |
@@ -150,5 +165,7 @@ Do not invent a fact to fill the data file, and do not invent a service to fill 
 Do not start Phase C, and do not provision a database, auth, object storage, or a server runtime, unless `architecture-plan.md` exists and names that system with a reason. Astro stays the framework unless the user explicitly overrides it. Cloudflare Workers is the standard host for every project; a site already live elsewhere moves over as a named step in the plan, with the old URL redirected. A static marketing site stays static: no login, no R2, no server-rendered pages, just because those exist. The only standing exception is the capture API Worker + D1 from the live showcase standard: a `subscribers` table, plus an `inquiries` table when the PRD's `primary_action` is a form.
 
 ## After step 5
+
+**Every update after handoff ends with an update brochure** (`client-web-delivery` → `references/update-brochure.md`): what changed behind the scenes, the before and after, the security checks and how many passed, in the client's own design kit, saved to `deliverables/actualizaciones/`.
 
 Return to `client-web-delivery` for the client handoff (`deliverables/client-handoff.md`, then the visual prompt). That is not a step you can run instead of the audit or SEO. The handoff describes only what production actually has.

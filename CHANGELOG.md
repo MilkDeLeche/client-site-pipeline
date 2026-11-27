@@ -3,6 +3,24 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.30.0] — 2026-11-27
+
+Lessons from a week of updates on a live client site with a staff panel, a database and uploads.
+
+- **Step 4b, `client-site-security`, is now in the repo.** The orchestrator already named it, but the skill wasn't published. It tests on the host that actually answers for the domain and against the live database: the public key, RLS and column grants, definer functions, triggers, rate limits, uploads and signed URLs, headers and CSP, auth settings and dependencies. Insider tests run in a transaction that rolls back. `launch-audit` now hands off to it and `seo` comes after it. New lessons:
+  - Supabase grants every new table to everyone, so a column grant does nothing until you `revoke all` first.
+  - Every feature that writes gets a role decision, enforced in the database, the server and the screen.
+  - RLS fails silently on update and delete, so the server checks the affected rows before deleting files or sending email.
+  - Do the major dependency upgrade instead of postponing it, with a smoke test of every route before and after deploy.
+- **Update brochure after every shipped update** (`client-web-delivery` → `references/update-brochure.md`). It's a short, fun brochure in the client's own design kit that shows the work behind the scenes:
+  - selling points, each led by what the owner gains, with measured proof (never "faster" without a measurement), illustrated in code from the client's world;
+  - the security checks and how many passed, and the owner's to-dos;
+  - always the title "Your Cybersecurity Update", a "This month" badge, and a "Why it matters" closer.
+- **Two builder rules in the orchestrator:**
+  - Changes to the pipeline add the feature, never one client's look.
+  - Everything written sounds like a person: research how real people talk first (Reddit, `copy-bank`, `deep-research`), then `humanizer` / `antislop-copywriting`.
+- **Logo loader hand-off** (`motion-template`): the transition into the hero is part of the loader and is designed from each site's logo and design. Shapes to start from: the mark flying into the header logo, a curtain, a mask, a crossfade or hard cuts. The page's entrance overlaps the loader's exit. On prerendered pages, a cover in the loader's own color from the first frame stops the hero from flashing. Timings go in plain CSS, because arbitrary Tailwind classes can silently not build. Check the hand-off by sampling computed styles, not with screenshots.
+
 ## [1.29.0] — 2026-11-16
 
 - **The signup is a slide-in, not a popup** (`client-web-delivery` → live showcase standard, orchestrator): a small corner card on desktop and a slim bottom bar on phones, no dimmed screen and no modal, shown only after real interest (past the work section or half the page, and about 30 s on the page; exit intent on a mouse after about 10 s), never on arrival or on the quote page. Google's guidance on intrusive interstitials is the reason, plus a 12-second modal that covered the hero reel visitors were watching. How to test the timing with Playwright's fake clock.

@@ -83,6 +83,13 @@ Most of these sites go up before the client pays, as a **near-final pitch**: it 
 
 **When the builder says "start the pipeline":** follow `references/kickoff.md`. Read the builder profile (`~/.client-site-pipeline/builder.json`) and never ask what it answers. Ask one question: find a business to pitch (`references/prospecting.md`), or do they have one in mind? Take the brief, then run steps 0 to 3 and stop only twice: for the template pick, and before anything goes to an owner. Keep `pipeline-state.md` current so any session or tool can pick the job up, end with the readiness report, then draft the outreach (`references/outreach.md`). A new project folder comes from `scripts/scaffold.mjs`. On any project that has a `pipeline-state.md`, read it first, then `deliverables/pending-items-of-the-skill.md`, and say the top one or two open items in one line.
 
+**Which brand the builder works as (ask once per project, builder rule).** The builder works under more than one name: their agency brands or their own name. They're listed in the builder profile under `brands`. Before the first deliverable that carries the builder's name, ask which one this client sees, offering the profile's list as options:
+- deliverables that carry the name include the billable, the proposal, the pitch kit, the handoff, the owner sheet and the outreach;
+- record the answer in `pipeline-state.md` as `Working as: <brand · tagline>`;
+- use exactly that name and tagline in every footer, header and signature for this client, and don't ask again unless the builder changes it.
+
+The hidden authorship mark is separate and never changes.
+
 **End of every session that changed a project (builder rule, never skipped):**
 - Update `deliverables/pending-items-of-the-skill.md` (`references/pending-items.md`): what the pipeline can still do for this client, how to get each item done, and the builder's reminders, such as "time to bring the email template from Copymail".
 - Bring every affected deliverable up to date in the same session, not "later". That means the update brochure for a shipped update, the billable (`client-web-delivery` → `references/billable.md`), the email previews in `deliverables/correos/`, the setup-list and the handoff.

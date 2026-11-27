@@ -14,7 +14,7 @@ A short document that shows the owner what they are paying for and why the price
 
 ## What goes on it
 
-1. **Header:** the client's name, a folio (`XX-001`, +1 per billable for that client), the date, the builder's name. Built in the client's design kit, like the update brochure.
+1. **Header:** the client's name, a folio (`XX-001`, +1 per billable for that client), the date, and the brand the builder works as for this client (`Working as:` in `pipeline-state.md`; if it isn't there, ask, offering the `brands` in the builder profile). The same brand and tagline go in the footer of every page. Built in the client's design kit, like the update brochure.
 2. **Page 1, what it does for them:** each feature as one line led by what the owner or their customers gain ("customers book from their phone at midnight"; "a review request goes out the day after every pickup"), grouped (the site, the shop system, email marketing, security). Only features that are live and verified.
 3. **Page 2:**
    - A table: every line with its status. Lines included in the price say "Included", so the owner sees the size of the work.

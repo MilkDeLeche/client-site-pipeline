@@ -3,6 +3,11 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.32.0] — 2026-11-27
+
+- **Tool spotlight graphic in update brochures** (`client-web-delivery` → `references/update-brochure.md`). When an update names a tool with a recognizable logo, it gets a launch-style hero graphic instead of a plain number badge: the official logo on a tilted 3D glass tile with a lit edge, a reflection, a dark stage, a name label and a round version badge. It's built in code, with no credits. The logo comes only from the tool's official brand page, downloaded with the builder's yes, and the graphic follows that page's trademark terms.
+- **Which brand the builder works as** (orchestrator, `billable.md`). The builder works under several names (agency brands or their own name, listed as `brands` in the builder profile). Once per project, before the first deliverable that carries the builder's name, the pipeline asks which one this client sees. The answer is recorded as `Working as:` in `pipeline-state.md` and used in every header, footer and signature for that client.
+
 ## [1.31.0] — 2026-11-27
 
 Email marketing on a live client site, and what the builder needs to pick a job back up after a break.

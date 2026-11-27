@@ -145,6 +145,7 @@ When the pitch site is live and passes the standard above, build what the builde
 | Instagram mockups: the logo as the profile picture, the launch post, the site in the bio | `references/mockups.md` | `assets/ig-post-image.html`, `assets/ig-post-mockup.html`, `assets/ig-profile-mockup.html`, `scripts/render_cards.py` |
 | Hype set: coming-soon, stat and phone cards | `references/hype-set.md` | `assets/hype-*.html`, `scripts/render_cards.py`, `scripts/census.py` |
 | Launch reel | `references/launch-reel.md` | `scripts/reel.py`, `assets/reel-phone-frame.html`, `assets/reel-stat-card.html` |
+| Update brochure after each shipped update (upgrades, security rounds, features), in the client's design kit | `references/update-brochure.md` | the site's own fonts, colors and logo; Playwright to PDF/PNG |
 | Brand board (when a brand kit was made) | `brand-discovery` → `references/brand-kit.md` | `assets/brand-board.html` |
 | Weekly ads, after launch: five a week from Krea Ad Studio, for the builder's own agency and for clients whose plan includes marketing | `references/ad-studio.md` | `assets/ads-log-template.md`, the Krea `ad_studio_*` tools |
 

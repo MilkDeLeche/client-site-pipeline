@@ -3,6 +3,28 @@
 All notable changes to this pipeline are recorded here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.31.0] — 2026-11-27
+
+Email marketing on a live client site, and what the builder needs to pick a job back up after a break.
+
+- **Cloudflare first, for every project** (`client-web-delivery` → `references/cloudflare-stack.md`). Domain, DNS, site, API routes, secrets, D1, R2, Cron Triggers, Email Routing and analytics live on Cloudflare. An outside service is added only for what Cloudflare doesn't do, and it's always reached through the Worker. Every outside API is connected with the same five steps:
+  1. domain records in Cloudflare DNS;
+  2. the narrowest key;
+  3. `wrangler secret put`;
+  4. a health check;
+  5. one real action.
+- **Email marketing on Resend** (`client-web-delivery` → `references/email-marketing.md`), from research on popups, welcome and review timing, and retention:
+  - a signup popup that shows only after real interest and stays closed for 30 days, a footer band, and an unticked opt-in on booking forms;
+  - automatic emails through Resend Automations (welcome, review request the next day, warranty a week later, and others by trade);
+  - consent rules and no review gating;
+  - a one-click admin setup that creates the segment, the templates and the automations;
+  - the monthly newsletter stays manual on purpose: it's the builder's visible work in the monthly plan, with templates from the builder's library adapted to each brand.
+  - Testing note: Playwright counts as a bot, so the test has to override `navigator.webdriver`.
+- **The billable** (`client-web-delivery` → `references/billable.md`): what was built in the owner's words, everything marked included, sourced prices of comparable tools, the monthly plan with its monthly promotion emails (left off for one-time purchases), and "Why it matters". It's refreshed with the update brochure after every update.
+- **Pending items of the skill** (`client-site-pipeline` → `references/pending-items.md`): every project keeps `deliverables/pending-items-of-the-skill.md` for the builder. It lists what the pipeline can still do for that client and how, plus reminders such as "time to bring the email template". It's updated at the end of every session.
+- **Builder toolkit** (`client-site-pipeline` → `references/builder-toolkit.md`): the way of working (terminal-first keys, Cloudflare first, copy from research, templates from the builder's libraries), what the setup script installs and the accounts it can't install. `setup.mjs` now also checks the Cloudflare sign-in, Git and the GitHub CLI.
+- The architecture plan template gains an `email:` section and a list of outside services.
+
 ## [1.30.0] — 2026-11-27
 
 Lessons from a week of updates on a live client site with a staff panel, a database and uploads.

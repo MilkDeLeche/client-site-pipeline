@@ -61,6 +61,10 @@ Storage: logos and photos that change only by deploy stay in Astro static assets
 
 Analytics default for a suitable new project: Cloudflare Web Analytics, one system, disclosed in the privacy policy. If the client already named another tool, use that instead.
 
+**Cloudflare first, for everything it does (builder rule).** Domain and DNS, the site, the API (`/api/*` on the Worker), secrets, capture (D1), uploads (R2), scheduled jobs (Cron Triggers), receiving mail (Email Routing) and analytics all live on Cloudflare. An outside service is added only for what Cloudflare doesn't do (sending email, payments, a database the table above picks), and it is always reached through the Worker with a Worker secret, never from the browser. Every outside API is connected with the same five steps: domain records in Cloudflare DNS, the narrowest key, `wrangler secret put`, a health check, one real action. Email sends through Resend from the Worker: one-person emails are built in code per recipient, newsletters go through the provider's broadcasts. Read `references/cloudflare-stack.md` before connecting any service, and `references/email-marketing.md` for the signup popup, the automatic emails, the monthly newsletter (templates from Copymail) and the one-click Resend setup.
+
+**Billable and deliverables stay current.** When the builder charges for work, `references/billable.md` builds the billable (what it does for them, everything included, what it would cost elsewhere with sources, the monthly plan, "Why it matters"). After every update that ships, refresh the billable together with the update brochure (`references/update-brochure.md`) and the other affected deliverables, and update the builder's pending-items list (`client-site-pipeline` → `references/pending-items.md`).
+
 Every selected service needs a `reason`. Add-ons are opt-in per client, never standard: an AI sales/lead chat, for example, goes only on sites whose owner wants it and is never listed as part of the base offer. Missing business facts stay on the setup-list. Content strategy is required; a blog is not. A dead blog of generic articles is not an SEO asset. Client-editable publishing needs auth and persistent storage; developer-committed Markdown does not.
 
 Copy `assets/architecture-plan-template.md`, fill it, and keep it as the source of truth for Phase C and the launch audit.
@@ -172,7 +176,7 @@ Copy `assets/setup-list-template.md` into the project and fill it in for THIS cl
 | **Stripe / Square** | Publishable + restricted/secret keys — or connect through their own dashboard / OAuth. |
 | **GlossGenius / external booking** | Usually **nothing** — booking and payment happen there; just confirm the booking URL(s). |
 | **A CMS (Sanity, Contentful, Keystatic…)** | Project ID / dataset / a read token, or an invite to the space. |
-| **Email / newsletter / contact forms** | Which email tool sends the newsletter (Brevo, Mailchimp, Klaviyo, the POS's marketing tool) and confirmation of what subscribers are promised (birthday treat, alerts). Until then signups live in D1. The tool's API key goes in a Worker secret (`wrangler secret put`), never in chat. |
+| **Email / newsletter / contact forms** | Default: Resend, sent from the Worker (`references/cloudflare-stack.md`). Ask only whether they already use another tool (Brevo, Mailchimp, Klaviyo, the POS's marketing tool), which inbox replies go to, and what subscribers are promised (birthday treat, alerts). Until the key is in, signups live in D1. The key goes in a Worker secret (`wrangler secret put`), never in chat. |
 | **Google Maps / Business Profile** | Confirm the exact NAP (name, address, phone); claim/verify the GBP. |
 | **Analytics** | Which tool; any consent/cookie requirements for their region. |
 | **A licensed font or stock asset** | Proof of license — or approval to swap for a free equivalent. |

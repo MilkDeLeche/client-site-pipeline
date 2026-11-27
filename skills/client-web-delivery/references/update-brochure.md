@@ -57,7 +57,8 @@ Leave out:
 1. Write the HTML with the client's fonts and colors, inline SVG icons (no emoji-able characters), sized for letter or A4 at print, readable on a phone as an image.
 2. Render it with Playwright or Edge to PDF and PNG (`page.pdf`, `page.screenshot` per page).
 3. Open the PNG and read it as the owner would: every number matches this update's output, nothing technical is left unexplained, text contrast passes, and it fits the page.
-4. Tell the builder where it is, in one line.
+4. In the same session, bring the billable up to date (`billable.md`: new lines for what shipped, the comparison checked again; the price only changes when the builder says so), refresh the email previews if emails changed, and update `deliverables/pending-items-of-the-skill.md`.
+5. Tell the builder where each one is, in one line each.
 
 ## Example, not a template
 

@@ -178,6 +178,33 @@ if (py) {
   report('Responsive audit browsers', false, 'Python not found; the responsive audit can\'t run', false);
 }
 
+// 7. Cloudflare sign-in (references/builder-toolkit.md): wrangler runs through npx in each project,
+// so only the sign-in is checked here. The sign-in opens a browser; the builder finishes it.
+const whoami = run('npx', ['-y', 'wrangler@latest', 'whoami']);
+if (whoami.ok && /logged in/i.test(whoami.out) && !/not authenticated|not logged in/i.test(whoami.out)) {
+  report('Cloudflare (wrangler)', true, 'signed in', false);
+} else if (CHECK_ONLY) {
+  report('Cloudflare (wrangler)', false, 'not signed in: npx wrangler login', false);
+} else {
+  console.log('  signing in to Cloudflare (a browser opens; finish it there)...');
+  const ok = run('npx', ['-y', 'wrangler@latest', 'login'], { quiet: false }).ok;
+  report('Cloudflare (wrangler)', ok, ok ? 'signed in now' : 'not signed in: run npx wrangler login', false);
+}
+
+// 8. Git and the GitHub CLI (the pipeline repo and client repos)
+report('Git', has('git'), has('git') ? 'installed' : 'missing: winget install Git.Git / brew install git', false);
+if (has('gh')) {
+  const auth = run('gh', ['auth', 'status']);
+  report('GitHub CLI', auth.ok, auth.ok ? 'signed in' : 'installed, not signed in: gh auth login', false);
+} else if (CHECK_ONLY) {
+  report('GitHub CLI', false, 'missing', false);
+} else {
+  const ok = installWith('GitHub CLI', WIN
+    ? [['winget', ['install', '--id', 'GitHub.cli', '-e', '--silent', '--accept-source-agreements', '--accept-package-agreements']]]
+    : MAC ? [['brew', ['install', 'gh']]] : []);
+  report('GitHub CLI', ok, ok ? 'installed now; open a new terminal, then gh auth login' : 'install failed', false);
+}
+
 // Summary
 console.log('\nClient Site Pipeline setup');
 for (const r of results) {
@@ -185,4 +212,5 @@ for (const r of results) {
 }
 const missing = results.filter((r) => r.required && !r.ok);
 console.log(missing.length ? `\n${missing.length} required item(s) missing.` : '\nReady.');
+console.log('Accounts the script can\'t install (Resend, Supabase, Krea, Copymail, MotionSites, Envato...): see references/builder-toolkit.md');
 process.exit(missing.length ? 1 : 0);

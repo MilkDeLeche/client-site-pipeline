@@ -30,6 +30,16 @@ content:
   client_editing_required: false
   reason: >
 
+email:                      # references/cloudflare-stack.md
+  provider: none            # resend when the site sends any email; another tool only if the client already uses it
+  sent_from: worker         # one-person emails built in code per recipient; newsletters via the provider's broadcasts
+  sender: >                 # name@client-domain (a var in wrangler.jsonc); newsletters from a separate subdomain
+  reply_to: >               # the business inbox
+  secret: RESEND_API_KEY    # set with `wrangler secret put`, shown as a true/false in the health check
+  reason: >
+
+outside_services: []        # each: name, why Cloudflare doesn't cover it, secret name, health-check field
+
 analytics:
   provider: cloudflare-web-analytics
   consent_required: true    # loaded only after the cookie banner says Accept
